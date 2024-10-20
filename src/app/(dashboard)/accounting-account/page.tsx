@@ -3,13 +3,14 @@ import {
   getAllAccountingAccountApi,
   IAccountingAccount,
 } from "@/api/accounting-account";
+import CreateButton from "@/modules/accounting-account/CreateButton";
 import { AccountingAccountStatusLabels } from "@/modules/accounting-account/type";
 import { formatDatetime } from "@/utils/DateUtils";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 
 const Page = () => {
-  const [data, setData] = useState<DataType[]>([]);
+  const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
     getAllAccountingAccountApi().then((res) => {
@@ -17,14 +18,18 @@ const Page = () => {
         ...item,
         key: item._id,
       }));
-      setData(dataWithKeys);
+      setDataSource(dataWithKeys);
     });
   }, []);
 
   return (
-    <div>
-      <Table<DataType> columns={columns} dataSource={data} />
-    </div>
+    <>
+      <div className="flex mb-5">
+        <CreateButton />
+      </div>
+
+      <Table<DataType> columns={columns} dataSource={dataSource} />
+    </>
   );
 };
 
