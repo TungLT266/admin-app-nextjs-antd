@@ -1,6 +1,6 @@
-import axios from "axios";
+import { axiosInstancePublic } from "@/utils/ApiUtils";
 
-const apiUrl = "http://localhost:8080/api/v1/auth/login";
+const apiUrl = "auth/login";
 
 export interface ILoginReq {
   username?: string;
@@ -12,6 +12,6 @@ interface ILoginRes {
 }
 
 export const loginApi = async (req: ILoginReq) => {
-  const result = await axios.post<ILoginRes>(apiUrl, req);
-  return result;
+  const result = await axiosInstancePublic.post<ILoginRes>(apiUrl, req);
+  return result.data;
 };

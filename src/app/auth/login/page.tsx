@@ -1,16 +1,19 @@
 "use client";
 import { ILoginReq, loginApi } from "@/api/auth";
 import { Button, Form, FormProps, Input } from "antd";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  type FieldType = {
-    username?: string;
-    password?: string;
-  };
+  const router = useRouter();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     const data: ILoginReq = { ...values };
-    loginApi(data);
+    loginApi(data).then((res) => {
+      if (res.access_token) {
+        localStorage.setItem("accessToken", res.access_token);
+        router.push("/");
+      }
+    });
   };
 
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
@@ -55,6 +58,11 @@ const LoginPage = () => {
       </Form>
     </div>
   );
+};
+
+type FieldType = {
+  username?: string;
+  password?: string;
 };
 
 export default LoginPage;
