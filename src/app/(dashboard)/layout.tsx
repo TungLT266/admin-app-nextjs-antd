@@ -16,7 +16,7 @@ export default function DashboardLayout({
   return (
     <Layout hasSider>
       <Sidebar />
-      <Layout style={{ marginInlineStart: 200 }}>
+      <Layout style={{ marginInlineStart: 200, minHeight: "100vh" }}>
         <HeaderLayout />
         <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
           <div

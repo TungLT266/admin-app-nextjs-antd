@@ -1,9 +1,17 @@
 import React from "react";
 import { UserOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, MenuProps } from "antd";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Sidebar() {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleMenuClick: MenuProps["onClick"] = (e) => {
+    if (e.key.startsWith(pathname)) return;
+    router.push(e.key);
+  };
+
   return (
     <Sider
       style={{
@@ -21,8 +29,9 @@ export default function Sidebar() {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["4"]}
+        defaultSelectedKeys={[pathname]}
         items={items}
+        onClick={handleMenuClick}
       />
     </Sider>
   );
@@ -32,7 +41,7 @@ const { Sider } = Layout;
 
 const items: MenuProps["items"] = [
   {
-    key: 1,
+    key: "/accounting-account",
     icon: <UserOutlined />,
     label: "Tài khoản kế toán",
   },
