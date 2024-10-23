@@ -8,7 +8,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
-    if (e.key.startsWith(pathname)) return;
+    if (e.key === pathname) return;
     router.push(e.key);
   };
 
