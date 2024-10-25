@@ -1,4 +1,4 @@
-import { useNotificationContext } from "@/shared/context/NotificationProvider";
+import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
@@ -9,6 +9,7 @@ import {
   updateAccountingAccountApi,
 } from "@/api/accounting-account";
 import { useEffect } from "react";
+import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
 
 interface EditButtonProps {
   id: string;
@@ -18,6 +19,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
+  const { fetchDataList } = useAccountingAccountContext();
 
   useEffect(() => {
     if (isOpen) {
@@ -41,6 +43,7 @@ const EditButton = ({ id }: EditButtonProps) => {
       .then(() => {
         notifySuccess("Update account successfully");
         form.resetFields();
+        fetchDataList();
       })
       .catch((error) => {
         notifyError(error.response.data.message);

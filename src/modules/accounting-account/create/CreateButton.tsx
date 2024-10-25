@@ -2,7 +2,7 @@ import {
   createAccountingAccountApi,
   ICreateAccountingAccountReq,
 } from "@/api/accounting-account";
-import { useNotificationContext } from "@/shared/context/NotificationProvider";
+import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import { Button, Form, FormProps, Modal } from "antd";
 import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";

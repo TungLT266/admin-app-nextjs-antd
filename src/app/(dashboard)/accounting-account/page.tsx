@@ -1,27 +1,28 @@
 "use client";
-import {
-  getAllAccountingAccountApi,
-  IAccountingAccount,
-} from "@/api/accounting-account";
+import { IAccountingAccount } from "@/api/accounting-account";
 import CreateButton from "@/modules/accounting-account/create/CreateButton";
 import { AccountingAccountStatusLabels } from "@/modules/accounting-account/type";
 import { formatDatetime } from "@/utils/DateUtils";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import EditButton from "@/modules/accounting-account/edit/EditButton";
+import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
 
 const Page = () => {
+  const { dataList, fetchDataList } = useAccountingAccountContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
-    getAllAccountingAccountApi().then((res) => {
-      const dataWithKeys: DataType[] = res.map((item) => ({
-        ...item,
-        key: item._id,
-      }));
-      setDataSource(dataWithKeys);
-    });
+    fetchDataList();
   }, []);
+
+  useEffect(() => {
+    const dataWithKeys: DataType[] = dataList.map((item) => ({
+      ...item,
+      key: item._id,
+    }));
+    setDataSource(dataWithKeys);
+  }, [dataList]);
 
   const columns: TableProps<DataType>["columns"] = [
     {
