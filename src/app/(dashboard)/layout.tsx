@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Layout, theme } from "antd";
-import Sidebar from "@/shared/component/sider";
+import Sidebar from "@/shared/component/sidebar";
 import HeaderLayout from "@/shared/component/header";
 import AuthGuard from "@/shared/component/auth/AuthGuard";
 

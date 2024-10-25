@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import React, { createContext, ReactNode, useContext } from "react";
 import { notification } from "antd";
 
 interface NotificationContextProps {
-    notifySuccess: (message: string) => void;
+  notifySuccess: (message: string) => void;
+  notifyError: (message: string) => void;
 }
 
 const NotificationContext = createContext<NotificationContextProps | undefined>(
@@ -14,9 +15,9 @@ interface NotificationProviderProps {
   children: ReactNode;
 }
 
-export const NotificationContextProvider: React.FC<NotificationProviderProps> = ({
-  children,
-}) => {
+export const NotificationContextProvider: React.FC<
+  NotificationProviderProps
+> = ({ children }) => {
   const [api, contextHolder] = notification.useNotification();
 
   const notifySuccess = (message: string) => {
@@ -31,8 +32,15 @@ export const NotificationContextProvider: React.FC<NotificationProviderProps> = 
     });
   };
 
+  const notifyError = (message: string) => {
+    api.error({
+      message,
+      placement: "topRight",
+    });
+  };
+
   return (
-    <NotificationContext.Provider value={{ notifySuccess }}>
+    <NotificationContext.Provider value={{ notifySuccess, notifyError }}>
       {contextHolder}
       {children}
     </NotificationContext.Provider>

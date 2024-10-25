@@ -43,6 +43,6 @@ const items: MenuProps["items"] = [
   {
     key: "/accounting-account",
     icon: <UserOutlined />,
-    label: "Tài khoản kế toán",
+    label: "Accounting Account",
   },
 ];

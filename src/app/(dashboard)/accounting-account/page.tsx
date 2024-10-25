@@ -3,11 +3,12 @@ import {
   getAllAccountingAccountApi,
   IAccountingAccount,
 } from "@/api/accounting-account";
-import CreateButton from "@/modules/accounting-account/CreateButton";
+import CreateButton from "@/modules/accounting-account/create/CreateButton";
 import { AccountingAccountStatusLabels } from "@/modules/accounting-account/type";
 import { formatDatetime } from "@/utils/DateUtils";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
+import EditButton from "@/modules/accounting-account/edit/EditButton";
 
 const Page = () => {
   const [dataSource, setDataSource] = useState<DataType[]>([]);
@@ -21,6 +22,58 @@ const Page = () => {
       setDataSource(dataWithKeys);
     });
   }, []);
+
+  const columns: TableProps<DataType>["columns"] = [
+    {
+      title: "Account Number",
+      dataIndex: "number",
+      key: "number",
+    },
+    {
+      title: "Acount Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => {
+        return (
+          <Tag color="green">
+            {
+              AccountingAccountStatusLabels.find((item) => item.key === status)
+                ?.label
+            }
+          </Tag>
+        );
+      },
+    },
+    {
+      title: "Created At",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (createdAt) => formatDatetime(createdAt),
+    },
+    {
+      title: "Updated At",
+      dataIndex: "updatedAt",
+      key: "updatedAt",
+      render: (updatedAt) => formatDatetime(updatedAt),
+    },
+    {
+      title: "Action",
+      dataIndex: "_id",
+      key: "action",
+      render: (id) => {
+        return (
+          <div className="flex">
+            <EditButton id={id} />
+          </div>
+        );
+      },
+    },
+  ];
 
   return (
     <>
@@ -36,45 +89,5 @@ const Page = () => {
 interface DataType extends IAccountingAccount {
   key?: string;
 }
-
-const columns: TableProps<DataType>["columns"] = [
-  {
-    title: "Số tài khoản",
-    dataIndex: "number",
-    key: "number",
-  },
-  {
-    title: "Tên tài khoản",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Trạng thái",
-    dataIndex: "status",
-    key: "status",
-    render: (status) => {
-      return (
-        <Tag color="green">
-          {
-            AccountingAccountStatusLabels.find((item) => item.key === status)
-              ?.label
-          }
-        </Tag>
-      );
-    },
-  },
-  {
-    title: "Ngày tạo",
-    dataIndex: "createdAt",
-    key: "createdAt",
-    render: (createdAt) => formatDatetime(createdAt),
-  },
-  {
-    title: "Ngày sửa",
-    dataIndex: "updatedAt",
-    key: "updatedAt",
-    render: (updatedAt) => formatDatetime(updatedAt),
-  },
-];
 
 export default Page;
