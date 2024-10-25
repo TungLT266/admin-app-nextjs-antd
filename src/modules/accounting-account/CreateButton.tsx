@@ -2,6 +2,7 @@ import {
   createAccountingAccountApi,
   ICreateAccountingAccountReq,
 } from "@/api/accounting-account";
+import { useNotificationContext } from "@/shared/context/NotificationProvider";
 import { Button, Form, FormProps, Input, Modal } from "antd";
 import { useState } from "react";
 
@@ -21,11 +22,18 @@ const CreateButton = () => {
     form.submit();
   };
 
+  const { notifySuccess } = useNotificationContext();
+
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateAccountingAccountReq = { ...values };
-    createAccountingAccountApi(data).then(() => {
-      handleCancel();
-    });
+    createAccountingAccountApi(data)
+      .then(() => {
+        notifySuccess("Tạo tài khoản kế toán thành công");
+      })
+      .catch((error) => {
+        notifySuccess(error.response.data.message);
+      });
+    handleCancel();
   };
 
   return (
