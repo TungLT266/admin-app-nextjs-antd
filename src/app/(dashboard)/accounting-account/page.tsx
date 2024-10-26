@@ -1,7 +1,10 @@
 "use client";
 import { IAccountingAccount } from "@/api/accounting-account";
 import CreateButton from "@/modules/accounting-account/create/CreateButton";
-import { AccountingAccountStatusLabels } from "@/modules/accounting-account/type";
+import {
+  AccountingAccountStatus,
+  AccountingAccountStatusLabels,
+} from "@/modules/accounting-account/type";
 import { formatDatetime } from "@/utils/DateUtils";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
@@ -41,12 +44,18 @@ const Page = () => {
       dataIndex: "status",
       key: "status",
       render: (status) => {
+        const statusLabel = AccountingAccountStatusLabels.find(
+          (item) => item.value === status
+        );
         return (
-          <Tag color="green">
-            {
-              AccountingAccountStatusLabels.find((item) => item.key === status)
-                ?.label
+          <Tag
+            color={
+              statusLabel?.value === AccountingAccountStatus.ACTIVE
+                ? "green"
+                : "red"
             }
+          >
+            {statusLabel?.label}
           </Tag>
         );
       },

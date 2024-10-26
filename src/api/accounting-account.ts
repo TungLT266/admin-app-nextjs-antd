@@ -8,6 +8,12 @@ export interface ICreateAccountingAccountReq {
   name?: string;
 }
 
+export interface IUpdateAccountingAccountReq {
+  number?: number;
+  name?: string;
+  status?: string;
+}
+
 export interface IAccountingAccount {
   _id?: string;
   number?: number;
@@ -29,7 +35,7 @@ export const createAccountingAccountApi = async (
 
 export const updateAccountingAccountApi = async (
   id: string,
-  body: ICreateAccountingAccountReq
+  body: IUpdateAccountingAccountReq
 ) => {
   const result = await axiosInstance.patch<IApiResponse<IAccountingAccount>>(
     `${apiUrl}/${id}`,

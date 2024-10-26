@@ -4,6 +4,6 @@ export enum AccountingAccountStatus {
 }
 
 export const AccountingAccountStatusLabels = [
-  { key: AccountingAccountStatus.ACTIVE, label: "Active" },
-  { key: AccountingAccountStatus.INACTIVE, label: "Inactive" },
+  { value: AccountingAccountStatus.ACTIVE, label: "Active" },
+  { value: AccountingAccountStatus.INACTIVE, label: "Inactive" },
 ];

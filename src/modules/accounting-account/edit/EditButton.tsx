@@ -5,7 +5,7 @@ import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
 import {
   getAllAccountingAccountByIdApi,
-  ICreateAccountingAccountReq,
+  IUpdateAccountingAccountReq,
   updateAccountingAccountApi,
 } from "@/api/accounting-account";
 import { useEffect } from "react";
@@ -24,9 +24,10 @@ const EditButton = ({ id }: EditButtonProps) => {
   useEffect(() => {
     if (isOpen) {
       getAllAccountingAccountByIdApi(id).then((res) => {
-        const initialValues: ICreateAccountingAccountReq = {
+        const initialValues: IUpdateAccountingAccountReq = {
           number: res.number,
           name: res.name,
+          status: res.status,
         };
         form.setFieldsValue(initialValues);
       });
@@ -38,7 +39,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   };
 
   const onFinish: FormProps["onFinish"] = (values) => {
-    const data: ICreateAccountingAccountReq = { ...values };
+    const data: IUpdateAccountingAccountReq = { ...values };
     updateAccountingAccountApi(id, data)
       .then(() => {
         notifySuccess("Update account successfully");
@@ -68,7 +69,7 @@ const EditButton = ({ id }: EditButtonProps) => {
         onOk={handleOk}
         onCancel={onClose}
       >
-        <CreateUpdateForm form={form} onFinish={onFinish} />
+        <CreateUpdateForm form={form} onFinish={onFinish} isEditForm />
       </Modal>
     </>
   );

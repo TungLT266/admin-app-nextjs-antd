@@ -1,12 +1,18 @@
-import { Form, FormProps, Input } from "antd";
+import { Form, FormProps, Input, Select } from "antd";
+import { AccountingAccountStatusLabels } from "../type";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: any;
+  isEditForm?: boolean;
 }
 
-const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
+const CreateUpdateForm = ({
+  onFinish,
+  form,
+  isEditForm,
+}: CreateUpdateFormProps) => {
   return (
     <Form
       form={form}
@@ -31,6 +37,21 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
       >
         <Input />
       </Form.Item>
+
+      {isEditForm && (
+        <Form.Item
+          label="Status"
+          name="status"
+          rules={[{ required: true, message: "Please input this field!" }]}
+        >
+          <Select
+            // defaultValue="lucy"
+            // style={{ width: 120 }}
+            // onChange={handleChange}
+            options={AccountingAccountStatusLabels}
+          />
+        </Form.Item>
+      )}
     </Form>
   );
 };
