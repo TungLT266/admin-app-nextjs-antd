@@ -50,4 +50,9 @@ const items: MenuProps["items"] = [
     icon: <UserOutlined />,
     label: "Income and Expense Type",
   },
+  {
+    key: "/wallet",
+    icon: <UserOutlined />,
+    label: "Wallet",
+  },
 ];
