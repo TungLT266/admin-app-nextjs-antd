@@ -7,6 +7,7 @@ import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import EditButton from "@/modules/accounting-account/edit/EditButton";
 import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
+import DeleteButton from "@/modules/accounting-account/delete/DeleteButton";
 
 const Page = () => {
   const { dataList, fetchDataList } = useAccountingAccountContext();
@@ -68,8 +69,9 @@ const Page = () => {
       key: "action",
       render: (id) => {
         return (
-          <div className="flex">
+          <div className="flex gap-2">
             <EditButton id={id} />
+            <DeleteButton id={id} />
           </div>
         );
       },

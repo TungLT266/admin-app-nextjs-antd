@@ -6,11 +6,13 @@ import { useNotificationContext } from "@/shared/context/NotificationContextProv
 import { Button, Form, FormProps, Modal } from "antd";
 import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
+import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
 
 const CreateButton = () => {
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
+  const { fetchDataList } = useAccountingAccountContext();
 
   const handleOk = () => {
     form.submit();
@@ -22,9 +24,10 @@ const CreateButton = () => {
       .then(() => {
         notifySuccess("Create account successfully");
         form.resetFields();
+        fetchDataList();
       })
       .catch((error) => {
-        notifyError(error.response.data.message);
+        notifyError(error);
       });
     onClose();
   };

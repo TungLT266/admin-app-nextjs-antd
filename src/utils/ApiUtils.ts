@@ -40,6 +40,6 @@ axiosInstance.interceptors.response.use(
       localStorage.removeItem("accessToken");
       window.location.href = "/auth/login";
     }
-    return Promise.reject(error);
+    return Promise.reject(error.response.data.message);
   }
 );

@@ -46,7 +46,7 @@ const EditButton = ({ id }: EditButtonProps) => {
         fetchDataList();
       })
       .catch((error) => {
-        notifyError(error.response.data.message);
+        notifyError(error);
       });
     onClose();
   };

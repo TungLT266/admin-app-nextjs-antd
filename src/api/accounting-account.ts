@@ -51,3 +51,10 @@ export const getAllAccountingAccountByIdApi = async (id: string) => {
   );
   return result.data.data;
 };
+
+export const deleteAccountingAccountApi = async (id: string) => {
+  const result = await axiosInstance.delete<IApiResponse<IAccountingAccount>>(
+    `${apiUrl}/${id}`
+  );
+  return result.data.data;
+};
