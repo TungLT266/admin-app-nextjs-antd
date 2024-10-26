@@ -33,17 +33,6 @@ export const createAccountingAccountApi = async (
   return result.data.data;
 };
 
-export const updateAccountingAccountApi = async (
-  id: string,
-  body: IUpdateAccountingAccountReq
-) => {
-  const result = await axiosInstance.patch<IApiResponse<IAccountingAccount>>(
-    `${apiUrl}/${id}`,
-    body
-  );
-  return result.data.data;
-};
-
 export const getAllAccountingAccountApi = async () => {
   const result = await axiosInstance.get<IApiResponse<IAccountingAccount[]>>(
     apiUrl
@@ -51,9 +40,20 @@ export const getAllAccountingAccountApi = async () => {
   return result.data.data;
 };
 
-export const getAllAccountingAccountByIdApi = async (id: string) => {
+export const getAccountingAccountByIdApi = async (id: string) => {
   const result = await axiosInstance.get<IApiResponse<IAccountingAccount>>(
     `${apiUrl}/${id}`
+  );
+  return result.data.data;
+};
+
+export const updateAccountingAccountApi = async (
+  id: string,
+  body: IUpdateAccountingAccountReq
+) => {
+  const result = await axiosInstance.patch<IApiResponse<IAccountingAccount>>(
+    `${apiUrl}/${id}`,
+    body
   );
   return result.data.data;
 };

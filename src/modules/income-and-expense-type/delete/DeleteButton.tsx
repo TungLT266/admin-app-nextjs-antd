@@ -2,8 +2,8 @@ import { useNotificationContext } from "@/shared/context/NotificationContextProv
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
-import { deleteAccountingAccountApi } from "@/api/accounting-account";
-import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
+import { useIncomeAndExpenseTypeContext } from "@/shared/context/IncomeAndExpenseTypeContextProvider";
+import { deleteIncomeAndExpenseTypeApi } from "@/api/income-and-expense-type";
 
 interface DeleteButtonProps {
   id: string;
@@ -12,10 +12,10 @@ interface DeleteButtonProps {
 const DeleteButton = ({ id }: DeleteButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
-  const { fetchDataList } = useAccountingAccountContext();
+  const { fetchDataList } = useIncomeAndExpenseTypeContext();
 
   const handleOk = () => {
-    deleteAccountingAccountApi(id)
+    deleteIncomeAndExpenseTypeApi(id)
       .then(() => {
         notifySuccess("Delete successfully");
         fetchDataList();

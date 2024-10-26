@@ -45,4 +45,9 @@ const items: MenuProps["items"] = [
     icon: <UserOutlined />,
     label: "Accounting Account",
   },
+  {
+    key: "/income-and-expense-type",
+    icon: <UserOutlined />,
+    label: "Income and Expense Type",
+  },
 ];

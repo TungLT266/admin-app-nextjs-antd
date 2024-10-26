@@ -1,22 +1,22 @@
-import {
-  createAccountingAccountApi,
-  ICreateAccountingAccountReq,
-} from "@/api/accounting-account";
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import { Button, Form, FormProps, Modal } from "antd";
-import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
-import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
+import { useIncomeAndExpenseTypeContext } from "@/shared/context/IncomeAndExpenseTypeContextProvider";
+import {
+  createIncomeAndExpenseTypeApi,
+  ICreateIncomeAndExpenseTypeReq,
+} from "@/api/income-and-expense-type";
+import CreateUpdateForm from "./CreateUpdateForm";
 
 const CreateButton = () => {
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
-  const { fetchDataList } = useAccountingAccountContext();
+  const { fetchDataList } = useIncomeAndExpenseTypeContext();
 
   const onFinish: FormProps["onFinish"] = (values) => {
-    const data: ICreateAccountingAccountReq = { ...values };
-    createAccountingAccountApi(data)
+    const data: ICreateIncomeAndExpenseTypeReq = { ...values };
+    createIncomeAndExpenseTypeApi(data)
       .then(() => {
         notifySuccess("Create successfully");
         form.resetFields();
@@ -35,7 +35,7 @@ const CreateButton = () => {
       </Button>
 
       <Modal
-        title="Create Accounting Account"
+        title="Create Income And Expense Type"
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}
