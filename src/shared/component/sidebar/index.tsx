@@ -55,4 +55,9 @@ const items: MenuProps["items"] = [
     icon: <UserOutlined />,
     label: "Wallet",
   },
+  {
+    key: "/income",
+    icon: <UserOutlined />,
+    label: "Income",
+  },
 ];
