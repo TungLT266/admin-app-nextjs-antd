@@ -34,6 +34,7 @@ const IncomeAndExpenseTypePage = () => {
       title: "Type",
       dataIndex: "type",
       key: "type",
+      align: "center",
       render: (type) => {
         const label = IncomeExpenseTypeLabels.find(
           (item) => item.value === type
@@ -66,6 +67,7 @@ const IncomeAndExpenseTypePage = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      align: "center",
       render: (status) => {
         const statusLabel = AccountingAccountStatusLabels.find(
           (item) => item.value === status
@@ -87,21 +89,24 @@ const IncomeAndExpenseTypePage = () => {
       title: "Created At",
       dataIndex: "createdAt",
       key: "createdAt",
+      align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
       title: "Updated At",
       dataIndex: "updatedAt",
       key: "updatedAt",
+      align: "center",
       render: (updatedAt) => formatDatetime(updatedAt),
     },
     {
       title: "Action",
       dataIndex: "_id",
       key: "action",
+      align: "center",
       render: (id) => {
         return (
-          <div className="flex gap-2">
+          <div className="flex gap-2 justify-center">
             <EditButton id={id} />
             <DeleteButton id={id} />
           </div>

@@ -31,6 +31,7 @@ const AccountingAccountPage = () => {
       title: "Account Number",
       dataIndex: "number",
       key: "number",
+      align: "center",
     },
     {
       title: "Acount Name",
@@ -41,6 +42,7 @@ const AccountingAccountPage = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      align: "center",
       render: (status) => {
         const statusLabel = AccountingAccountStatusLabels.find(
           (item) => item.value === status
@@ -62,21 +64,24 @@ const AccountingAccountPage = () => {
       title: "Created At",
       dataIndex: "createdAt",
       key: "createdAt",
+      align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
       title: "Updated At",
       dataIndex: "updatedAt",
       key: "updatedAt",
+      align: "center",
       render: (updatedAt) => formatDatetime(updatedAt),
     },
     {
       title: "Action",
       dataIndex: "_id",
       key: "action",
+      align: "center",
       render: (id) => {
         return (
-          <div className="flex gap-2">
+          <div className="flex gap-2 justify-center">
             <EditButton id={id} />
             <DeleteButton id={id} />
           </div>
