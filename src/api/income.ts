@@ -58,3 +58,17 @@ export const deleteIncomeApi = async (id: string) => {
   );
   return result.data.data;
 };
+
+export const confirmIncomeApi = async (id: string) => {
+  const result = await axiosInstance.patch<IApiResponse<IIncome>>(
+    `${apiUrl}/${id}/confirm`
+  );
+  return result.data.data;
+};
+
+export const unconfirmIncomeApi = async (id: string) => {
+  const result = await axiosInstance.patch<IApiResponse<IIncome>>(
+    `${apiUrl}/${id}/unconfirm`
+  );
+  return result.data.data;
+};

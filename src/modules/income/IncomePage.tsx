@@ -11,6 +11,8 @@ import { IIncome } from "@/api/income";
 import { IncomeStatus, IncomeStatusLabels } from "./type";
 import { IWallet } from "@/api/wallet";
 import { IIncomeAndExpenseType } from "@/api/income-and-expense-type";
+import ConfirmButton from "./ConfirmButton";
+import UnconfirmButton from "./UnconfirmButton";
 
 const IncomePage = () => {
   const { dataList, fetchDataList } = useIncomeContext();
@@ -33,6 +35,7 @@ const IncomePage = () => {
       title: "Document Date",
       dataIndex: "documentDate",
       key: "documentDate",
+      align: "center",
       render: (documentDate) => formatDate(documentDate),
     },
     {
@@ -44,6 +47,7 @@ const IncomePage = () => {
       title: "Amount",
       dataIndex: "amount",
       key: "amount",
+      align: "right",
     },
     {
       title: "Content",
@@ -62,6 +66,7 @@ const IncomePage = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      align: "center",
       render: (status) => {
         const statusLabel = IncomeStatusLabels.find(
           (item) => item.value === status
@@ -69,7 +74,7 @@ const IncomePage = () => {
         return (
           <Tag
             color={
-              statusLabel?.value === IncomeStatus.CONFIRMED ? "green" : "gray"
+              statusLabel?.value === IncomeStatus.CONFIRMED ? "green" : "yellow"
             }
           >
             {statusLabel?.label}
@@ -81,23 +86,38 @@ const IncomePage = () => {
       title: "Created At",
       dataIndex: "createdAt",
       key: "createdAt",
+      align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
       title: "Updated At",
       dataIndex: "updatedAt",
       key: "updatedAt",
+      align: "center",
       render: (updatedAt) => formatDatetime(updatedAt),
     },
     {
       title: "Action",
       dataIndex: "_id",
       key: "action",
-      render: (id) => {
+      align: "center",
+      render: (id, record) => {
+        const { status } = record;
         return (
-          <div className="flex gap-2">
-            <EditButton id={id} />
-            <DeleteButton id={id} />
+          <div className="flex gap-2 justify-center">
+            {status === IncomeStatus.PENDING && (
+              <>
+                <ConfirmButton id={id} />
+                <EditButton id={id} />
+                <DeleteButton id={id} />
+              </>
+            )}
+
+            {status === IncomeStatus.CONFIRMED && (
+              <>
+                <UnconfirmButton id={id} />
+              </>
+            )}
           </div>
         );
       },
