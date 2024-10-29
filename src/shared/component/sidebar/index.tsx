@@ -61,6 +61,11 @@ const items: MenuProps["items"] = [
     label: "Income",
   },
   {
+    key: "/expense",
+    icon: <UserOutlined />,
+    label: "Expense",
+  },
+  {
     key: "/bookkeeping",
     icon: <UserOutlined />,
     label: "Bookkeeping",
