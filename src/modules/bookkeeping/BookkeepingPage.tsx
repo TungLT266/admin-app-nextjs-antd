@@ -8,6 +8,7 @@ import { IAccountingAccount } from "@/api/accounting-account";
 import { IWallet } from "@/api/wallet";
 import { IIncomeAndExpenseType } from "@/api/income-and-expense-type";
 import { EntryType } from "./type";
+import { formatNumber } from "@/utils/NumberUtils";
 
 const BookkeepingPage = () => {
   const { dataList, fetchDataList } = useBookkeepingContext();
@@ -98,6 +99,7 @@ const BookkeepingPage = () => {
       dataIndex: "amount",
       key: "amount",
       align: "right",
+      render: (amount) => formatNumber(amount),
       onCell: (record) => {
         if (record.entryType === EntryType.DEBIT) {
           return { rowSpan: 2 };

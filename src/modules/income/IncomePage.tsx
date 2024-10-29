@@ -13,6 +13,7 @@ import { IWallet } from "@/api/wallet";
 import { IIncomeAndExpenseType } from "@/api/income-and-expense-type";
 import ConfirmButton from "./ConfirmButton";
 import UnconfirmButton from "./UnconfirmButton";
+import { formatNumber } from "@/utils/NumberUtils";
 
 const IncomePage = () => {
   const { dataList, fetchDataList } = useIncomeContext();
@@ -48,6 +49,7 @@ const IncomePage = () => {
       dataIndex: "amount",
       key: "amount",
       align: "right",
+      render: (amount) => formatNumber(amount),
     },
     {
       title: "Content",

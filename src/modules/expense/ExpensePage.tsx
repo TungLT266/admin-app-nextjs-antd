@@ -13,6 +13,7 @@ import { IIncomeAndExpenseType } from "@/api/income-and-expense-type";
 import { IncomeStatus, IncomeStatusLabels } from "../income/type";
 import UnconfirmButton from "./UnconfirmButton";
 import { IExpense } from "@/api/expense";
+import { formatNumber } from "@/utils/NumberUtils";
 
 const ExpensePage = () => {
   const { dataList, fetchDataList } = useExpenseContext();
@@ -48,6 +49,7 @@ const ExpensePage = () => {
       dataIndex: "amount",
       key: "amount",
       align: "right",
+      render: (amount) => formatNumber(amount),
     },
     {
       title: "Content",
