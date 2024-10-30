@@ -12,6 +12,7 @@ import {
   AccountingAccountStatusLabels,
 } from "../accounting-account/type";
 import { IWallet } from "@/api/wallet";
+import { formatNumber } from "@/utils/NumberUtils";
 
 const WalletPage = () => {
   const { dataList, fetchDataList } = useWalletContext();
@@ -44,6 +45,13 @@ const WalletPage = () => {
           ? `${accountingAcount?.name} (${accountingAcount?.number})`
           : "-";
       },
+    },
+    {
+      title: "Balance",
+      dataIndex: "amountBalance",
+      key: "amountBalance",
+      align: "right",
+      render: (amountBalance) => formatNumber(amountBalance),
     },
     {
       title: "Status",
