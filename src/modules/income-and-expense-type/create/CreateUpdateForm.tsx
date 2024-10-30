@@ -1,44 +1,29 @@
 import { AccountingAccountStatusLabels } from "@/modules/accounting-account/type";
 import { Form, FormProps, Input, Select } from "antd";
 import { IncomeExpenseTypeLabels } from "../type";
-import { useEffect, useState } from "react";
-import {
-  getAllAccountingAccountApi,
-  IAccountingAccount,
-} from "@/api/accounting-account";
 import { ISelectOption } from "@/shared/type/ISelectOption";
+import { v4 as uuidv4 } from "uuid";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: any;
   isEditForm?: boolean;
+  accountingAccountOptions: ISelectOption[];
+  setType?: (type: string) => void;
 }
 
 const CreateUpdateForm = ({
   onFinish,
   form,
   isEditForm,
+  accountingAccountOptions,
+  setType,
 }: CreateUpdateFormProps) => {
-  const [accountingAccountOptions, setAccountingAccountOptions] = useState<
-    ISelectOption[]
-  >([]);
-
-  useEffect(() => {
-    getAllAccountingAccountApi().then((res) => {
-      setAccountingAccountOptions(
-        res.map((item: IAccountingAccount) => ({
-          label: `${item.name} (${item.number})`,
-          value: item._id,
-        }))
-      );
-    });
-  }, []);
-
   return (
     <Form
       form={form}
-      name="basic"
+      name={uuidv4()}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       onFinish={onFinish}
@@ -49,7 +34,15 @@ const CreateUpdateForm = ({
         name="type"
         rules={[{ required: true, message: "Please input this field!" }]}
       >
-        <Select options={IncomeExpenseTypeLabels} disabled={isEditForm} />
+        <Select
+          options={IncomeExpenseTypeLabels}
+          disabled={isEditForm}
+          onChange={(value) => {
+            if (setType) {
+              setType(value);
+            }
+          }}
+        />
       </Form.Item>
 
       <Form.Item

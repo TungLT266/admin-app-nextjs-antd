@@ -19,6 +19,7 @@ const IncomeAndExpenseTypePage = () => {
 
   useEffect(() => {
     fetchDataList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

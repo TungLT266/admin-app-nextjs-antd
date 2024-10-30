@@ -4,15 +4,37 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { useIncomeAndExpenseTypeContext } from "@/shared/context/IncomeAndExpenseTypeContextProvider";
 import {
   createIncomeAndExpenseTypeApi,
+  getIAEAccountsApi,
   ICreateIncomeAndExpenseTypeReq,
 } from "@/api/income-and-expense-type";
 import CreateUpdateForm from "./CreateUpdateForm";
+import { ISelectOption } from "@/shared/type/ISelectOption";
+import { useEffect, useState } from "react";
+import { IAccountingAccount } from "@/api/accounting-account";
 
 const CreateButton = () => {
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useIncomeAndExpenseTypeContext();
+
+  const [accountingAccountOptions, setAccountingAccountOptions] = useState<
+    ISelectOption[]
+  >([]);
+  const [type, setType] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (isOpen && type) {
+      getIAEAccountsApi(type).then((res) => {
+        setAccountingAccountOptions(
+          res.map((item: IAccountingAccount) => ({
+            label: `${item.name} (${item.number})`,
+            value: item._id,
+          }))
+        );
+      });
+    }
+  }, [isOpen, type]);
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateIncomeAndExpenseTypeReq = { ...values };
@@ -40,7 +62,12 @@ const CreateButton = () => {
         onOk={() => form.submit()}
         onCancel={onClose}
       >
-        <CreateUpdateForm form={form} onFinish={onFinish} />
+        <CreateUpdateForm
+          form={form}
+          onFinish={onFinish}
+          accountingAccountOptions={accountingAccountOptions}
+          setType={setType}
+        />
       </Modal>
     </>
   );

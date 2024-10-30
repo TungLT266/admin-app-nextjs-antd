@@ -69,3 +69,10 @@ export const deleteIncomeAndExpenseTypeApi = async (id: string) => {
   >(`${apiUrl}/${id}`);
   return result.data.data;
 };
+
+export const getIAEAccountsApi = async (type: string, id?: string) => {
+  const result = await axiosInstance.get<IApiResponse<IAccountingAccount[]>>(
+    `${apiUrl}/accounts?type=${type}${id ? `&id=${id}` : ""}`
+  );
+  return result.data.data;
+};
