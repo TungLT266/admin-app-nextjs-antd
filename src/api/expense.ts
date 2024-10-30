@@ -1,4 +1,4 @@
-import { IApiResponse } from "@/shared/type/IApiResponse";
+import { IApiResponse } from "@/shared/type/ApiResponse";
 import { axiosInstance } from "@/utils/ApiUtils";
 import { IWallet } from "./wallet";
 import { IIncomeAndExpenseType } from "./income-and-expense-type";

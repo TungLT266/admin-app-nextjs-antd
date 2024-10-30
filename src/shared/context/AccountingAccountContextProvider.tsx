@@ -2,11 +2,15 @@
 import {
   getAllAccountingAccountApi,
   IAccountingAccount,
+  IAccountingAccountListReq,
 } from "@/api/accounting-account";
 import React, { createContext, ReactNode, useContext, useState } from "react";
+import { DataWithPagination, paginationDefault } from "../type/ApiResponse";
 
 interface AccountingAccountContextProps {
-  dataList: IAccountingAccount[];
+  dataQuery: IAccountingAccountListReq;
+  setDataQuery: (dataQuery: IAccountingAccountListReq) => void;
+  dataList: DataWithPagination<IAccountingAccount>;
   fetchDataList: () => void;
 }
 
@@ -21,16 +25,22 @@ interface AccountingAccountProviderProps {
 export const AccountingAccountContextProvider: React.FC<
   AccountingAccountProviderProps
 > = ({ children }) => {
-  const [dataList, setDataList] = useState<IAccountingAccount[]>([]);
+  const [dataQuery, setDataQuery] =
+    useState<IAccountingAccountListReq>(paginationDefault);
+  const [dataList, setDataList] = useState<
+    DataWithPagination<IAccountingAccount>
+  >({});
 
   const fetchDataList = async () => {
-    getAllAccountingAccountApi({}).then((res) => {
+    getAllAccountingAccountApi(dataQuery).then((res) => {
       setDataList(res);
     });
   };
 
   return (
-    <AccountingAccountContext.Provider value={{ dataList, fetchDataList }}>
+    <AccountingAccountContext.Provider
+      value={{ dataList, fetchDataList, setDataQuery, dataQuery }}
+    >
       {children}
     </AccountingAccountContext.Provider>
   );

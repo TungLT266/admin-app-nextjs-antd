@@ -41,6 +41,11 @@ const { Sider } = Layout;
 
 const items: MenuProps["items"] = [
   {
+    key: "/",
+    icon: <UserOutlined />,
+    label: "Dashboard",
+  },
+  {
     key: "/accounting-account",
     icon: <UserOutlined />,
     label: "Accounting Account",

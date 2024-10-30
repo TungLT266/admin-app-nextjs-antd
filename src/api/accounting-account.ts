@@ -1,5 +1,9 @@
 import { AccountingAccountStatus } from "@/modules/accounting-account/type";
-import { IApiResponse } from "@/shared/type/IApiResponse";
+import {
+  DataWithPagination,
+  IApiResponse,
+  PaginationReq,
+} from "@/shared/type/ApiResponse";
 import { axiosInstance } from "@/utils/ApiUtils";
 
 const apiUrl = "accounting-account";
@@ -24,7 +28,7 @@ export interface IAccountingAccount {
   updatedAt?: Date;
 }
 
-export interface IAccountingAccountListReq {
+export interface IAccountingAccountListReq extends PaginationReq {
   status?: string;
   numberRegex?: string;
 }
@@ -50,12 +54,11 @@ export const getAccountingAccounts1FirstApi = async () => {
 export const getAllAccountingAccountApi = async (
   query: IAccountingAccountListReq
 ) => {
-  const result = await axiosInstance.get<IApiResponse<IAccountingAccount[]>>(
-    apiUrl,
-    {
-      params: query,
-    }
-  );
+  const result = await axiosInstance.get<
+    IApiResponse<DataWithPagination<IAccountingAccount>>
+  >(apiUrl, {
+    params: query,
+  });
   return result.data.data;
 };
 
