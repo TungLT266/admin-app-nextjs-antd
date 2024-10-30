@@ -1,5 +1,5 @@
 "use client";
-import { Table, TableProps } from "antd";
+import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { formatDate, formatDatetime } from "@/utils/DateUtils";
 import { useBookkeepingContext } from "./BookkeepingContextProvider";
@@ -9,6 +9,7 @@ import { IWallet } from "@/api/wallet";
 import { IIncomeAndExpenseType } from "@/api/income-and-expense-type";
 import { EntryType } from "./type";
 import { formatNumber } from "@/utils/NumberUtils";
+import { FunctionType, FunctionTypeLabels } from "@/shared/type/FunctionType";
 
 const BookkeepingPage = () => {
   const { dataList, fetchDataList } = useBookkeepingContext();
@@ -67,6 +68,24 @@ const BookkeepingPage = () => {
           return { rowSpan: 0 };
         }
       },
+      render: (functionType) => {
+        const functionTypeLabel = FunctionTypeLabels.find(
+          (item) => item.value === functionType
+        );
+        return (
+          <Tag
+            color={
+              functionType === FunctionType.INCOME
+                ? "green"
+                : functionType === FunctionType.EXPENSE
+                ? "red"
+                : "orange"
+            }
+          >
+            {functionTypeLabel?.label}
+          </Tag>
+        );
+      },
     },
     {
       title: "Document Date",
@@ -113,6 +132,13 @@ const BookkeepingPage = () => {
       dataIndex: "entryType",
       key: "entryType",
       align: "center",
+      render: (entryType) => {
+        return (
+          <Tag color={entryType === EntryType.DEBIT ? "blue" : "red"}>
+            {entryType}
+          </Tag>
+        );
+      },
     },
     {
       title: "Account",

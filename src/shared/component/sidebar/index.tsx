@@ -66,6 +66,11 @@ const items: MenuProps["items"] = [
     label: "Expense",
   },
   {
+    key: "/local-transfer",
+    icon: <UserOutlined />,
+    label: "Local Transfer",
+  },
+  {
     key: "/bookkeeping",
     icon: <UserOutlined />,
     label: "Bookkeeping",
