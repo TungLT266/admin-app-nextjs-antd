@@ -1,3 +1,4 @@
+import { AccountingAccountStatus } from "@/modules/accounting-account/type";
 import { IApiResponse } from "@/shared/type/IApiResponse";
 import { axiosInstance } from "@/utils/ApiUtils";
 
@@ -23,6 +24,11 @@ export interface IAccountingAccount {
   updatedAt?: Date;
 }
 
+export interface IAccountingAccountListReq {
+  status?: string;
+  numberRegex?: string;
+}
+
 export const createAccountingAccountApi = async (
   body: ICreateAccountingAccountReq
 ) => {
@@ -33,9 +39,22 @@ export const createAccountingAccountApi = async (
   return result.data.data;
 };
 
-export const getAllAccountingAccountApi = async () => {
+export const getAccountingAccounts1FirstApi = async () => {
+  const query: IAccountingAccountListReq = {
+    status: AccountingAccountStatus.ACTIVE,
+    numberRegex: "^1",
+  };
+  return getAllAccountingAccountApi(query);
+};
+
+export const getAllAccountingAccountApi = async (
+  query: IAccountingAccountListReq
+) => {
   const result = await axiosInstance.get<IApiResponse<IAccountingAccount[]>>(
-    apiUrl
+    apiUrl,
+    {
+      params: query,
+    }
   );
   return result.data.data;
 };

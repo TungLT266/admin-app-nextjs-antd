@@ -1,5 +1,6 @@
 import { Form, FormProps, Input, Select } from "antd";
 import { AccountingAccountStatusLabels } from "../type";
+import { v4 as uuidv4 } from "uuid";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
@@ -16,7 +17,7 @@ const CreateUpdateForm = ({
   return (
     <Form
       form={form}
-      name="basic"
+      name={uuidv4()}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       onFinish={onFinish}

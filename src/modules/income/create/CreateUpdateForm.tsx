@@ -6,6 +6,7 @@ import { getAllWalletApi, IWallet } from "@/api/wallet";
 import { ISelectOption } from "@/shared/type/ISelectOption";
 import { DatePicker, Form, FormProps, Input, InputNumber, Select } from "antd";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
@@ -40,7 +41,7 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
   return (
     <Form
       form={form}
-      name="basic"
+      name={uuidv4()}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       onFinish={onFinish}

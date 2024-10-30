@@ -24,7 +24,7 @@ export const AccountingAccountContextProvider: React.FC<
   const [dataList, setDataList] = useState<IAccountingAccount[]>([]);
 
   const fetchDataList = async () => {
-    getAllAccountingAccountApi().then((res) => {
+    getAllAccountingAccountApi({}).then((res) => {
       setDataList(res);
     });
   };

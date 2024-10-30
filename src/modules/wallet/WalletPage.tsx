@@ -13,6 +13,7 @@ import {
 } from "../accounting-account/type";
 import { IWallet } from "@/api/wallet";
 import { formatNumber } from "@/utils/NumberUtils";
+import { WalletTypeLabels } from "./type";
 
 const WalletPage = () => {
   const { dataList, fetchDataList } = useWalletContext();
@@ -20,6 +21,7 @@ const WalletPage = () => {
 
   useEffect(() => {
     fetchDataList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -52,6 +54,16 @@ const WalletPage = () => {
       key: "amountBalance",
       align: "right",
       render: (amountBalance) => formatNumber(amountBalance),
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
+      align: "center",
+      render: (type) => {
+        const typeLabel = WalletTypeLabels.find((item) => item.value === type);
+        return <Tag color="cyan">{typeLabel?.label}</Tag>;
+      },
     },
     {
       title: "Status",
