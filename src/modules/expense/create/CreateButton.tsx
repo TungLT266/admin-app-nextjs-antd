@@ -4,6 +4,7 @@ import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { useExpenseContext } from "../ExpenseContextProvider";
 import { createExpenseApi, ICreateExpenseReq } from "@/api/expense";
+import { formatDateInputApi } from "@/utils/DateUtils";
 
 const CreateButton = () => {
   const [form] = Form.useForm();
@@ -12,7 +13,10 @@ const CreateButton = () => {
   const { fetchDataList } = useExpenseContext();
 
   const onFinish: FormProps["onFinish"] = (values) => {
-    const data: ICreateExpenseReq = { ...values };
+    const data: ICreateExpenseReq = {
+      ...values,
+      documentDate: formatDateInputApi(values.documentDate),
+    };
     createExpenseApi(data)
       .then(() => {
         notifySuccess("Create successfully");

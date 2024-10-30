@@ -4,6 +4,7 @@ import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { useIncomeContext } from "../IncomeContextProvider";
 import { createIncomeApi, ICreateIncomeReq } from "@/api/income";
+import { formatDateInputApi } from "@/utils/DateUtils";
 
 const CreateButton = () => {
   const [form] = Form.useForm();
@@ -12,7 +13,10 @@ const CreateButton = () => {
   const { fetchDataList } = useIncomeContext();
 
   const onFinish: FormProps["onFinish"] = (values) => {
-    const data: ICreateIncomeReq = { ...values };
+    const data: ICreateIncomeReq = {
+      ...values,
+      documentDate: formatDateInputApi(values.documentDate),
+    };
     createIncomeApi(data)
       .then(() => {
         notifySuccess("Create successfully");

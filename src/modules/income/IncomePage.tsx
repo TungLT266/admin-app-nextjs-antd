@@ -45,13 +45,6 @@ const IncomePage = () => {
       key: "title",
     },
     {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
-      align: "right",
-      render: (amount) => formatNumber(amount),
-    },
-    {
       title: "Content",
       dataIndex: "incomeAndExpenseType",
       key: "incomeAndExpenseType",
@@ -63,6 +56,13 @@ const IncomePage = () => {
       dataIndex: "wallet",
       key: "wallet",
       render: (wallet: IWallet) => wallet.name,
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+      align: "right",
+      render: (amount) => formatNumber(amount),
     },
     {
       title: "Status",

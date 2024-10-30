@@ -11,6 +11,7 @@ import {
   ICreateExpenseReq,
   updateExpenseApi,
 } from "@/api/expense";
+import { formatDateInputApi } from "@/utils/DateUtils";
 
 interface EditButtonProps {
   id: string;
@@ -36,6 +37,7 @@ const EditButton = ({ id }: EditButtonProps) => {
         form.setFieldsValue(initialValues);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const handleOk = () => {
@@ -43,7 +45,10 @@ const EditButton = ({ id }: EditButtonProps) => {
   };
 
   const onFinish: FormProps["onFinish"] = (values) => {
-    const data: ICreateExpenseReq = { ...values };
+    const data: ICreateExpenseReq = {
+      ...values,
+      documentDate: formatDateInputApi(values.documentDate),
+    };
     updateExpenseApi(id, data)
       .then(() => {
         notifySuccess("Update successfully");

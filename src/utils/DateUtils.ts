@@ -7,3 +7,7 @@ export const formatDatetime = (datetime: Date) => {
 export const formatDate = (datetime: Date) => {
   return dayjs(datetime).format("YYYY-MM-DD");
 };
+
+export const formatDateInputApi = (datetime: Date) => {
+  return dayjs(datetime).format("YYYY-MM-DD");
+};
