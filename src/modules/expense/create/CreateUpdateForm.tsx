@@ -1,8 +1,8 @@
 import {
-  getAllIncomeAndExpenseTypeApi,
+  getExpenseTypeApi,
   IIncomeAndExpenseType,
 } from "@/api/income-and-expense-type";
-import { getAllWalletApi, IWallet } from "@/api/wallet";
+import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
 import { ISelectOption } from "@/shared/type/ISelectOption";
 import { DatePicker, Form, FormProps, Input, InputNumber, Select } from "antd";
 import { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
   const [walletOptions, setWalletOptions] = useState<ISelectOption[]>([]);
 
   useEffect(() => {
-    getAllIncomeAndExpenseTypeApi().then((res) => {
+    getExpenseTypeApi().then((res) => {
       setTypeOptions(
         res.map((item: IIncomeAndExpenseType) => ({
           label: item.name,
@@ -28,7 +28,7 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
       );
     });
 
-    getAllWalletApi().then((res) => {
+    getAllActiveWalletApi().then((res) => {
       setWalletOptions(
         res.map((item: IWallet) => ({
           label: item.name,

@@ -24,7 +24,7 @@ export const IncomeAndExpenseTypeContextProvider: React.FC<
   const [dataList, setDataList] = useState<IIncomeAndExpenseType[]>([]);
 
   const fetchDataList = async () => {
-    getAllIncomeAndExpenseTypeApi().then((res) => {
+    getAllIncomeAndExpenseTypeApi({}).then((res) => {
       setDataList(res);
     });
   };

@@ -19,7 +19,7 @@ export const WalletContextProvider: React.FC<WalletProviderProps> = ({
   const [dataList, setDataList] = useState<IWallet[]>([]);
 
   const fetchDataList = async () => {
-    getAllWalletApi().then((res) => {
+    getAllWalletApi({}).then((res) => {
       setDataList(res);
     });
   };
