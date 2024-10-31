@@ -1,5 +1,4 @@
 "use client";
-
 import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
@@ -8,8 +7,8 @@ import { formatDatetime } from "@/utils/DateUtils";
 import EditButton from "./edit/EditButton";
 import DeleteButton from "./delete/DeleteButton";
 import { IAccountingAccount } from "@/api/accounting-account";
-import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
+import PaginationCommon from "@/shared/component/pagination";
 
 const AccountingAccountPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
@@ -94,14 +93,6 @@ const AccountingAccountPage = () => {
     },
   ];
 
-  const handleTableChange: TableProps<DataType>["onChange"] = (pagination) => {
-    setDataQuery({
-      ...dataQuery,
-      pageSize: pagination.pageSize,
-      current: pagination.current,
-    });
-  };
-
   return (
     <>
       <FilterSection />
@@ -109,13 +100,20 @@ const AccountingAccountPage = () => {
       <Table<DataType>
         columns={columns}
         dataSource={dataSource}
-        pagination={{
-          ...dataList.pagination,
-          pageSizeOptions: pageSizeOptions,
-          showSizeChanger: true,
-        }}
-        onChange={handleTableChange}
         loading={isLoading}
+        pagination={false}
+      />
+
+      <PaginationCommon
+        current={dataList.pagination?.current}
+        total={dataList.pagination?.total}
+        onChange={(current, pageSize) =>
+          setDataQuery({
+            ...dataQuery,
+            pageSize: pageSize,
+            current: current,
+          })
+        }
       />
     </>
   );

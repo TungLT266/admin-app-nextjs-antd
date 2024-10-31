@@ -1,5 +1,5 @@
 "use client";
-import { Pagination, PaginationProps, Table, TableProps, Tag } from "antd";
+import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { formatDate, formatDatetime } from "@/utils/DateUtils";
 import { useBookkeepingContext } from "./BookkeepingContextProvider";
@@ -11,6 +11,7 @@ import { EntryType } from "./type";
 import { formatNumber } from "@/utils/NumberUtils";
 import { FunctionType, FunctionTypeLabels } from "@/shared/type/FunctionType";
 import FilterSection from "./FilterSection";
+import PaginationCommon from "@/shared/component/pagination";
 
 const BookkeepingPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
@@ -191,17 +192,6 @@ const BookkeepingPage = () => {
     // },
   ];
 
-  const handlePaginationChange: PaginationProps["onShowSizeChange"] = (
-    current,
-    pageSize
-  ) => {
-    setDataQuery({
-      ...dataQuery,
-      pageSize: pageSize,
-      current: current,
-    });
-  };
-
   return (
     <>
       <FilterSection />
@@ -214,19 +204,16 @@ const BookkeepingPage = () => {
         pagination={false}
       />
 
-      <Pagination
-        align="end"
-        showSizeChanger
-        current={dataList.pagination?.current || 1}
-        onChange={handlePaginationChange}
-        total={dataList.pagination?.total || 0}
-        className="!my-4"
-        style={{
-          display:
-            dataList.pagination?.total && dataList.pagination.total > 0
-              ? "flex"
-              : "none",
-        }}
+      <PaginationCommon
+        current={dataList.pagination?.current}
+        total={dataList.pagination?.total}
+        onChange={(current, pageSize) =>
+          setDataQuery({
+            ...dataQuery,
+            pageSize: pageSize,
+            current: current,
+          })
+        }
       />
     </>
   );

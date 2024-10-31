@@ -51,6 +51,11 @@ const items: MenuProps["items"] = [
     label: "Accounting Account",
   },
   {
+    key: "/account-group",
+    icon: <UserOutlined />,
+    label: "Account Group",
+  },
+  {
     key: "/income-and-expense-type",
     icon: <UserOutlined />,
     label: "Income and Expense Type",
