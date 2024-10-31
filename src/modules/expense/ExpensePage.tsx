@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { formatDate, formatDatetime } from "@/utils/DateUtils";
 import EditButton from "./edit/EditButton";
 import DeleteButton from "./delete/DeleteButton";
-import CreateButton from "./create/CreateButton";
 import { useExpenseContext } from "./ExpenseContextProvider";
 import { IWallet } from "@/api/wallet";
 import ConfirmButton from "./ConfirmButton";
@@ -14,20 +13,25 @@ import { IncomeStatus, IncomeStatusLabels } from "../income/type";
 import UnconfirmButton from "./UnconfirmButton";
 import { IExpense } from "@/api/expense";
 import { formatNumber } from "@/utils/NumberUtils";
+import FilterSection from "./FilterSection";
+import { pageSizeOptions } from "@/shared/type/ApiResponse";
 
 const ExpensePage = () => {
-  const { dataList, fetchDataList } = useExpenseContext();
+  const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
+    useExpenseContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
     fetchDataList();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataQuery]);
 
   useEffect(() => {
-    const dataWithKeys: DataType[] = dataList.map((item) => ({
-      ...item,
-      key: item._id,
-    }));
+    const dataWithKeys: DataType[] =
+      dataList.items?.map((item) => ({
+        ...item,
+        key: item._id,
+      })) || [];
     setDataSource(dataWithKeys);
   }, [dataList]);
 
@@ -126,13 +130,29 @@ const ExpensePage = () => {
     },
   ];
 
+  const handleTableChange: TableProps<DataType>["onChange"] = (pagination) => {
+    setDataQuery({
+      ...dataQuery,
+      pageSize: pagination.pageSize,
+      current: pagination.current,
+    });
+  };
+
   return (
     <>
-      <div className="flex mb-5">
-        <CreateButton />
-      </div>
+      <FilterSection />
 
-      <Table<DataType> columns={columns} dataSource={dataSource} />
+      <Table<DataType>
+        columns={columns}
+        dataSource={dataSource}
+        pagination={{
+          ...dataList.pagination,
+          pageSizeOptions: pageSizeOptions,
+          showSizeChanger: true,
+        }}
+        onChange={handleTableChange}
+        loading={isLoading}
+      />
     </>
   );
 };

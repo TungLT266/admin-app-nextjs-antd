@@ -1,10 +1,21 @@
 "use client";
-import { getAllLocalTransferApi, ILocalTransfer } from "@/api/local-transfer";
+import {
+  getAllLocalTransferApi,
+  ILocalTransfer,
+  ILocalTransferListReq,
+} from "@/api/local-transfer";
+import {
+  DataWithPagination,
+  paginationDefault,
+} from "@/shared/type/ApiResponse";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface LocalTransferContextProps {
-  dataList: ILocalTransfer[];
+  dataQuery: ILocalTransferListReq;
+  setDataQuery: (dataQuery: ILocalTransferListReq) => void;
+  dataList: DataWithPagination<ILocalTransfer>;
   fetchDataList: () => void;
+  isLoading: boolean;
 }
 
 const LocalTransferContext = createContext<
@@ -18,16 +29,29 @@ interface LocalTransferProviderProps {
 export const LocalTransferContextProvider: React.FC<
   LocalTransferProviderProps
 > = ({ children }) => {
-  const [dataList, setDataList] = useState<ILocalTransfer[]>([]);
+  const [dataQuery, setDataQuery] =
+    useState<ILocalTransferListReq>(paginationDefault);
+  const [dataList, setDataList] = useState<DataWithPagination<ILocalTransfer>>(
+    {}
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchDataList = async () => {
-    getAllLocalTransferApi().then((res) => {
-      setDataList(res);
-    });
+    setIsLoading(true);
+    getAllLocalTransferApi(dataQuery)
+      .then((res) => {
+        setDataList(res);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
-    <LocalTransferContext.Provider value={{ dataList, fetchDataList }}>
+    <LocalTransferContext.Provider
+      value={{ dataList, fetchDataList, dataQuery, setDataQuery, isLoading }}
+    >
       {children}
     </LocalTransferContext.Provider>
   );

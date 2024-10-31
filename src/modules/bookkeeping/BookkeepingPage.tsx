@@ -10,19 +10,23 @@ import { IIncomeAndExpenseType } from "@/api/income-and-expense-type";
 import { EntryType } from "./type";
 import { formatNumber } from "@/utils/NumberUtils";
 import { FunctionType, FunctionTypeLabels } from "@/shared/type/FunctionType";
+import { pageSizeOptions } from "@/shared/type/ApiResponse";
+import FilterSection from "./FilterSection";
 
 const BookkeepingPage = () => {
-  const { dataList, fetchDataList } = useBookkeepingContext();
+  const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
+    useBookkeepingContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
     fetchDataList();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataQuery]);
 
   useEffect(() => {
     const dataSourceNew: DataType[] = [];
 
-    dataList.forEach((item: IBookkeeping) => {
+    dataList.items?.forEach((item: IBookkeeping) => {
       dataSourceNew.push({
         key: `${item._id}_1`,
         _id: item._id,
@@ -188,7 +192,32 @@ const BookkeepingPage = () => {
     // },
   ];
 
-  return <Table<DataType> columns={columns} dataSource={dataSource} bordered />;
+  const handleTableChange: TableProps<DataType>["onChange"] = (pagination) => {
+    setDataQuery({
+      ...dataQuery,
+      pageSize: pagination.pageSize,
+      current: pagination.current,
+    });
+  };
+
+  return (
+    <>
+      <FilterSection />
+
+      <Table<DataType>
+        columns={columns}
+        dataSource={dataSource}
+        bordered
+        pagination={{
+          ...dataList.pagination,
+          pageSizeOptions: pageSizeOptions,
+          showSizeChanger: true,
+        }}
+        onChange={handleTableChange}
+        loading={isLoading}
+      />
+    </>
+  );
 };
 
 interface DataType {

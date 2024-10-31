@@ -2,7 +2,7 @@ import { useNotificationContext } from "@/shared/context/NotificationContextProv
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
-import { useIncomeAndExpenseTypeContext } from "@/shared/context/IncomeAndExpenseTypeContextProvider";
+import { useIncomeAndExpenseTypeContext } from "@/modules/income-and-expense-type/IncomeAndExpenseTypeContextProvider";
 import { deleteIncomeAndExpenseTypeApi } from "@/api/income-and-expense-type";
 
 interface DeleteButtonProps {

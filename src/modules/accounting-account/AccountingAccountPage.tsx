@@ -1,6 +1,6 @@
 "use client";
 
-import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
+import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { AccountingAccountStatus, AccountingAccountStatusLabels } from "./type";

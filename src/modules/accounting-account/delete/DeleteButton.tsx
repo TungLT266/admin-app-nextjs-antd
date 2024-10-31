@@ -3,7 +3,7 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import { deleteAccountingAccountApi } from "@/api/accounting-account";
-import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
+import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 
 interface DeleteButtonProps {
   id: string;

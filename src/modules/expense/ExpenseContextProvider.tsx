@@ -1,10 +1,17 @@
 "use client";
-import { getAllExpenseApi, IExpense } from "@/api/expense";
+import { getAllExpenseApi, IExpense, IExpenseListReq } from "@/api/expense";
+import {
+  DataWithPagination,
+  paginationDefault,
+} from "@/shared/type/ApiResponse";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface ExpenseContextProps {
-  dataList: IExpense[];
+  dataQuery: IExpenseListReq;
+  setDataQuery: (dataQuery: IExpenseListReq) => void;
+  dataList: DataWithPagination<IExpense>;
   fetchDataList: () => void;
+  isLoading: boolean;
 }
 
 const ExpenseContext = createContext<ExpenseContextProps | undefined>(
@@ -18,16 +25,27 @@ interface ExpenseProviderProps {
 export const ExpenseContextProvider: React.FC<ExpenseProviderProps> = ({
   children,
 }) => {
-  const [dataList, setDataList] = useState<IExpense[]>([]);
+  const [dataList, setDataList] = useState<DataWithPagination<IExpense>>({});
+  const [dataQuery, setDataQuery] =
+    useState<IExpenseListReq>(paginationDefault);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchDataList = async () => {
-    getAllExpenseApi().then((res) => {
-      setDataList(res);
-    });
+    setIsLoading(true);
+    getAllExpenseApi(dataQuery)
+      .then((res) => {
+        setDataList(res);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
-    <ExpenseContext.Provider value={{ dataList, fetchDataList }}>
+    <ExpenseContext.Provider
+      value={{ dataList, fetchDataList, dataQuery, setDataQuery, isLoading }}
+    >
       {children}
     </ExpenseContext.Provider>
   );

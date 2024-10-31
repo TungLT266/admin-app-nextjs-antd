@@ -16,10 +16,10 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
   useEffect(() => {
     getAllActiveWalletApi().then((res) => {
       setWalletOptions(
-        res.map((item: IWallet) => ({
+        res.items?.map((item: IWallet) => ({
           label: item.name,
           value: item._id,
-        }))
+        })) || []
       );
     });
   }, []);

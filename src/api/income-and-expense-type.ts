@@ -1,4 +1,4 @@
-import { IApiResponse } from "@/shared/type/ApiResponse";
+import { DataWithPagination, IApiResponse, PaginationReq } from "@/shared/type/ApiResponse";
 import { axiosInstance } from "@/utils/ApiUtils";
 import { IAccountingAccount } from "./accounting-account";
 import { AccountingAccountStatus } from "@/modules/accounting-account/type";
@@ -30,7 +30,7 @@ export interface IIncomeAndExpenseType {
   updatedAt?: Date;
 }
 
-export interface IIncomeAndExpenseTypeListReq {
+export interface IIncomeAndExpenseTypeListReq extends PaginationReq {
   status?: string;
   type?: string;
 }
@@ -61,15 +61,21 @@ export const getExpenseTypeApi = async () => {
   return getAllIncomeAndExpenseTypeApi(query);
 };
 
+export const getAllActiveIncomeAndExpenseTypeApi = async () => {
+  const query: IIncomeAndExpenseTypeListReq = {
+    status: AccountingAccountStatus.ACTIVE,
+  };
+  return getAllIncomeAndExpenseTypeApi(query);
+};
+
 export const getAllIncomeAndExpenseTypeApi = async (
   query: IIncomeAndExpenseTypeListReq
 ) => {
-  const result = await axiosInstance.get<IApiResponse<IIncomeAndExpenseType[]>>(
-    apiUrl,
-    {
-      params: query,
-    }
-  );
+  const result = await axiosInstance.get<
+    IApiResponse<DataWithPagination<IIncomeAndExpenseType>>
+  >(apiUrl, {
+    params: query,
+  });
   return result.data.data;
 };
 

@@ -1,4 +1,8 @@
-import { IApiResponse } from "@/shared/type/ApiResponse";
+import {
+  DataWithPagination,
+  IApiResponse,
+  PaginationReq,
+} from "@/shared/type/ApiResponse";
 import { axiosInstance } from "@/utils/ApiUtils";
 import { IAccountingAccount } from "./accounting-account";
 import { IWallet } from "./wallet";
@@ -22,8 +26,22 @@ export interface IBookkeeping {
   createdAt?: Date;
 }
 
-export const getAllBookkeepingApi = async () => {
-  const result = await axiosInstance.get<IApiResponse<IBookkeeping[]>>(apiUrl);
+export interface IBookkeepingListReq extends PaginationReq {
+  functionType?: string;
+  titleRegex?: string;
+  documentDateFrom?: string;
+  documentDateTo?: string;
+  accountingAccount?: string;
+  wallet?: string;
+  incomeAndExpenseType?: string;
+}
+
+export const getAllBookkeepingApi = async (query: IBookkeepingListReq) => {
+  const result = await axiosInstance.get<
+    IApiResponse<DataWithPagination<IBookkeeping>>
+  >(apiUrl, {
+    params: query,
+  });
   return result.data.data;
 };
 

@@ -1,4 +1,8 @@
-import { IApiResponse } from "@/shared/type/ApiResponse";
+import {
+  DataWithPagination,
+  IApiResponse,
+  PaginationReq,
+} from "@/shared/type/ApiResponse";
 import { axiosInstance } from "@/utils/ApiUtils";
 import { IWallet } from "./wallet";
 
@@ -26,6 +30,15 @@ export interface ILocalTransfer {
   updatedAt?: Date;
 }
 
+export interface ILocalTransferListReq extends PaginationReq {
+  status?: string;
+  titleRegex?: string;
+  documentDateFrom?: string;
+  documentDateTo?: string;
+  walletFrom?: IWallet;
+  walletTo?: IWallet;
+}
+
 export const createLocalTransferApi = async (body: ICreateLocalTransferReq) => {
   const result = await axiosInstance.post<IApiResponse<ILocalTransfer>>(
     apiUrl,
@@ -34,10 +47,12 @@ export const createLocalTransferApi = async (body: ICreateLocalTransferReq) => {
   return result.data.data;
 };
 
-export const getAllLocalTransferApi = async () => {
-  const result = await axiosInstance.get<IApiResponse<ILocalTransfer[]>>(
-    apiUrl
-  );
+export const getAllLocalTransferApi = async (query: ILocalTransferListReq) => {
+  const result = await axiosInstance.get<
+    IApiResponse<DataWithPagination<ILocalTransfer>>
+  >(apiUrl, {
+    params: query,
+  });
   return result.data.data;
 };
 

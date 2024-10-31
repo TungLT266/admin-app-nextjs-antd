@@ -5,7 +5,7 @@ import {
   IAccountingAccountListReq,
 } from "@/api/accounting-account";
 import React, { createContext, ReactNode, useContext, useState } from "react";
-import { DataWithPagination, paginationDefault } from "../type/ApiResponse";
+import { DataWithPagination, paginationDefault } from "../../shared/type/ApiResponse";
 
 interface AccountingAccountContextProps {
   dataQuery: IAccountingAccountListReq;

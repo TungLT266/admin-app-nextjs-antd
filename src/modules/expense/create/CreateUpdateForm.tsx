@@ -21,19 +21,19 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
   useEffect(() => {
     getExpenseTypeApi().then((res) => {
       setTypeOptions(
-        res.map((item: IIncomeAndExpenseType) => ({
+        res.items?.map((item: IIncomeAndExpenseType) => ({
           label: item.name,
           value: item._id,
-        }))
+        })) || []
       );
     });
 
     getAllActiveWalletApi().then((res) => {
       setWalletOptions(
-        res.map((item: IWallet) => ({
+        res.items?.map((item: IWallet) => ({
           label: item.name,
           value: item._id,
-        }))
+        })) || []
       );
     });
   }, []);

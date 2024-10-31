@@ -1,7 +1,7 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import { Button, Form, FormProps, Modal } from "antd";
 import useDisclosure from "@/shared/hook/useDisclosure";
-import { useIncomeAndExpenseTypeContext } from "@/shared/context/IncomeAndExpenseTypeContextProvider";
+import { useIncomeAndExpenseTypeContext } from "@/modules/income-and-expense-type/IncomeAndExpenseTypeContextProvider";
 import {
   createIncomeAndExpenseTypeApi,
   getIAEAccountsApi,

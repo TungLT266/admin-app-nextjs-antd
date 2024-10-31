@@ -1,5 +1,5 @@
 "use client";
-import { useIncomeAndExpenseTypeContext } from "@/shared/context/IncomeAndExpenseTypeContextProvider";
+import { useIncomeAndExpenseTypeContext } from "@/modules/income-and-expense-type/IncomeAndExpenseTypeContextProvider";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { IncomeExpenseType, IncomeExpenseTypeLabels } from "./type";
@@ -10,23 +10,26 @@ import {
 import { formatDatetime } from "@/utils/DateUtils";
 import EditButton from "./edit/EditButton";
 import DeleteButton from "./delete/DeleteButton";
-import CreateButton from "./create/CreateButton";
 import { IIncomeAndExpenseType } from "@/api/income-and-expense-type";
+import FilterSection from "./FilterSection";
+import { pageSizeOptions } from "@/shared/type/ApiResponse";
 
 const IncomeAndExpenseTypePage = () => {
-  const { dataList, fetchDataList } = useIncomeAndExpenseTypeContext();
+  const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
+    useIncomeAndExpenseTypeContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
     fetchDataList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dataQuery]);
 
   useEffect(() => {
-    const dataWithKeys: DataType[] = dataList.map((item) => ({
-      ...item,
-      key: item._id,
-    }));
+    const dataWithKeys: DataType[] =
+      dataList.items?.map((item) => ({
+        ...item,
+        key: item._id,
+      })) || [];
     setDataSource(dataWithKeys);
   }, [dataList]);
 
@@ -116,13 +119,29 @@ const IncomeAndExpenseTypePage = () => {
     },
   ];
 
+  const handleTableChange: TableProps<DataType>["onChange"] = (pagination) => {
+    setDataQuery({
+      ...dataQuery,
+      pageSize: pagination.pageSize,
+      current: pagination.current,
+    });
+  };
+
   return (
     <>
-      <div className="flex mb-5">
-        <CreateButton />
-      </div>
+      <FilterSection />
 
-      <Table<DataType> columns={columns} dataSource={dataSource} />
+      <Table<DataType>
+        columns={columns}
+        dataSource={dataSource}
+        pagination={{
+          ...dataList.pagination,
+          pageSizeOptions: pageSizeOptions,
+          showSizeChanger: true,
+        }}
+        onChange={handleTableChange}
+        loading={isLoading}
+      />
     </>
   );
 };

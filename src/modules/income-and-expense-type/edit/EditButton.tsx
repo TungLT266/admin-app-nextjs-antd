@@ -4,7 +4,7 @@ import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
 import { useEffect, useState } from "react";
-import { useIncomeAndExpenseTypeContext } from "@/shared/context/IncomeAndExpenseTypeContextProvider";
+import { useIncomeAndExpenseTypeContext } from "@/modules/income-and-expense-type/IncomeAndExpenseTypeContextProvider";
 import {
   getIAEAccountsApi,
   getIncomeAndExpenseTypeByIdApi,

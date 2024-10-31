@@ -1,17 +1,16 @@
-import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 import CreateButton from "./create/CreateButton";
-import { Form, Input, Select } from "antd";
-import { AccountingAccountStatusLabels } from "./type";
+import { Form, Select } from "antd";
+import { useWalletContext } from "./WalletContextProvider";
+import { AccountingAccountStatusLabels } from "../accounting-account/type";
 
 const FilterSection = () => {
-  const { dataQuery, setDataQuery } = useAccountingAccountContext();
+  const { dataQuery, setDataQuery } = useWalletContext();
   const [form] = Form.useForm();
 
   const handleValuesChange = () => {
     const values = form.getFieldsValue();
     setDataQuery({
       ...dataQuery,
-      numberRegex: `^${values.number}`,
       status: values.status,
     });
   };
@@ -25,10 +24,6 @@ const FilterSection = () => {
           onValuesChange={handleValuesChange}
           className="w-full flex gap-3"
         >
-          <Form.Item label="Account Number" name="number">
-            <Input className="!w-[200px]" />
-          </Form.Item>
-
           <Form.Item label="Status" name="status">
             <Select
               options={AccountingAccountStatusLabels}

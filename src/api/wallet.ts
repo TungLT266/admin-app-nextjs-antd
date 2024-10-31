@@ -1,4 +1,4 @@
-import { IApiResponse } from "@/shared/type/ApiResponse";
+import { DataWithPagination, IApiResponse, PaginationReq } from "@/shared/type/ApiResponse";
 import { axiosInstance } from "@/utils/ApiUtils";
 import { IAccountingAccount } from "./accounting-account";
 import { AccountingAccountStatus } from "@/modules/accounting-account/type";
@@ -38,7 +38,7 @@ export interface IWallet {
   updatedAt?: Date;
 }
 
-export interface IWalletListReq {
+export interface IWalletListReq extends PaginationReq {
   status?: string;
 }
 
@@ -55,7 +55,9 @@ export const getAllActiveWalletApi = async () => {
 };
 
 export const getAllWalletApi = async (query: IWalletListReq) => {
-  const result = await axiosInstance.get<IApiResponse<IWallet[]>>(apiUrl, {
+  const result = await axiosInstance.get<
+    IApiResponse<DataWithPagination<IWallet>>
+  >(apiUrl, {
     params: query,
   });
   return result.data.data;

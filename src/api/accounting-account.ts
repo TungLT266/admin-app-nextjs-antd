@@ -51,6 +51,13 @@ export const getAccountingAccounts1FirstApi = async () => {
   return getAllAccountingAccountApi(query);
 };
 
+export const getAllAccountingAccountActiveApi = async () => {
+  const query: IAccountingAccountListReq = {
+    status: AccountingAccountStatus.ACTIVE,
+  };
+  return getAllAccountingAccountApi(query);
+};
+
 export const getAllAccountingAccountApi = async (
   query: IAccountingAccountListReq
 ) => {

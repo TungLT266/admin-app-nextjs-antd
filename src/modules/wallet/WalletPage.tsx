@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { formatDatetime } from "@/utils/DateUtils";
 import EditButton from "./edit/EditButton";
 import DeleteButton from "./delete/DeleteButton";
-import CreateButton from "./create/CreateButton";
 import { useWalletContext } from "./WalletContextProvider";
 import {
   AccountingAccountStatus,
@@ -14,21 +13,25 @@ import {
 import { IWallet } from "@/api/wallet";
 import { formatNumber } from "@/utils/NumberUtils";
 import { WalletTypeLabels } from "./type";
+import { pageSizeOptions } from "@/shared/type/ApiResponse";
+import FilterSection from "./FilterSection";
 
 const WalletPage = () => {
-  const { dataList, fetchDataList } = useWalletContext();
+  const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
+    useWalletContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
     fetchDataList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dataQuery]);
 
   useEffect(() => {
-    const dataWithKeys: DataType[] = dataList.map((item) => ({
-      ...item,
-      key: item._id,
-    }));
+    const dataWithKeys: DataType[] =
+      dataList.items?.map((item) => ({
+        ...item,
+        key: item._id,
+      })) || [];
     setDataSource(dataWithKeys);
   }, [dataList]);
 
@@ -117,13 +120,29 @@ const WalletPage = () => {
     },
   ];
 
+  const handleTableChange: TableProps<DataType>["onChange"] = (pagination) => {
+    setDataQuery({
+      ...dataQuery,
+      pageSize: pagination.pageSize,
+      current: pagination.current,
+    });
+  };
+
   return (
     <>
-      <div className="flex mb-5">
-        <CreateButton />
-      </div>
+      <FilterSection />
 
-      <Table<DataType> columns={columns} dataSource={dataSource} />
+      <Table<DataType>
+        columns={columns}
+        dataSource={dataSource}
+        pagination={{
+          ...dataList.pagination,
+          pageSizeOptions: pageSizeOptions,
+          showSizeChanger: true,
+        }}
+        onChange={handleTableChange}
+        loading={isLoading}
+      />
     </>
   );
 };

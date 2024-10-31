@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountingAccountContextProvider } from "@/shared/context/AccountingAccountContextProvider";
+import { AccountingAccountContextProvider } from "@/modules/accounting-account/AccountingAccountContextProvider";
 
 export default function Layout({
   children,

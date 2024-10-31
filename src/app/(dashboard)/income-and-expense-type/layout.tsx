@@ -1,4 +1,4 @@
-import { IncomeAndExpenseTypeContextProvider } from "@/shared/context/IncomeAndExpenseTypeContextProvider";
+import { IncomeAndExpenseTypeContextProvider } from "@/modules/income-and-expense-type/IncomeAndExpenseTypeContextProvider";
 import React from "react";
 
 export default function Layout({

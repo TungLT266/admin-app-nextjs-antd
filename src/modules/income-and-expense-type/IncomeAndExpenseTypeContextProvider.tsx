@@ -2,12 +2,20 @@
 import {
   getAllIncomeAndExpenseTypeApi,
   IIncomeAndExpenseType,
+  IIncomeAndExpenseTypeListReq,
 } from "@/api/income-and-expense-type";
+import {
+  DataWithPagination,
+  paginationDefault,
+} from "@/shared/type/ApiResponse";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface IncomeAndExpenseTypeContextProps {
-  dataList: IIncomeAndExpenseType[];
+  dataQuery: IIncomeAndExpenseTypeListReq;
+  setDataQuery: (dataQuery: IIncomeAndExpenseTypeListReq) => void;
+  dataList: DataWithPagination<IIncomeAndExpenseType>;
   fetchDataList: () => void;
+  isLoading: boolean;
 }
 
 const IncomeAndExpenseTypeContext = createContext<
@@ -21,16 +29,29 @@ interface IncomeAndExpenseTypeProviderProps {
 export const IncomeAndExpenseTypeContextProvider: React.FC<
   IncomeAndExpenseTypeProviderProps
 > = ({ children }) => {
-  const [dataList, setDataList] = useState<IIncomeAndExpenseType[]>([]);
+  const [dataList, setDataList] = useState<
+    DataWithPagination<IIncomeAndExpenseType>
+  >({});
+  const [dataQuery, setDataQuery] =
+    useState<IIncomeAndExpenseTypeListReq>(paginationDefault);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchDataList = async () => {
-    getAllIncomeAndExpenseTypeApi({}).then((res) => {
-      setDataList(res);
-    });
+    setIsLoading(true);
+    getAllIncomeAndExpenseTypeApi(dataQuery)
+      .then((res) => {
+        setDataList(res);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
-    <IncomeAndExpenseTypeContext.Provider value={{ dataList, fetchDataList }}>
+    <IncomeAndExpenseTypeContext.Provider
+      value={{ dataList, fetchDataList, dataQuery, setDataQuery, isLoading }}
+    >
       {children}
     </IncomeAndExpenseTypeContext.Provider>
   );

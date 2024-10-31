@@ -1,10 +1,17 @@
 "use client";
-import { getAllWalletApi, IWallet } from "@/api/wallet";
+import { getAllWalletApi, IWallet, IWalletListReq } from "@/api/wallet";
+import {
+  DataWithPagination,
+  paginationDefault,
+} from "@/shared/type/ApiResponse";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface WalletContextProps {
-  dataList: IWallet[];
+  dataQuery: IWalletListReq;
+  setDataQuery: (dataQuery: IWalletListReq) => void;
+  dataList: DataWithPagination<IWallet>;
   fetchDataList: () => void;
+  isLoading: boolean;
 }
 
 const WalletContext = createContext<WalletContextProps | undefined>(undefined);
@@ -16,16 +23,26 @@ interface WalletProviderProps {
 export const WalletContextProvider: React.FC<WalletProviderProps> = ({
   children,
 }) => {
-  const [dataList, setDataList] = useState<IWallet[]>([]);
+  const [dataQuery, setDataQuery] = useState<IWalletListReq>(paginationDefault);
+  const [dataList, setDataList] = useState<DataWithPagination<IWallet>>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchDataList = async () => {
-    getAllWalletApi({}).then((res) => {
-      setDataList(res);
-    });
+    setIsLoading(true);
+    getAllWalletApi(dataQuery)
+      .then((res) => {
+        setDataList(res);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
-    <WalletContext.Provider value={{ dataList, fetchDataList }}>
+    <WalletContext.Provider
+      value={{ dataList, fetchDataList, dataQuery, setDataQuery, isLoading }}
+    >
       {children}
     </WalletContext.Provider>
   );

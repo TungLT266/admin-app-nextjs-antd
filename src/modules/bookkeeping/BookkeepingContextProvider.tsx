@@ -1,10 +1,21 @@
 "use client";
-import { getAllBookkeepingApi, IBookkeeping } from "@/api/bookkeeping";
+import {
+  getAllBookkeepingApi,
+  IBookkeeping,
+  IBookkeepingListReq,
+} from "@/api/bookkeeping";
+import {
+  DataWithPagination,
+  paginationDefault,
+} from "@/shared/type/ApiResponse";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface BookkeepingContextProps {
-  dataList: IBookkeeping[];
+  dataQuery: IBookkeepingListReq;
+  setDataQuery: (dataQuery: IBookkeepingListReq) => void;
+  dataList: DataWithPagination<IBookkeeping>;
   fetchDataList: () => void;
+  isLoading: boolean;
 }
 
 const BookkeepingContext = createContext<BookkeepingContextProps | undefined>(
@@ -18,16 +29,29 @@ interface BookkeepingProviderProps {
 export const BookkeepingContextProvider: React.FC<BookkeepingProviderProps> = ({
   children,
 }) => {
-  const [dataList, setDataList] = useState<IBookkeeping[]>([]);
+  const [dataQuery, setDataQuery] =
+    useState<IBookkeepingListReq>(paginationDefault);
+  const [dataList, setDataList] = useState<DataWithPagination<IBookkeeping>>(
+    {}
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchDataList = async () => {
-    getAllBookkeepingApi().then((res) => {
-      setDataList(res);
-    });
+    setIsLoading(true);
+    getAllBookkeepingApi(dataQuery)
+      .then((res) => {
+        setDataList(res);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
-    <BookkeepingContext.Provider value={{ dataList, fetchDataList }}>
+    <BookkeepingContext.Provider
+      value={{ dataList, fetchDataList, dataQuery, setDataQuery, isLoading }}
+    >
       {children}
     </BookkeepingContext.Provider>
   );

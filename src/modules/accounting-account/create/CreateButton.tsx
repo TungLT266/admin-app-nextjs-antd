@@ -6,7 +6,7 @@ import { useNotificationContext } from "@/shared/context/NotificationContextProv
 import { Button, Form, FormProps, Modal } from "antd";
 import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
-import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
+import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 
 const CreateButton = () => {
   const [form] = Form.useForm();

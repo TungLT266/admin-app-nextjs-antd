@@ -9,7 +9,7 @@ import {
   updateAccountingAccountApi,
 } from "@/api/accounting-account";
 import { useEffect } from "react";
-import { useAccountingAccountContext } from "@/shared/context/AccountingAccountContextProvider";
+import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 
 interface EditButtonProps {
   id: string;
