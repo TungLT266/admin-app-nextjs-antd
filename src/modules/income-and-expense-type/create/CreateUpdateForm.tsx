@@ -55,7 +55,7 @@ const CreateUpdateForm = ({
 
       <Form.Item
         label="Accounting Account"
-        name="accountingAcount"
+        name="accountingAccount"
         rules={[{ required: true, message: "Please input this field!" }]}
       >
         <Select options={accountingAccountOptions} />

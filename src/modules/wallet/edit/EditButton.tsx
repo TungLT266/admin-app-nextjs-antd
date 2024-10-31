@@ -30,7 +30,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           bankName: res.bankName,
           bankAccountNo: res.bankAccountNo,
           creditLimit: res.creditLimit,
-          accountingAcount: res.accountingAcount?._id,
+          accountingAccount: res.accountingAccount?._id,
           status: res.status,
         };
         form.setFieldsValue(initialValues);

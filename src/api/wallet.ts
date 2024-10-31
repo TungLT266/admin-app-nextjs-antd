@@ -11,7 +11,7 @@ export interface ICreateWalletReq {
   bankName?: string;
   bankAccountNo?: string;
   creditLimit?: number;
-  accountingAcount?: string;
+  accountingAccount?: string;
 }
 
 export interface IUpdateWalletReq {
@@ -20,7 +20,7 @@ export interface IUpdateWalletReq {
   bankName?: string;
   bankAccountNo?: string;
   creditLimit?: number;
-  accountingAcount?: string;
+  accountingAccount?: string;
   status?: string;
 }
 
@@ -32,7 +32,7 @@ export interface IWallet {
   bankAccountNo?: string;
   creditLimit?: number;
   amountBalance?: number;
-  accountingAcount?: IAccountingAccount;
+  accountingAccount?: IAccountingAccount;
   status?: string;
   createdAt?: Date;
   updatedAt?: Date;

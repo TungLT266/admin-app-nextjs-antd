@@ -36,7 +36,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           type,
           name: res.name,
           description: res.description,
-          accountingAcount: res.accountingAcount?._id,
+          accountingAccount: res.accountingAccount?._id,
           status: res.status,
         };
         form.setFieldsValue(initialValues);

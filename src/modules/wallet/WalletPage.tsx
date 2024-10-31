@@ -40,11 +40,11 @@ const WalletPage = () => {
     },
     {
       title: "Accounting Account",
-      dataIndex: "accountingAcount",
-      key: "accountingAcount",
-      render: (accountingAcount) => {
-        return accountingAcount
-          ? `${accountingAcount?.name} (${accountingAcount?.number})`
+      dataIndex: "accountingAccount",
+      key: "accountingAccount",
+      render: (accountingAccount) => {
+        return accountingAccount
+          ? `${accountingAccount?.name} (${accountingAccount?.number})`
           : "-";
       },
     },

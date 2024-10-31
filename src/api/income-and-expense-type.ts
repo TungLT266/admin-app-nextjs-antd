@@ -9,13 +9,13 @@ const apiUrl = "income-and-expense-type";
 export interface ICreateIncomeAndExpenseTypeReq {
   name?: string;
   description?: string;
-  accountingAcount?: string;
+  accountingAccount?: string;
 }
 
 export interface IUpdateIncomeAndExpenseTypeReq {
   name?: string;
   description?: string;
-  accountingAcount?: string;
+  accountingAccount?: string;
   status?: string;
 }
 
@@ -24,7 +24,7 @@ export interface IIncomeAndExpenseType {
   type?: string;
   name?: string;
   description?: string;
-  accountingAcount?: IAccountingAccount;
+  accountingAccount?: IAccountingAccount;
   status?: string;
   createdAt?: Date;
   updatedAt?: Date;
