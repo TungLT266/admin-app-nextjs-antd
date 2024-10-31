@@ -7,12 +7,12 @@ import { AccountingAccountStatus, AccountingAccountStatusLabels } from "./type";
 import { formatDatetime } from "@/utils/DateUtils";
 import EditButton from "./edit/EditButton";
 import DeleteButton from "./delete/DeleteButton";
-import CreateButton from "./create/CreateButton";
 import { IAccountingAccount } from "@/api/accounting-account";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
+import FilterSection from "./FilterSection";
 
 const AccountingAccountPage = () => {
-  const { dataList, fetchDataList, dataQuery, setDataQuery } =
+  const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useAccountingAccountContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
@@ -95,26 +95,16 @@ const AccountingAccountPage = () => {
   ];
 
   const handleTableChange: TableProps<DataType>["onChange"] = (pagination) => {
-    if (pagination.pageSize !== dataList.pagination?.pageSize) {
-      setDataQuery({
-        ...dataQuery,
-        pageSize: pagination.pageSize,
-      });
-    }
-
-    if (pagination.current !== dataList.pagination?.current) {
-      setDataQuery({
-        ...dataQuery,
-        current: pagination.current,
-      });
-    }
+    setDataQuery({
+      ...dataQuery,
+      pageSize: pagination.pageSize,
+      current: pagination.current,
+    });
   };
 
   return (
     <>
-      <div className="flex mb-5">
-        <CreateButton />
-      </div>
+      <FilterSection />
 
       <Table<DataType>
         columns={columns}
@@ -125,6 +115,7 @@ const AccountingAccountPage = () => {
           showSizeChanger: true,
         }}
         onChange={handleTableChange}
+        loading={isLoading}
       />
     </>
   );

@@ -45,12 +45,7 @@ const CreateUpdateForm = ({
           name="status"
           rules={[{ required: true, message: "Please input this field!" }]}
         >
-          <Select
-            // defaultValue="lucy"
-            // style={{ width: 120 }}
-            // onChange={handleChange}
-            options={AccountingAccountStatusLabels}
-          />
+          <Select options={AccountingAccountStatusLabels} />
         </Form.Item>
       )}
     </Form>

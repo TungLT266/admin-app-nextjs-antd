@@ -12,6 +12,7 @@ interface AccountingAccountContextProps {
   setDataQuery: (dataQuery: IAccountingAccountListReq) => void;
   dataList: DataWithPagination<IAccountingAccount>;
   fetchDataList: () => void;
+  isLoading: boolean;
 }
 
 const AccountingAccountContext = createContext<
@@ -30,16 +31,23 @@ export const AccountingAccountContextProvider: React.FC<
   const [dataList, setDataList] = useState<
     DataWithPagination<IAccountingAccount>
   >({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchDataList = async () => {
-    getAllAccountingAccountApi(dataQuery).then((res) => {
-      setDataList(res);
-    });
+    setIsLoading(true);
+    getAllAccountingAccountApi(dataQuery)
+      .then((res) => {
+        setDataList(res);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
     <AccountingAccountContext.Provider
-      value={{ dataList, fetchDataList, setDataQuery, dataQuery }}
+      value={{ dataList, fetchDataList, setDataQuery, dataQuery, isLoading }}
     >
       {children}
     </AccountingAccountContext.Provider>

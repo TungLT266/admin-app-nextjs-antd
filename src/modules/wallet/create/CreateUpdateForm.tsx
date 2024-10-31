@@ -30,10 +30,10 @@ const CreateUpdateForm = ({
   useEffect(() => {
     getAccountingAccounts1FirstApi().then((res) => {
       setAccountingAccountOptions(
-        res.map((item: IAccountingAccount) => ({
+        res.items?.map((item: IAccountingAccount) => ({
           label: `${item.name} (${item.number})`,
           value: item._id,
-        }))
+        })) || []
       );
     });
   }, []);
@@ -87,17 +87,18 @@ const CreateUpdateForm = ({
         <Select options={WalletTypeLabels} />
       </Form.Item>
 
-      {type === WalletType.BANK || type === WalletType.SAVING && (
-        <>
-          <Form.Item label="Bank Name" name="bankName">
-            <Input />
-          </Form.Item>
+      {type === WalletType.BANK ||
+        (type === WalletType.SAVING && (
+          <>
+            <Form.Item label="Bank Name" name="bankName">
+              <Input />
+            </Form.Item>
 
-          <Form.Item label="Bank No" name="bankAccountNo">
-            <Input />
-          </Form.Item>
-        </>
-      )}
+            <Form.Item label="Bank No" name="bankAccountNo">
+              <Input />
+            </Form.Item>
+          </>
+        ))}
 
       {type === WalletType.CREDIT_CARD && (
         <Form.Item label="Credit Limit" name="creditLimit">
