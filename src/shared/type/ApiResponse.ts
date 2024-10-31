@@ -10,7 +10,7 @@ export interface PaginationReq {
 }
 
 export interface DataWithPagination<T> {
-  pagination?: PaginationReq;
+  pagination?: PaginationRes;
   items?: T[];
 }
 
@@ -23,6 +23,12 @@ export interface PaginationRes {
 export const paginationDefault: PaginationReq = {
   current: 1,
   pageSize: 10,
+};
+
+export const paginationResDefault: PaginationRes = {
+  current: 1,
+  pageSize: 10,
+  total: 0,
 };
 
 export const pageSizeOptions = ["10", "20", "50", "100"];

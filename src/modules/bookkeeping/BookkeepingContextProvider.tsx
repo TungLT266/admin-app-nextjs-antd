@@ -7,6 +7,7 @@ import {
 import {
   DataWithPagination,
   paginationDefault,
+  paginationResDefault,
 } from "@/shared/type/ApiResponse";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
@@ -31,9 +32,9 @@ export const BookkeepingContextProvider: React.FC<BookkeepingProviderProps> = ({
 }) => {
   const [dataQuery, setDataQuery] =
     useState<IBookkeepingListReq>(paginationDefault);
-  const [dataList, setDataList] = useState<DataWithPagination<IBookkeeping>>(
-    {}
-  );
+  const [dataList, setDataList] = useState<DataWithPagination<IBookkeeping>>({
+    pagination: paginationResDefault,
+  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchDataList = async () => {
