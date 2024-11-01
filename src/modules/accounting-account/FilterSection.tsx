@@ -11,7 +11,7 @@ const FilterSection = () => {
     const values = form.getFieldsValue();
     setDataQuery({
       ...dataQuery,
-      numberRegex: `^${values.number}`,
+      numberRegex: values.number ? `^${values.number}` : "",
       status: values.status,
     });
   };
