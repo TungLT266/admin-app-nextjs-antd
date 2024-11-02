@@ -37,6 +37,7 @@ const EditButton = ({ id }: EditButtonProps) => {
         form.setFieldsValue(initialValues);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const handleOk = () => {

@@ -51,6 +51,7 @@ const EditButton = ({ id }: EditButtonProps) => {
         });
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const handleOk = () => {
