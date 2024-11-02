@@ -11,9 +11,8 @@ import {
   AccountingAccountStatus,
   AccountingAccountStatusLabels,
 } from "../accounting-account/type";
-import { IAccountGroup } from "@/api/account-group";
+import { IAccountGroup, IAccountGroupAccount } from "@/api/account-group";
 import { AccountGroupViewType, AccountGroupViewTypeLabels } from "./type";
-import { IAccountingAccount } from "@/api/accounting-account";
 
 const AccountGroupPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
@@ -45,13 +44,15 @@ const AccountGroupPage = () => {
       dataIndex: "accountingAccounts",
       key: "accountingAccounts",
       align: "center",
-      render: (accountingAccounts: IAccountingAccount[]) => {
+      render: (accountingAccounts: IAccountGroupAccount[]) => {
         return (
           <div className="flex flex-col gap-1">
-            {accountingAccounts.map((accountingAccount) => (
-              <div key={accountingAccount._id}>
+            {accountingAccounts.map((accountingAccount, index) => (
+              <div
+                key={`account-${accountingAccount.accountingAccount?._id}-${index}`}
+              >
                 <Tag color="geekblue">
-                  {`${accountingAccount.name} (${accountingAccount.number})`}
+                  {`${accountingAccount.accountingAccount?.name} (${accountingAccount.accountingAccount?.number})`}
                 </Tag>
               </div>
             ))}

@@ -28,11 +28,15 @@ const EditButton = ({ id }: EditButtonProps) => {
           name: res.name,
           description: res.description,
           accountingAccounts:
-            res.accountingAccounts?.map((item) => item._id || "") || [],
+            res.accountingAccounts?.map((item) => ({
+              accountingAccount: item.accountingAccount?._id,
+              serialNo: item.serialNo,
+            })) || [],
           isShowInDashboard: res.isShowInDashboard,
           isFollowTotalValue: res.isFollowTotalValue,
           viewType: res.viewType,
           status: res.status,
+          dashboardSerialNo: res.dashboardSerialNo,
         };
         form.setFieldsValue(initialValues);
       });
@@ -45,6 +49,8 @@ const EditButton = ({ id }: EditButtonProps) => {
   };
 
   const onFinish: FormProps["onFinish"] = (values) => {
+    console.log("Success:::::", values);
+
     const data: IUpdateAccountGroupReq = { ...values };
     updateAccountGroupApi(id, data)
       .then(() => {

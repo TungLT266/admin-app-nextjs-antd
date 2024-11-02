@@ -12,10 +12,22 @@ const apiUrl = "account-group";
 export interface ICreateAccountGroupReq {
   name?: string;
   description?: string;
-  accountingAccounts?: string[];
+  accountingAccounts?: ICreateAccountGroupAccount[];
+  accountGroups?: ICreateAccountGroupGroup[];
   isShowInDashboard?: boolean;
   isFollowTotalValue?: boolean;
   viewType?: string;
+  dashboardSerialNo?: number;
+}
+
+export interface ICreateAccountGroupAccount {
+  accountingAccount?: string;
+  serialNo?: number;
+}
+
+export interface ICreateAccountGroupGroup {
+  accountGroup?: string;
+  serialNo?: number;
 }
 
 export interface IUpdateAccountGroupReq extends ICreateAccountGroupReq {
@@ -26,13 +38,25 @@ export interface IAccountGroup {
   _id?: string;
   name?: string;
   description?: string;
-  accountingAccounts?: IAccountingAccount[];
+  accountingAccounts?: IAccountGroupAccount[];
+  accountGroups?: IAccountGroupGroup[];
   isShowInDashboard?: boolean;
   isFollowTotalValue?: boolean;
   viewType?: string;
   status?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  dashboardSerialNo?: number;
+}
+
+export interface IAccountGroupAccount {
+  accountingAccount?: IAccountingAccount;
+  serialNo?: number;
+}
+
+export interface IAccountGroupGroup {
+  accountGroup?: IAccountGroup;
+  serialNo?: number;
 }
 
 export interface IAccountGroupListReq extends PaginationReq {
