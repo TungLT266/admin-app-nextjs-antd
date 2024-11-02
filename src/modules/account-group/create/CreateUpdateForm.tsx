@@ -17,6 +17,10 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { AccountGroupViewTypeLabels } from "../type";
 import { CloseOutlined } from "@ant-design/icons";
+import {
+  getAllAccountGroupActiveApi,
+  IAccountGroup,
+} from "@/api/account-group";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
@@ -56,6 +60,7 @@ const CreateUpdateForm = ({
       </Form.Item>
 
       <AccountingAccountsForm />
+      <AccountGroupsForm />
 
       <Form.Item
         label="Follow Total Value"
@@ -91,6 +96,56 @@ const CreateUpdateForm = ({
         </Form.Item>
       )}
     </Form>
+  );
+};
+
+const AccountGroupsForm = () => {
+  const [accountGroupOptions, setAccountGroupOptions] = useState<
+    ISelectOption[]
+  >([]);
+
+  useEffect(() => {
+    getAllAccountGroupActiveApi().then((res) => {
+      setAccountGroupOptions(
+        res.items?.map((item: IAccountGroup) => ({
+          label: item.name,
+          value: item._id,
+        })) || []
+      );
+    });
+  }, []);
+
+  return (
+    <Form.Item label="Account Groups">
+      <Form.List name="accountGroups">
+        {(fields, { add, remove }) => (
+          <div className="flex flex-col gap-4">
+            {fields.map((subField) => (
+              <div key={subField.key} className="grid grid-cols-3 gap-2">
+                <div className="col-span-2">
+                  <Form.Item noStyle name={[subField.name, "accountGroup"]}>
+                    <Select options={accountGroupOptions} />
+                  </Form.Item>
+                </div>
+                <div className="flex gap-1">
+                  <Form.Item noStyle name={[subField.name, "serialNo"]}>
+                    <Input placeholder="Serial No" />
+                  </Form.Item>
+                  <CloseOutlined
+                    onClick={() => {
+                      remove(subField.name);
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+            <Button type="dashed" onClick={() => add()} block>
+              + Add
+            </Button>
+          </div>
+        )}
+      </Form.List>
+    </Form.Item>
   );
 };
 
@@ -144,13 +199,6 @@ const AccountingAccountsForm = () => {
         )}
       </Form.List>
     </Form.Item>
-    // <Form.Item
-    //   label="Accounting Accounts"
-    //   name="accountingAccounts"
-    //   rules={[{ required: true, message: "Please input this field!" }]}
-    // >
-    //   <Select mode="multiple" allowClear options={accountingAccountOptions} />
-    // </Form.Item>
   );
 };
 

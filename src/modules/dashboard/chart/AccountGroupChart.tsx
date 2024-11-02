@@ -2,6 +2,7 @@
 import { IAccountGroup } from "@/api/account-group";
 import { getAccountGroupReportApi } from "@/api/dashboard-report";
 import { formatNumber } from "@/utils/NumberUtils";
+import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import {
   CartesianGrid,
@@ -26,17 +27,19 @@ const AccountGroupChart = ({ accountGroup }: IAccountGroupChartProps) => {
     getAccountGroupReportApi(accountGroup._id).then((res) => {
       const data = res?.map((reportDataItem) => {
         const result: { [key: string]: string | number | undefined } = {
-          name: reportDataItem.date,
+          name: dayjs(reportDataItem.date).format("MMM YY"),
         };
 
         let totalAmount = 0;
 
         reportDataItem.data?.forEach((dataDetail) => {
           const accountingAccount = accountGroup.accountingAccounts?.find(
-            (item) => item._id === dataDetail.accountingAccountId
+            (item) =>
+              item.accountingAccount?._id === dataDetail.accountingAccountId
           );
-          if (accountingAccount && accountingAccount.name) {
-            result[accountingAccount.name] = dataDetail.totalAmount;
+          if (accountingAccount && accountingAccount.accountingAccount?.name) {
+            result[accountingAccount.accountingAccount.name] =
+              dataDetail.totalAmount;
             totalAmount += dataDetail.totalAmount || 0;
           }
         });
@@ -65,11 +68,20 @@ const AccountGroupChart = ({ accountGroup }: IAccountGroupChartProps) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis
+            dataKey="name"
+            axisLine={false}
+            tickLine={false}
+            fontSize={12}
+            tickMargin={8}
+          />
           <YAxis
             orientation="right"
             tickFormatter={(value) => formatNumber(value)}
             tickCount={6}
+            tickLine={false}
+            axisLine={false}
+            fontSize={12}
           />
           <Tooltip content={<ChartTooltip />} />
           <Legend />
@@ -79,14 +91,16 @@ const AccountGroupChart = ({ accountGroup }: IAccountGroupChartProps) => {
             stroke="#0088FE"
             activeDot={{ r: 8 }}
           />
-          {accountGroup.accountingAccounts?.map((accountingAccount, index) => (
-            <Line
-              key={accountingAccount._id}
-              type="monotone"
-              dataKey={accountingAccount.name}
-              stroke={getColor(index)}
-            />
-          ))}
+          {accountGroup.accountingAccounts
+            ?.sort((a, b) => ((a.serialNo || 0) > (b.serialNo || 0) ? 1 : -1))
+            .map((accountingAccount, index) => (
+              <Line
+                key={accountingAccount.accountingAccount?._id}
+                type="monotone"
+                dataKey={accountingAccount.accountingAccount?.name}
+                stroke={getColor(index)}
+              />
+            ))}
         </LineChart>
       </ResponsiveContainer>
     </div>
