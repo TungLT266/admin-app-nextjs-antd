@@ -13,7 +13,7 @@ export interface IAccountGroupReportData {
   totalAmount?: number;
 }
 
-export const getAllAccountingAccountApi = async (accountGroupId: string) => {
+export const getAccountGroupReportApi = async (accountGroupId: string | undefined) => {
   const result = await axiosInstance.get<
     IApiResponse<IAccountGroupReportRes[]>
   >(`${apiUrl}/account-group/${accountGroupId}`);

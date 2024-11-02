@@ -25,9 +25,10 @@ export default function PaginationCommon({
       current={currentProp || 1}
       onChange={handlePaginationChange}
       total={total || 0}
-      className="!my-4"
       style={{
         display: total && total > 0 ? "flex" : "none",
+        marginTop: "16px",
+        marginBottom: "16px",
       }}
     />
   );
