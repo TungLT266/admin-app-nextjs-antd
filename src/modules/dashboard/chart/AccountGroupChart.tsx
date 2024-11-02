@@ -2,7 +2,6 @@
 import { IAccountGroup } from "@/api/account-group";
 import { getAccountGroupReportApi } from "@/api/dashboard-report";
 import { formatNumber } from "@/utils/NumberUtils";
-import { Tag } from "antd";
 import { useEffect, useState } from "react";
 import {
   CartesianGrid,
@@ -102,10 +101,15 @@ const ChartTooltip = ({ active, payload, label }: any) => {
         <div>{label}</div>
         {payload.map((item: { name: string; value: number; color: string }) => (
           <div key={item.name} className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-sm" style={{backgroundColor: item.color}} />
+            <div
+              className="w-2 h-2 rounded-sm"
+              style={{ backgroundColor: item.color }}
+            />
             <div className="flex justify-between w-full gap-3">
               {`${item.name}: `}
-              <div className="font-semibold">{formatNumber(item.value)} VND</div>
+              <div className="font-semibold">
+                {formatNumber(item.value)} VND
+              </div>
             </div>
           </div>
         ))}
