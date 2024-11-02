@@ -6,6 +6,7 @@ import { ISelectOption } from "@/shared/type/ISelectOption";
 import { useEffect, useState } from "react";
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
 import { IncomeStatusLabels } from "../income/type";
+import { FormItemCustom } from "@/shared/component/element/form";
 
 const FilterSection = () => {
   const { dataQuery, setDataQuery } = useLocalTransferContext();
@@ -44,38 +45,39 @@ const FilterSection = () => {
           form={form}
           onValuesChange={handleValuesChange}
           className="w-full flex gap-3 flex-wrap"
+          style={{ paddingBottom: 16}}
         >
-          <Form.Item label="Title" name="title">
+          <FormItemCustom label="Title" name="title">
             <Input className="!w-[200px]" />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Wallet From" name="walletFrom">
+          <FormItemCustom label="Wallet From" name="walletFrom">
             <Select
               options={walletOptions}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Wallet To" name="walletTo">
+          <FormItemCustom label="Wallet To" name="walletTo">
             <Select
               options={walletOptions}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Status" name="status">
+          <FormItemCustom label="Status" name="status">
             <Select
               options={IncomeStatusLabels}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Document Date" name="documentDate">
+          <FormItemCustom label="Document Date" name="documentDate">
             <DatePicker.RangePicker />
-          </Form.Item>
+          </FormItemCustom>
         </Form>
       </div>
 

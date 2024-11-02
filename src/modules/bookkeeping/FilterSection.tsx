@@ -13,6 +13,7 @@ import {
   IIncomeAndExpenseType,
 } from "@/api/income-and-expense-type";
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
+import { FormItemCustom } from "@/shared/component/element/form";
 
 const FilterSection = () => {
   const { dataQuery, setDataQuery } = useBookkeepingContext();
@@ -76,45 +77,48 @@ const FilterSection = () => {
           onValuesChange={handleValuesChange}
           className="w-full flex gap-3 flex-wrap"
         >
-          <Form.Item label="Function" name="functionType">
+          <FormItemCustom label="Function" name="functionType">
             <Select
               options={FunctionTypeLabels}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Document Date" name="documentDate">
+          <FormItemCustom label="Document Date" name="documentDate">
             <DatePicker.RangePicker />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Title" name="title">
+          <FormItemCustom label="Title" name="title">
             <Input className="!w-[200px]" />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Account" name="accountingAccount">
+          <FormItemCustom label="Account" name="accountingAccount">
             <Select
               options={accountingAccountOptions}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Wallet" name="wallet">
+          <FormItemCustom label="Wallet" name="wallet">
             <Select
               options={walletOptions}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Income/Expense Type" name="incomeAndExpenseType">
+          <FormItemCustom
+            label="Income/Expense Type"
+            name="incomeAndExpenseType"
+          >
             <Select
               options={incomeAndExpenseTypeOptions}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
         </Form>
       </div>
     </div>

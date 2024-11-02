@@ -2,6 +2,7 @@ import { useAccountingAccountContext } from "@/modules/accounting-account/Accoun
 import CreateButton from "./create/CreateButton";
 import { Form, Input, Select } from "antd";
 import { AccountingAccountStatusLabels } from "./type";
+import { FormItemCustom } from "@/shared/component/element/form";
 
 const FilterSection = () => {
   const { dataQuery, setDataQuery } = useAccountingAccountContext();
@@ -24,18 +25,19 @@ const FilterSection = () => {
           form={form}
           onValuesChange={handleValuesChange}
           className="w-full flex gap-3"
+          style={{ paddingBottom: 16}}
         >
-          <Form.Item label="Account Number" name="number">
+          <FormItemCustom label="Account Number" name="number">
             <Input className="!w-[200px]" />
-          </Form.Item>
+          </FormItemCustom>
 
-          <Form.Item label="Status" name="status">
+          <FormItemCustom label="Status" name="status">
             <Select
               options={AccountingAccountStatusLabels}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
         </Form>
       </div>
 

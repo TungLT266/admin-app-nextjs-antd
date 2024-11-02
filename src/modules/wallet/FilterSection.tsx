@@ -2,6 +2,7 @@ import CreateButton from "./create/CreateButton";
 import { Form, Select } from "antd";
 import { useWalletContext } from "./WalletContextProvider";
 import { AccountingAccountStatusLabels } from "../accounting-account/type";
+import { FormItemCustom } from "@/shared/component/element/form";
 
 const FilterSection = () => {
   const { dataQuery, setDataQuery } = useWalletContext();
@@ -23,14 +24,15 @@ const FilterSection = () => {
           form={form}
           onValuesChange={handleValuesChange}
           className="w-full flex gap-3"
+          style={{ paddingBottom: 16}}
         >
-          <Form.Item label="Status" name="status">
+          <FormItemCustom label="Status" name="status">
             <Select
               options={AccountingAccountStatusLabels}
               className="!w-[200px] !text-left"
               allowClear
             />
-          </Form.Item>
+          </FormItemCustom>
         </Form>
       </div>
 
