@@ -1,4 +1,8 @@
-import { DataWithPagination, IApiResponse, PaginationReq } from "@/shared/type/ApiResponse";
+import {
+  DataWithPagination,
+  IApiResponse,
+  PaginationReq,
+} from "@/shared/type/ApiResponse";
 import { axiosInstance } from "@/utils/ApiUtils";
 import { IAccountingAccount } from "./accounting-account";
 import { AccountingAccountStatus } from "@/modules/accounting-account/type";
@@ -105,8 +109,8 @@ export const deleteIncomeAndExpenseTypeApi = async (id: string) => {
 };
 
 export const getIAEAccountsApi = async (type: string, id?: string) => {
-  const result = await axiosInstance.get<IApiResponse<IAccountingAccount[]>>(
-    `${apiUrl}/accounts?type=${type}${id ? `&id=${id}` : ""}`
-  );
+  const result = await axiosInstance.get<
+    IApiResponse<DataWithPagination<IAccountingAccount>>
+  >(`${apiUrl}/accounts?type=${type}${id ? `&id=${id}` : ""}`);
   return result.data.data;
 };

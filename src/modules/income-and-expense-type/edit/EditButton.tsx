@@ -43,10 +43,10 @@ const EditButton = ({ id }: EditButtonProps) => {
 
         getIAEAccountsApi(type, id).then((res) => {
           setAccountingAccountOptions(
-            res.map((item: IAccountingAccount) => ({
+            res.items?.map((item: IAccountingAccount) => ({
               label: `${item.name} (${item.number})`,
               value: item._id,
-            }))
+            })) || []
           );
         });
       });

@@ -27,10 +27,10 @@ const CreateButton = () => {
     if (isOpen && type) {
       getIAEAccountsApi(type).then((res) => {
         setAccountingAccountOptions(
-          res.map((item: IAccountingAccount) => ({
+          res.items?.map((item: IAccountingAccount) => ({
             label: `${item.name} (${item.number})`,
             value: item._id,
-          }))
+          })) || []
         );
       });
     }
