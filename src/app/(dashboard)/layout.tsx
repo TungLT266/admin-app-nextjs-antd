@@ -14,7 +14,7 @@ export default function DashboardLayout({
     <AuthGuard>
       <Layout hasSider>
         <Sidebar />
-        <Layout style={{ marginInlineStart: 200, minHeight: "100vh" }}>
+        <Layout style={{ marginInlineStart: 250, minHeight: "100vh" }}>
           <HeaderLayout />
           <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
             {children}

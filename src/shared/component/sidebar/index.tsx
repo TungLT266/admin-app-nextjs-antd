@@ -24,6 +24,7 @@ export default function Sidebar() {
         scrollbarWidth: "thin",
         scrollbarColor: "unset",
       }}
+      width={250}
     >
       <div className="demo-logo-vertical" />
       <Menu
@@ -58,7 +59,12 @@ const items: MenuProps["items"] = [
   {
     key: "/income-and-expense-type",
     icon: <UserOutlined />,
-    label: "Income and Expense Type",
+    label: "Income/Expense Type",
+  },
+  {
+    key: "/accounting-object",
+    icon: <UserOutlined />,
+    label: "Object",
   },
   {
     key: "/wallet",
