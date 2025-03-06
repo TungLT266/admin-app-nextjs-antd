@@ -1,5 +1,16 @@
 import React from "react";
-import { UserOutlined } from "@ant-design/icons";
+import {
+  AccountBookOutlined,
+  BankOutlined,
+  CreditCardFilled,
+  CreditCardOutlined,
+  DashboardOutlined,
+  DollarOutlined,
+  FileTextOutlined,
+  SwapOutlined,
+  TransactionOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -43,22 +54,22 @@ const { Sider } = Layout;
 const items: MenuProps["items"] = [
   {
     key: "/",
-    icon: <UserOutlined />,
+    icon: <DashboardOutlined />,
     label: "Dashboard",
   },
   {
     key: "/accounting-account",
-    icon: <UserOutlined />,
+    icon: <DollarOutlined />,
     label: "Accounting Account",
   },
   {
     key: "/account-group",
-    icon: <UserOutlined />,
+    icon: <BankOutlined />,
     label: "Account Group",
   },
   {
     key: "/income-and-expense-type",
-    icon: <UserOutlined />,
+    icon: <TransactionOutlined />,
     label: "Income/Expense Type",
   },
   {
@@ -68,27 +79,27 @@ const items: MenuProps["items"] = [
   },
   {
     key: "/wallet",
-    icon: <UserOutlined />,
+    icon: <CreditCardOutlined />,
     label: "Wallet",
   },
   {
     key: "/income",
-    icon: <UserOutlined />,
+    icon: <FileTextOutlined />,
     label: "Income",
   },
   {
     key: "/expense",
-    icon: <UserOutlined />,
+    icon: <CreditCardFilled />,
     label: "Expense",
   },
   {
     key: "/local-transfer",
-    icon: <UserOutlined />,
+    icon: <SwapOutlined />,
     label: "Local Transfer",
   },
   {
     key: "/bookkeeping",
-    icon: <UserOutlined />,
+    icon: <AccountBookOutlined />,
     label: "Bookkeeping",
   },
 ];
