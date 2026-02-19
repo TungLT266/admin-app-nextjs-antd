@@ -1,5 +1,5 @@
 import { Form, FormProps, Input, Select } from "antd";
-import { AccountingAccountStatusLabels } from "../type";
+import { AccountingAccountStatusLabels, AccountTypeLabels } from "../type";
 import { v4 as uuidv4 } from "uuid";
 
 interface CreateUpdateFormProps {
@@ -24,15 +24,15 @@ const CreateUpdateForm = ({
       autoComplete="off"
     >
       <Form.Item
-        label="Account Number"
-        name="number"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        label="Account Type"
+        name="type"
+        rules={[{ required: true, message: "Please select account type!" }]}
       >
-        <Input />
+        <Select options={AccountTypeLabels} placeholder="Select account type" />
       </Form.Item>
 
       <Form.Item
-        label="Acount Name"
+        label="Account Name"
         name="name"
         rules={[{ required: true, message: "Please input this field!" }]}
       >
