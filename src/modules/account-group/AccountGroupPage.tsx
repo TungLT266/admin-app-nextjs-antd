@@ -40,19 +40,28 @@ const AccountGroupPage = () => {
       key: "name",
     },
     {
-      title: "Accounting Accounts",
+      title: "Accounting Accounts & Groups",
       dataIndex: "accountingAccounts",
       key: "accountingAccounts",
       align: "center",
-      render: (accountingAccounts: IAccountGroupAccount[]) => {
+      render: (accountingAccounts: IAccountGroupAccount[], record: DataType) => {
         return (
           <div className="flex flex-col gap-1">
-            {accountingAccounts.map((accountingAccount, index) => (
+            {accountingAccounts?.map((accountingAccount, index) => (
               <div
                 key={`account-${accountingAccount.accountingAccount?._id}-${index}`}
               >
                 <Tag color="geekblue">
                   {`${accountingAccount.accountingAccount?.name} (${accountingAccount.accountingAccount?.number})`}
+                </Tag>
+              </div>
+            ))}
+            {record.accountGroups?.map((accountGroup, index) => (
+              <div
+                key={`group-${accountGroup.accountGroup?._id}-${index}`}
+              >
+                <Tag color="orange">
+                  {`${accountGroup.accountGroup?.name}`}
                 </Tag>
               </div>
             ))}
