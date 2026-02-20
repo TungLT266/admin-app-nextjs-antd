@@ -10,6 +10,9 @@ import {
   SwapOutlined,
   TransactionOutlined,
   UserOutlined,
+  TeamOutlined,
+  FileProtectOutlined,
+  UnorderedListOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
@@ -27,6 +30,11 @@ export default function Sidebar() {
   const getOpenKeys = () => {
     if (["/income", "/expense", "/local-transfer"].includes(pathname)) {
       return ["transactions"];
+    }
+    if (
+      ["/loan-contact", "/loan-contract", "/loan-transaction"].includes(pathname)
+    ) {
+      return ["loans-debts"];
     }
     return [];
   };
@@ -117,5 +125,27 @@ const items: MenuProps["items"] = [
     key: "/bookkeeping",
     icon: <AccountBookOutlined />,
     label: "Bookkeeping",
+  },
+  {
+    key: "loans-debts",
+    icon: <FileProtectOutlined />,
+    label: "Loans & Debts",
+    children: [
+      {
+        key: "/loan-contact",
+        icon: <TeamOutlined />,
+        label: "Contacts",
+      },
+      {
+        key: "/loan-contract",
+        icon: <FileProtectOutlined />,
+        label: "Loan Contracts",
+      },
+      {
+        key: "/loan-transaction",
+        icon: <UnorderedListOutlined />,
+        label: "Contract Transactions",
+      },
+    ],
   },
 ];
