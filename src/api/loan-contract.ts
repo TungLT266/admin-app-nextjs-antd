@@ -7,7 +7,7 @@ import { axiosInstance } from "@/utils/ApiUtils";
 import { ILoanContact } from "./loan-contact";
 import { IWallet } from "./wallet";
 
-const apiUrl = "loan";
+const apiUrl = "loan-contract";
 
 export interface ICreateLoanContractReq {
   loanType?: string;
