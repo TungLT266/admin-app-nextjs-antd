@@ -23,6 +23,14 @@ export default function Sidebar() {
     router.push(e.key);
   };
 
+  // Determine which submenu should be open based on the current pathname
+  const getOpenKeys = () => {
+    if (["/income", "/expense", "/local-transfer"].includes(pathname)) {
+      return ["transactions"];
+    }
+    return [];
+  };
+
   return (
     <Sider
       style={{
@@ -41,7 +49,8 @@ export default function Sidebar() {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={[pathname]}
+        selectedKeys={[pathname]}
+        defaultOpenKeys={getOpenKeys()}
         items={items}
         onClick={handleMenuClick}
       />
@@ -83,19 +92,26 @@ const items: MenuProps["items"] = [
     label: "Wallet",
   },
   {
-    key: "/income",
-    icon: <FileTextOutlined />,
-    label: "Income",
-  },
-  {
-    key: "/expense",
-    icon: <CreditCardFilled />,
-    label: "Expense",
-  },
-  {
-    key: "/local-transfer",
-    icon: <SwapOutlined />,
-    label: "Local Transfer",
+    key: "transactions",
+    icon: <TransactionOutlined />,
+    label: "Transactions",
+    children: [
+      {
+        key: "/income",
+        icon: <FileTextOutlined />,
+        label: "Income",
+      },
+      {
+        key: "/expense",
+        icon: <CreditCardFilled />,
+        label: "Expense",
+      },
+      {
+        key: "/local-transfer",
+        icon: <SwapOutlined />,
+        label: "Local Transfer",
+      },
+    ],
   },
   {
     key: "/bookkeeping",
