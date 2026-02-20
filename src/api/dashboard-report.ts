@@ -13,9 +13,18 @@ export interface IAccountGroupReportData {
   totalAmount?: number;
 }
 
-export const getAccountGroupReportApi = async (accountGroupId: string | undefined) => {
+export const getAccountGroupReportApi = async (
+  accountGroupId: string | undefined,
+  fromDate: string,
+  toDate: string,
+) => {
   const result = await axiosInstance.get<
     IApiResponse<IAccountGroupReportRes[]>
-  >(`${apiUrl}/account-group/${accountGroupId}`);
+  >(`${apiUrl}/account-group/${accountGroupId}`, {
+    params: {
+      fromDate,
+      toDate,
+    },
+  });
   return result.data.data;
 };

@@ -24,7 +24,11 @@ const AccountGroupChart = ({ accountGroup }: IAccountGroupChartProps) => {
   const [dataChart, setDataChart] = useState<any[]>([]);
 
   useEffect(() => {
-    getAccountGroupReportApi(accountGroup._id).then((res) => {
+    const currentDate = dayjs();
+    const fromDate = currentDate.subtract(3, 'year').format('YYYY-MM');
+    const toDate = currentDate.format('YYYY-MM');
+
+    getAccountGroupReportApi(accountGroup._id, fromDate, toDate).then((res) => {
       const data = res?.map((reportDataItem) => {
         const result: { [key: string]: string | number | undefined } = {
           name: dayjs(reportDataItem.date).format("MMM YY"),
