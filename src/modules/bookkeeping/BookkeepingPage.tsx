@@ -3,13 +3,13 @@ import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { formatDate, formatDatetime } from "@/utils/DateUtils";
 import { useBookkeepingContext } from "./BookkeepingContextProvider";
-import { IBookkeeping } from "@/api/bookkeeping";
+import { IBookkeeping, ILoanContact } from "@/api/bookkeeping";
 import { IAccountingAccount } from "@/api/accounting-account";
 import { IWallet } from "@/api/wallet";
 import { IIncomeAndExpenseType } from "@/api/income-and-expense-type";
 import { EntryType } from "./type";
 import { formatNumber } from "@/utils/NumberUtils";
-import { FunctionType, FunctionTypeLabels } from "@/shared/type/FunctionType";
+import { FunctionTypeLabels } from "@/shared/type/FunctionType";
 import FilterSection from "./FilterSection";
 import PaginationCommon from "@/shared/component/pagination";
 
@@ -38,6 +38,7 @@ const BookkeepingPage = () => {
         account: item.debitAccount,
         wallet: item.debitWallet,
         incomeAndExpenseType: item.debitIncomeAndExpenseType,
+        loanContact: item.debitLoanContact,
         createdAt: item.createdAt,
       });
 
@@ -52,6 +53,7 @@ const BookkeepingPage = () => {
         account: item.creditAccount,
         wallet: item.creditWallet,
         incomeAndExpenseType: item.creditIncomeAndExpenseType,
+        loanContact: item.creditLoanContact,
         createdAt: item.createdAt,
       });
     });
@@ -77,16 +79,8 @@ const BookkeepingPage = () => {
           (item) => item.value === functionType
         );
         return (
-          <Tag
-            color={
-              functionType === FunctionType.INCOME
-                ? "green"
-                : functionType === FunctionType.EXPENSE
-                ? "red"
-                : "orange"
-            }
-          >
-            {functionTypeLabel?.label}
+          <Tag color={functionTypeLabel?.color}>
+            {functionTypeLabel?.label ?? functionType}
           </Tag>
         );
       },
@@ -165,6 +159,12 @@ const BookkeepingPage = () => {
         incomeAndExpenseType?.name,
     },
     {
+      title: "Loan Contact",
+      dataIndex: "loanContact",
+      key: "loanContact",
+      render: (loanContact: ILoanContact) => loanContact?.name,
+    },
+    {
       title: "Created At",
       dataIndex: "createdAt",
       key: "createdAt",
@@ -230,6 +230,7 @@ interface DataType {
   account?: IAccountingAccount;
   wallet?: IWallet;
   incomeAndExpenseType?: IIncomeAndExpenseType;
+  loanContact?: ILoanContact;
   createdAt?: Date;
 }
 

@@ -10,6 +10,11 @@ import { IIncomeAndExpenseType } from "./income-and-expense-type";
 
 const apiUrl = "bookkeeping";
 
+export interface ILoanContact {
+  _id?: string;
+  name?: string;
+}
+
 export interface IBookkeeping {
   _id?: string;
   functionType?: string;
@@ -20,9 +25,11 @@ export interface IBookkeeping {
   debitAccount?: IAccountingAccount;
   debitWallet?: IWallet;
   debitIncomeAndExpenseType?: IIncomeAndExpenseType;
+  debitLoanContact?: ILoanContact;
   creditAccount?: IAccountingAccount;
   creditWallet?: IWallet;
   creditIncomeAndExpenseType?: IIncomeAndExpenseType;
+  creditLoanContact?: ILoanContact;
   createdAt?: Date;
 }
 
