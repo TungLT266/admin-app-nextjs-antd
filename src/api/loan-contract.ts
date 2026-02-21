@@ -46,6 +46,7 @@ export interface ILoanContractListReq extends PaginationReq {
 export interface IAmountWithDateReq {
   amount?: number;
   documentDate?: string;
+  wallet?: string;
   note?: string;
 }
 

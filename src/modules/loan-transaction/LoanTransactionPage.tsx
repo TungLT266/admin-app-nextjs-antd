@@ -94,6 +94,12 @@ const LoanTransactionPage = () => {
       render: (amount) => formatNumber(amount),
     },
     {
+      title: "Wallet",
+      dataIndex: "wallet",
+      key: "wallet",
+      render: (wallet) => wallet?.name,
+    },
+    {
       title: "Note",
       dataIndex: "note",
       key: "note",

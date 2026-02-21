@@ -9,11 +9,15 @@ import {
   Input,
   InputNumber,
   Modal,
+  Select,
   Tooltip,
 } from "antd";
 import { IAmountWithDateReq, recordPaymentApi } from "@/api/loan-contract";
 import { useLoanContractContext } from "./LoanContractContextProvider";
 import { formatDateInputApi } from "@/utils/DateUtils";
+import { useEffect, useState } from "react";
+import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
+import { ISelectOption } from "@/shared/type/ISelectOption";
 
 interface RecordPaymentButtonProps {
   id: string;
@@ -24,6 +28,15 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLoanContractContext();
+  const [walletOptions, setWalletOptions] = useState<ISelectOption[]>([]);
+
+  useEffect(() => {
+    getAllActiveWalletApi().then((res) => {
+      setWalletOptions(
+        res.items?.map((item: IWallet) => ({ label: item.name, value: item._id })) || []
+      );
+    });
+  }, []);
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: IAmountWithDateReq = {
@@ -83,6 +96,13 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
                 value ? value.replace(/\$\s?|(,*)/g, "") : ""
               }
             />
+          </Form.Item>
+          <Form.Item
+            label="Wallet"
+            name="wallet"
+            rules={[{ required: true, message: "Please select a wallet!" }]}
+          >
+            <Select options={walletOptions} placeholder="Select wallet" />
           </Form.Item>
           <Form.Item label="Note" name="note">
             <Input />

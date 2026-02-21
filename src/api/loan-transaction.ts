@@ -18,6 +18,10 @@ export interface ILoanTransaction {
   actionType?: string;
   amount?: number;
   documentDate?: string;
+  wallet?: {
+    _id?: string;
+    name?: string;
+  };
   note?: string;
   createdAt?: Date;
   updatedAt?: Date;
