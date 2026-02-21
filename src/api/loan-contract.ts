@@ -125,3 +125,17 @@ export const completeLoanContractApi = async (id: string) => {
   );
   return result.data.data;
 };
+
+export const cancelLoanContractApi = async (id: string) => {
+  const result = await axiosInstance.patch<IApiResponse<ILoanContract>>(
+    `${apiUrl}/${id}/cancel`
+  );
+  return result.data.data;
+};
+
+export const reopenLoanContractApi = async (id: string) => {
+  const result = await axiosInstance.patch<IApiResponse<ILoanContract>>(
+    `${apiUrl}/${id}/reopen`
+  );
+  return result.data.data;
+};

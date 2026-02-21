@@ -17,6 +17,8 @@ import ConfirmButton from "./ConfirmButton";
 import AddDisbursementButton from "./AddDisbursementButton";
 import RecordPaymentButton from "./RecordPaymentButton";
 import CompleteButton from "./CompleteButton";
+import CancelButton from "./CancelButton";
+import ReopenButton from "./ReopenButton";
 import { formatNumber } from "@/utils/NumberUtils";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
@@ -113,6 +115,17 @@ const LoanContractPage = () => {
                 <AddDisbursementButton id={id} />
                 <RecordPaymentButton id={id} />
                 <CompleteButton id={id} />
+                <CancelButton id={id} />
+              </>
+            )}
+            {status === LoanStatus.COMPLETED && (
+              <>
+                <ReopenButton id={id} />
+              </>
+            )}
+            {status === LoanStatus.CANCELLED && (
+              <>
+                <DeleteButton id={id} />
               </>
             )}
           </div>
