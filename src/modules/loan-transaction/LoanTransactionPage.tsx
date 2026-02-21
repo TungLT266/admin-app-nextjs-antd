@@ -9,7 +9,6 @@ import {
   ILoanTransaction,
 } from "@/api/loan-transaction";
 import {
-  LoanActionTypeLabels,
   LoanStatus,
   LoanStatusLabels,
   LoanTransactionTypeLabels,
@@ -85,18 +84,6 @@ const LoanTransactionPage = () => {
         const label = LoanTransactionTypeLabels.find(
           (t) => t.value === transactionType
         );
-        return label ? (
-          <Tag color={label.color}>{label.label}</Tag>
-        ) : null;
-      },
-    },
-    {
-      title: "Action",
-      dataIndex: "actionType",
-      key: "actionType",
-      align: "center",
-      render: (actionType) => {
-        const label = LoanActionTypeLabels.find((t) => t.value === actionType);
         return label ? (
           <Tag color={label.color}>{label.label}</Tag>
         ) : null;

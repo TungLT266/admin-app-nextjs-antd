@@ -15,7 +15,6 @@ export interface ILoanTransaction {
     loanType?: string;
   };
   transactionType?: string;
-  actionType?: string;
   amount?: number;
   documentDate?: string;
   wallet?: {

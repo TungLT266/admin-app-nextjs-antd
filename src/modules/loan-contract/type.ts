@@ -30,12 +30,4 @@ export const LoanTransactionTypeLabels = [
   { value: LoanTransactionType.PAYMENT, label: "Payment", color: "green" },
 ];
 
-export enum LoanActionType {
-  ADD = "ADD",
-  SUBTRACT = "SUBTRACT",
-}
 
-export const LoanActionTypeLabels = [
-  { value: LoanActionType.ADD, label: "Add (+)", color: "green" },
-  { value: LoanActionType.SUBTRACT, label: "Subtract (−)", color: "red" },
-];
