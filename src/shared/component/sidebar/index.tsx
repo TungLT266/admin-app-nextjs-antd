@@ -122,11 +122,6 @@ const items: MenuProps["items"] = [
     ],
   },
   {
-    key: "/bookkeeping",
-    icon: <AccountBookOutlined />,
-    label: "Bookkeeping",
-  },
-  {
     key: "loans-debts",
     icon: <FileProtectOutlined />,
     label: "Loans & Debts",
@@ -147,5 +142,10 @@ const items: MenuProps["items"] = [
         label: "Contract Transactions",
       },
     ],
+  },
+  {
+    key: "/bookkeeping",
+    icon: <AccountBookOutlined />,
+    label: "Bookkeeping",
   },
 ];
