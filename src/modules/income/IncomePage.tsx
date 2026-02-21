@@ -20,6 +20,7 @@ const IncomePage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useIncomeContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
+  const [selectedRows, setSelectedRows] = useState<DataType[]>([]);
 
   useEffect(() => {
     fetchDataList();
@@ -145,13 +146,24 @@ const IncomePage = () => {
     });
   };
 
+  const rowSelection: TableProps<DataType>["rowSelection"] = {
+    selectedRowKeys: selectedRows.map((row) => row.key!),
+    onChange: (_selectedRowKeys, selectedRows) => {
+      setSelectedRows(selectedRows);
+    },
+  };
+
   return (
     <>
-      <FilterSection />
+      <FilterSection
+        selectedRows={selectedRows}
+        onClearSelection={() => setSelectedRows([])}
+      />
 
       <Table<DataType>
         columns={columns}
         dataSource={dataSource}
+        rowSelection={rowSelection}
         pagination={{
           ...dataList.pagination,
           pageSizeOptions: pageSizeOptions,
