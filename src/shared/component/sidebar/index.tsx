@@ -9,7 +9,6 @@ import {
   FileTextOutlined,
   SwapOutlined,
   TransactionOutlined,
-  UserOutlined,
   TeamOutlined,
   FileProtectOutlined,
   UnorderedListOutlined,
@@ -32,7 +31,9 @@ export default function Sidebar() {
       return ["transactions"];
     }
     if (
-      ["/loan-contact", "/loan-contract", "/loan-transaction"].includes(pathname)
+      ["/loan-contact", "/loan-contract", "/loan-transaction"].includes(
+        pathname,
+      )
     ) {
       return ["loans-debts"];
     }
@@ -89,11 +90,11 @@ const items: MenuProps["items"] = [
     icon: <TransactionOutlined />,
     label: "Income/Expense Type",
   },
-  {
-    key: "/accounting-object",
-    icon: <UserOutlined />,
-    label: "Object",
-  },
+  // {
+  //   key: "/accounting-object",
+  //   icon: <UserOutlined />,
+  //   label: "Object",
+  // },
   {
     key: "/wallet",
     icon: <CreditCardOutlined />,
