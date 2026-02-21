@@ -1,12 +1,17 @@
 "use client";
 
-import { Table, TableProps, Tag } from "antd";
+import { Button, Popconfirm, Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { formatDate, formatDatetime } from "@/utils/DateUtils";
 import { useLoanTransactionContext } from "./LoanTransactionContextProvider";
-import { ILoanTransaction } from "@/api/loan-transaction";
+import {
+  deleteLoanTransactionApi,
+  ILoanTransaction,
+} from "@/api/loan-transaction";
 import {
   LoanActionTypeLabels,
+  LoanStatus,
+  LoanStatusLabels,
   LoanTransactionTypeLabels,
   LoanTypeLabels,
 } from "../loan-contract/type";
@@ -20,6 +25,7 @@ const LoanTransactionPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useLoanTransactionContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchDataList();
@@ -31,6 +37,16 @@ const LoanTransactionPage = () => {
       dataList.items?.map((item) => ({ ...item, key: item._id })) || []
     );
   }, [dataList]);
+
+  const handleDelete = async (id: string) => {
+    try {
+      setDeletingId(id);
+      await deleteLoanTransactionApi(id);
+      fetchDataList();
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   const columns: TableProps<DataType>["columns"] = [
     {
@@ -100,6 +116,18 @@ const LoanTransactionPage = () => {
       render: (wallet) => wallet?.name,
     },
     {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      align: "center",
+      render: (status) => {
+        const label = LoanStatusLabels.find((t) => t.value === status);
+        return label ? (
+          <Tag color={label.color}>{label.label}</Tag>
+        ) : null;
+      },
+    },
+    {
       title: "Note",
       dataIndex: "note",
       key: "note",
@@ -110,6 +138,32 @@ const LoanTransactionPage = () => {
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
+    },
+    {
+      title: "",
+      key: "actions",
+      align: "center",
+      render: (_, record) => {
+        if (record.status !== LoanStatus.ACTIVE) return null;
+        return (
+          <Popconfirm
+            title="Delete this transaction?"
+            description="This will also reverse the bookkeeping entry and recalculate the contract amount."
+            onConfirm={() => handleDelete(record._id!)}
+            okText="Delete"
+            okButtonProps={{ danger: true }}
+            cancelText="Cancel"
+          >
+            <Button
+              danger
+              size="small"
+              loading={deletingId === record._id}
+            >
+              Delete
+            </Button>
+          </Popconfirm>
+        );
+      },
     },
   ];
 

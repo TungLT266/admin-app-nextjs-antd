@@ -23,6 +23,7 @@ export interface ILoanTransaction {
     name?: string;
   };
   note?: string;
+  status?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -40,5 +41,12 @@ export const getAllLoanTransactionApi = async (
   const result = await axiosInstance.get<
     IApiResponse<DataWithPagination<ILoanTransaction>>
   >(apiUrl, { params: query });
+  return result.data.data;
+};
+
+export const deleteLoanTransactionApi = async (id: string) => {
+  const result = await axiosInstance.delete<IApiResponse<ILoanTransaction>>(
+    `${apiUrl}/${id}`
+  );
   return result.data.data;
 };
