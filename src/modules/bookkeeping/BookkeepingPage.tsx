@@ -32,6 +32,7 @@ const BookkeepingPage = () => {
         _id: item._id,
         functionType: item.functionType,
         documentDate: item.documentDate,
+        accountingDate: item.accountingDate,
         amount: item.amount,
         title: item.title,
         entryType: EntryType.DEBIT,
@@ -47,6 +48,7 @@ const BookkeepingPage = () => {
         _id: item._id,
         functionType: item.functionType,
         documentDate: item.documentDate,
+        accountingDate: item.accountingDate,
         amount: item.amount,
         title: item.title,
         entryType: EntryType.CREDIT,
@@ -91,6 +93,20 @@ const BookkeepingPage = () => {
       key: "documentDate",
       align: "center",
       render: (documentDate) => formatDate(documentDate),
+      onCell: (record) => {
+        if (record.entryType === EntryType.DEBIT) {
+          return { rowSpan: 2 };
+        } else {
+          return { rowSpan: 0 };
+        }
+      },
+    },
+    {
+      title: "Accounting Date",
+      dataIndex: "accountingDate",
+      key: "accountingDate",
+      align: "center",
+      render: (accountingDate) => formatDate(accountingDate),
       onCell: (record) => {
         if (record.entryType === EntryType.DEBIT) {
           return { rowSpan: 2 };
@@ -224,6 +240,7 @@ interface DataType {
   _id?: string;
   functionType?: string;
   documentDate?: Date;
+  accountingDate?: Date;
   amount?: number;
   title?: string;
   entryType?: string;

@@ -20,6 +20,7 @@ export interface IBookkeeping {
   functionType?: string;
   functionId?: string;
   documentDate?: Date;
+  accountingDate?: Date;
   amount?: number;
   title?: string;
   debitAccount?: IAccountingAccount;
