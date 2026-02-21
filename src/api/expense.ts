@@ -11,6 +11,7 @@ const apiUrl = "expense";
 
 export interface ICreateExpenseReq {
   documentDate?: Date;
+  accountingDate?: Date;
   title?: string;
   description?: string;
   amount?: number;
@@ -21,6 +22,7 @@ export interface ICreateExpenseReq {
 export interface IExpense {
   _id?: string;
   documentDate?: Date;
+  accountingDate?: Date;
   title?: string;
   description?: string;
   amount?: number;

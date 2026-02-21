@@ -28,6 +28,9 @@ const EditButton = ({ id }: EditButtonProps) => {
       getIncomeByIdApi(id).then((res) => {
         const initialValues = {
           documentDate: dayjs(res.documentDate),
+          accountingDate: res.accountingDate
+            ? dayjs(res.accountingDate)
+            : dayjs(res.documentDate),
           title: res.title,
           description: res.description,
           amount: res.amount,
@@ -48,6 +51,7 @@ const EditButton = ({ id }: EditButtonProps) => {
     const data: ICreateIncomeReq = {
       ...values,
       documentDate: formatDateInputApi(values.documentDate),
+      accountingDate: formatDateInputApi(values.accountingDate),
     };
     updateIncomeApi(id, data)
       .then(() => {

@@ -11,6 +11,7 @@ const apiUrl = "income";
 
 export interface ICreateIncomeReq {
   documentDate?: Date;
+  accountingDate?: Date;
   title?: string;
   description?: string;
   amount?: number;
@@ -21,6 +22,7 @@ export interface ICreateIncomeReq {
 export interface IIncome {
   _id?: string;
   documentDate?: Date;
+  accountingDate?: Date;
   title?: string;
   description?: string;
   amount?: number;

@@ -52,6 +52,19 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
         name="documentDate"
         rules={[{ required: true, message: "Please input this field!" }]}
       >
+        <DatePicker
+          className="w-full"
+          onChange={(value) => {
+            form.setFieldValue("accountingDate", value);
+          }}
+        />
+      </Form.Item>
+
+      <Form.Item
+        label="Ngày ghi nhận kế toán"
+        name="accountingDate"
+        rules={[{ required: true, message: "Please input this field!" }]}
+      >
         <DatePicker className="w-full" />
       </Form.Item>
 

@@ -16,6 +16,7 @@ const CreateButton = () => {
     const data: ICreateIncomeReq = {
       ...values,
       documentDate: formatDateInputApi(values.documentDate),
+      accountingDate: formatDateInputApi(values.accountingDate),
     };
     createIncomeApi(data)
       .then(() => {

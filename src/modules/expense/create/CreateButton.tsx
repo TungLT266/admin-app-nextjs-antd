@@ -16,6 +16,7 @@ const CreateButton = () => {
     const data: ICreateExpenseReq = {
       ...values,
       documentDate: formatDateInputApi(values.documentDate),
+      accountingDate: formatDateInputApi(values.accountingDate),
     };
     createExpenseApi(data)
       .then(() => {
