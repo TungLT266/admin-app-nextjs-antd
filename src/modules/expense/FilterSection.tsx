@@ -1,4 +1,6 @@
 import CreateButton from "./create/CreateButton";
+import BulkConfirmButton from "./BulkConfirmButton";
+import BulkUnconfirmButton from "./BulkUnconfirmButton";
 import { DatePicker, Form, Input, Select } from "antd";
 import { useExpenseContext } from "./ExpenseContextProvider";
 import { formatDateInputApi } from "@/utils/DateUtils";
@@ -11,8 +13,14 @@ import {
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
 import { IncomeStatusLabels } from "../income/type";
 import { FormItemCustom } from "@/shared/component/element/form";
+import { IExpense } from "@/api/expense";
 
-const FilterSection = () => {
+interface FilterSectionProps {
+  selectedRows: IExpense[];
+  onClearSelection: () => void;
+}
+
+const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) => {
   const { dataQuery, setDataQuery } = useExpenseContext();
   const [form] = Form.useForm();
   const [incomeAndExpenseTypeOptions, setIncomeAndExpenseTypeOptions] =
@@ -99,8 +107,10 @@ const FilterSection = () => {
         </Form>
       </div>
 
-      <div className="flex">
+      <div className="flex gap-2 items-center">
         <CreateButton />
+        <BulkConfirmButton selectedRows={selectedRows} onSuccess={onClearSelection} />
+        <BulkUnconfirmButton selectedRows={selectedRows} onSuccess={onClearSelection} />
       </div>
     </div>
   );

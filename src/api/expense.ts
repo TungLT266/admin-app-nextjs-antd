@@ -91,3 +91,19 @@ export const unconfirmExpenseApi = async (id: string) => {
   );
   return result.data.data;
 };
+
+export const bulkConfirmExpenseApi = async (ids: string[]) => {
+  const result = await axiosInstance.post<IApiResponse<IExpense[]>>(
+    `${apiUrl}/bulk-confirm`,
+    { ids }
+  );
+  return result.data.data;
+};
+
+export const bulkUnconfirmExpenseApi = async (ids: string[]) => {
+  const result = await axiosInstance.post<IApiResponse<IExpense[]>>(
+    `${apiUrl}/bulk-unconfirm`,
+    { ids }
+  );
+  return result.data.data;
+};
