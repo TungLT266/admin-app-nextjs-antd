@@ -2,7 +2,7 @@
 import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
-import { AccountingAccountStatus, AccountingAccountStatusLabels, AccountTypeLabels } from "./type";
+import { AccountingAccountStatus, AccountingAccountStatusLabels } from "./type";
 import { formatDatetime } from "@/utils/DateUtils";
 import EditButton from "./edit/EditButton";
 import DeleteButton from "./delete/DeleteButton";
@@ -35,18 +35,6 @@ const AccountingAccountPage = () => {
       dataIndex: "number",
       key: "number",
       align: "center",
-    },
-    {
-      title: "Account Type",
-      dataIndex: "type",
-      key: "type",
-      align: "center",
-      render: (type) => {
-        const typeLabel = AccountTypeLabels.find(
-          (item) => item.value === type
-        );
-        return typeLabel?.label || type;
-      },
     },
     {
       title: "Account Name",

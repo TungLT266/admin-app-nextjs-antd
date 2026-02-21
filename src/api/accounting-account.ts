@@ -9,8 +9,8 @@ import { axiosInstance } from "@/utils/ApiUtils";
 const apiUrl = "accounting-account";
 
 export interface ICreateAccountingAccountReq {
+  number?: string;
   name?: string;
-  type?: number;
 }
 
 export interface IUpdateAccountingAccountReq
@@ -22,7 +22,6 @@ export interface IAccountingAccount {
   _id?: string;
   number?: string;
   name?: string;
-  type?: number;
   status?: string;
   createdAt?: Date;
   updatedAt?: Date;

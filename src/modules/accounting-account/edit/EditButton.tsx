@@ -25,8 +25,8 @@ const EditButton = ({ id }: EditButtonProps) => {
     if (isOpen) {
       getAccountingAccountByIdApi(id).then((res) => {
         const initialValues: IUpdateAccountingAccountReq = {
+          number: res.number,
           name: res.name,
-          type: res.type,
           status: res.status,
         };
         form.setFieldsValue(initialValues);
