@@ -44,6 +44,13 @@ const ExpensePage = () => {
       render: (documentDate) => formatDate(documentDate),
     },
     {
+      title: "Accounting Date",
+      dataIndex: "accountingDate",
+      key: "accountingDate",
+      align: "center",
+      render: (accountingDate) => formatDate(accountingDate),
+    },
+    {
       title: "Title",
       dataIndex: "title",
       key: "title",
