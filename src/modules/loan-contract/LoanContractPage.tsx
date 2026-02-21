@@ -13,7 +13,6 @@ import {
   LoanTypeLabels,
 } from "./type";
 import { ILoanContact } from "@/api/loan-contact";
-import { IWallet } from "@/api/wallet";
 import ConfirmButton from "./ConfirmButton";
 import AddDisbursementButton from "./AddDisbursementButton";
 import RecordPaymentButton from "./RecordPaymentButton";
@@ -68,12 +67,6 @@ const LoanContractPage = () => {
       dataIndex: "loanContact",
       key: "loanContact",
       render: (loanContact: ILoanContact) => loanContact?.name,
-    },
-    {
-      title: "Wallet",
-      dataIndex: "wallet",
-      key: "wallet",
-      render: (wallet: IWallet) => wallet?.name,
     },
     {
       title: "Amount",
