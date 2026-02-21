@@ -33,7 +33,7 @@ const LoanTransactionPage = () => {
 
   useEffect(() => {
     setDataSource(
-      dataList.items?.map((item) => ({ ...item, key: item._id })) || []
+      dataList.items?.map((item) => ({ ...item, key: item._id })) || [],
     );
   }, [dataList]);
 
@@ -68,11 +68,9 @@ const LoanTransactionPage = () => {
       align: "center",
       render: (loanContract) => {
         const label = LoanTypeLabels.find(
-          (t) => t.value === loanContract?.loanType
+          (t) => t.value === loanContract?.loanType,
         );
-        return label ? (
-          <Tag color={label.color}>{label.label}</Tag>
-        ) : null;
+        return label ? <Tag color={label.color}>{label.label}</Tag> : null;
       },
     },
     {
@@ -82,11 +80,9 @@ const LoanTransactionPage = () => {
       align: "center",
       render: (transactionType) => {
         const label = LoanTransactionTypeLabels.find(
-          (t) => t.value === transactionType
+          (t) => t.value === transactionType,
         );
-        return label ? (
-          <Tag color={label.color}>{label.label}</Tag>
-        ) : null;
+        return label ? <Tag color={label.color}>{label.label}</Tag> : null;
       },
     },
     {
@@ -109,9 +105,7 @@ const LoanTransactionPage = () => {
       align: "center",
       render: (status) => {
         const label = LoanStatusLabels.find((t) => t.value === status);
-        return label ? (
-          <Tag color={label.color}>{label.label}</Tag>
-        ) : null;
+        return label ? <Tag color={label.color}>{label.label}</Tag> : null;
       },
     },
     {
@@ -127,7 +121,7 @@ const LoanTransactionPage = () => {
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "",
+      title: "Action",
       key: "actions",
       align: "center",
       render: (_, record) => {
@@ -141,11 +135,7 @@ const LoanTransactionPage = () => {
             okButtonProps={{ danger: true }}
             cancelText="Cancel"
           >
-            <Button
-              danger
-              size="small"
-              loading={deletingId === record._id}
-            >
+            <Button danger size="small" loading={deletingId === record._id}>
               Delete
             </Button>
           </Popconfirm>

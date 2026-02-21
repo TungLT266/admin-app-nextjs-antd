@@ -2,10 +2,7 @@ import { DatePicker, Form, Select } from "antd";
 import { useLoanTransactionContext } from "./LoanTransactionContextProvider";
 import { formatDateInputApi } from "@/utils/DateUtils";
 import { FormItemCustom } from "@/shared/component/element/form";
-import {
-  LoanTransactionTypeLabels,
-  LoanActionTypeLabels,
-} from "../loan-contract/type";
+import { LoanTransactionTypeLabels } from "../loan-contract/type";
 
 const FilterSection = () => {
   const { dataQuery, setDataQuery } = useLoanTransactionContext();
