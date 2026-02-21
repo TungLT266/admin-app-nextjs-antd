@@ -78,7 +78,7 @@ const BookkeepingPage = () => {
       },
       render: (functionType) => {
         const functionTypeLabel = FunctionTypeLabels.find(
-          (item) => item.value === functionType
+          (item) => item.value === functionType,
         );
         return (
           <Tag color={functionTypeLabel?.color}>
@@ -88,11 +88,11 @@ const BookkeepingPage = () => {
       },
     },
     {
-      title: "Document Date",
-      dataIndex: "documentDate",
-      key: "documentDate",
+      title: "Accounting Date",
+      dataIndex: "accountingDate",
+      key: "accountingDate",
       align: "center",
-      render: (documentDate) => formatDate(documentDate),
+      render: (accountingDate) => formatDate(accountingDate),
       onCell: (record) => {
         if (record.entryType === EntryType.DEBIT) {
           return { rowSpan: 2 };
@@ -102,11 +102,11 @@ const BookkeepingPage = () => {
       },
     },
     {
-      title: "Accounting Date",
-      dataIndex: "accountingDate",
-      key: "accountingDate",
+      title: "Document Date",
+      dataIndex: "documentDate",
+      key: "documentDate",
       align: "center",
-      render: (accountingDate) => formatDate(accountingDate),
+      render: (documentDate) => formatDate(documentDate),
       onCell: (record) => {
         if (record.entryType === EntryType.DEBIT) {
           return { rowSpan: 2 };
