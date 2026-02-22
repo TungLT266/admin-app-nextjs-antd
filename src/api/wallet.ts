@@ -34,6 +34,7 @@ export interface IWallet {
   amountBalance?: number;
   accountingAccount?: IAccountingAccount;
   status?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

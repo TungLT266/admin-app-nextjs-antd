@@ -30,6 +30,7 @@ export interface IIncomeAndExpenseType {
   description?: string;
   accountingAccount?: IAccountingAccount;
   status?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

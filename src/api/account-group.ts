@@ -44,6 +44,7 @@ export interface IAccountGroup {
   isFollowTotalValue?: boolean;
   viewType?: string;
   status?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
   dashboardSerialNo?: number;
