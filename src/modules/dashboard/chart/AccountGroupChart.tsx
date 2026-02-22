@@ -36,10 +36,10 @@ const AccountGroupChart = ({ accountGroup }: IAccountGroupChartProps) => {
 
         let totalAmount = 0;
 
-        reportDataItem.data?.forEach((dataDetail) => {
+        reportDataItem.accountingAccounts?.forEach((dataDetail) => {
           const accountingAccount = accountGroup.accountingAccounts?.find(
             (item) =>
-              item.accountingAccount?._id === dataDetail.accountingAccountId
+              item.accountingAccount?._id === dataDetail.id
           );
           if (accountingAccount && accountingAccount.accountingAccount?.name) {
             result[accountingAccount.accountingAccount.name] =
