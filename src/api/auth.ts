@@ -1,4 +1,4 @@
-import { axiosInstancePublic } from "@/utils/ApiUtils";
+import { axiosInstance, axiosInstancePublic } from "@/utils/ApiUtils";
 
 const apiUrl = "auth";
 
@@ -44,5 +44,31 @@ export const selectCompanyApi = async (
     req
   );
   return result.data;
+};
+
+export const logoutApi = async (): Promise<void> => {
+  await axiosInstance.post(`${apiUrl}/logout`);
+};
+
+/** Decode the JWT stored in localStorage and return the payload (no verification). */
+export const getTokenPayload = (): {
+  username?: string;
+  companyCode?: string;
+} | null => {
+  try {
+    const token = localStorage.getItem("accessToken");
+    if (!token) return null;
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const json = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
 };
 

@@ -1,36 +1,97 @@
-import { Button, Layout, theme } from "antd";
-import { useState } from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+"use client";
+import { getTokenPayload, logoutApi } from "@/api/auth";
+import {
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Avatar, Button, Dropdown, Layout, MenuProps, Space, theme } from "antd";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function HeaderLayout() {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const [username, setUsername] = useState<string>("");
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  useEffect(() => {
+    const payload = getTokenPayload();
+    if (payload?.username) setUsername(payload.username);
+  }, []);
+
+  const handleLogout = async () => {
+    setLoggingOut(true);
+    try {
+      await logoutApi();
+    } catch {
+      // even if the API call fails, clear local state
+    } finally {
+      localStorage.removeItem("accessToken");
+      router.push("/auth/login");
+    }
+  };
+
+  const menuItems: MenuProps["items"] = [
+    {
+      key: "username",
+      label: (
+        <span className="font-semibold text-gray-700">{username}</span>
+      ),
+      disabled: true,
+    },
+    { type: "divider" },
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: "Logout",
+      danger: true,
+      onClick: handleLogout,
+    },
+  ];
 
   return (
     <Header
       style={{
-        padding: 0,
+        padding: "0 16px",
         background: colorBgContainer,
         position: "sticky",
         top: 0,
         zIndex: 10,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
       }}
     >
+      {/* Left: sidebar toggle */}
       <Button
         type="text"
         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         onClick={() => setCollapsed(!collapsed)}
-        style={{
-          fontSize: "16px",
-          width: 64,
-          height: 64,
-        }}
+        style={{ fontSize: "16px", width: 64, height: 64 }}
       />
+
+      {/* Right: user avatar + dropdown */}
+      <Dropdown menu={{ items: menuItems }} trigger={["click"]} placement="bottomRight">
+        <Space className="cursor-pointer select-none pr-2" style={{ height: 64 }}>
+          <Avatar
+            size={36}
+            icon={<UserOutlined />}
+            style={{ backgroundColor: "#1677ff" }}
+          />
+          <span className="font-medium text-gray-700 hidden sm:inline">
+            {username || "User"}
+          </span>
+        </Space>
+      </Dropdown>
     </Header>
   );
 }
 
 const { Header } = Layout;
+
