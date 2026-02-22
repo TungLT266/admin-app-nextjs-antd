@@ -80,6 +80,7 @@ const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
             );
             if (grp && grp.accountGroup?.name) {
               result[grp.accountGroup.name] = dataDetail.totalAmount;
+              totalAmount += dataDetail.totalAmount || 0;
             }
           });
 
@@ -215,8 +216,7 @@ const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
                       stroke={getColor(
                         (accountGroup.accountingAccounts?.length ?? 0) + index,
                       )}
-                      strokeWidth={2}
-                      strokeDasharray="5 3"
+                      strokeWidth={1.5}
                       dot={false}
                     />
                   ))}
