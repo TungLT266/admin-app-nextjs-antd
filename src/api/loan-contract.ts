@@ -27,6 +27,7 @@ export interface ILoanContract {
   title?: string;
   description?: string;
   amount?: number;
+  remainingBalance?: number;
   wallet?: IWallet;
   status?: string;
   createdAt?: Date;

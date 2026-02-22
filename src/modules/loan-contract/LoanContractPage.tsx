@@ -78,6 +78,13 @@ const LoanContractPage = () => {
       render: (amount) => formatNumber(amount),
     },
     {
+      title: "Remaining Balance",
+      dataIndex: "remainingBalance",
+      key: "remainingBalance",
+      align: "right",
+      render: (remainingBalance) => formatNumber(remainingBalance),
+    },
+    {
       title: "Status",
       dataIndex: "status",
       key: "status",
