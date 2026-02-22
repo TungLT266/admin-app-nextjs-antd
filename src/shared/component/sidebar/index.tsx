@@ -12,6 +12,7 @@ import {
   TeamOutlined,
   FileProtectOutlined,
   UnorderedListOutlined,
+  ShopOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
@@ -74,6 +75,11 @@ const items: MenuProps["items"] = [
     key: "/",
     icon: <DashboardOutlined />,
     label: "Dashboard",
+  },
+  {
+    key: "/company",
+    icon: <ShopOutlined />,
+    label: "Company",
   },
   {
     key: "/accounting-account",
