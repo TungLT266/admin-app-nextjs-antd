@@ -6,6 +6,8 @@ import { Button } from "antd";
 import { bulkConfirmIncomeApi, IIncome } from "@/api/income";
 import { useIncomeContext } from "./IncomeContextProvider";
 import { IncomeStatus } from "./type";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface BulkConfirmButtonProps {
   selectedRows: IIncome[];
@@ -15,6 +17,7 @@ interface BulkConfirmButtonProps {
 const BulkConfirmButton = ({ selectedRows, onSuccess }: BulkConfirmButtonProps) => {
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useIncomeContext();
+  const { t } = useTranslation();
 
   const isEnabled =
     selectedRows.length > 0 &&
@@ -24,7 +27,7 @@ const BulkConfirmButton = ({ selectedRows, onSuccess }: BulkConfirmButtonProps) 
     const ids = selectedRows.map((row) => row._id!);
     bulkConfirmIncomeApi(ids)
       .then(() => {
-        notifySuccess(`Confirmed ${ids.length} record(s) successfully`);
+        notifySuccess(t("income.notify.bulkConfirmSuccess", { count: ids.length }));
         fetchDataList();
         onSuccess();
       })
@@ -41,7 +44,7 @@ const BulkConfirmButton = ({ selectedRows, onSuccess }: BulkConfirmButtonProps) 
       disabled={!isEnabled}
       style={{ backgroundColor: isEnabled ? "green" : undefined }}
     >
-      Confirm
+      {t("common.confirm")}
     </Button>
   );
 };

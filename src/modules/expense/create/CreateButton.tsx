@@ -5,12 +5,15 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { useExpenseContext } from "../ExpenseContextProvider";
 import { createExpenseApi, ICreateExpenseReq } from "@/api/expense";
 import { formatDateInputApi } from "@/utils/DateUtils";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const CreateButton = () => {
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useExpenseContext();
+  const { t } = useTranslation();
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateExpenseReq = {
@@ -20,7 +23,7 @@ const CreateButton = () => {
     };
     createExpenseApi(data)
       .then(() => {
-        notifySuccess("Create successfully");
+        notifySuccess(t("expense.notify.createSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -33,11 +36,11 @@ const CreateButton = () => {
   return (
     <>
       <Button type="primary" onClick={onOpen}>
-        Create
+        {t("common.create")}
       </Button>
 
       <Modal
-        title="Create Expense"
+        title={t("expense.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}

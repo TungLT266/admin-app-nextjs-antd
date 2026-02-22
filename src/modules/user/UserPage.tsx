@@ -9,10 +9,13 @@ import DeleteButton from "./delete/DeleteButton";
 import { IUser } from "@/api/user";
 import FilterSection from "./FilterSection";
 import PaginationCommon from "@/shared/component/pagination";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const UserPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useUserContext();
+  const { t } = useTranslation();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
@@ -31,18 +34,18 @@ const UserPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Username",
+      title: t("user.columns.username"),
       dataIndex: "username",
       key: "username",
     },
     {
-      title: "Password",
+      title: t("user.columns.password"),
       key: "password",
       align: "center",
       render: () => "••••••••",
     },
     {
-      title: "Status",
+      title: t("user.columns.status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -60,21 +63,21 @@ const UserPage = () => {
       },
     },
     {
-      title: "Created At",
+      title: t("user.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Updated At",
+      title: t("user.columns.updatedAt"),
       dataIndex: "updatedAt",
       key: "updatedAt",
       align: "center",
       render: (updatedAt) => formatDatetime(updatedAt),
     },
     {
-      title: "Action",
+      title: t("user.columns.action"),
       dataIndex: "_id",
       key: "action",
       align: "center",

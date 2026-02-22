@@ -14,6 +14,8 @@ import {
 } from "antd";
 import { IAmountWithDateReq, recordPaymentApi } from "@/api/loan-contract";
 import { useLoanContractContext } from "./LoanContractContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { formatDateInputApi } from "@/utils/DateUtils";
 import { useEffect, useState } from "react";
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
@@ -24,6 +26,7 @@ interface RecordPaymentButtonProps {
 }
 
 const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -45,7 +48,7 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
     };
     recordPaymentApi(id, data)
       .then(() => {
-        notifySuccess("Payment recorded successfully");
+        notifySuccess(t("loanContract.notify.paymentSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -55,7 +58,7 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Record Payment">
+      <Tooltip title={t("loanContract.button.recordPayment")}>
         <Button
           shape="circle"
           icon={<DollarOutlined />}
@@ -64,7 +67,7 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
         />
       </Tooltip>
       <Modal
-        title="Record Payment"
+        title={t("loanContract.modal.recordPayment")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}
@@ -76,16 +79,16 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
           onFinish={onFinish}
         >
           <Form.Item
-            label="Date"
+            label={t("loanContract.form.date")}
             name="documentDate"
-            rules={[{ required: true, message: "Please select a date!" }]}
+            rules={[{ required: true, message: t("loanContract.form.dateRequired") }]}
           >
             <DatePicker className="w-full" />
           </Form.Item>
           <Form.Item
-            label="Amount"
+            label={t("loanContract.form.amount")}
             name="amount"
-            rules={[{ required: true, message: "Please enter the amount!" }]}
+            rules={[{ required: true, message: t("loanContract.form.amountRequired") }]}
           >
             <InputNumber
               style={{ width: "100%" }}
@@ -98,13 +101,13 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
             />
           </Form.Item>
           <Form.Item
-            label="Wallet"
+            label={t("loanContract.form.wallet")}
             name="wallet"
-            rules={[{ required: true, message: "Please select a wallet!" }]}
+            rules={[{ required: true, message: t("loanContract.form.walletRequired") }]}
           >
-            <Select options={walletOptions} placeholder="Select wallet" />
+            <Select options={walletOptions} placeholder={t("loanContract.form.walletPlaceholder")} />
           </Form.Item>
-          <Form.Item label="Note" name="note">
+          <Form.Item label={t("loanContract.form.note")} name="note">
             <Input />
           </Form.Item>
         </Form>

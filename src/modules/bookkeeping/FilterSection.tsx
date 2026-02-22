@@ -14,8 +14,11 @@ import {
 } from "@/api/income-and-expense-type";
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
 import { FormItemCustom } from "@/shared/component/element/form";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const FilterSection = () => {
+  const { t } = useTranslation();
   const { dataQuery, setDataQuery } = useBookkeepingContext();
   const [form] = Form.useForm();
   const [accountingAccountOptions, setAccountingAccountOptions] = useState<
@@ -77,7 +80,7 @@ const FilterSection = () => {
           onValuesChange={handleValuesChange}
           className="w-full flex gap-3 flex-wrap"
         >
-          <FormItemCustom label="Function" name="functionType">
+          <FormItemCustom label={t("bookkeeping.filter.function")} name="functionType">
             <Select
               options={FunctionTypeLabels}
               className="!w-[200px] !text-left"
@@ -85,15 +88,15 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Document Date" name="documentDate">
+          <FormItemCustom label={t("bookkeeping.filter.documentDate")} name="documentDate">
             <DatePicker.RangePicker />
           </FormItemCustom>
 
-          <FormItemCustom label="Title" name="title">
+          <FormItemCustom label={t("bookkeeping.filter.title")} name="title">
             <Input className="!w-[200px]" />
           </FormItemCustom>
 
-          <FormItemCustom label="Account" name="accountingAccount">
+          <FormItemCustom label={t("bookkeeping.filter.account")} name="accountingAccount">
             <Select
               options={accountingAccountOptions}
               className="!w-[200px] !text-left"
@@ -101,7 +104,7 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Wallet" name="wallet">
+          <FormItemCustom label={t("bookkeeping.filter.wallet")} name="wallet">
             <Select
               options={walletOptions}
               className="!w-[200px] !text-left"
@@ -110,7 +113,7 @@ const FilterSection = () => {
           </FormItemCustom>
 
           <FormItemCustom
-            label="Income/Expense Type"
+            label={t("bookkeeping.filter.incomeExpenseType")}
             name="incomeAndExpenseType"
           >
             <Select

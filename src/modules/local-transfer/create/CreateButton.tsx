@@ -1,5 +1,7 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import { Button, Form, FormProps, Modal } from "antd";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { useLocalTransferContext } from "../LocalTransferContextProvider";
@@ -10,6 +12,7 @@ import {
 } from "@/api/local-transfer";
 
 const CreateButton = () => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -22,7 +25,7 @@ const CreateButton = () => {
     };
     createLocalTransferApi(data)
       .then(() => {
-        notifySuccess("Create successfully");
+        notifySuccess(t("localTransfer.notify.createSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -35,11 +38,11 @@ const CreateButton = () => {
   return (
     <>
       <Button type="primary" onClick={onOpen}>
-        Create
+        {t("common.create")}
       </Button>
 
       <Modal
-        title="Create LocalTransfer"
+        title={t("localTransfer.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}

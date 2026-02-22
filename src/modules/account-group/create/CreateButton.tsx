@@ -4,8 +4,11 @@ import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { useAccountGroupContext } from "../AccountGroupContextProvider";
 import { createAccountGroupApi, ICreateAccountGroupReq } from "@/api/account-group";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const CreateButton = () => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -15,7 +18,7 @@ const CreateButton = () => {
     const data: ICreateAccountGroupReq = { ...values };
     createAccountGroupApi(data)
       .then(() => {
-        notifySuccess("Create successfully");
+        notifySuccess(t("accountGroup.notify.createSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -28,11 +31,11 @@ const CreateButton = () => {
   return (
     <>
       <Button type="primary" onClick={onOpen}>
-        Create
+        {t("common.create")}
       </Button>
 
       <Modal
-        title="Create Account Group"
+        title={t("accountGroup.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}

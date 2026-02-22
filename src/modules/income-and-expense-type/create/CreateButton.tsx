@@ -11,6 +11,72 @@ import CreateUpdateForm from "./CreateUpdateForm";
 import { ISelectOption } from "@/shared/type/ISelectOption";
 import { useEffect, useState } from "react";
 import { IAccountingAccount } from "@/api/accounting-account";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
+
+const CreateButton = () => {
+  const [form] = Form.useForm();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { notifySuccess, notifyError } = useNotificationContext();
+  const { fetchDataList } = useIncomeAndExpenseTypeContext();
+  const { t } = useTranslation();
+
+  const [accountingAccountOptions, setAccountingAccountOptions] = useState<
+    ISelectOption[]
+  >([]);
+  const [type, setType] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (isOpen && type) {
+      getIAEAccountsApi(type).then((res) => {
+        setAccountingAccountOptions(
+          res.items?.map((item: IAccountingAccount) => ({
+            label: `${item.name} (${item.number})`,
+            value: item._id,
+          })) || []
+        );
+      });
+    }
+  }, [isOpen, type]);
+
+  const onFinish: FormProps["onFinish"] = (values) => {
+    const data: ICreateIncomeAndExpenseTypeReq = { ...values };
+    createIncomeAndExpenseTypeApi(data)
+      .then(() => {
+        notifySuccess(t("incomeExpenseType.notify.createSuccess"));
+        form.resetFields();
+        fetchDataList();
+      })
+      .catch((error) => {
+        notifyError(error);
+      });
+    onClose();
+  };
+
+  return (
+    <>
+      <Button type="primary" onClick={onOpen}>
+        {t("common.create")}
+      </Button>
+
+      <Modal
+        title={t("incomeExpenseType.modal.create")}
+        open={isOpen}
+        onOk={() => form.submit()}
+        onCancel={onClose}
+      >
+        <CreateUpdateForm
+          form={form}
+          onFinish={onFinish}
+          accountingAccountOptions={accountingAccountOptions}
+          setType={setType}
+        />
+      </Modal>
+    </>
+  );
+};
+
+export default CreateButton;
 
 const CreateButton = () => {
   const [form] = Form.useForm();
@@ -40,7 +106,7 @@ const CreateButton = () => {
     const data: ICreateIncomeAndExpenseTypeReq = { ...values };
     createIncomeAndExpenseTypeApi(data)
       .then(() => {
-        notifySuccess("Create successfully");
+        notifySuccess(t("incomeExpenseType.notify.createSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -57,7 +123,7 @@ const CreateButton = () => {
       </Button>
 
       <Modal
-        title="Create Income And Expense Type"
+        title={t("incomeExpenseType.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}

@@ -15,6 +15,146 @@ import { formatNumber } from "@/utils/NumberUtils";
 import { WalletTypeLabels } from "./type";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
+
+const WalletPage = () => {
+  const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
+    useWalletContext();
+  const { t } = useTranslation();
+  const [dataSource, setDataSource] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    fetchDataList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataQuery]);
+
+  useEffect(() => {
+    const dataWithKeys: DataType[] =
+      dataList.items?.map((item) => ({
+        ...item,
+        key: item._id,
+      })) || [];
+    setDataSource(dataWithKeys);
+  }, [dataList]);
+
+  const columns: TableProps<DataType>["columns"] = [
+    {
+      title: t("wallet.columns.name"),
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: t("wallet.columns.accountingAccount"),
+      dataIndex: "accountingAccount",
+      key: "accountingAccount",
+      render: (accountingAccount) => {
+        return accountingAccount
+          ? `${accountingAccount?.name} (${accountingAccount?.number})`
+          : "-";
+      },
+    },
+    {
+      title: t("wallet.columns.balance"),
+      dataIndex: "amountBalance",
+      key: "amountBalance",
+      align: "right",
+      render: (amountBalance) => formatNumber(amountBalance),
+    },
+    {
+      title: t("wallet.columns.type"),
+      dataIndex: "type",
+      key: "type",
+      align: "center",
+      render: (type) => {
+        const typeLabel = WalletTypeLabels.find((item) => item.value === type);
+        return <Tag color="cyan">{typeLabel?.label}</Tag>;
+      },
+    },
+    {
+      title: t("wallet.columns.status"),
+      dataIndex: "status",
+      key: "status",
+      align: "center",
+      render: (status) => {
+        const statusLabel = AccountingAccountStatusLabels.find(
+          (item) => item.value === status
+        );
+        return (
+          <Tag
+            color={
+              statusLabel?.value === AccountingAccountStatus.ACTIVE
+                ? "green"
+                : "red"
+            }
+          >
+            {statusLabel?.label}
+          </Tag>
+        );
+      },
+    },
+    {
+      title: t("wallet.columns.createdAt"),
+      dataIndex: "createdAt",
+      key: "createdAt",
+      align: "center",
+      render: (createdAt) => formatDatetime(createdAt),
+    },
+    {
+      title: t("wallet.columns.updatedAt"),
+      dataIndex: "updatedAt",
+      key: "updatedAt",
+      align: "center",
+      render: (updatedAt) => formatDatetime(updatedAt),
+    },
+    {
+      title: t("wallet.columns.action"),
+      dataIndex: "_id",
+      key: "action",
+      align: "center",
+      render: (id) => {
+        return (
+          <div className="flex gap-2 justify-center">
+            <EditButton id={id} />
+            <DeleteButton id={id} />
+          </div>
+        );
+      },
+    },
+  ];
+
+  const handleTableChange: TableProps<DataType>["onChange"] = (pagination) => {
+    setDataQuery({
+      ...dataQuery,
+      pageSize: pagination.pageSize,
+      current: pagination.current,
+    });
+  };
+
+  return (
+    <>
+      <FilterSection />
+
+      <Table<DataType>
+        columns={columns}
+        dataSource={dataSource}
+        pagination={{
+          ...dataList.pagination,
+          pageSizeOptions: pageSizeOptions,
+          showSizeChanger: true,
+        }}
+        onChange={handleTableChange}
+        loading={isLoading}
+      />
+    </>
+  );
+};
+
+interface DataType extends IWallet {
+  key?: string;
+}
+
+export default WalletPage;
 
 const WalletPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =

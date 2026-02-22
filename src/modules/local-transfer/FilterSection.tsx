@@ -7,10 +7,13 @@ import { useEffect, useState } from "react";
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
 import { IncomeStatusLabels } from "../income/type";
 import { FormItemCustom } from "@/shared/component/element/form";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const FilterSection = () => {
   const { dataQuery, setDataQuery } = useLocalTransferContext();
   const [form] = Form.useForm();
+  const { t } = useTranslation();
   const [walletOptions, setWalletOptions] = useState<ISelectOption[]>([]);
 
   useEffect(() => {
@@ -47,11 +50,11 @@ const FilterSection = () => {
           className="w-full flex gap-3 flex-wrap"
           style={{ paddingBottom: 16}}
         >
-          <FormItemCustom label="Title" name="title">
+          <FormItemCustom label={t("localTransfer.form.title")} name="title">
             <Input className="!w-[200px]" />
           </FormItemCustom>
 
-          <FormItemCustom label="Wallet From" name="walletFrom">
+          <FormItemCustom label={t("localTransfer.columns.walletFrom")} name="walletFrom">
             <Select
               options={walletOptions}
               className="!w-[200px] !text-left"
@@ -59,7 +62,7 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Wallet To" name="walletTo">
+          <FormItemCustom label={t("localTransfer.columns.walletTo")} name="walletTo">
             <Select
               options={walletOptions}
               className="!w-[200px] !text-left"
@@ -67,7 +70,7 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Status" name="status">
+          <FormItemCustom label={t("common.status")} name="status">
             <Select
               options={IncomeStatusLabels}
               className="!w-[200px] !text-left"
@@ -75,7 +78,7 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Document Date" name="documentDate">
+          <FormItemCustom label={t("localTransfer.form.documentDate")} name="documentDate">
             <DatePicker.RangePicker />
           </FormItemCustom>
         </Form>

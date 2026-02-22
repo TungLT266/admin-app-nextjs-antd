@@ -1,6 +1,8 @@
 import { Form, FormProps, Input, Select } from "antd";
 import { AccountingAccountStatusLabels } from "../type";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
@@ -14,6 +16,7 @@ const CreateUpdateForm = ({
   form,
   isEditForm,
 }: CreateUpdateFormProps) => {
+  const { t } = useTranslation();
   return (
     <Form
       form={form}
@@ -24,26 +27,26 @@ const CreateUpdateForm = ({
       autoComplete="off"
     >
       <Form.Item
-        label="Account Number"
+        label={t("accountingAccount.form.number")}
         name="number"
-        rules={[{ required: true, message: "Please input account number!" }]}
+        rules={[{ required: true, message: t("accountingAccount.form.numberRequired") }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Account Name"
+        label={t("accountingAccount.form.name")}
         name="name"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Input />
       </Form.Item>
 
       {isEditForm && (
         <Form.Item
-          label="Status"
+          label={t("accountingAccount.form.status")}
           name="status"
-          rules={[{ required: true, message: "Please input this field!" }]}
+          rules={[{ required: true, message: t("common.required") }]}
         >
           <Select options={AccountingAccountStatusLabels} />
         </Form.Item>

@@ -4,8 +4,11 @@ import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { useLoanContactContext } from "../LoanContactContextProvider";
 import { createLoanContactApi, ICreateLoanContactReq } from "@/api/loan-contact";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const CreateButton = () => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -15,7 +18,7 @@ const CreateButton = () => {
     const data: ICreateLoanContactReq = { ...values };
     createLoanContactApi(data)
       .then(() => {
-        notifySuccess("Contact created successfully");
+        notifySuccess(t("loanContact.notify.createSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -26,10 +29,10 @@ const CreateButton = () => {
   return (
     <>
       <Button type="primary" onClick={onOpen}>
-        Create
+        {t("common.create")}
       </Button>
       <Modal
-        title="Create Contact"
+        title={t("loanContact.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}

@@ -6,6 +6,8 @@ import CreateUpdateForm from "../create/CreateUpdateForm";
 import { getUserByIdApi, IUpdateUserReq, updateUserApi } from "@/api/user";
 import { useEffect } from "react";
 import { useUserContext } from "@/modules/user/UserContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface EditButtonProps {
   id: string;
@@ -16,6 +18,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useUserContext();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isOpen) {
@@ -33,7 +36,7 @@ const EditButton = ({ id }: EditButtonProps) => {
     };
     updateUserApi(id, data)
       .then(() => {
-        notifySuccess("Update successfully");
+        notifySuccess(t("user.notify.updateSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -45,7 +48,7 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Edit">
+      <Tooltip title={t("common.edit")}>
         <Button
           type="primary"
           shape="circle"
@@ -55,7 +58,7 @@ const EditButton = ({ id }: EditButtonProps) => {
       </Tooltip>
 
       <Modal
-        title="Edit User"
+        title={t("user.modal.update")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}

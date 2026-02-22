@@ -14,10 +14,13 @@ import { IncomeStatus, IncomeStatusLabels } from "../income/type";
 import { ILocalTransfer } from "@/api/local-transfer";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const LocalTransferPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useLocalTransferContext();
+  const { t } = useTranslation();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
@@ -36,38 +39,38 @@ const LocalTransferPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Document Date",
+      title: t("localTransfer.columns.documentDate"),
       dataIndex: "documentDate",
       key: "documentDate",
       align: "center",
       render: (documentDate) => formatDate(documentDate),
     },
     {
-      title: "Title",
+      title: t("localTransfer.columns.title"),
       dataIndex: "title",
       key: "title",
     },
     {
-      title: "Wallet From",
+      title: t("localTransfer.columns.walletFrom"),
       dataIndex: "walletFrom",
       key: "walletFrom",
       render: (walletFrom: IWallet) => walletFrom.name,
     },
     {
-      title: "Wallet To",
+      title: t("localTransfer.columns.walletTo"),
       dataIndex: "walletTo",
       key: "walletTo",
       render: (walletTo: IWallet) => walletTo.name,
     },
     {
-      title: "Amount",
+      title: t("localTransfer.columns.amount"),
       dataIndex: "amount",
       key: "amount",
       align: "right",
       render: (amount) => formatNumber(amount),
     },
     {
-      title: "Status",
+      title: t("localTransfer.columns.status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -87,21 +90,21 @@ const LocalTransferPage = () => {
       },
     },
     {
-      title: "Created At",
+      title: t("localTransfer.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Updated At",
+      title: t("localTransfer.columns.updatedAt"),
       dataIndex: "updatedAt",
       key: "updatedAt",
       align: "center",
       render: (updatedAt) => formatDatetime(updatedAt),
     },
     {
-      title: "Action",
+      title: t("localTransfer.columns.action"),
       dataIndex: "_id",
       key: "action",
       align: "center",

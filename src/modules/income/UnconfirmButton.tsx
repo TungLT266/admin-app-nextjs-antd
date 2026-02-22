@@ -4,6 +4,8 @@ import { Button, Modal, Tooltip } from "antd";
 import { unconfirmIncomeApi } from "@/api/income";
 import { useIncomeContext } from "./IncomeContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface DeleteButtonProps {
   id: string;
@@ -13,11 +15,12 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useIncomeContext();
+  const { t } = useTranslation();
 
   const handleOk = () => {
     unconfirmIncomeApi(id)
       .then(() => {
-        notifySuccess("Unconfirm successfully");
+        notifySuccess(t("income.notify.unconfirmSuccess"));
         fetchDataList();
       })
       .catch((error) => {
@@ -27,7 +30,7 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Unconfirm">
+      <Tooltip title={t("common.unconfirm")}>
         <Button
           type="primary"
           shape="circle"
@@ -38,12 +41,12 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
       </Tooltip>
 
       <Modal
-        title="Unconfirm the task"
+        title={t("income.modal.unconfirm")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
-        <p>Are you sure to unconfirm this task?</p>
+        <p>{t("income.confirm.unconfirm")}</p>
       </Modal>
     </>
   );

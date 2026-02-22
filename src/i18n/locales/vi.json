@@ -1,0 +1,632 @@
+{
+  "common": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "create": "Tạo mới",
+    "search": "Tìm kiếm",
+    "reset": "Đặt lại",
+    "yes": "Có",
+    "no": "Không",
+    "confirm": "Xác nhận",
+    "unconfirm": "Hủy xác nhận",
+    "actions": "Thao tác",
+    "status": "Trạng thái",
+    "name": "Tên",
+    "description": "Mô tả",
+    "createdAt": "Ngày tạo",
+    "updatedAt": "Ngày cập nhật",
+    "required": "Vui lòng nhập trường này!",
+    "loading": "Đang tải...",
+    "success": "Thao tác thành công",
+    "error": "Đã xảy ra lỗi",
+    "footer": "Được tạo bởi Le Thanh Tung",
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động",
+    "pending": "Chờ xử lý",
+    "confirmed": "Đã xác nhận",
+    "rowSelected": "Đã chọn {{count}} hàng",
+    "deleteTitle": "Xóa bản ghi",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa bản ghi này?"
+  },
+  "header": {
+    "logout": "Đăng xuất",
+    "language": "Ngôn ngữ"
+  },
+  "sidebar": {
+    "dashboard": "Tổng quan",
+    "company": "Công ty",
+    "user": "Người dùng",
+    "accountingAccount": "Tài khoản kế toán",
+    "accountGroup": "Nhóm tài khoản",
+    "incomeExpenseType": "Loại Thu/Chi",
+    "wallet": "Ví",
+    "transactions": "Giao dịch",
+    "income": "Thu",
+    "expense": "Chi",
+    "localTransfer": "Chuyển khoản nội bộ",
+    "loansDebts": "Vay & Nợ",
+    "contacts": "Liên hệ",
+    "loanContracts": "Hợp đồng vay",
+    "contractTransactions": "Giao dịch hợp đồng",
+    "bookkeeping": "Sổ kế toán"
+  },
+  "auth": {
+    "login": {
+      "title": "Chào mừng trở lại",
+      "subtitle": "Đăng nhập vào tài khoản của bạn",
+      "username": "Tên đăng nhập",
+      "password": "Mật khẩu",
+      "signIn": "Đăng nhập",
+      "error": "Đăng nhập thất bại. Vui lòng kiểm tra thông tin đăng nhập."
+    },
+    "selectCompany": {
+      "title": "Chọn Công ty",
+      "subtitle": "Chọn công ty để đăng nhập",
+      "searchPlaceholder": "Tìm theo tên hoặc mã...",
+      "logout": "Đăng xuất",
+      "error": "Chọn công ty thất bại.",
+      "selectButton": "Chọn"
+    }
+  },
+  "accountingAccount": {
+    "title": "Tài khoản kế toán",
+    "columns": {
+      "number": "Số tài khoản",
+      "name": "Tên tài khoản",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác"
+    },
+    "form": {
+      "number": "Số tài khoản",
+      "numberRequired": "Vui lòng nhập số tài khoản!",
+      "name": "Tên tài khoản",
+      "nameRequired": "Vui lòng nhập tên tài khoản!",
+      "status": "Trạng thái"
+    },
+    "modal": {
+      "create": "Tạo tài khoản kế toán",
+      "update": "Cập nhật tài khoản kế toán",
+      "delete": "Xóa tài khoản kế toán"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "deleteSuccess": "Xóa thành công"
+    },
+    "confirm": {
+      "delete": "Bạn có chắc chắn muốn xóa bản ghi này?"
+    },
+    "chart": {
+      "title": "Biểu đồ số dư tài khoản",
+      "timeRange": {
+        "1year": "1 Năm",
+        "3years": "3 Năm",
+        "5years": "5 Năm",
+        "custom": "Tùy chỉnh"
+      },
+      "legend": "Số tiền"
+    }
+  },
+  "accountGroup": {
+    "title": "Nhóm tài khoản",
+    "columns": {
+      "name": "Tên",
+      "accountingAccounts": "Tài khoản & Nhóm kế toán",
+      "viewType": "Loại hiển thị",
+      "followTotalValue": "Theo tổng giá trị",
+      "showInDashboard": "Hiển thị trên tổng quan",
+      "status": "Trạng thái",
+      "action": "Thao tác"
+    },
+    "form": {
+      "name": "Tên",
+      "viewType": "Loại hiển thị",
+      "followTotalValue": "Theo tổng giá trị",
+      "showInDashboard": "Hiển thị trên tổng quan",
+      "accountingAccounts": "Tài khoản kế toán",
+      "accountGroups": "Nhóm tài khoản",
+      "addAccount": "Thêm tài khoản kế toán",
+      "addGroup": "Thêm nhóm tài khoản",
+      "ratio": "Tỉ lệ (%)",
+      "dashboardSerialNo": "Số thứ tự Dashboard",
+      "serialNo": "Số thứ tự"
+    },
+    "modal": {
+      "create": "Tạo nhóm tài khoản",
+      "update": "Cập nhật nhóm tài khoản",
+      "delete": "Xóa nhóm tài khoản"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "deleteSuccess": "Xóa thành công"
+    },
+    "confirm": {
+      "delete": "Bạn có chắc chắn muốn xóa bản ghi này?"
+    },
+    "chart": {
+      "viewChart": "Xem biểu đồ",
+      "timeRange": {
+        "1year": "1 Năm",
+        "3years": "3 Năm",
+        "5years": "5 Năm",
+        "custom": "Tùy chỉnh"
+      }
+    }
+  },
+  "wallet": {
+    "title": "Ví",
+    "columns": {
+      "name": "Tên",
+      "accountingAccount": "Tài khoản kế toán",
+      "balance": "Số dư",
+      "type": "Loại",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác"
+    },
+    "form": {
+      "name": "Tên",
+      "accountingAccount": "Tài khoản kế toán",
+      "type": "Loại",
+      "bankName": "Tên ngân hàng",
+      "bankNo": "Số tài khoản ngân hàng",
+      "creditLimit": "Hạn mức tín dụng",
+      "status": "Trạng thái"
+    },
+    "type": {
+      "bank": "Ngân hàng",
+      "cash": "Tiền mặt",
+      "creditCard": "Thẻ tín dụng",
+      "eWallet": "Ví điện tử",
+      "saving": "Tiết kiệm"
+    },
+    "modal": {
+      "create": "Tạo ví",
+      "update": "Cập nhật ví"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "deleteSuccess": "Xóa thành công"
+    }
+  },
+  "income": {
+    "title": "Thu",
+    "columns": {
+      "documentDate": "Ngày chứng từ",
+      "accountingDate": "Ngày kế toán",
+      "title": "Tiêu đề",
+      "content": "Nội dung",
+      "wallet": "Ví",
+      "amount": "Số tiền",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác"
+    },
+    "filter": {
+      "title": "Tiêu đề",
+      "type": "Loại Thu/Chi",
+      "wallet": "Ví",
+      "status": "Trạng thái",
+      "documentDate": "Ngày chứng từ"
+    },
+    "form": {
+      "documentDate": "Ngày chứng từ",
+      "accountingDate": "Ngày ghi nhận kế toán",
+      "title": "Tiêu đề",
+      "content": "Nội dung",
+      "wallet": "Ví",
+      "amount": "Số tiền",
+      "description": "Mô tả"
+    },
+    "modal": {
+      "create": "Tạo khoản thu",
+      "update": "Cập nhật khoản thu",
+      "delete": "Xóa khoản thu",
+      "unconfirm": "Hủy xác nhận khoản thu",
+      "bulkUnconfirm": "Hủy xác nhận các bản ghi đã chọn"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "confirmSuccess": "Xác nhận thành công",
+      "unconfirmSuccess": "Hủy xác nhận thành công",
+      "deleteSuccess": "Xóa thành công",
+      "bulkConfirmSuccess": "Đã xác nhận {{count}} bản ghi",
+      "bulkUnconfirmSuccess": "Đã hủy xác nhận {{count}} bản ghi"
+    },
+    "confirm": {
+      "delete": "Bạn có chắc chắn muốn xóa bản ghi này?",
+      "unconfirm": "Bạn có chắc chắn muốn hủy xác nhận bản ghi này?",
+      "bulkUnconfirm": "Bạn có chắc chắn muốn hủy xác nhận {{count}} bản ghi đã chọn?"
+    }
+  },
+  "expense": {
+    "title": "Chi",
+    "columns": {
+      "documentDate": "Ngày chứng từ",
+      "accountingDate": "Ngày kế toán",
+      "title": "Tiêu đề",
+      "amount": "Số tiền",
+      "content": "Nội dung",
+      "wallet": "Ví",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác"
+    },
+    "filter": {
+      "title": "Tiêu đề",
+      "type": "Loại Chi",
+      "wallet": "Ví",
+      "status": "Trạng thái",
+      "documentDate": "Ngày chứng từ"
+    },
+    "form": {
+      "documentDate": "Ngày chứng từ",
+      "accountingDate": "Ngày ghi nhận kế toán",
+      "title": "Tiêu đề",
+      "content": "Nội dung",
+      "wallet": "Ví",
+      "amount": "Số tiền",
+      "description": "Mô tả"
+    },
+    "modal": {
+      "create": "Tạo khoản chi",
+      "update": "Cập nhật khoản chi",
+      "delete": "Xóa khoản chi",
+      "unconfirm": "Hủy xác nhận khoản chi",
+      "bulkUnconfirm": "Hủy xác nhận các bản ghi đã chọn"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "confirmSuccess": "Xác nhận thành công",
+      "unconfirmSuccess": "Hủy xác nhận thành công",
+      "deleteSuccess": "Xóa thành công",
+      "bulkConfirmSuccess": "Đã xác nhận {{count}} bản ghi",
+      "bulkUnconfirmSuccess": "Đã hủy xác nhận {{count}} bản ghi"
+    },
+    "confirm": {
+      "delete": "Bạn có chắc chắn muốn xóa bản ghi này?",
+      "unconfirm": "Bạn có chắc chắn muốn hủy xác nhận bản ghi này?",
+      "bulkUnconfirm": "Bạn có chắc chắn muốn hủy xác nhận {{count}} bản ghi đã chọn?"
+    }
+  },
+  "localTransfer": {
+    "title": "Chuyển khoản nội bộ",
+    "columns": {
+      "documentDate": "Ngày chứng từ",
+      "title": "Tiêu đề",
+      "walletFrom": "Từ ví",
+      "walletTo": "Đến ví",
+      "amount": "Số tiền",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác"
+    },
+    "form": {
+      "documentDate": "Ngày chứng từ",
+      "title": "Tiêu đề",
+      "walletFrom": "Từ ví",
+      "walletTo": "Đến ví",
+      "amount": "Số tiền",
+      "description": "Mô tả"
+    },
+    "modal": {
+      "create": "Tạo chuyển khoản nội bộ",
+      "update": "Cập nhật chuyển khoản nội bộ",
+      "delete": "Xóa chuyển khoản nội bộ",
+      "unconfirm": "Hủy xác nhận chuyển khoản nội bộ"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "confirmSuccess": "Xác nhận thành công",
+      "unconfirmSuccess": "Hủy xác nhận thành công",
+      "deleteSuccess": "Xóa thành công"
+    },
+    "confirm": {
+      "delete": "Bạn có chắc chắn muốn xóa bản ghi này?",
+      "unconfirm": "Bạn có chắc chắn muốn hủy xác nhận bản ghi này?"
+    }
+  },
+  "incomeExpenseType": {
+    "title": "Loại Thu/Chi",
+    "columns": {
+      "type": "Loại",
+      "name": "Tên",
+      "accountingAccount": "Tài khoản kế toán",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác"
+    },
+    "form": {
+      "type": "Loại",
+      "name": "Tên",
+      "accountingAccount": "Tài khoản kế toán",
+      "description": "Mô tả",
+      "status": "Trạng thái"
+    },
+    "type": {
+      "income": "Thu",
+      "expense": "Chi"
+    },
+    "modal": {
+      "create": "Tạo loại Thu/Chi",
+      "update": "Cập nhật loại Thu/Chi"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "deleteSuccess": "Xóa thành công"
+    }
+  },
+  "company": {
+    "title": "Công ty",
+    "columns": {
+      "code": "Mã công ty",
+      "name": "Tên công ty",
+      "description": "Mô tả",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác"
+    },
+    "form": {
+      "code": "Mã công ty",
+      "codeRequired": "Vui lòng nhập mã công ty!",
+      "name": "Tên công ty",
+      "nameRequired": "Vui lòng nhập tên công ty!",
+      "description": "Mô tả",
+      "status": "Trạng thái",
+      "statusRequired": "Vui lòng chọn trạng thái!"
+    },
+    "modal": {
+      "create": "Tạo công ty",
+      "update": "Cập nhật công ty"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "deleteSuccess": "Xóa thành công"
+    }
+  },
+  "user": {
+    "title": "Người dùng",
+    "columns": {
+      "username": "Tên đăng nhập",
+      "password": "Mật khẩu",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác"
+    },
+    "form": {
+      "username": "Tên đăng nhập",
+      "usernameRequired": "Vui lòng nhập tên đăng nhập!",
+      "password": "Mật khẩu",
+      "passwordRequired": "Vui lòng nhập mật khẩu!",
+      "newPassword": "Mật khẩu mới",
+      "newPasswordPlaceholder": "Để trống để giữ nguyên mật khẩu",
+      "status": "Trạng thái",
+      "statusRequired": "Vui lòng chọn trạng thái!"
+    },
+    "modal": {
+      "create": "Tạo người dùng",
+      "update": "Cập nhật người dùng"
+    },
+    "notify": {
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "deleteSuccess": "Xóa thành công"
+    },
+    "deleteButton": {
+      "tooltip": "Xóa khỏi công ty",
+      "modalTitle": "Xóa người dùng khỏi công ty",
+      "ok": "Xóa",
+      "confirm": "Bạn có chắc chắn muốn xóa người dùng này khỏi công ty hiện tại? Tài khoản người dùng sẽ không bị xóa."
+    }
+  },
+  "loanContact": {
+    "title": "Liên hệ",
+    "columns": {
+      "name": "Tên",
+      "phone": "Điện thoại",
+      "email": "Email",
+      "createdAt": "Ngày tạo",
+      "action": "Thao tác"
+    },
+    "form": {
+      "name": "Tên",
+      "nameRequired": "Vui lòng nhập tên liên hệ!",
+      "phone": "Điện thoại",
+      "email": "Email",
+      "emailRequired": "Vui lòng nhập email hợp lệ!"
+    },
+    "modal": {
+      "create": "Tạo liên hệ",
+      "update": "Sửa liên hệ",
+      "delete": "Xóa liên hệ"
+    },
+    "notify": {
+      "createSuccess": "Tạo liên hệ thành công",
+      "updateSuccess": "Cập nhật liên hệ thành công",
+      "deleteSuccess": "Xóa liên hệ thành công"
+    },
+    "confirm": {
+      "delete": "Bạn có chắc chắn muốn xóa liên hệ này?"
+    },
+    "filter": {
+      "name": "Tên",
+      "namePlaceholder": "Tìm theo tên..."
+    }
+  },
+  "loanContract": {
+    "title": "Hợp đồng vay",
+    "columns": {
+      "contractDate": "Ngày hợp đồng",
+      "title": "Tiêu đề",
+      "type": "Loại",
+      "contact": "Liên hệ",
+      "amount": "Số tiền",
+      "remainingBalance": "Dư nợ",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "action": "Thao tác"
+    },
+    "type": {
+      "loan": "Cho vay",
+      "debt": "Đi vay"
+    },
+    "status": {
+      "pending": "Chờ xử lý",
+      "active": "Đang hoạt động",
+      "completed": "Hoàn thành",
+      "cancelled": "Đã hủy"
+    },
+    "filter": {
+      "title": "Tiêu đề",
+      "titlePlaceholder": "Tìm theo tiêu đề...",
+      "type": "Loại",
+      "typePlaceholder": "Tất cả loại",
+      "status": "Trạng thái",
+      "statusPlaceholder": "Tất cả trạng thái",
+      "contact": "Liên hệ",
+      "contactPlaceholder": "Tất cả liên hệ",
+      "contractDate": "Ngày hợp đồng"
+    },
+    "form": {
+      "type": "Loại",
+      "typePlaceholder": "Chọn loại (Cho vay / Đi vay)",
+      "typeRequired": "Vui lòng chọn loại hợp đồng!",
+      "contact": "Liên hệ",
+      "contactPlaceholder": "Chọn liên hệ",
+      "contactRequired": "Vui lòng chọn liên hệ!",
+      "contractDate": "Ngày hợp đồng",
+      "contractDateRequired": "Vui lòng chọn ngày hợp đồng!",
+      "title": "Tiêu đề",
+      "titleRequired": "Vui lòng nhập tiêu đề!",
+      "description": "Mô tả",
+      "wallet": "Ví",
+      "walletPlaceholder": "Chọn ví",
+      "walletRequired": "Vui lòng chọn ví!",
+      "amount": "Số tiền",
+      "amountRequired": "Vui lòng nhập số tiền!",
+      "date": "Ngày",
+      "dateRequired": "Vui lòng chọn ngày!",
+      "note": "Ghi chú"
+    },
+    "modal": {
+      "create": "Tạo hợp đồng vay",
+      "update": "Sửa hợp đồng vay",
+      "delete": "Xóa hợp đồng",
+      "addDisbursement": "Thêm giải ngân",
+      "recordPayment": "Ghi nhận thanh toán",
+      "complete": "Hoàn thành hợp đồng",
+      "cancel": "Hủy hợp đồng",
+      "reopen": "Mở lại hợp đồng"
+    },
+    "button": {
+      "confirmActivate": "Xác nhận & Kích hoạt",
+      "addDisbursement": "Thêm giải ngân",
+      "recordPayment": "Ghi nhận thanh toán",
+      "complete": "Hoàn thành hợp đồng",
+      "cancel": "Hủy hợp đồng",
+      "reopen": "Mở lại hợp đồng",
+      "yesComplete": "Có, Hoàn thành",
+      "yesCancel": "Có, Hủy",
+      "yesReopen": "Có, Mở lại"
+    },
+    "notify": {
+      "createSuccess": "Tạo hợp đồng thành công",
+      "updateSuccess": "Cập nhật hợp đồng thành công",
+      "deleteSuccess": "Xóa hợp đồng thành công",
+      "confirmSuccess": "Xác nhận và kích hoạt hợp đồng thành công",
+      "disbursementSuccess": "Ghi nhận giải ngân thành công",
+      "paymentSuccess": "Ghi nhận thanh toán thành công",
+      "completeSuccess": "Hợp đồng đã được hoàn thành",
+      "cancelSuccess": "Hủy hợp đồng thành công",
+      "reopenSuccess": "Mở lại hợp đồng thành công"
+    },
+    "confirm": {
+      "delete": "Bạn có chắc chắn muốn xóa hợp đồng này?",
+      "complete": "Đánh dấu hợp đồng này là Hoàn thành? Thao tác này không thể hoàn tác.",
+      "cancel": "Bạn có chắc chắn muốn hủy hợp đồng này? Tất cả giao dịch liên quan cũng sẽ bị hủy.",
+      "reopen": "Mở lại hợp đồng và chuyển về trạng thái Hoạt động? Tất cả giao dịch liên quan cũng sẽ được khôi phục."
+    }
+  },
+  "loanTransaction": {
+    "title": "Giao dịch hợp đồng",
+    "columns": {
+      "documentDate": "Ngày chứng từ",
+      "contractTitle": "Tiêu đề hợp đồng",
+      "contractType": "Loại hợp đồng",
+      "transactionType": "Loại giao dịch",
+      "amount": "Số tiền",
+      "wallet": "Ví",
+      "status": "Trạng thái",
+      "note": "Ghi chú",
+      "createdAt": "Ngày tạo",
+      "action": "Thao tác"
+    },
+    "transactionType": {
+      "disbursement": "Giải ngân",
+      "payment": "Thanh toán"
+    },
+    "filter": {
+      "transactionType": "Loại giao dịch",
+      "documentDate": "Ngày chứng từ",
+      "allTypes": "Tất cả loại"
+    },
+    "confirm": {
+      "deleteTitle": "Xóa giao dịch này?",
+      "deleteDescription": "Thao tác này sẽ xóa bút toán kế toán và tính toán lại số tiền hợp đồng.",
+      "okText": "Xóa",
+      "cancelText": "Hủy"
+    }
+  },
+  "bookkeeping": {
+    "title": "Sổ kế toán",
+    "columns": {
+      "function": "Chức năng",
+      "accountingDate": "Ngày kế toán",
+      "documentDate": "Ngày chứng từ",
+      "title": "Tiêu đề",
+      "amount": "Số tiền",
+      "entryType": "Loại bút toán",
+      "account": "Tài khoản",
+      "wallet": "Ví",
+      "incomeExpenseType": "Loại Thu/Chi",
+      "loanContact": "Liên hệ vay",
+      "createdAt": "Ngày tạo"
+    },
+    "entryType": {
+      "debit": "Nợ",
+      "credit": "Có"
+    },
+    "functionType": {
+      "income": "Thu",
+      "expense": "Chi",
+      "localTransfer": "Chuyển khoản nội bộ",
+      "contractTransaction": "Giao dịch hợp đồng"
+    },
+    "filter": {
+      "function": "Chức năng",
+      "documentDate": "Ngày chứng từ",
+      "title": "Tiêu đề",
+      "account": "Tài khoản",
+      "wallet": "Ví",
+      "incomeExpenseType": "Loại Thu/Chi"
+    }
+  }
+}

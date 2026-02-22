@@ -13,6 +13,8 @@ import {
 } from "@/api/income-and-expense-type";
 import { ISelectOption } from "@/shared/type/ISelectOption";
 import { IAccountingAccount } from "@/api/accounting-account";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface EditButtonProps {
   id: string;
@@ -23,6 +25,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useIncomeAndExpenseTypeContext();
+  const { t } = useTranslation();
   const [accountingAccountOptions, setAccountingAccountOptions] = useState<
     ISelectOption[]
   >([]);
@@ -62,7 +65,7 @@ const EditButton = ({ id }: EditButtonProps) => {
     const data: IUpdateIncomeAndExpenseTypeReq = { ...values };
     updateIncomeAndExpenseTypeApi(id, data)
       .then(() => {
-        notifySuccess("Update successfully");
+        notifySuccess(t("incomeExpenseType.notify.updateSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -74,7 +77,7 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Edit">
+      <Tooltip title={t("common.edit")}>
         <Button
           type="primary"
           shape="circle"
@@ -84,7 +87,7 @@ const EditButton = ({ id }: EditButtonProps) => {
       </Tooltip>
 
       <Modal
-        title="Update Income and Expense Type"
+        title={t("incomeExpenseType.modal.update")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}

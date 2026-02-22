@@ -4,12 +4,15 @@ import { Button, Modal, Tooltip } from "antd";
 import { useLocalTransferContext } from "./LocalTransferContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { unconfirmLocalTransferApi } from "@/api/local-transfer";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface DeleteButtonProps {
   id: string;
 }
 
 const UnconfirmButton = ({ id }: DeleteButtonProps) => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLocalTransferContext();
@@ -17,7 +20,7 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
   const handleOk = () => {
     unconfirmLocalTransferApi(id)
       .then(() => {
-        notifySuccess("Unconfirm successfully");
+        notifySuccess(t("localTransfer.notify.unconfirmSuccess"));
         fetchDataList();
       })
       .catch((error) => {
@@ -27,7 +30,7 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Unconfirm">
+      <Tooltip title={t("common.unconfirm")}>
         <Button
           type="primary"
           shape="circle"
@@ -38,12 +41,12 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
       </Tooltip>
 
       <Modal
-        title="Unconfirm the task"
+        title={t("localTransfer.modal.unconfirm")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
-        <p>Are you sure to unconfirm this task?</p>
+        <p>{t("localTransfer.confirm.unconfirm")}</p>
       </Modal>
     </>
   );

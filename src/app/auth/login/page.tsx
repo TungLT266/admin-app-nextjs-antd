@@ -3,9 +3,12 @@ import { ILoginReq, loginApi, selectCompanyApi } from "@/api/auth";
 import { Button, Form, FormProps, Input, Alert } from "antd";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const LoginPage = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
 
@@ -37,7 +40,7 @@ const LoginPage = () => {
       }
     } catch (err: any) {
       setError(
-        typeof err === "string" ? err : "Login failed. Please check your credentials."
+        typeof err === "string" ? err : t("auth.login.error")
       );
     } finally {
       setLoading(false);
@@ -48,8 +51,8 @@ const LoginPage = () => {
     <div className="w-full min-h-[100vh] bg-gradient-to-br from-blue-50 to-indigo-100 flex justify-center items-center">
       <div className="bg-white rounded-2xl shadow-xl p-10 w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Welcome back</h1>
-          <p className="text-gray-500 mt-2">Sign in to your account</p>
+          <h1 className="text-3xl font-bold text-gray-800">{t("auth.login.title")}</h1>
+          <p className="text-gray-500 mt-2">{t("auth.login.subtitle")}</p>
         </div>
 
         {error && (
@@ -64,19 +67,19 @@ const LoginPage = () => {
           size="large"
         >
           <Form.Item<FieldType>
-            label="Username"
+            label={t("auth.login.username")}
             name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[{ required: true, message: t("common.required") }]}
           >
-            <Input placeholder="Enter your username" />
+            <Input placeholder={t("auth.login.username")} />
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Password"
+            label={t("auth.login.password")}
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[{ required: true, message: t("common.required") }]}
           >
-            <Input.Password placeholder="Enter your password" />
+            <Input.Password placeholder={t("auth.login.password")} />
           </Form.Item>
 
           <Form.Item className="mt-6">
@@ -86,7 +89,7 @@ const LoginPage = () => {
               className="w-full"
               loading={loading}
             >
-              Sign In
+              {t("auth.login.signIn")}
             </Button>
           </Form.Item>
         </Form>

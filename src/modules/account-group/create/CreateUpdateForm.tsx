@@ -21,6 +21,8 @@ import {
   getAllAccountGroupActiveApi,
   IAccountGroup,
 } from "@/api/account-group";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
@@ -34,6 +36,7 @@ const CreateUpdateForm = ({
   form,
   isEditForm,
 }: CreateUpdateFormProps) => {
+  const { t } = useTranslation();
   return (
     <Form
       form={form}
@@ -44,17 +47,17 @@ const CreateUpdateForm = ({
       autoComplete="off"
     >
       <Form.Item
-        label="Name"
+        label={t("accountGroup.form.name")}
         name="name"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="View Type"
+        label={t("accountGroup.form.viewType")}
         name="viewType"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Select options={AccountGroupViewTypeLabels} />
       </Form.Item>
@@ -63,7 +66,7 @@ const CreateUpdateForm = ({
       <AccountGroupsForm />
 
       <Form.Item
-        label="Follow Total Value"
+        label={t("accountGroup.form.followTotalValue")}
         name="isFollowTotalValue"
         valuePropName="checked"
       >
@@ -71,26 +74,26 @@ const CreateUpdateForm = ({
       </Form.Item>
 
       <Form.Item
-        label="Show in Dashboard"
+        label={t("accountGroup.form.showInDashboard")}
         name="isShowInDashboard"
         valuePropName="checked"
       >
         <Checkbox />
       </Form.Item>
 
-      <Form.Item label="Dashboard Serial No" name="dashboardSerialNo">
+      <Form.Item label={t("accountGroup.form.dashboardSerialNo")} name="dashboardSerialNo">
         <InputNumber style={{ width: "100%" }} />
       </Form.Item>
 
-      <Form.Item label="Description" name="description">
+      <Form.Item label={t("common.description")} name="description">
         <Input />
       </Form.Item>
 
       {isEditForm && (
         <Form.Item
-          label="Status"
+          label={t("common.status")}
           name="status"
-          rules={[{ required: true, message: "Please input this field!" }]}
+          rules={[{ required: true, message: t("common.required") }]}
         >
           <Select options={AccountingAccountStatusLabels} />
         </Form.Item>
@@ -100,6 +103,7 @@ const CreateUpdateForm = ({
 };
 
 const AccountGroupsForm = () => {
+  const { t } = useTranslation();
   const [accountGroupOptions, setAccountGroupOptions] = useState<
     ISelectOption[]
   >([]);
@@ -116,7 +120,7 @@ const AccountGroupsForm = () => {
   }, []);
 
   return (
-    <Form.Item label="Account Groups">
+    <Form.Item label={t("accountGroup.form.accountGroups")}>
       <Form.List name="accountGroups">
         {(fields, { add, remove }) => (
           <div className="flex flex-col gap-4">
@@ -129,7 +133,7 @@ const AccountGroupsForm = () => {
                 </div>
                 <div className="flex gap-1">
                   <Form.Item noStyle name={[subField.name, "serialNo"]}>
-                    <Input placeholder="Serial No" />
+                    <Input placeholder={t("accountGroup.form.serialNo")} />
                   </Form.Item>
                   <CloseOutlined
                     onClick={() => {
@@ -140,7 +144,7 @@ const AccountGroupsForm = () => {
               </div>
             ))}
             <Button type="dashed" onClick={() => add()} block>
-              + Add
+              {t("accountGroup.form.addGroup")}
             </Button>
           </div>
         )}
@@ -150,6 +154,7 @@ const AccountGroupsForm = () => {
 };
 
 const AccountingAccountsForm = () => {
+  const { t } = useTranslation();
   const [accountingAccountOptions, setAccountingAccountOptions] = useState<
     ISelectOption[]
   >([]);
@@ -166,7 +171,7 @@ const AccountingAccountsForm = () => {
   }, []);
 
   return (
-    <Form.Item label="Accounting Accounts">
+    <Form.Item label={t("accountGroup.form.accountingAccounts")}>
       <Form.List name="accountingAccounts">
         {(fields, { add, remove }) => (
           <div className="flex flex-col gap-4">
@@ -182,7 +187,7 @@ const AccountingAccountsForm = () => {
                 </div>
                 <div className="flex gap-1">
                   <Form.Item noStyle name={[subField.name, "serialNo"]}>
-                    <Input placeholder="Serial No" />
+                    <Input placeholder={t("accountGroup.form.serialNo")} />
                   </Form.Item>
                   <CloseOutlined
                     onClick={() => {
@@ -193,7 +198,7 @@ const AccountingAccountsForm = () => {
               </div>
             ))}
             <Button type="dashed" onClick={() => add()} block>
-              + Add
+              {t("accountGroup.form.addAccount")}
             </Button>
           </div>
         )}

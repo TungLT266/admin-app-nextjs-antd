@@ -7,8 +7,11 @@ import { useEffect, useState } from "react";
 import { getAllLoanContactApi, ILoanContact } from "@/api/loan-contact";
 import { FormItemCustom } from "@/shared/component/element/form";
 import { LoanStatusLabels, LoanTypeLabels } from "./type";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const FilterSection = () => {
+  const { t } = useTranslation();
   const { dataQuery, setDataQuery } = useLoanContractContext();
   const [form] = Form.useForm();
   const [contactOptions, setContactOptions] = useState<ISelectOption[]>([]);
@@ -46,14 +49,14 @@ const FilterSection = () => {
           onValuesChange={handleValuesChange}
           className="flex gap-3 flex-wrap"
         >
-          <FormItemCustom label="Title" name="title">
-            <Input placeholder="Search by title..." />
+          <FormItemCustom label={t("loanContract.filter.title")} name="title">
+            <Input placeholder={t("loanContract.filter.titlePlaceholder")} />
           </FormItemCustom>
 
-          <FormItemCustom label="Type" name="loanType">
+          <FormItemCustom label={t("loanContract.filter.type")} name="loanType">
             <Select
               allowClear
-              placeholder="All types"
+              placeholder={t("loanContract.filter.typePlaceholder")}
               options={LoanTypeLabels.map((t) => ({
                 label: t.label,
                 value: t.value,
@@ -62,10 +65,10 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Status" name="status">
+          <FormItemCustom label={t("loanContract.filter.status")} name="status">
             <Select
               allowClear
-              placeholder="All statuses"
+              placeholder={t("loanContract.filter.statusPlaceholder")}
               options={LoanStatusLabels.map((s) => ({
                 label: s.label,
                 value: s.value,
@@ -74,11 +77,11 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Contact" name="loanContact">
+          <FormItemCustom label={t("loanContract.filter.contact")} name="loanContact">
             <Select
               allowClear
               showSearch
-              placeholder="All contacts"
+              placeholder={t("loanContract.filter.contactPlaceholder")}
               options={contactOptions}
               filterOption={(input, option) =>
                 (option?.label as string)
@@ -89,7 +92,7 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Contract Date" name="contractDate">
+          <FormItemCustom label={t("loanContract.filter.contractDate")} name="contractDate">
             <DatePicker.RangePicker />
           </FormItemCustom>
         </Form>

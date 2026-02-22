@@ -1,5 +1,7 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal, Tooltip } from "antd";
 import { useLoanContactContext } from "../LoanContactContextProvider";
@@ -10,6 +12,7 @@ interface DeleteButtonProps {
 }
 
 const DeleteButton = ({ id }: DeleteButtonProps) => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLoanContactContext();
@@ -17,7 +20,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
   const handleOk = () => {
     deleteLoanContactApi(id)
       .then(() => {
-        notifySuccess("Contact deleted successfully");
+        notifySuccess(t("loanContact.notify.deleteSuccess"));
         fetchDataList();
       })
       .catch((error) => notifyError(error));
@@ -26,7 +29,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Delete">
+      <Tooltip title={t("common.delete")}>
         <Button
           danger
           shape="circle"
@@ -35,13 +38,13 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
         />
       </Tooltip>
       <Modal
-        title="Delete Contact"
+        title={t("loanContact.modal.delete")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
         okType="danger"
       >
-        <p>Are you sure you want to delete this contact?</p>
+        <p>{t("loanContact.confirm.delete")}</p>
       </Modal>
     </>
   );

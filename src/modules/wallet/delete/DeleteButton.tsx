@@ -4,12 +4,15 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import { useWalletContext } from "../WalletContextProvider";
 import { deleteWalletApi } from "@/api/wallet";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface DeleteButtonProps {
   id: string;
 }
 
 const DeleteButton = ({ id }: DeleteButtonProps) => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useWalletContext();
@@ -17,7 +20,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
   const handleOk = () => {
     deleteWalletApi(id)
       .then(() => {
-        notifySuccess("Delete successfully");
+        notifySuccess(t("wallet.notify.deleteSuccess"));
         fetchDataList();
       })
       .catch((error) => {
@@ -37,12 +40,12 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
       />
 
       <Modal
-        title="Delete the task"
+        title={t("common.deleteTitle")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
-        <p>Are you sure to delete this task?</p>
+        <p>{t("common.deleteConfirm")}</p>
       </Modal>
     </>
   );

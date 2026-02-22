@@ -9,10 +9,13 @@ import { useLoanContactContext } from "./LoanContactContextProvider";
 import { ILoanContact } from "@/api/loan-contact";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 type DataType = ILoanContact & { key?: string };
 
 const LoanContactPage = () => {
+  const { t } = useTranslation();
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useLoanContactContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
@@ -30,29 +33,29 @@ const LoanContactPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Name",
+      title: t("loanContact.columns.name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Phone",
+      title: t("loanContact.columns.phone"),
       dataIndex: "phone",
       key: "phone",
     },
     {
-      title: "Email",
+      title: t("loanContact.columns.email"),
       dataIndex: "email",
       key: "email",
     },
     {
-      title: "Created At",
+      title: t("loanContact.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Action",
+      title: t("loanContact.columns.action"),
       dataIndex: "_id",
       key: "action",
       align: "center",

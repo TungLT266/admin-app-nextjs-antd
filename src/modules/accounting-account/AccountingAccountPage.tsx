@@ -10,10 +10,13 @@ import { IAccountingAccount } from "@/api/accounting-account";
 import FilterSection from "./FilterSection";
 import PaginationCommon from "@/shared/component/pagination";
 import ViewChartButton from "./chart/ViewChartButton";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const AccountingAccountPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useAccountingAccountContext();
+  const { t } = useTranslation();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
@@ -32,18 +35,18 @@ const AccountingAccountPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Account Number",
+      title: t("accountingAccount.columns.number"),
       dataIndex: "number",
       key: "number",
       align: "center",
     },
     {
-      title: "Account Name",
+      title: t("accountingAccount.columns.name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Status",
+      title: t("accountingAccount.columns.status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -65,21 +68,21 @@ const AccountingAccountPage = () => {
       },
     },
     {
-      title: "Created At",
+      title: t("accountingAccount.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Updated At",
+      title: t("accountingAccount.columns.updatedAt"),
       dataIndex: "updatedAt",
       key: "updatedAt",
       align: "center",
       render: (updatedAt) => formatDatetime(updatedAt),
     },
     {
-      title: "Action",
+      title: t("accountingAccount.columns.action"),
       dataIndex: "_id",
       key: "action",
       align: "center",

@@ -3,9 +3,12 @@ import CreateButton from "./create/CreateButton";
 import { Form, Input, Select } from "antd";
 import { AccountingAccountStatusLabels } from "./type";
 import { FormItemCustom } from "@/shared/component/element/form";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const FilterSection = () => {
   const { dataQuery, setDataQuery } = useAccountingAccountContext();
+  const { t } = useTranslation();
   const [form] = Form.useForm();
 
   const handleValuesChange = () => {
@@ -27,11 +30,11 @@ const FilterSection = () => {
           className="w-full flex gap-3"
           style={{ paddingBottom: 16}}
         >
-          <FormItemCustom label="Account Number" name="number">
+          <FormItemCustom label={t("accountingAccount.form.number")} name="number">
             <Input className="!w-[200px]" />
           </FormItemCustom>
 
-          <FormItemCustom label="Status" name="status">
+          <FormItemCustom label={t("common.status")} name="status">
             <Select
               options={AccountingAccountStatusLabels}
               className="!w-[200px] !text-left"

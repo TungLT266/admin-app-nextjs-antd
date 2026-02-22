@@ -14,6 +14,8 @@ import {
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
 import { FormItemCustom } from "@/shared/component/element/form";
 import { IIncome } from "@/api/income";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface FilterSectionProps {
   selectedRows: IIncome[];
@@ -23,6 +25,7 @@ interface FilterSectionProps {
 const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) => {
   const { dataQuery, setDataQuery } = useIncomeContext();
   const [form] = Form.useForm();
+  const { t } = useTranslation();
   const [incomeAndExpenseTypeOptions, setIncomeAndExpenseTypeOptions] =
     useState<ISelectOption[]>([]);
   const [walletOptions, setWalletOptions] = useState<ISelectOption[]>([]);
@@ -70,12 +73,12 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
           className="w-full flex gap-3 flex-wrap"
           style={{ paddingBottom: 16}}
         >
-          <FormItemCustom label="Title" name="title">
+          <FormItemCustom label={t("income.filter.title")} name="title">
             <Input className="!w-[200px]" />
           </FormItemCustom>
 
           <FormItemCustom
-            label="Income/Expense Type"
+            label={t("income.filter.type")}
             name="incomeAndExpenseType"
           >
             <Select
@@ -85,7 +88,7 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Wallet" name="wallet">
+          <FormItemCustom label={t("income.filter.wallet")} name="wallet">
             <Select
               options={walletOptions}
               className="!w-[200px] !text-left"
@@ -93,7 +96,7 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Status" name="status">
+          <FormItemCustom label={t("income.filter.status")} name="status">
             <Select
               options={IncomeStatusLabels}
               className="!w-[200px] !text-left"
@@ -101,7 +104,7 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Document Date" name="documentDate">
+          <FormItemCustom label={t("income.filter.documentDate")} name="documentDate">
             <DatePicker.RangePicker />
           </FormItemCustom>
         </Form>
@@ -113,7 +116,7 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
         <BulkUnconfirmButton selectedRows={selectedRows} onSuccess={onClearSelection} />
         {selectedRows.length > 0 && (
           <span className="text-gray-500 text-sm">
-            {selectedRows.length} row(s) selected
+            {t("common.rowSelected", { count: selectedRows.length })}
           </span>
         )}
       </div>

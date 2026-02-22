@@ -1,5 +1,7 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
@@ -16,6 +18,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -54,7 +57,7 @@ const EditButton = ({ id }: EditButtonProps) => {
     const data: IUpdateAccountGroupReq = { ...values };
     updateAccountGroupApi(id, data)
       .then(() => {
-        notifySuccess("Update successfully");
+        notifySuccess(t("accountGroup.notify.updateSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -66,7 +69,7 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Edit">
+      <Tooltip title={t("common.edit")}>
         <Button
           type="primary"
           shape="circle"
@@ -76,7 +79,7 @@ const EditButton = ({ id }: EditButtonProps) => {
       </Tooltip>
 
       <Modal
-        title="Update Account Group"
+        title={t("accountGroup.modal.update")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}

@@ -4,12 +4,15 @@ import { Layout } from "antd";
 import Sidebar from "@/shared/component/sidebar";
 import HeaderLayout from "@/shared/component/header";
 import AuthGuard from "@/shared/component/auth/AuthGuard";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { t } = useTranslation();
   return (
     <AuthGuard>
       <Layout hasSider>
@@ -20,7 +23,7 @@ export default function DashboardLayout({
             {children}
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Created by Le Thanh Tung
+            {t("common.footer")}
           </Footer>
         </Layout>
       </Layout>

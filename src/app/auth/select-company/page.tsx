@@ -8,11 +8,14 @@ import {
   LogoutOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const { Title, Text } = Typography;
 
 const SelectCompanyPage = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const [companies, setCompanies] = useState<ICompanyOption[]>([]);
   const [filtered, setFiltered] = useState<ICompanyOption[]>([]);
   const [tempToken, setTempToken] = useState<string>("");
@@ -62,7 +65,7 @@ const SelectCompanyPage = () => {
       localStorage.setItem("accessToken", access_token);
       router.push("/");
     } catch (err: any) {
-      setError(typeof err === "string" ? err : "Failed to select company.");
+      setError(typeof err === "string" ? err : t("auth.selectCompany.error"));
       setLoading("");
     }
   };
@@ -99,7 +102,7 @@ const SelectCompanyPage = () => {
           type="text"
           className="text-gray-500 hover:text-red-500"
         >
-          Back to Login
+          {t("auth.selectCompany.logout")}
         </Button>
       </header>
 
@@ -115,11 +118,10 @@ const SelectCompanyPage = () => {
               {username.charAt(0).toUpperCase()}
             </Avatar>
             <Title level={3} className="!mb-1 !text-gray-800">
-              Welcome, {username}!
+              {t("auth.selectCompany.title")}, {username}!
             </Title>
             <Text className="text-gray-500">
-              You have access to {companies.length} companies. Please select one
-              to continue.
+              {t("auth.selectCompany.subtitle")}
             </Text>
           </div>
 
@@ -138,7 +140,7 @@ const SelectCompanyPage = () => {
           {companies.length > 4 && (
             <Input
               prefix={<SearchOutlined className="text-gray-400" />}
-              placeholder="Search by company name or code..."
+              placeholder={t("auth.selectCompany.searchPlaceholder")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="mb-6 rounded-xl"

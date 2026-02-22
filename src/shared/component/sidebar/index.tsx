@@ -17,10 +17,13 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
+  const { t } = useTranslation();
   const [isRestrictedMode, setIsRestrictedMode] = useState(false);
 
   // Decode JWT to check if user has a company; restrict menu if not
@@ -57,8 +60,8 @@ export default function Sidebar() {
   };
 
   const visibleItems = isRestrictedMode
-    ? items.filter((item) => item?.key === '/company')
-    : items;
+    ? items(t).filter((item) => item?.key === '/company')
+    : items(t);
 
   return (
     <Sider
@@ -89,89 +92,89 @@ export default function Sidebar() {
 
 const { Sider } = Layout;
 
-const items: MenuProps["items"] = [
+const items = (t: (key: string) => string): MenuProps["items"] => [
   {
     key: "/",
     icon: <DashboardOutlined />,
-    label: "Dashboard",
+    label: t("sidebar.dashboard"),
   },
   {
     key: "/company",
     icon: <ShopOutlined />,
-    label: "Company",
+    label: t("sidebar.company"),
   },
   {
     key: "/user",
     icon: <UserOutlined />,
-    label: "User",
+    label: t("sidebar.user"),
   },
   {
     key: "/accounting-account",
     icon: <DollarOutlined />,
-    label: "Accounting Account",
+    label: t("sidebar.accountingAccount"),
   },
   {
     key: "/account-group",
     icon: <BankOutlined />,
-    label: "Account Group",
+    label: t("sidebar.accountGroup"),
   },
   {
     key: "/income-and-expense-type",
     icon: <TransactionOutlined />,
-    label: "Income/Expense Type",
+    label: t("sidebar.incomeExpenseType"),
   },
   {
     key: "/wallet",
     icon: <CreditCardOutlined />,
-    label: "Wallet",
+    label: t("sidebar.wallet"),
   },
   {
     key: "transactions",
     icon: <TransactionOutlined />,
-    label: "Transactions",
+    label: t("sidebar.transactions"),
     children: [
       {
         key: "/income",
         icon: <FileTextOutlined />,
-        label: "Income",
+        label: t("sidebar.income"),
       },
       {
         key: "/expense",
         icon: <CreditCardFilled />,
-        label: "Expense",
+        label: t("sidebar.expense"),
       },
       {
         key: "/local-transfer",
         icon: <SwapOutlined />,
-        label: "Local Transfer",
+        label: t("sidebar.localTransfer"),
       },
     ],
   },
   {
     key: "loans-debts",
     icon: <FileProtectOutlined />,
-    label: "Loans & Debts",
+    label: t("sidebar.loansDebts"),
     children: [
       {
         key: "/loan-contact",
         icon: <TeamOutlined />,
-        label: "Contacts",
+        label: t("sidebar.contacts"),
       },
       {
         key: "/loan-contract",
         icon: <FileProtectOutlined />,
-        label: "Loan Contracts",
+        label: t("sidebar.loanContracts"),
       },
       {
         key: "/loan-transaction",
         icon: <UnorderedListOutlined />,
-        label: "Contract Transactions",
+        label: t("sidebar.contractTransactions"),
       },
     ],
   },
   {
     key: "/bookkeeping",
     icon: <AccountBookOutlined />,
-    label: "Bookkeeping",
+    label: t("sidebar.bookkeeping"),
   },
 ];

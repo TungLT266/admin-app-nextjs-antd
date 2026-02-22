@@ -1,4 +1,6 @@
 import { Form, FormProps, Input } from "antd";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { v4 as uuidv4 } from "uuid";
 
 interface CreateUpdateFormProps {
@@ -8,6 +10,7 @@ interface CreateUpdateFormProps {
 }
 
 const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
+  const { t } = useTranslation();
   return (
     <Form
       form={form}
@@ -18,21 +21,21 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
       autoComplete="off"
     >
       <Form.Item
-        label="Name"
+        label={t("loanContact.form.name")}
         name="name"
-        rules={[{ required: true, message: "Please enter the contact name!" }]}
+        rules={[{ required: true, message: t("loanContact.form.nameRequired") }]}
       >
         <Input />
       </Form.Item>
 
-      <Form.Item label="Phone" name="phone">
+      <Form.Item label={t("loanContact.form.phone")} name="phone">
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Email"
+        label={t("loanContact.form.email")}
         name="email"
-        rules={[{ type: "email", message: "Please enter a valid email!" }]}
+        rules={[{ type: "email", message: t("loanContact.form.emailRequired") }]}
       >
         <Input />
       </Form.Item>

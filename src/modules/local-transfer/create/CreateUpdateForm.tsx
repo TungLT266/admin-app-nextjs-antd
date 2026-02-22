@@ -1,4 +1,6 @@
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { ISelectOption } from "@/shared/type/ISelectOption";
 import { DatePicker, Form, FormProps, Input, InputNumber, Select } from "antd";
 import { useEffect, useState } from "react";
@@ -11,6 +13,7 @@ interface CreateUpdateFormProps {
 }
 
 const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
+  const { t } = useTranslation();
   const [walletOptions, setWalletOptions] = useState<ISelectOption[]>([]);
 
   useEffect(() => {
@@ -34,41 +37,41 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
       autoComplete="off"
     >
       <Form.Item
-        label="Document Date"
+        label={t("localTransfer.form.documentDate")}
         name="documentDate"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <DatePicker className="w-full" />
       </Form.Item>
 
       <Form.Item
-        label="Title"
+        label={t("localTransfer.form.title")}
         name="title"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Wallet From"
+        label={t("localTransfer.form.walletFrom")}
         name="walletFrom"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Select options={walletOptions} />
       </Form.Item>
 
       <Form.Item
-        label="Wallet To"
+        label={t("localTransfer.form.walletTo")}
         name="walletTo"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Select options={walletOptions} />
       </Form.Item>
 
       <Form.Item
-        label="Amount"
+        label={t("localTransfer.form.amount")}
         name="amount"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <InputNumber
           style={{ width: "100%" }}
@@ -79,7 +82,7 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
         />
       </Form.Item>
 
-      <Form.Item label="Description" name="description">
+      <Form.Item label={t("localTransfer.form.description")} name="description">
         <Input />
       </Form.Item>
     </Form>

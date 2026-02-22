@@ -1,0 +1,632 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "reset": "Reset",
+    "yes": "Yes",
+    "no": "No",
+    "confirm": "Confirm",
+    "unconfirm": "Unconfirm",
+    "actions": "Actions",
+    "status": "Status",
+    "name": "Name",
+    "description": "Description",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "required": "Please input this field!",
+    "loading": "Loading...",
+    "success": "Operation successful",
+    "error": "An error occurred",
+    "footer": "Created by Le Thanh Tung",
+    "active": "Active",
+    "inactive": "Inactive",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "rowSelected": "{{count}} row(s) selected",
+    "deleteTitle": "Delete Record",
+    "deleteConfirm": "Are you sure to delete this record?"
+  },
+  "header": {
+    "logout": "Logout",
+    "language": "Language"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "company": "Company",
+    "user": "User",
+    "accountingAccount": "Accounting Account",
+    "accountGroup": "Account Group",
+    "incomeExpenseType": "Income/Expense Type",
+    "wallet": "Wallet",
+    "transactions": "Transactions",
+    "income": "Income",
+    "expense": "Expense",
+    "localTransfer": "Local Transfer",
+    "loansDebts": "Loans & Debts",
+    "contacts": "Contacts",
+    "loanContracts": "Loan Contracts",
+    "contractTransactions": "Contract Transactions",
+    "bookkeeping": "Bookkeeping"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "username": "Username",
+      "password": "Password",
+      "signIn": "Sign In",
+      "error": "Login failed. Please check your credentials."
+    },
+    "selectCompany": {
+      "title": "Select a Company",
+      "subtitle": "Choose the company to sign in to",
+      "searchPlaceholder": "Search by name or code...",
+      "logout": "Logout",
+      "error": "Failed to select company.",
+      "selectButton": "Select"
+    }
+  },
+  "accountingAccount": {
+    "title": "Accounting Account",
+    "columns": {
+      "number": "Account Number",
+      "name": "Account Name",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action"
+    },
+    "form": {
+      "number": "Account Number",
+      "numberRequired": "Please input account number!",
+      "name": "Account Name",
+      "nameRequired": "Please input account name!",
+      "status": "Status"
+    },
+    "modal": {
+      "create": "Create Accounting Account",
+      "update": "Update Accounting Account",
+      "delete": "Delete Accounting Account"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "deleteSuccess": "Deleted successfully"
+    },
+    "confirm": {
+      "delete": "Are you sure to delete this record?"
+    },
+    "chart": {
+      "title": "Account Balance Chart",
+      "timeRange": {
+        "1year": "1 Year",
+        "3years": "3 Years",
+        "5years": "5 Years",
+        "custom": "Custom"
+      },
+      "legend": "Amount"
+    }
+  },
+  "accountGroup": {
+    "title": "Account Group",
+    "columns": {
+      "name": "Name",
+      "accountingAccounts": "Accounting Accounts & Groups",
+      "viewType": "View Type",
+      "followTotalValue": "Follow Total Value",
+      "showInDashboard": "Show in Dashboard",
+      "status": "Status",
+      "action": "Action"
+    },
+    "form": {
+      "name": "Name",
+      "viewType": "View Type",
+      "followTotalValue": "Follow Total Value",
+      "showInDashboard": "Show in Dashboard",
+      "accountingAccounts": "Accounting Accounts",
+      "accountGroups": "Account Groups",
+      "addAccount": "Add Accounting Account",
+      "addGroup": "Add Account Group",
+      "ratio": "Ratio (%)",
+      "dashboardSerialNo": "Dashboard Serial No",
+      "serialNo": "Serial No"
+    },
+    "modal": {
+      "create": "Create Account Group",
+      "update": "Update Account Group",
+      "delete": "Delete Account Group"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "deleteSuccess": "Deleted successfully"
+    },
+    "confirm": {
+      "delete": "Are you sure to delete this record?"
+    },
+    "chart": {
+      "viewChart": "View Chart",
+      "timeRange": {
+        "1year": "1 Year",
+        "3years": "3 Years",
+        "5years": "5 Years",
+        "custom": "Custom"
+      }
+    }
+  },
+  "wallet": {
+    "title": "Wallet",
+    "columns": {
+      "name": "Name",
+      "accountingAccount": "Accounting Account",
+      "balance": "Balance",
+      "type": "Type",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action"
+    },
+    "form": {
+      "name": "Name",
+      "accountingAccount": "Accounting Account",
+      "type": "Type",
+      "bankName": "Bank Name",
+      "bankNo": "Bank Account No.",
+      "creditLimit": "Credit Limit",
+      "status": "Status"
+    },
+    "type": {
+      "bank": "Bank",
+      "cash": "Cash",
+      "creditCard": "Credit Card",
+      "eWallet": "E-Wallet",
+      "saving": "Saving"
+    },
+    "modal": {
+      "create": "Create Wallet",
+      "update": "Update Wallet"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "deleteSuccess": "Deleted successfully"
+    }
+  },
+  "income": {
+    "title": "Income",
+    "columns": {
+      "documentDate": "Document Date",
+      "accountingDate": "Accounting Date",
+      "title": "Title",
+      "content": "Content",
+      "wallet": "Wallet",
+      "amount": "Amount",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action"
+    },
+    "filter": {
+      "title": "Title",
+      "type": "Income/Expense Type",
+      "wallet": "Wallet",
+      "status": "Status",
+      "documentDate": "Document Date"
+    },
+    "form": {
+      "documentDate": "Document Date",
+      "accountingDate": "Accounting Date",
+      "title": "Title",
+      "content": "Content",
+      "wallet": "Wallet",
+      "amount": "Amount",
+      "description": "Description"
+    },
+    "modal": {
+      "create": "Create Income",
+      "update": "Update Income",
+      "delete": "Delete Income",
+      "unconfirm": "Unconfirm Income",
+      "bulkUnconfirm": "Unconfirm selected records"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "confirmSuccess": "Confirmed successfully",
+      "unconfirmSuccess": "Unconfirmed successfully",
+      "deleteSuccess": "Deleted successfully",
+      "bulkConfirmSuccess": "Confirmed {{count}} record(s) successfully",
+      "bulkUnconfirmSuccess": "Unconfirmed {{count}} record(s) successfully"
+    },
+    "confirm": {
+      "delete": "Are you sure to delete this record?",
+      "unconfirm": "Are you sure to unconfirm this record?",
+      "bulkUnconfirm": "Are you sure you want to unconfirm {{count}} selected record(s)?"
+    }
+  },
+  "expense": {
+    "title": "Expense",
+    "columns": {
+      "documentDate": "Document Date",
+      "accountingDate": "Accounting Date",
+      "title": "Title",
+      "amount": "Amount",
+      "content": "Content",
+      "wallet": "Wallet",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action"
+    },
+    "filter": {
+      "title": "Title",
+      "type": "Expense Type",
+      "wallet": "Wallet",
+      "status": "Status",
+      "documentDate": "Document Date"
+    },
+    "form": {
+      "documentDate": "Document Date",
+      "accountingDate": "Accounting Date",
+      "title": "Title",
+      "content": "Content",
+      "wallet": "Wallet",
+      "amount": "Amount",
+      "description": "Description"
+    },
+    "modal": {
+      "create": "Create Expense",
+      "update": "Update Expense",
+      "delete": "Delete Expense",
+      "unconfirm": "Unconfirm Expense",
+      "bulkUnconfirm": "Unconfirm selected records"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "confirmSuccess": "Confirmed successfully",
+      "unconfirmSuccess": "Unconfirmed successfully",
+      "deleteSuccess": "Deleted successfully",
+      "bulkConfirmSuccess": "Confirmed {{count}} record(s) successfully",
+      "bulkUnconfirmSuccess": "Unconfirmed {{count}} record(s) successfully"
+    },
+    "confirm": {
+      "delete": "Are you sure to delete this record?",
+      "unconfirm": "Are you sure to unconfirm this record?",
+      "bulkUnconfirm": "Are you sure you want to unconfirm {{count}} selected record(s)?"
+    }
+  },
+  "localTransfer": {
+    "title": "Local Transfer",
+    "columns": {
+      "documentDate": "Document Date",
+      "title": "Title",
+      "walletFrom": "Wallet From",
+      "walletTo": "Wallet To",
+      "amount": "Amount",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action"
+    },
+    "form": {
+      "documentDate": "Document Date",
+      "title": "Title",
+      "walletFrom": "Wallet From",
+      "walletTo": "Wallet To",
+      "amount": "Amount",
+      "description": "Description"
+    },
+    "modal": {
+      "create": "Create Local Transfer",
+      "update": "Update Local Transfer",
+      "delete": "Delete Local Transfer",
+      "unconfirm": "Unconfirm Local Transfer"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "confirmSuccess": "Confirmed successfully",
+      "unconfirmSuccess": "Unconfirmed successfully",
+      "deleteSuccess": "Deleted successfully"
+    },
+    "confirm": {
+      "delete": "Are you sure to delete this record?",
+      "unconfirm": "Are you sure to unconfirm this record?"
+    }
+  },
+  "incomeExpenseType": {
+    "title": "Income/Expense Type",
+    "columns": {
+      "type": "Type",
+      "name": "Name",
+      "accountingAccount": "Accounting Account",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action"
+    },
+    "form": {
+      "type": "Type",
+      "name": "Name",
+      "accountingAccount": "Accounting Account",
+      "description": "Description",
+      "status": "Status"
+    },
+    "type": {
+      "income": "Income",
+      "expense": "Expense"
+    },
+    "modal": {
+      "create": "Create Income/Expense Type",
+      "update": "Update Income/Expense Type"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "deleteSuccess": "Deleted successfully"
+    }
+  },
+  "company": {
+    "title": "Company",
+    "columns": {
+      "code": "Company Code",
+      "name": "Company Name",
+      "description": "Description",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action"
+    },
+    "form": {
+      "code": "Company Code",
+      "codeRequired": "Please input company code!",
+      "name": "Company Name",
+      "nameRequired": "Please input company name!",
+      "description": "Description",
+      "status": "Status",
+      "statusRequired": "Please select status!"
+    },
+    "modal": {
+      "create": "Create Company",
+      "update": "Update Company"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "deleteSuccess": "Deleted successfully"
+    }
+  },
+  "user": {
+    "title": "User",
+    "columns": {
+      "username": "Username",
+      "password": "Password",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action"
+    },
+    "form": {
+      "username": "Username",
+      "usernameRequired": "Please input username!",
+      "password": "Password",
+      "passwordRequired": "Please input password!",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Leave blank to keep current",
+      "status": "Status",
+      "statusRequired": "Please select status!"
+    },
+    "modal": {
+      "create": "Create User",
+      "update": "Update User"
+    },
+    "notify": {
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully",
+      "deleteSuccess": "Deleted successfully"
+    },
+    "deleteButton": {
+      "tooltip": "Remove from Company",
+      "modalTitle": "Remove User from Company",
+      "ok": "Remove",
+      "confirm": "Are you sure you want to remove this user from the current company? The user account will not be deleted."
+    }
+  },
+  "loanContact": {
+    "title": "Contacts",
+    "columns": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "createdAt": "Created At",
+      "action": "Action"
+    },
+    "form": {
+      "name": "Name",
+      "nameRequired": "Please enter the contact name!",
+      "phone": "Phone",
+      "email": "Email",
+      "emailRequired": "Please enter a valid email!"
+    },
+    "modal": {
+      "create": "Create Contact",
+      "update": "Edit Contact",
+      "delete": "Delete Contact"
+    },
+    "notify": {
+      "createSuccess": "Contact created successfully",
+      "updateSuccess": "Contact updated successfully",
+      "deleteSuccess": "Contact deleted successfully"
+    },
+    "confirm": {
+      "delete": "Are you sure you want to delete this contact?"
+    },
+    "filter": {
+      "name": "Name",
+      "namePlaceholder": "Search by name..."
+    }
+  },
+  "loanContract": {
+    "title": "Loan Contracts",
+    "columns": {
+      "contractDate": "Contract Date",
+      "title": "Title",
+      "type": "Type",
+      "contact": "Contact",
+      "amount": "Amount",
+      "remainingBalance": "Remaining Balance",
+      "status": "Status",
+      "createdAt": "Created At",
+      "action": "Action"
+    },
+    "type": {
+      "loan": "Loan (Lending)",
+      "debt": "Debt (Borrowing)"
+    },
+    "status": {
+      "pending": "Pending",
+      "active": "Active",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "filter": {
+      "title": "Title",
+      "titlePlaceholder": "Search by title...",
+      "type": "Type",
+      "typePlaceholder": "All types",
+      "status": "Status",
+      "statusPlaceholder": "All statuses",
+      "contact": "Contact",
+      "contactPlaceholder": "All contacts",
+      "contractDate": "Contract Date"
+    },
+    "form": {
+      "type": "Type",
+      "typePlaceholder": "Select type (Loan / Debt)",
+      "typeRequired": "Please select the loan type!",
+      "contact": "Contact",
+      "contactPlaceholder": "Select contact",
+      "contactRequired": "Please select a contact!",
+      "contractDate": "Contract Date",
+      "contractDateRequired": "Please select the contract date!",
+      "title": "Title",
+      "titleRequired": "Please enter a title!",
+      "description": "Description",
+      "wallet": "Wallet",
+      "walletPlaceholder": "Select wallet",
+      "walletRequired": "Please select a wallet!",
+      "amount": "Amount",
+      "amountRequired": "Please enter the amount!",
+      "date": "Date",
+      "dateRequired": "Please select a date!",
+      "note": "Note"
+    },
+    "modal": {
+      "create": "Create Loan Contract",
+      "update": "Edit Loan Contract",
+      "delete": "Delete Contract",
+      "addDisbursement": "Add Disbursement",
+      "recordPayment": "Record Payment",
+      "complete": "Complete Contract",
+      "cancel": "Cancel Contract",
+      "reopen": "Reopen Contract"
+    },
+    "button": {
+      "confirmActivate": "Confirm & Activate",
+      "addDisbursement": "Add Disbursement",
+      "recordPayment": "Record Payment",
+      "complete": "Complete Contract",
+      "cancel": "Cancel Contract",
+      "reopen": "Reopen Contract",
+      "yesComplete": "Yes, Complete",
+      "yesCancel": "Yes, Cancel",
+      "yesReopen": "Yes, Reopen"
+    },
+    "notify": {
+      "createSuccess": "Contract created successfully",
+      "updateSuccess": "Contract updated successfully",
+      "deleteSuccess": "Contract deleted successfully",
+      "confirmSuccess": "Contract confirmed and activated successfully",
+      "disbursementSuccess": "Disbursement recorded successfully",
+      "paymentSuccess": "Payment recorded successfully",
+      "completeSuccess": "Contract marked as completed",
+      "cancelSuccess": "Contract cancelled successfully",
+      "reopenSuccess": "Contract reopened successfully"
+    },
+    "confirm": {
+      "delete": "Are you sure you want to delete this contract?",
+      "complete": "Mark this contract as Completed? This cannot be undone.",
+      "cancel": "Are you sure you want to cancel this contract? All associated transactions will also be marked as cancelled.",
+      "reopen": "Reopen this contract and move it back to Active? All associated transactions will also be restored to active status."
+    }
+  },
+  "loanTransaction": {
+    "title": "Contract Transactions",
+    "columns": {
+      "documentDate": "Document Date",
+      "contractTitle": "Contract Title",
+      "contractType": "Contract Type",
+      "transactionType": "Transaction Type",
+      "amount": "Amount",
+      "wallet": "Wallet",
+      "status": "Status",
+      "note": "Note",
+      "createdAt": "Created At",
+      "action": "Action"
+    },
+    "transactionType": {
+      "disbursement": "Disbursement",
+      "payment": "Payment"
+    },
+    "filter": {
+      "transactionType": "Transaction Type",
+      "documentDate": "Document Date",
+      "allTypes": "All types"
+    },
+    "confirm": {
+      "deleteTitle": "Delete this transaction?",
+      "deleteDescription": "This will also reverse the bookkeeping entry and recalculate the contract amount.",
+      "okText": "Delete",
+      "cancelText": "Cancel"
+    }
+  },
+  "bookkeeping": {
+    "title": "Bookkeeping",
+    "columns": {
+      "function": "Function",
+      "accountingDate": "Accounting Date",
+      "documentDate": "Document Date",
+      "title": "Title",
+      "amount": "Amount",
+      "entryType": "Entry Type",
+      "account": "Account",
+      "wallet": "Wallet",
+      "incomeExpenseType": "Income/Expense Type",
+      "loanContact": "Loan Contact",
+      "createdAt": "Created At"
+    },
+    "entryType": {
+      "debit": "Debit",
+      "credit": "Credit"
+    },
+    "functionType": {
+      "income": "Income",
+      "expense": "Expense",
+      "localTransfer": "Local Transfer",
+      "contractTransaction": "Contract Transaction"
+    },
+    "filter": {
+      "function": "Function",
+      "documentDate": "Document Date",
+      "title": "Title",
+      "account": "Account",
+      "wallet": "Wallet",
+      "incomeExpenseType": "Income/Expense Type"
+    }
+  }
+}

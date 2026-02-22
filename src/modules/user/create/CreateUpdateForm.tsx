@@ -1,6 +1,8 @@
 import { Form, FormProps, Input, Select } from "antd";
 import { UserStatusLabels } from "../type";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
@@ -14,6 +16,7 @@ const CreateUpdateForm = ({
   form,
   isEditForm,
 }: CreateUpdateFormProps) => {
+  const { t } = useTranslation();
   return (
     <Form
       form={form}
@@ -25,33 +28,33 @@ const CreateUpdateForm = ({
     >
       {!isEditForm && (
         <Form.Item
-          label="Username"
+          label={t("user.form.username")}
           name="username"
-          rules={[{ required: true, message: "Please input username!" }]}
+          rules={[{ required: true, message: t("common.required") }]}
         >
           <Input />
         </Form.Item>
       )}
 
       <Form.Item
-        label={isEditForm ? "New Password" : "Password"}
+        label={isEditForm ? t("user.form.newPassword") : t("user.form.password")}
         name="password"
         rules={
           isEditForm
             ? []
-            : [{ required: true, message: "Please input password!" }]
+            : [{ required: true, message: t("common.required") }]
         }
       >
         <Input.Password
-          placeholder={isEditForm ? "Leave blank to keep current" : ""}
+          placeholder={isEditForm ? t("user.form.newPasswordPlaceholder") : ""}
         />
       </Form.Item>
 
       {isEditForm && (
         <Form.Item
-          label="Status"
+          label={t("common.status")}
           name="status"
-          rules={[{ required: true, message: "Please select status!" }]}
+          rules={[{ required: true, message: t("common.required") }]}
         >
           <Select options={UserStatusLabels} />
         </Form.Item>

@@ -4,17 +4,20 @@ import { LineChartOutlined } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
 import { useState } from "react";
 import ViewChartModal from "./ViewChartModal";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface Props {
   accountGroup: IAccountGroup;
 }
 
 const ViewChartButton = ({ accountGroup }: Props) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Tooltip title="View Chart">
+      <Tooltip title={t("accountGroup.chart.viewChart")}>
         <Button
           type="primary"
           shape="circle"

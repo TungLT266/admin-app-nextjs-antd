@@ -4,6 +4,8 @@ import { UserDeleteOutlined } from "@ant-design/icons";
 import { Button, Modal, Tooltip } from "antd";
 import { removeUserFromCompanyApi } from "@/api/user-company";
 import { useUserContext } from "@/modules/user/UserContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface DeleteButtonProps {
   id: string;
@@ -13,11 +15,12 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useUserContext();
+  const { t } = useTranslation();
 
   const handleOk = () => {
     removeUserFromCompanyApi(id)
       .then(() => {
-        notifySuccess("User removed from company successfully");
+        notifySuccess(t("user.notify.deleteSuccess"));
         fetchDataList();
       })
       .catch((error) => {
@@ -28,7 +31,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Remove from Company">
+      <Tooltip title={t("user.deleteButton.tooltip")}>
         <Button
           type="primary"
           shape="circle"
@@ -39,17 +42,14 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
       </Tooltip>
 
       <Modal
-        title="Remove User from Company"
+        title={t("user.deleteButton.modalTitle")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
-        okText="Remove"
+        okText={t("user.deleteButton.ok")}
         okButtonProps={{ danger: true }}
       >
-        <p>
-          Are you sure you want to remove this user from the current company?
-          The user account will not be deleted.
-        </p>
+        <p>{t("user.deleteButton.confirm")}</p>
       </Modal>
     </>
   );

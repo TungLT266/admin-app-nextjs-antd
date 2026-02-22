@@ -1,5 +1,7 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import { Button, Form, FormProps, Modal } from "antd";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { useLoanContractContext } from "../LoanContractContextProvider";
@@ -10,6 +12,7 @@ import {
 import { formatDateInputApi } from "@/utils/DateUtils";
 
 const CreateButton = () => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -22,7 +25,7 @@ const CreateButton = () => {
     };
     createLoanContractApi(data)
       .then(() => {
-        notifySuccess("Contract created successfully");
+        notifySuccess(t("loanContract.notify.createSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -33,10 +36,10 @@ const CreateButton = () => {
   return (
     <>
       <Button type="primary" onClick={onOpen}>
-        Create
+        {t("common.create")}
       </Button>
       <Modal
-        title="Create Loan Contract"
+        title={t("loanContract.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}

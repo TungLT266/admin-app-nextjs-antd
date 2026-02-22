@@ -12,8 +12,11 @@ import { formatNumber } from "@/utils/NumberUtils";
 import { FunctionTypeLabels } from "@/shared/type/FunctionType";
 import FilterSection from "./FilterSection";
 import PaginationCommon from "@/shared/component/pagination";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const BookkeepingPage = () => {
+  const { t } = useTranslation();
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useBookkeepingContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
@@ -65,7 +68,7 @@ const BookkeepingPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Fuction",
+      title: t("bookkeeping.columns.function"),
       dataIndex: "functionType",
       key: "functionType",
       align: "center",
@@ -88,7 +91,7 @@ const BookkeepingPage = () => {
       },
     },
     {
-      title: "Accounting Date",
+      title: t("bookkeeping.columns.accountingDate"),
       dataIndex: "accountingDate",
       key: "accountingDate",
       align: "center",
@@ -102,7 +105,7 @@ const BookkeepingPage = () => {
       },
     },
     {
-      title: "Document Date",
+      title: t("bookkeeping.columns.documentDate"),
       dataIndex: "documentDate",
       key: "documentDate",
       align: "center",
@@ -116,7 +119,7 @@ const BookkeepingPage = () => {
       },
     },
     {
-      title: "Title",
+      title: t("bookkeeping.columns.title"),
       dataIndex: "title",
       key: "title",
       onCell: (record) => {
@@ -128,7 +131,7 @@ const BookkeepingPage = () => {
       },
     },
     {
-      title: "Amount",
+      title: t("bookkeeping.columns.amount"),
       dataIndex: "amount",
       key: "amount",
       align: "right",
@@ -142,7 +145,7 @@ const BookkeepingPage = () => {
       },
     },
     {
-      title: "Entry Type",
+      title: t("bookkeeping.columns.entryType"),
       dataIndex: "entryType",
       key: "entryType",
       align: "center",
@@ -155,33 +158,33 @@ const BookkeepingPage = () => {
       },
     },
     {
-      title: "Account",
+      title: t("bookkeeping.columns.account"),
       dataIndex: "account",
       key: "account",
       render: (account: IAccountingAccount) =>
         `${account?.name} (${account?.number})`,
     },
     {
-      title: "Wallet",
+      title: t("bookkeeping.columns.wallet"),
       dataIndex: "wallet",
       key: "wallet",
       render: (wallet: IWallet) => wallet?.name,
     },
     {
-      title: "Income/Expense Type",
+      title: t("bookkeeping.columns.incomeExpenseType"),
       dataIndex: "incomeAndExpenseType",
       key: "incomeAndExpenseType",
       render: (incomeAndExpenseType: IIncomeAndExpenseType) =>
         incomeAndExpenseType?.name,
     },
     {
-      title: "Loan Contact",
+      title: t("bookkeeping.columns.loanContact"),
       dataIndex: "loanContact",
       key: "loanContact",
       render: (loanContact: ILoanContact) => loanContact?.name,
     },
     {
-      title: "Created At",
+      title: t("bookkeeping.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",

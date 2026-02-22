@@ -3,8 +3,11 @@ import { useLoanTransactionContext } from "./LoanTransactionContextProvider";
 import { formatDateInputApi } from "@/utils/DateUtils";
 import { FormItemCustom } from "@/shared/component/element/form";
 import { LoanTransactionTypeLabels } from "../loan-contract/type";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const FilterSection = () => {
+  const { t } = useTranslation();
   const { dataQuery, setDataQuery } = useLoanTransactionContext();
   const [form] = Form.useForm();
 
@@ -27,10 +30,10 @@ const FilterSection = () => {
           onValuesChange={handleValuesChange}
           className="flex gap-3 flex-wrap"
         >
-          <FormItemCustom label="Transaction Type" name="transactionType">
+          <FormItemCustom label={t("loanTransaction.filter.transactionType")} name="transactionType">
             <Select
               allowClear
-              placeholder="All types"
+              placeholder={t("loanTransaction.filter.allTypes")}
               options={LoanTransactionTypeLabels.map((t) => ({
                 label: t.label,
                 value: t.value,
@@ -39,7 +42,7 @@ const FilterSection = () => {
             />
           </FormItemCustom>
 
-          <FormItemCustom label="Document Date" name="documentDate">
+          <FormItemCustom label={t("loanTransaction.filter.documentDate")} name="documentDate">
             <DatePicker.RangePicker />
           </FormItemCustom>
         </Form>

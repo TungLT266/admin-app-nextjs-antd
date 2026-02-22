@@ -22,10 +22,13 @@ import ReopenButton from "./ReopenButton";
 import { formatNumber } from "@/utils/NumberUtils";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 type DataType = ILoanContract & { key?: string };
 
 const LoanContractPage = () => {
+  const { t } = useTranslation();
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useLoanContractContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
@@ -43,19 +46,19 @@ const LoanContractPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Contract Date",
+      title: t("loanContract.columns.contractDate"),
       dataIndex: "contractDate",
       key: "contractDate",
       align: "center",
       render: (contractDate) => formatDate(contractDate),
     },
     {
-      title: "Title",
+      title: t("loanContract.columns.title"),
       dataIndex: "title",
       key: "title",
     },
     {
-      title: "Type",
+      title: t("loanContract.columns.type"),
       dataIndex: "loanType",
       key: "loanType",
       align: "center",
@@ -65,27 +68,27 @@ const LoanContractPage = () => {
       },
     },
     {
-      title: "Contact",
+      title: t("loanContract.columns.contact"),
       dataIndex: "loanContact",
       key: "loanContact",
       render: (loanContact: ILoanContact) => loanContact?.name,
     },
     {
-      title: "Amount",
+      title: t("loanContract.columns.amount"),
       dataIndex: "amount",
       key: "amount",
       align: "right",
       render: (amount) => formatNumber(amount),
     },
     {
-      title: "Remaining Balance",
+      title: t("loanContract.columns.remainingBalance"),
       dataIndex: "remainingBalance",
       key: "remainingBalance",
       align: "right",
       render: (remainingBalance) => formatNumber(remainingBalance),
     },
     {
-      title: "Status",
+      title: t("loanContract.columns.status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -95,14 +98,14 @@ const LoanContractPage = () => {
       },
     },
     {
-      title: "Created At",
+      title: t("loanContract.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Action",
+      title: t("loanContract.columns.action"),
       dataIndex: "_id",
       key: "action",
       align: "center",

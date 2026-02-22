@@ -4,12 +4,15 @@ import { RedoOutlined } from "@ant-design/icons";
 import { Button, Modal, Tooltip } from "antd";
 import { reopenLoanContractApi } from "@/api/loan-contract";
 import { useLoanContractContext } from "./LoanContractContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface ReopenButtonProps {
   id: string;
 }
 
 const ReopenButton = ({ id }: ReopenButtonProps) => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLoanContractContext();
@@ -17,7 +20,7 @@ const ReopenButton = ({ id }: ReopenButtonProps) => {
   const handleOk = () => {
     reopenLoanContractApi(id)
       .then(() => {
-        notifySuccess("Contract reopened successfully");
+        notifySuccess(t("loanContract.notify.reopenSuccess"));
         fetchDataList();
       })
       .catch((error) => notifyError(error));
@@ -26,7 +29,7 @@ const ReopenButton = ({ id }: ReopenButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Reopen Contract">
+      <Tooltip title={t("loanContract.button.reopen")}>
         <Button
           shape="circle"
           icon={<RedoOutlined />}
@@ -35,17 +38,14 @@ const ReopenButton = ({ id }: ReopenButtonProps) => {
         />
       </Tooltip>
       <Modal
-        title="Reopen Contract"
+        title={t("loanContract.modal.reopen")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
-        okText="Yes, Reopen"
+        okText={t("loanContract.button.yesReopen")}
         okType="primary"
       >
-        <p>
-          Reopen this contract and move it back to <strong>Active</strong>? All
-          associated transactions will also be restored to active status.
-        </p>
+        <p>{t("loanContract.confirm.reopen")}</p>
       </Modal>
     </>
   );

@@ -7,6 +7,8 @@ import { bulkUnconfirmExpenseApi, IExpense } from "@/api/expense";
 import { useExpenseContext } from "./ExpenseContextProvider";
 import { IncomeStatus } from "../income/type";
 import useDisclosure from "@/shared/hook/useDisclosure";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface BulkUnconfirmButtonProps {
   selectedRows: IExpense[];
@@ -17,6 +19,7 @@ const BulkUnconfirmButton = ({ selectedRows, onSuccess }: BulkUnconfirmButtonPro
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useExpenseContext();
+  const { t } = useTranslation();
 
   const isEnabled =
     selectedRows.length > 0 &&
@@ -26,7 +29,7 @@ const BulkUnconfirmButton = ({ selectedRows, onSuccess }: BulkUnconfirmButtonPro
     const ids = selectedRows.map((row) => row._id!);
     bulkUnconfirmExpenseApi(ids)
       .then(() => {
-        notifySuccess(`Unconfirmed ${ids.length} record(s) successfully`);
+        notifySuccess(t("expense.notify.bulkUnconfirmSuccess", { count: ids.length }));
         fetchDataList();
         onSuccess();
         onClose();
@@ -45,18 +48,17 @@ const BulkUnconfirmButton = ({ selectedRows, onSuccess }: BulkUnconfirmButtonPro
         onClick={onOpen}
         disabled={!isEnabled}
       >
-        Unconfirm
+        {t("common.unconfirm")}
       </Button>
 
       <Modal
-        title="Unconfirm selected records"
+        title={t("expense.modal.bulkUnconfirm")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
         <p>
-          Are you sure you want to unconfirm{" "}
-          <strong>{selectedRows.length}</strong> selected record(s)?
+          {t("expense.confirm.bulkUnconfirm", { count: selectedRows.length })}
         </p>
       </Modal>
     </>

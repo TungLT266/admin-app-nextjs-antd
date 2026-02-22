@@ -14,8 +14,11 @@ import {
 import { IAccountGroup, IAccountGroupAccount } from "@/api/account-group";
 import { AccountGroupViewType, AccountGroupViewTypeLabels } from "./type";
 import ViewChartButton from "./chart/ViewChartButton";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const AccountGroupPage = () => {
+  const { t } = useTranslation();
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useAccountGroupContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
@@ -36,12 +39,12 @@ const AccountGroupPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Name",
+      title: t("accountGroup.columns.name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Accounting Accounts & Groups",
+      title: t("accountGroup.columns.accountingAccounts"),
       dataIndex: "accountingAccounts",
       key: "accountingAccounts",
       align: "center",
@@ -71,7 +74,7 @@ const AccountGroupPage = () => {
       },
     },
     {
-      title: "View Type",
+      title: t("accountGroup.columns.viewType"),
       dataIndex: "viewType",
       key: "viewType",
       align: "center",
@@ -87,33 +90,33 @@ const AccountGroupPage = () => {
       },
     },
     {
-      title: "Show In Dashboard",
+      title: t("accountGroup.columns.showInDashboard"),
       dataIndex: "isShowInDashboard",
       key: "isShowInDashboard",
       align: "center",
       render: (isShowInDashboard) => {
         return (
           <Tag color={isShowInDashboard ? "blue" : "red"}>
-            {isShowInDashboard ? "Yes" : "No"}
+            {isShowInDashboard ? t("common.yes") : t("common.no")}
           </Tag>
         );
       },
     },
     {
-      title: "Follow Total Value",
+      title: t("accountGroup.columns.followTotalValue"),
       dataIndex: "isFollowTotalValue",
       key: "isFollowTotalValue",
       align: "center",
       render: (isFollowTotalValue) => {
         return (
           <Tag color={isFollowTotalValue ? "blue" : "red"}>
-            {isFollowTotalValue ? "Yes" : "No"}
+            {isFollowTotalValue ? t("common.yes") : t("common.no")}
           </Tag>
         );
       },
     },
     {
-      title: "Status",
+      title: t("accountGroup.columns.status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -135,21 +138,21 @@ const AccountGroupPage = () => {
       },
     },
     {
-      title: "Created At",
+      title: t("common.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Updated At",
+      title: t("common.updatedAt"),
       dataIndex: "updatedAt",
       key: "updatedAt",
       align: "center",
       render: (updatedAt) => formatDatetime(updatedAt),
     },
     {
-      title: "Action",
+      title: t("accountGroup.columns.action"),
       dataIndex: "_id",
       key: "action",
       align: "center",

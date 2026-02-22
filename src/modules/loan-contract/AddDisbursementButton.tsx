@@ -4,6 +4,8 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, DatePicker, Form, FormProps, InputNumber, Modal, Tooltip, Input, Select } from "antd";
 import { addDisbursementApi, IAmountWithDateReq } from "@/api/loan-contract";
 import { useLoanContractContext } from "./LoanContractContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { formatDateInputApi } from "@/utils/DateUtils";
 import { useEffect, useState } from "react";
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
@@ -14,6 +16,7 @@ interface AddDisbursementButtonProps {
 }
 
 const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -35,7 +38,7 @@ const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
     };
     addDisbursementApi(id, data)
       .then(() => {
-        notifySuccess("Disbursement recorded successfully");
+        notifySuccess(t("loanContract.notify.disbursementSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -45,7 +48,7 @@ const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Add Disbursement">
+      <Tooltip title={t("loanContract.button.addDisbursement")}>
         <Button
           shape="circle"
           icon={<PlusOutlined />}
@@ -54,7 +57,7 @@ const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
         />
       </Tooltip>
       <Modal
-        title="Add Disbursement"
+        title={t("loanContract.modal.addDisbursement")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}
@@ -66,16 +69,16 @@ const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
           onFinish={onFinish}
         >
           <Form.Item
-            label="Date"
+            label={t("loanContract.form.date")}
             name="documentDate"
-            rules={[{ required: true, message: "Please select a date!" }]}
+            rules={[{ required: true, message: t("loanContract.form.dateRequired") }]}
           >
             <DatePicker className="w-full" />
           </Form.Item>
           <Form.Item
-            label="Amount"
+            label={t("loanContract.form.amount")}
             name="amount"
-            rules={[{ required: true, message: "Please enter the amount!" }]}
+            rules={[{ required: true, message: t("loanContract.form.amountRequired") }]}
           >
             <InputNumber
               style={{ width: "100%" }}
@@ -88,13 +91,13 @@ const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
             />
           </Form.Item>
           <Form.Item
-            label="Wallet"
+            label={t("loanContract.form.wallet")}
             name="wallet"
-            rules={[{ required: true, message: "Please select a wallet!" }]}
+            rules={[{ required: true, message: t("loanContract.form.walletRequired") }]}
           >
-            <Select options={walletOptions} placeholder="Select wallet" />
+            <Select options={walletOptions} placeholder={t("loanContract.form.walletPlaceholder")} />
           </Form.Item>
-          <Form.Item label="Note" name="note">
+          <Form.Item label={t("loanContract.form.note")} name="note">
             <Input />
           </Form.Item>
         </Form>

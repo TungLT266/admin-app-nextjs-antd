@@ -1,4 +1,6 @@
 import { getAllLoanContactApi, ILoanContact } from "@/api/loan-contact";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { getAllActiveWalletApi, IWallet } from "@/api/wallet";
 import { ISelectOption } from "@/shared/type/ISelectOption";
 import { DatePicker, Form, FormProps, Input, InputNumber, Select } from "antd";
@@ -13,6 +15,7 @@ interface CreateUpdateFormProps {
 }
 
 const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
+  const { t } = useTranslation();
   const [contactOptions, setContactOptions] = useState<ISelectOption[]>([]);
   const [walletOptions, setWalletOptions] = useState<ISelectOption[]>([]);
 
@@ -51,20 +54,20 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
       autoComplete="off"
     >
       <Form.Item
-        label="Type"
+        label={t("loanContract.form.type")}
         name="loanType"
-        rules={[{ required: true, message: "Please select the loan type!" }]}
+        rules={[{ required: true, message: t("loanContract.form.typeRequired") }]}
       >
         <Select
           options={loanTypeOptions}
-          placeholder="Select type (Loan / Debt)"
+          placeholder={t("loanContract.form.typePlaceholder")}
         />
       </Form.Item>
 
       <Form.Item
-        label="Contact"
+        label={t("loanContract.form.contact")}
         name="loanContact"
-        rules={[{ required: true, message: "Please select a contact!" }]}
+        rules={[{ required: true, message: t("loanContract.form.contactRequired") }]}
       >
         <Select
           options={contactOptions}
@@ -74,42 +77,42 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
               ?.toLowerCase()
               .includes(input.toLowerCase())
           }
-          placeholder="Select contact"
+          placeholder={t("loanContract.form.contactPlaceholder")}
         />
       </Form.Item>
 
       <Form.Item
-        label="Contract Date"
+        label={t("loanContract.form.contractDate")}
         name="contractDate"
-        rules={[{ required: true, message: "Please select the contract date!" }]}
+        rules={[{ required: true, message: t("loanContract.form.contractDateRequired") }]}
       >
         <DatePicker className="w-full" />
       </Form.Item>
 
       <Form.Item
-        label="Title"
+        label={t("loanContract.form.title")}
         name="title"
-        rules={[{ required: true, message: "Please enter a title!" }]}
+        rules={[{ required: true, message: t("loanContract.form.titleRequired") }]}
       >
         <Input />
       </Form.Item>
 
-      <Form.Item label="Description" name="description">
+      <Form.Item label={t("loanContract.form.description")} name="description">
         <Input.TextArea rows={3} />
       </Form.Item>
 
       <Form.Item
-        label="Wallet"
+        label={t("loanContract.form.wallet")}
         name="wallet"
-        rules={[{ required: true, message: "Please select a wallet!" }]}
+        rules={[{ required: true, message: t("loanContract.form.walletRequired") }]}
       >
         <Select options={walletOptions} />
       </Form.Item>
 
       <Form.Item
-        label="Amount"
+        label={t("loanContract.form.amount")}
         name="amount"
-        rules={[{ required: true, message: "Please enter the amount!" }]}
+        rules={[{ required: true, message: t("loanContract.form.amountRequired") }]}
       >
         <InputNumber
           style={{ width: "100%" }}

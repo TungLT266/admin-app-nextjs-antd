@@ -17,10 +17,13 @@ import {
 import { formatNumber } from "@/utils/NumberUtils";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 type DataType = ILoanTransaction & { key?: string };
 
 const LoanTransactionPage = () => {
+  const { t } = useTranslation();
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useLoanTransactionContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
@@ -49,20 +52,20 @@ const LoanTransactionPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Document Date",
+      title: t("loanTransaction.columns.documentDate"),
       dataIndex: "documentDate",
       key: "documentDate",
       align: "center",
       render: (documentDate) => formatDate(documentDate),
     },
     {
-      title: "Contract Title",
+      title: t("loanTransaction.columns.contractTitle"),
       dataIndex: "loanContract",
       key: "contractTitle",
       render: (loanContract) => loanContract?.title,
     },
     {
-      title: "Contract Type",
+      title: t("loanTransaction.columns.contractType"),
       dataIndex: "loanContract",
       key: "contractType",
       align: "center",
@@ -74,7 +77,7 @@ const LoanTransactionPage = () => {
       },
     },
     {
-      title: "Transaction Type",
+      title: t("loanTransaction.columns.transactionType"),
       dataIndex: "transactionType",
       key: "transactionType",
       align: "center",
@@ -86,20 +89,20 @@ const LoanTransactionPage = () => {
       },
     },
     {
-      title: "Amount",
+      title: t("loanTransaction.columns.amount"),
       dataIndex: "amount",
       key: "amount",
       align: "right",
       render: (amount) => formatNumber(amount),
     },
     {
-      title: "Wallet",
+      title: t("loanTransaction.columns.wallet"),
       dataIndex: "wallet",
       key: "wallet",
       render: (wallet) => wallet?.name,
     },
     {
-      title: "Status",
+      title: t("loanTransaction.columns.status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -109,34 +112,34 @@ const LoanTransactionPage = () => {
       },
     },
     {
-      title: "Note",
+      title: t("loanTransaction.columns.note"),
       dataIndex: "note",
       key: "note",
     },
     {
-      title: "Created At",
+      title: t("loanTransaction.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Action",
+      title: t("loanTransaction.columns.action"),
       key: "actions",
       align: "center",
       render: (_, record) => {
         if (record.status !== LoanStatus.ACTIVE) return null;
         return (
           <Popconfirm
-            title="Delete this transaction?"
-            description="This will also reverse the bookkeeping entry and recalculate the contract amount."
+            title={t("loanTransaction.confirm.deleteTitle")}
+            description={t("loanTransaction.confirm.deleteDescription")}
             onConfirm={() => handleDelete(record._id!)}
-            okText="Delete"
+            okText={t("loanTransaction.confirm.okText")}
             okButtonProps={{ danger: true }}
-            cancelText="Cancel"
+            cancelText={t("loanTransaction.confirm.cancelText")}
           >
             <Button danger size="small" loading={deletingId === record._id}>
-              Delete
+              {t("common.delete")}
             </Button>
           </Popconfirm>
         );

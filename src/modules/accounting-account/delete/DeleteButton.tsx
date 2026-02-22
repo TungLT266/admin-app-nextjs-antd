@@ -4,6 +4,8 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import { deleteAccountingAccountApi } from "@/api/accounting-account";
 import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface DeleteButtonProps {
   id: string;
@@ -13,11 +15,12 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useAccountingAccountContext();
+  const { t } = useTranslation();
 
   const handleOk = () => {
     deleteAccountingAccountApi(id)
       .then(() => {
-        notifySuccess("Delete successfully");
+        notifySuccess(t("accountingAccount.notify.deleteSuccess"));
         fetchDataList();
       })
       .catch((error) => {
@@ -37,12 +40,12 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
       />
 
       <Modal
-        title="Delete the task"
+        title={t("accountingAccount.modal.delete")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
-        <p>Are you sure to delete this task?</p>
+        <p>{t("accountingAccount.confirm.delete")}</p>
       </Modal>
     </>
   );

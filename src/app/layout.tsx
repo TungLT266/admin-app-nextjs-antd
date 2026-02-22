@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NotificationContextProvider } from "@/shared/context/NotificationContextProvider";
+import { I18nContextProvider } from "@/shared/context/I18nContextProvider";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -31,7 +32,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AntdRegistry>
-          <NotificationContextProvider>{children}</NotificationContextProvider>
+          <I18nContextProvider>
+            <NotificationContextProvider>{children}</NotificationContextProvider>
+          </I18nContextProvider>
         </AntdRegistry>
       </body>
     </html>

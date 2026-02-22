@@ -24,6 +24,22 @@ axiosInstance.interceptors.request.use(
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
+    const lang = localStorage.getItem("i18n_language") || "en";
+    config.headers["Accept-Language"] = lang;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstancePublic.interceptors.request.use(
+  (config) => {
+    const lang =
+      typeof window !== "undefined"
+        ? localStorage.getItem("i18n_language") || "en"
+        : "en";
+    config.headers["Accept-Language"] = lang;
     return config;
   },
   (error) => {

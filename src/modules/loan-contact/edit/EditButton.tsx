@@ -1,5 +1,7 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
@@ -16,6 +18,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -38,7 +41,7 @@ const EditButton = ({ id }: EditButtonProps) => {
     const data: ICreateLoanContactReq = { ...values };
     updateLoanContactApi(id, data)
       .then(() => {
-        notifySuccess("Contact updated successfully");
+        notifySuccess(t("loanContact.notify.updateSuccess"));
         fetchDataList();
         onClose();
       })
@@ -47,7 +50,7 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Edit">
+      <Tooltip title={t("common.edit")}>
         <Button
           shape="circle"
           icon={<EditOutlined />}
@@ -55,7 +58,7 @@ const EditButton = ({ id }: EditButtonProps) => {
         />
       </Tooltip>
       <Modal
-        title="Edit Contact"
+        title={t("loanContact.modal.update")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}

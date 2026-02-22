@@ -4,12 +4,15 @@ import { StopOutlined } from "@ant-design/icons";
 import { Button, Modal, Tooltip } from "antd";
 import { cancelLoanContractApi } from "@/api/loan-contract";
 import { useLoanContractContext } from "./LoanContractContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface CancelButtonProps {
   id: string;
 }
 
 const CancelButton = ({ id }: CancelButtonProps) => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLoanContractContext();
@@ -17,7 +20,7 @@ const CancelButton = ({ id }: CancelButtonProps) => {
   const handleOk = () => {
     cancelLoanContractApi(id)
       .then(() => {
-        notifySuccess("Contract cancelled successfully");
+        notifySuccess(t("loanContract.notify.cancelSuccess"));
         fetchDataList();
       })
       .catch((error) => notifyError(error));
@@ -26,7 +29,7 @@ const CancelButton = ({ id }: CancelButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Cancel Contract">
+      <Tooltip title={t("loanContract.button.cancel")}>
         <Button
           danger
           shape="circle"
@@ -35,17 +38,14 @@ const CancelButton = ({ id }: CancelButtonProps) => {
         />
       </Tooltip>
       <Modal
-        title="Cancel Contract"
+        title={t("loanContract.modal.cancel")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
-        okText="Yes, Cancel"
+        okText={t("loanContract.button.yesCancel")}
         okButtonProps={{ danger: true }}
       >
-        <p>
-          Are you sure you want to <strong>cancel</strong> this contract? All
-          associated transactions will also be marked as cancelled.
-        </p>
+        <p>{t("loanContract.confirm.cancel")}</p>
       </Modal>
     </>
   );

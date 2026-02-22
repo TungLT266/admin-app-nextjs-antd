@@ -12,6 +12,8 @@ import {
   updateExpenseApi,
 } from "@/api/expense";
 import { formatDateInputApi } from "@/utils/DateUtils";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface EditButtonProps {
   id: string;
@@ -22,6 +24,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useExpenseContext();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isOpen) {
@@ -55,7 +58,7 @@ const EditButton = ({ id }: EditButtonProps) => {
     };
     updateExpenseApi(id, data)
       .then(() => {
-        notifySuccess("Update successfully");
+        notifySuccess(t("expense.notify.updateSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -67,7 +70,7 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Edit">
+      <Tooltip title={t("common.edit")}>
         <Button
           type="primary"
           shape="circle"
@@ -77,7 +80,7 @@ const EditButton = ({ id }: EditButtonProps) => {
       </Tooltip>
 
       <Modal
-        title="Update Expense"
+        title={t("expense.modal.update")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}

@@ -15,10 +15,13 @@ import { IExpense } from "@/api/expense";
 import { formatNumber } from "@/utils/NumberUtils";
 import FilterSection from "./FilterSection";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const ExpensePage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useExpenseContext();
+  const { t } = useTranslation();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
   const [selectedRows, setSelectedRows] = useState<DataType[]>([]);
 
@@ -38,46 +41,46 @@ const ExpensePage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Document Date",
+      title: t("expense.columns.documentDate"),
       dataIndex: "documentDate",
       key: "documentDate",
       align: "center",
       render: (documentDate) => formatDate(documentDate),
     },
     {
-      title: "Accounting Date",
+      title: t("expense.columns.accountingDate"),
       dataIndex: "accountingDate",
       key: "accountingDate",
       align: "center",
       render: (accountingDate) => formatDate(accountingDate),
     },
     {
-      title: "Title",
+      title: t("expense.columns.title"),
       dataIndex: "title",
       key: "title",
     },
     {
-      title: "Amount",
+      title: t("expense.columns.amount"),
       dataIndex: "amount",
       key: "amount",
       align: "right",
       render: (amount) => formatNumber(amount),
     },
     {
-      title: "Content",
+      title: t("expense.columns.content"),
       dataIndex: "incomeAndExpenseType",
       key: "incomeAndExpenseType",
       render: (incomeAndExpenseType: IIncomeAndExpenseType) =>
         incomeAndExpenseType.name,
     },
     {
-      title: "Wallet",
+      title: t("expense.columns.wallet"),
       dataIndex: "wallet",
       key: "wallet",
       render: (wallet: IWallet) => wallet.name,
     },
     {
-      title: "Status",
+      title: t("expense.columns.status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -97,21 +100,21 @@ const ExpensePage = () => {
       },
     },
     {
-      title: "Created At",
+      title: t("expense.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Updated At",
+      title: t("expense.columns.updatedAt"),
       dataIndex: "updatedAt",
       key: "updatedAt",
       align: "center",
       render: (updatedAt) => formatDatetime(updatedAt),
     },
     {
-      title: "Action",
+      title: t("expense.columns.action"),
       dataIndex: "_id",
       key: "action",
       align: "center",

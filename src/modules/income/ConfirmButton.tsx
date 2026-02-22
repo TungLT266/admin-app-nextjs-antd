@@ -3,6 +3,8 @@ import { CheckOutlined } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
 import { confirmIncomeApi } from "@/api/income";
 import { useIncomeContext } from "./IncomeContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface DeleteButtonProps {
   id: string;
@@ -11,11 +13,12 @@ interface DeleteButtonProps {
 const ConfirmButton = ({ id }: DeleteButtonProps) => {
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useIncomeContext();
+  const { t } = useTranslation();
 
   const handleClick = () => {
     confirmIncomeApi(id)
       .then(() => {
-        notifySuccess("Confirm successfully");
+        notifySuccess(t("income.notify.confirmSuccess"));
         fetchDataList();
       })
       .catch((error) => {
@@ -25,7 +28,7 @@ const ConfirmButton = ({ id }: DeleteButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Confirm">
+      <Tooltip title={t("common.confirm")}>
         <Button
           type="primary"
           shape="circle"

@@ -7,6 +7,8 @@ import { ISelectOption } from "@/shared/type/ISelectOption";
 import { DatePicker, Form, FormProps, Input, InputNumber, Select } from "antd";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
@@ -17,6 +19,7 @@ interface CreateUpdateFormProps {
 const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
   const [typeOptions, setTypeOptions] = useState<ISelectOption[]>([]);
   const [walletOptions, setWalletOptions] = useState<ISelectOption[]>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     getExpenseTypeApi().then((res) => {
@@ -48,9 +51,9 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
       autoComplete="off"
     >
       <Form.Item
-        label="Document Date"
+        label={t("expense.form.documentDate")}
         name="documentDate"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <DatePicker
           className="w-full"
@@ -61,41 +64,41 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
       </Form.Item>
 
       <Form.Item
-        label="Ngày ghi nhận kế toán"
+        label={t("expense.form.accountingDate")}
         name="accountingDate"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <DatePicker className="w-full" />
       </Form.Item>
 
       <Form.Item
-        label="Title"
+        label={t("expense.form.title")}
         name="title"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Content"
+        label={t("expense.form.content")}
         name="incomeAndExpenseType"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Select options={typeOptions} />
       </Form.Item>
 
       <Form.Item
-        label="Wallet"
+        label={t("expense.form.wallet")}
         name="wallet"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <Select options={walletOptions} />
       </Form.Item>
 
       <Form.Item
-        label="Amount"
+        label={t("expense.form.amount")}
         name="amount"
-        rules={[{ required: true, message: "Please input this field!" }]}
+        rules={[{ required: true, message: t("common.required") }]}
       >
         <InputNumber
           style={{ width: "100%" }}
@@ -106,7 +109,7 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
         />
       </Form.Item>
 
-      <Form.Item label="Description" name="description">
+      <Form.Item label={t("expense.form.description")} name="description">
         <Input />
       </Form.Item>
     </Form>

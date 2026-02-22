@@ -10,6 +10,76 @@ import {
 } from "@/api/accounting-account";
 import { useEffect } from "react";
 import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
+
+interface EditButtonProps {
+  id: string;
+}
+
+const EditButton = ({ id }: EditButtonProps) => {
+  const [form] = Form.useForm();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { notifySuccess, notifyError } = useNotificationContext();
+  const { fetchDataList } = useAccountingAccountContext();
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    if (isOpen) {
+      getAccountingAccountByIdApi(id).then((res) => {
+        const initialValues: IUpdateAccountingAccountReq = {
+          number: res.number,
+          name: res.name,
+          status: res.status,
+        };
+        form.setFieldsValue(initialValues);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  const handleOk = () => {
+    form.submit();
+  };
+
+  const onFinish: FormProps["onFinish"] = (values) => {
+    const data: IUpdateAccountingAccountReq = { ...values };
+    updateAccountingAccountApi(id, data)
+      .then(() => {
+        notifySuccess(t("accountingAccount.notify.updateSuccess"));
+        form.resetFields();
+        fetchDataList();
+      })
+      .catch((error) => {
+        notifyError(error);
+      });
+    onClose();
+  };
+
+  return (
+    <>
+      <Tooltip title={t("common.edit")}>
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<EditOutlined />}
+          onClick={onOpen}
+        />
+      </Tooltip>
+
+      <Modal
+        title={t("accountingAccount.modal.update")}
+        open={isOpen}
+        onOk={handleOk}
+        onCancel={onClose}
+      >
+        <CreateUpdateForm form={form} onFinish={onFinish} isEditForm />
+      </Modal>
+    </>
+  );
+};
+
+export default EditButton;
 
 interface EditButtonProps {
   id: string;
@@ -43,7 +113,7 @@ const EditButton = ({ id }: EditButtonProps) => {
     const data: IUpdateAccountingAccountReq = { ...values };
     updateAccountingAccountApi(id, data)
       .then(() => {
-        notifySuccess("Update successfully");
+        notifySuccess(t("accountingAccount.notify.updateSuccess"));
         form.resetFields();
         fetchDataList();
       })
@@ -55,7 +125,7 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Edit">
+      <Tooltip title={t("common.edit")}>
         <Button
           type="primary"
           shape="circle"
@@ -65,7 +135,7 @@ const EditButton = ({ id }: EditButtonProps) => {
       </Tooltip>
 
       <Modal
-        title="Update Accounting Account"
+        title={t("accountingAccount.modal.update")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}

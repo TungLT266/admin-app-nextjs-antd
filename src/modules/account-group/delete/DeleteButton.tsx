@@ -1,5 +1,7 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import { useAccountGroupContext } from "../AccountGroupContextProvider";
@@ -10,6 +12,7 @@ interface DeleteButtonProps {
 }
 
 const DeleteButton = ({ id }: DeleteButtonProps) => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useAccountGroupContext();
@@ -17,7 +20,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
   const handleOk = () => {
     deleteAccountGroupApi(id)
       .then(() => {
-        notifySuccess("Delete successfully");
+        notifySuccess(t("accountGroup.notify.deleteSuccess"));
         fetchDataList();
       })
       .catch((error) => {
@@ -37,12 +40,12 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
       />
 
       <Modal
-        title="Delete the task"
+        title={t("common.deleteTitle")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
-        <p>Are you sure to delete this task?</p>
+        <p>{t("accountGroup.confirm.delete")}</p>
       </Modal>
     </>
   );

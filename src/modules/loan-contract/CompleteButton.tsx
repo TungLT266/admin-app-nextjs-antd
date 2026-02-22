@@ -4,12 +4,15 @@ import { CheckCircleOutlined } from "@ant-design/icons";
 import { Button, Modal, Tooltip } from "antd";
 import { completeLoanContractApi } from "@/api/loan-contract";
 import { useLoanContractContext } from "./LoanContractContextProvider";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 interface CompleteButtonProps {
   id: string;
 }
 
 const CompleteButton = ({ id }: CompleteButtonProps) => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLoanContractContext();
@@ -17,7 +20,7 @@ const CompleteButton = ({ id }: CompleteButtonProps) => {
   const handleOk = () => {
     completeLoanContractApi(id)
       .then(() => {
-        notifySuccess("Contract marked as completed");
+        notifySuccess(t("loanContract.notify.completeSuccess"));
         fetchDataList();
       })
       .catch((error) => notifyError(error));
@@ -26,7 +29,7 @@ const CompleteButton = ({ id }: CompleteButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Complete Contract">
+      <Tooltip title={t("loanContract.button.complete")}>
         <Button
           shape="circle"
           icon={<CheckCircleOutlined />}
@@ -35,17 +38,14 @@ const CompleteButton = ({ id }: CompleteButtonProps) => {
         />
       </Tooltip>
       <Modal
-        title="Complete Contract"
+        title={t("loanContract.modal.complete")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
-        okText="Yes, Complete"
+        okText={t("loanContract.button.yesComplete")}
         okType="primary"
       >
-        <p>
-          Mark this contract as <strong>Completed</strong>? This cannot be
-          undone.
-        </p>
+        <p>{t("loanContract.confirm.complete")}</p>
       </Modal>
     </>
   );

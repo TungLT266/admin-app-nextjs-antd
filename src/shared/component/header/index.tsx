@@ -9,12 +9,16 @@ import {
 import { Avatar, Button, Dropdown, Layout, MenuProps, Space, theme } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function HeaderLayout() {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const { t } = useTranslation();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [username, setUsername] = useState<string>("");
@@ -49,7 +53,7 @@ export default function HeaderLayout() {
     {
       key: "logout",
       icon: <LogoutOutlined />,
-      label: "Logout",
+      label: t("header.logout"),
       danger: true,
       onClick: handleLogout,
     },
@@ -76,19 +80,23 @@ export default function HeaderLayout() {
         style={{ fontSize: "16px", width: 64, height: 64 }}
       />
 
-      {/* Right: user avatar + dropdown */}
-      <Dropdown menu={{ items: menuItems }} trigger={["click"]} placement="bottomRight">
-        <Space className="cursor-pointer select-none pr-2" style={{ height: 64 }}>
-          <Avatar
-            size={36}
-            icon={<UserOutlined />}
-            style={{ backgroundColor: "#1677ff" }}
-          />
-          <span className="font-medium text-gray-700 hidden sm:inline">
-            {username || "User"}
-          </span>
-        </Space>
-      </Dropdown>
+      {/* Right: language switcher + user avatar + dropdown */}
+      <Space size={4} style={{ height: 64 }} align="center">
+        <LanguageSwitcher />
+
+        <Dropdown menu={{ items: menuItems }} trigger={["click"]} placement="bottomRight">
+          <Space className="cursor-pointer select-none pr-2" style={{ height: 64 }}>
+            <Avatar
+              size={36}
+              icon={<UserOutlined />}
+              style={{ backgroundColor: "#1677ff" }}
+            />
+            <span className="font-medium text-gray-700 hidden sm:inline">
+              {username || "User"}
+            </span>
+          </Space>
+        </Dropdown>
+      </Space>
     </Header>
   );
 }

@@ -9,10 +9,13 @@ import DeleteButton from "./delete/DeleteButton";
 import { ICompany } from "@/api/company";
 import FilterSection from "./FilterSection";
 import PaginationCommon from "@/shared/component/pagination";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 
 const CompanyPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useCompanyContext();
+  const { t } = useTranslation();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
   useEffect(() => {
@@ -31,23 +34,23 @@ const CompanyPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "Company Code",
+      title: t("company.columns.code"),
       dataIndex: "code",
       key: "code",
       align: "center",
     },
     {
-      title: "Company Name",
+      title: t("company.columns.name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Description",
+      title: t("company.columns.description"),
       dataIndex: "description",
       key: "description",
     },
     {
-      title: "Status",
+      title: t("company.columns.status"),
       dataIndex: "status",
       key: "status",
       align: "center",
@@ -67,14 +70,14 @@ const CompanyPage = () => {
       },
     },
     {
-      title: "Created At",
+      title: t("company.columns.createdAt"),
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
     {
-      title: "Updated At",
+      title: t("company.columns.updatedAt"),
       dataIndex: "updatedAt",
       key: "updatedAt",
       align: "center",

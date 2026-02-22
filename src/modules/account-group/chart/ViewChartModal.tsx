@@ -3,6 +3,8 @@ import { IAccountGroup } from "@/api/account-group";
 import { getAccountGroupReportApi } from "@/api/dashboard-report";
 import { formatNumber } from "@/utils/NumberUtils";
 import { DatePicker, Modal, Segmented, Spin } from "antd";
+import { useTranslation } from "react-i18next";
+import "@/i18n/config";
 import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 import {
@@ -24,14 +26,8 @@ interface Props {
   onClose: () => void;
 }
 
-const TIME_RANGE_OPTIONS: { label: string; value: TimeRange }[] = [
-  { label: "1 Year", value: "1Y" },
-  { label: "3 Years", value: "3Y" },
-  { label: "5 Years", value: "5Y" },
-  { label: "Custom", value: "Custom" },
-];
-
 const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
+  const { t } = useTranslation();
   const [timeRange, setTimeRange] = useState<TimeRange>("3Y");
   const [customRange, setCustomRange] = useState<[Dayjs, Dayjs] | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -105,10 +101,12 @@ const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
         {/* Time range controls */}
         <div className="flex items-center gap-4 flex-wrap">
           <Segmented
-            options={TIME_RANGE_OPTIONS.map((o) => ({
-              label: o.label,
-              value: o.value,
-            }))}
+            options={[
+              { label: t("accountGroup.chart.timeRange.1year"), value: "1Y" as TimeRange },
+              { label: t("accountGroup.chart.timeRange.3years"), value: "3Y" as TimeRange },
+              { label: t("accountGroup.chart.timeRange.5years"), value: "5Y" as TimeRange },
+              { label: t("accountGroup.chart.timeRange.custom"), value: "Custom" as TimeRange },
+            ]}
             value={timeRange}
             onChange={(val) => {
               setTimeRange(val as TimeRange);
