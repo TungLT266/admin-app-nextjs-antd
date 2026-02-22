@@ -17,21 +17,20 @@ const LoginPage = () => {
       const res = await loginApi(data);
 
       if (res.companies.length === 0) {
-        setError("Your account is not assigned to any company.");
-        return;
-      }
-
-      if (res.companies.length === 1) {
+        // No companies: access_token issued directly, user will only see the Company menu
+        localStorage.setItem("accessToken", res.access_token!);
+        router.push("/");
+      } else if (res.companies.length === 1) {
         // Auto-select the only company
         const { access_token } = await selectCompanyApi({
-          tempToken: res.temp_token,
+          tempToken: res.temp_token!,
           companyCode: res.companies[0].code,
         });
         localStorage.setItem("accessToken", access_token);
         router.push("/");
       } else {
         // Multiple companies → go to selection screen
-        sessionStorage.setItem("tempToken", res.temp_token);
+        sessionStorage.setItem("tempToken", res.temp_token!);
         sessionStorage.setItem("companies", JSON.stringify(res.companies));
         sessionStorage.setItem("loginUsername", values.username || "");
         router.push("/auth/select-company");

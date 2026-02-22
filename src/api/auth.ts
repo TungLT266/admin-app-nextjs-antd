@@ -15,7 +15,8 @@ export interface ICompanyOption {
 }
 
 export interface ILoginRes {
-  temp_token: string;
+  access_token?: string;  // present when user has 0 companies (direct login, no company selection needed)
+  temp_token?: string;    // present when user has 1+ companies
   companies: ICompanyOption[];
 }
 

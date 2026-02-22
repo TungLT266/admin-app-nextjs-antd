@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AccountBookOutlined,
   BankOutlined,
@@ -21,6 +21,20 @@ import { usePathname, useRouter } from "next/navigation";
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
+  const [isRestrictedMode, setIsRestrictedMode] = useState(false);
+
+  // Decode JWT to check if user has a company; restrict menu if not
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        setIsRestrictedMode(!payload.companyCode);
+      } catch {
+        setIsRestrictedMode(false);
+      }
+    }
+  }, []);
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
     if (e.key === pathname) return;
@@ -29,30 +43,34 @@ export default function Sidebar() {
 
   // Determine which submenu should be open based on the current pathname
   const getOpenKeys = () => {
-    if (["/income", "/expense", "/local-transfer"].includes(pathname)) {
-      return ["transactions"];
+    if (['/income', '/expense', '/local-transfer'].includes(pathname)) {
+      return ['transactions'];
     }
     if (
-      ["/loan-contact", "/loan-contract", "/loan-transaction"].includes(
+      ['/loan-contact', '/loan-contract', '/loan-transaction'].includes(
         pathname,
       )
     ) {
-      return ["loans-debts"];
+      return ['loans-debts'];
     }
     return [];
   };
 
+  const visibleItems = isRestrictedMode
+    ? items.filter((item) => item?.key === '/company')
+    : items;
+
   return (
     <Sider
       style={{
-        overflow: "auto",
-        height: "100vh",
-        position: "fixed",
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
         insetInlineStart: 0,
         top: 0,
         bottom: 0,
-        scrollbarWidth: "thin",
-        scrollbarColor: "unset",
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'unset',
       }}
       width={250}
     >
@@ -62,7 +80,7 @@ export default function Sidebar() {
         mode="inline"
         selectedKeys={[pathname]}
         defaultOpenKeys={getOpenKeys()}
-        items={items}
+        items={visibleItems}
         onClick={handleMenuClick}
       />
     </Sider>
