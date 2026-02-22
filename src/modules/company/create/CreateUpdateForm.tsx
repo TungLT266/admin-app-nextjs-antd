@@ -1,4 +1,4 @@
-import { Form, FormProps, Input, Select, Tooltip } from "antd";
+import { Form, FormProps, Input, Select } from "antd";
 import { CompanyStatusLabels } from "../type";
 import { v4 as uuidv4 } from "uuid";
 
@@ -23,19 +23,15 @@ const CreateUpdateForm = ({
       onFinish={onFinish}
       autoComplete="off"
     >
-      <Form.Item
-        label="Company Code"
-        name="code"
-        rules={[{ required: true, message: "Please input company code!" }]}
-      >
-        {isEditForm ? (
-          <Tooltip title="Company code cannot be changed">
-            <Input disabled />
-          </Tooltip>
-        ) : (
+      {!isEditForm && (
+        <Form.Item
+          label="Company Code"
+          name="code"
+          rules={[{ required: true, message: "Please input company code!" }]}
+        >
           <Input />
-        )}
-      </Form.Item>
+        </Form.Item>
+      )}
 
       <Form.Item
         label="Company Name"
