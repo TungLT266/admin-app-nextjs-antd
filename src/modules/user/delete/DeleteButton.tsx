@@ -1,8 +1,8 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
-import { DeleteOutlined } from "@ant-design/icons";
+import { UserDeleteOutlined } from "@ant-design/icons";
 import { Button, Modal, Tooltip } from "antd";
-import { deleteUserApi } from "@/api/user";
+import { removeUserFromCompanyApi } from "@/api/user-company";
 import { useUserContext } from "@/modules/user/UserContextProvider";
 
 interface DeleteButtonProps {
@@ -15,9 +15,9 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
   const { fetchDataList } = useUserContext();
 
   const handleOk = () => {
-    deleteUserApi(id)
+    removeUserFromCompanyApi(id)
       .then(() => {
-        notifySuccess("Delete successfully");
+        notifySuccess("User removed from company successfully");
         fetchDataList();
       })
       .catch((error) => {
@@ -28,23 +28,28 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
 
   return (
     <>
-      <Tooltip title="Delete">
+      <Tooltip title="Remove from Company">
         <Button
           type="primary"
           shape="circle"
-          icon={<DeleteOutlined />}
+          icon={<UserDeleteOutlined />}
           onClick={onOpen}
           danger
         />
       </Tooltip>
 
       <Modal
-        title="Delete User"
+        title="Remove User from Company"
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
+        okText="Remove"
+        okButtonProps={{ danger: true }}
       >
-        <p>Are you sure to delete this user?</p>
+        <p>
+          Are you sure you want to remove this user from the current company?
+          The user account will not be deleted.
+        </p>
       </Modal>
     </>
   );
