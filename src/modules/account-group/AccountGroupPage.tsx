@@ -13,6 +13,7 @@ import {
 } from "../accounting-account/type";
 import { IAccountGroup, IAccountGroupAccount } from "@/api/account-group";
 import { AccountGroupViewType, AccountGroupViewTypeLabels } from "./type";
+import ViewChartButton from "./chart/ViewChartButton";
 
 const AccountGroupPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
@@ -152,9 +153,10 @@ const AccountGroupPage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
-      render: (id) => {
+      render: (id, record) => {
         return (
           <div className="flex gap-2 justify-center">
+            <ViewChartButton accountGroup={record} />
             <EditButton id={id} />
             <DeleteButton id={id} />
           </div>
