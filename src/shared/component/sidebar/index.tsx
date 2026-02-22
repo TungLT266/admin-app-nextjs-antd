@@ -120,11 +120,6 @@ const items: MenuProps["items"] = [
     icon: <TransactionOutlined />,
     label: "Income/Expense Type",
   },
-  // {
-  //   key: "/accounting-object",
-  //   icon: <UserOutlined />,
-  //   label: "Object",
-  // },
   {
     key: "/wallet",
     icon: <CreditCardOutlined />,
