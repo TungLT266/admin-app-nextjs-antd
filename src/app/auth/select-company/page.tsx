@@ -17,7 +17,7 @@ const SelectCompanyPage = () => {
   const [filtered, setFiltered] = useState<ICompanyOption[]>([]);
   const [tempToken, setTempToken] = useState<string>("");
   const [username, setUsername] = useState<string>("");
-  const [loading, setLoading] = useState<string>(""); // companyId being selected
+  const [loading, setLoading] = useState<string>(""); // companyCode being selected
   const [error, setError] = useState<string>("");
   const [search, setSearch] = useState<string>("");
 
@@ -49,12 +49,12 @@ const SelectCompanyPage = () => {
   }, [search, companies]);
 
   const handleSelect = async (company: ICompanyOption) => {
-    setLoading(company._id);
+    setLoading(company.code);
     setError("");
     try {
       const { access_token } = await selectCompanyApi({
         tempToken,
-        companyId: company._id,
+        companyCode: company.code,
       });
       sessionStorage.removeItem("tempToken");
       sessionStorage.removeItem("companies");
@@ -170,11 +170,11 @@ const SelectCompanyPage = () => {
                     transition-all duration-200 cursor-pointer
                     hover:border-indigo-400 hover:shadow-lg hover:-translate-y-0.5
                     focus:outline-none focus:ring-2 focus:ring-indigo-400
-                    ${loading === company._id ? "border-indigo-400 shadow-lg" : "border-gray-100 shadow-sm"}
-                    ${loading && loading !== company._id ? "opacity-50" : ""}
+                    ${loading === company.code ? "border-indigo-400 shadow-lg" : "border-gray-100 shadow-sm"}
+                    ${loading && loading !== company.code ? "opacity-50" : ""}
                   `}
                 >
-                  {loading === company._id && (
+                  {loading === company.code && (
                     <div className="absolute inset-0 bg-white/70 rounded-2xl flex items-center justify-center z-10">
                       <Spin />
                     </div>

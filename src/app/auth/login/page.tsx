@@ -25,7 +25,7 @@ const LoginPage = () => {
         // Auto-select the only company
         const { access_token } = await selectCompanyApi({
           tempToken: res.temp_token,
-          companyId: res.companies[0]._id,
+          companyCode: res.companies[0].code,
         });
         localStorage.setItem("accessToken", access_token);
         router.push("/");

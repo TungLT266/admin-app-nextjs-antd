@@ -21,7 +21,7 @@ export interface ILoginRes {
 
 export interface ISelectCompanyReq {
   tempToken: string;
-  companyId: string;
+  companyCode: string;
 }
 
 export interface ISelectCompanyRes {
