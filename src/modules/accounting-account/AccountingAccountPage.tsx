@@ -9,6 +9,7 @@ import DeleteButton from "./delete/DeleteButton";
 import { IAccountingAccount } from "@/api/accounting-account";
 import FilterSection from "./FilterSection";
 import PaginationCommon from "@/shared/component/pagination";
+import ViewChartButton from "./chart/ViewChartButton";
 
 const AccountingAccountPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
@@ -82,9 +83,10 @@ const AccountingAccountPage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
-      render: (id) => {
+      render: (id, record) => {
         return (
           <div className="flex gap-2 justify-center">
+            <ViewChartButton account={record} />
             <EditButton id={id} />
             <DeleteButton id={id} />
           </div>
