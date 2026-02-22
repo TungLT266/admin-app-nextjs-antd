@@ -23,6 +23,7 @@ export interface IAccountingAccount {
   number?: string;
   name?: string;
   status?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
