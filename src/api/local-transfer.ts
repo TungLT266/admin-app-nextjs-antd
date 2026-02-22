@@ -26,6 +26,7 @@ export interface ILocalTransfer {
   walletFrom?: IWallet;
   walletTo?: IWallet;
   status?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -29,6 +29,7 @@ export interface IExpense {
   wallet?: IWallet;
   incomeAndExpenseType?: IIncomeAndExpenseType;
   status?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

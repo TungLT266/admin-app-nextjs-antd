@@ -18,6 +18,7 @@ export interface ILoanContact {
   name?: string;
   phone?: string;
   email?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

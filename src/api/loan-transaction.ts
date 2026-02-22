@@ -23,6 +23,7 @@ export interface ILoanTransaction {
   };
   note?: string;
   status?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

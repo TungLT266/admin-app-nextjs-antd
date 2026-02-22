@@ -30,6 +30,7 @@ export interface ILoanContract {
   remainingBalance?: number;
   wallet?: IWallet;
   status?: string;
+  companyCode?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

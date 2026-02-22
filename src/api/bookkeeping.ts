@@ -31,6 +31,7 @@ export interface IBookkeeping {
   creditWallet?: IWallet;
   creditIncomeAndExpenseType?: IIncomeAndExpenseType;
   creditLoanContact?: ILoanContact;
+  companyCode?: string;
   createdAt?: Date;
 }
 
