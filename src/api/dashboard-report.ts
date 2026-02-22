@@ -6,15 +6,10 @@ const apiUrl = "dashboard-report";
 export interface IAccountGroupReportRes {
   date?: string;
   accountingAccounts?: IAccountGroupReportData[];
-  accountGroups?: IAccountGroupReportGroup[];
+  accountGroups?: IAccountGroupReportData[];
 }
 
 export interface IAccountGroupReportData {
-  id?: string;
-  totalAmount?: number;
-}
-
-export interface IAccountGroupReportGroup {
   id?: string;
   totalAmount?: number;
 }
