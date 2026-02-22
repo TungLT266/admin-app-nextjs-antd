@@ -64,10 +64,9 @@ const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
           };
 
           let totalAmount = 0;
-          reportDataItem.data?.forEach((dataDetail) => {
+          reportDataItem.accountingAccounts?.forEach((dataDetail) => {
             const acc = accountGroup.accountingAccounts?.find(
-              (item) =>
-                item.accountingAccount?._id === dataDetail.accountingAccountId
+              (item) => item.accountingAccount?._id === dataDetail.id,
             );
             if (acc && acc.accountingAccount?.name) {
               result[acc.accountingAccount.name] = dataDetail.totalAmount;
@@ -102,10 +101,22 @@ const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
         <div className="flex items-center gap-4 flex-wrap">
           <Segmented
             options={[
-              { label: t("accountGroup.chart.timeRange.1year"), value: "1Y" as TimeRange },
-              { label: t("accountGroup.chart.timeRange.3years"), value: "3Y" as TimeRange },
-              { label: t("accountGroup.chart.timeRange.5years"), value: "5Y" as TimeRange },
-              { label: t("accountGroup.chart.timeRange.custom"), value: "Custom" as TimeRange },
+              {
+                label: t("accountGroup.chart.timeRange.1year"),
+                value: "1Y" as TimeRange,
+              },
+              {
+                label: t("accountGroup.chart.timeRange.3years"),
+                value: "3Y" as TimeRange,
+              },
+              {
+                label: t("accountGroup.chart.timeRange.5years"),
+                value: "5Y" as TimeRange,
+              },
+              {
+                label: t("accountGroup.chart.timeRange.custom"),
+                value: "Custom" as TimeRange,
+              },
             ]}
             value={timeRange}
             onChange={(val) => {
@@ -171,7 +182,7 @@ const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
                 />
                 {accountGroup.accountingAccounts
                   ?.sort((a, b) =>
-                    (a.serialNo || 0) > (b.serialNo || 0) ? 1 : -1
+                    (a.serialNo || 0) > (b.serialNo || 0) ? 1 : -1,
                   )
                   .map((acc, index) => (
                     <Line
@@ -219,9 +230,21 @@ const ChartTooltip = ({ active, payload, label }: any) => {
 };
 
 const colors = [
-  "#82ca9d", "#FF6633", "#FFB399", "#FF33FF", "#00B3E6",
-  "#E6B333", "#B366CC", "#3366E6", "#999966", "#99FF99",
-  "#B34D4D", "#80B300", "#6680B3", "#66991A", "#FF1A66",
+  "#82ca9d",
+  "#FF6633",
+  "#FFB399",
+  "#FF33FF",
+  "#00B3E6",
+  "#E6B333",
+  "#B366CC",
+  "#3366E6",
+  "#999966",
+  "#99FF99",
+  "#B34D4D",
+  "#80B300",
+  "#6680B3",
+  "#66991A",
+  "#FF1A66",
 ];
 
 const getColor = (index: number) => colors[index % colors.length];
