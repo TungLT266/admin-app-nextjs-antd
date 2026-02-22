@@ -1,7 +1,7 @@
 "use client";
 import { IAccountingAccount } from "@/api/accounting-account";
 import { LineChartOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import { useState } from "react";
 import ViewChartModal from "./ViewChartModal";
 
@@ -14,13 +14,15 @@ const ViewChartButton = ({ account }: Props) => {
 
   return (
     <>
-      <Button
-        icon={<LineChartOutlined />}
-        size="small"
-        onClick={() => setOpen(true)}
-      >
-        View Chart
-      </Button>
+      <Tooltip title="View Chart">
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<LineChartOutlined />}
+          onClick={() => setOpen(true)}
+          style={{ backgroundColor: "#52c41a", borderColor: "#52c41a" }}
+        />
+      </Tooltip>
 
       {open && (
         <ViewChartModal
