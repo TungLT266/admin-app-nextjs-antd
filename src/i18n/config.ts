@@ -24,9 +24,10 @@ if (!i18n.isInitialized) {
         en: { translation: en },
         vi: { translation: vi },
       },
-      lng: (typeof window !== "undefined"
-        ? localStorage.getItem(I18N_STORAGE_KEY)
-        : null) ?? DEFAULT_LANGUAGE,
+      // Always initialize with the default language so the first render matches
+      // SSR output. I18nContextProvider's useEffect will switch to the user's
+      // stored language after hydration, avoiding the hydration mismatch error.
+      lng: DEFAULT_LANGUAGE,
       fallbackLng: DEFAULT_LANGUAGE,
       supportedLngs: SUPPORTED_LANGUAGES.map((l) => l.code),
       interpolation: {
