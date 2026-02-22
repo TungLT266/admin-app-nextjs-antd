@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NotificationContextProvider } from "@/shared/context/NotificationContextProvider";
 import { I18nContextProvider } from "@/shared/context/I18nContextProvider";
+import { cookies } from "next/headers";
+import { DEFAULT_LANGUAGE, I18N_STORAGE_KEY } from "@/i18n/constants";
+import type { LanguageCode } from "@/i18n/constants";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -26,13 +29,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = cookies();
+  const lang =
+    (cookieStore.get(I18N_STORAGE_KEY)?.value as LanguageCode) ||
+    DEFAULT_LANGUAGE;
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AntdRegistry>
-          <I18nContextProvider>
+          <I18nContextProvider initialLanguage={lang}>
             <NotificationContextProvider>{children}</NotificationContextProvider>
           </I18nContextProvider>
         </AntdRegistry>

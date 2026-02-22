@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { ConfigProvider } from "antd";
@@ -11,7 +12,7 @@ import enUS from "antd/locale/en_US";
 import viVN from "antd/locale/vi_VN";
 import type { Locale as AntdLocale } from "antd/lib/locale";
 import "@/i18n/config"; // Initialize i18next
-import i18n, { DEFAULT_LANGUAGE, LanguageCode, SUPPORTED_LANGUAGES } from "@/i18n/config";
+import i18n, { DEFAULT_LANGUAGE, I18N_STORAGE_KEY, LanguageCode, SUPPORTED_LANGUAGES } from "@/i18n/config";
 
 /* ------------------------------------------------------------------ */
 /*  Antd locale map                                                      */
@@ -39,25 +40,57 @@ const I18nContext = createContext<I18nContextValue>({
 /* ------------------------------------------------------------------ */
 /*  Provider                                                             */
 /* ------------------------------------------------------------------ */
-export function I18nContextProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
+export function I18nContextProvider({
+  children,
+  initialLanguage = DEFAULT_LANGUAGE,
+}: {
+  children: React.ReactNode;
+  initialLanguage?: LanguageCode;
+}) {
+  // Synchronously update i18next BEFORE children render so the first render
+  // on both server and client uses the same language → no hydration mismatch.
+  // All resources are pre-loaded so changeLanguage resolves synchronously.
+  useMemo(() => {
+    if (i18n.language !== initialLanguage) {
+      i18n.changeLanguage(initialLanguage);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialLanguage]);
 
-  // Sync initial language from localStorage / i18next on mount
+  const [language, setLanguage] = useState<LanguageCode>(initialLanguage);
+
+  // One-time migration: if no cookie exists yet but localStorage has a language
+  // (set by the previous implementation), write the cookie so the server can
+  // read it on the next request. Also restores the correct language on first
+  // load before the cookie is set.
   useEffect(() => {
-    const stored =
-      (localStorage.getItem("i18n_language") as LanguageCode) ?? DEFAULT_LANGUAGE;
-    const valid = SUPPORTED_LANGUAGES.some((l) => l.code === stored)
-      ? stored
-      : DEFAULT_LANGUAGE;
-    setLanguage(valid);
-    i18n.changeLanguage(valid);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const hasCookie = document.cookie
+      .split("; ")
+      .some((c) => c.startsWith(`${I18N_STORAGE_KEY}=`));
+    if (!hasCookie) {
+      const stored = localStorage.getItem(I18N_STORAGE_KEY) as LanguageCode | null;
+      const valid =
+        stored && SUPPORTED_LANGUAGES.some((l) => l.code === stored)
+          ? stored
+          : DEFAULT_LANGUAGE;
+      // Persist in cookie so the server can read it on the next request
+      document.cookie = `${I18N_STORAGE_KEY}=${valid}; path=/; max-age=31536000; SameSite=Lax`;
+      // Apply the language for the current page render
+      if (valid !== language) {
+        setLanguage(valid);
+        i18n.changeLanguage(valid);
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changeLanguage = useCallback((lang: LanguageCode) => {
     setLanguage(lang);
     i18n.changeLanguage(lang);
-    localStorage.setItem("i18n_language", lang);
+    // Write to cookie (read by server on next request for SSR)
+    document.cookie = `${I18N_STORAGE_KEY}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+    // Keep localStorage in sync (read by API axios interceptor)
+    localStorage.setItem(I18N_STORAGE_KEY, lang);
   }, []);
 
   return (

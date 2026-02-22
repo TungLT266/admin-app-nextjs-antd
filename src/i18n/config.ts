@@ -3,17 +3,11 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import en from "./locales/en.json";
 import vi from "./locales/vi.json";
+import { DEFAULT_LANGUAGE, I18N_STORAGE_KEY, SUPPORTED_LANGUAGES } from "./constants";
 
-export const SUPPORTED_LANGUAGES = [
-  { code: "en", label: "English", flag: "🇺🇸" },
-  { code: "vi", label: "Tiếng Việt", flag: "🇻🇳" },
-] as const;
-
-export type LanguageCode = (typeof SUPPORTED_LANGUAGES)[number]["code"];
-
-export const DEFAULT_LANGUAGE: LanguageCode = "en";
-
-const I18N_STORAGE_KEY = "i18n_language";
+// Re-export so existing imports from "@/i18n/config" keep working
+export { DEFAULT_LANGUAGE, I18N_STORAGE_KEY, SUPPORTED_LANGUAGES } from "./constants";
+export type { LanguageCode } from "./constants";
 
 if (!i18n.isInitialized) {
   i18n
