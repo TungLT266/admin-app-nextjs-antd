@@ -74,6 +74,15 @@ const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
             }
           });
 
+          reportDataItem.accountGroups?.forEach((dataDetail) => {
+            const grp = accountGroup.accountGroups?.find(
+              (item) => item.accountGroup?._id === dataDetail.id,
+            );
+            if (grp && grp.accountGroup?.name) {
+              result[grp.accountGroup.name] = dataDetail.totalAmount;
+            }
+          });
+
           result["Total"] = totalAmount;
           return result;
         });
@@ -191,6 +200,23 @@ const ViewChartModal = ({ accountGroup, open, onClose }: Props) => {
                       dataKey={acc.accountingAccount?.name}
                       stroke={getColor(index)}
                       strokeWidth={1.5}
+                      dot={false}
+                    />
+                  ))}
+                {accountGroup.accountGroups
+                  ?.sort((a, b) =>
+                    (a.serialNo || 0) > (b.serialNo || 0) ? 1 : -1,
+                  )
+                  .map((grp, index) => (
+                    <Line
+                      key={grp.accountGroup?._id}
+                      type="monotone"
+                      dataKey={grp.accountGroup?.name}
+                      stroke={getColor(
+                        (accountGroup.accountingAccounts?.length ?? 0) + index,
+                      )}
+                      strokeWidth={2}
+                      strokeDasharray="5 3"
                       dot={false}
                     />
                   ))}
