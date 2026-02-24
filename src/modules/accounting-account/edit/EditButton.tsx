@@ -43,7 +43,9 @@ const EditButton = ({ id }: EditButtonProps) => {
   };
 
   const onFinish: FormProps["onFinish"] = (values) => {
-    const data: IUpdateAccountingAccountReq = { ...values };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { number: _number, ...rest } = values;
+    const data: IUpdateAccountingAccountReq = { ...rest };
     updateAccountingAccountApi(id, data)
       .then(() => {
         notifySuccess(t("accountingAccount.notify.updateSuccess"));

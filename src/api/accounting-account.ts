@@ -13,8 +13,8 @@ export interface ICreateAccountingAccountReq {
   name?: string;
 }
 
-export interface IUpdateAccountingAccountReq
-  extends ICreateAccountingAccountReq {
+export interface IUpdateAccountingAccountReq {
+  name?: string;
   status?: string;
 }
 

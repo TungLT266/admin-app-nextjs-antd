@@ -29,9 +29,9 @@ const CreateUpdateForm = ({
       <Form.Item
         label={t("accountingAccount.form.number")}
         name="number"
-        rules={[{ required: true, message: t("accountingAccount.form.numberRequired") }]}
+        rules={[{ required: !isEditForm, message: t("accountingAccount.form.numberRequired") }]}
       >
-        <Input />
+        <Input disabled={isEditForm} />
       </Form.Item>
 
       <Form.Item
