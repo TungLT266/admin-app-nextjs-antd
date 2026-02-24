@@ -48,6 +48,16 @@ const AccountGroupChart = ({ accountGroup }: IAccountGroupChartProps) => {
           }
         });
 
+        reportDataItem.accountGroups?.forEach((dataDetail) => {
+          const grp = accountGroup.accountGroups?.find(
+            (item) => item.accountGroup?._id === dataDetail.id
+          );
+          if (grp && grp.accountGroup?.name) {
+            result[grp.accountGroup.name] = dataDetail.totalAmount;
+            totalAmount += dataDetail.totalAmount || 0;
+          }
+        });
+
         result["Total"] = totalAmount;
         return result;
       });
@@ -103,6 +113,18 @@ const AccountGroupChart = ({ accountGroup }: IAccountGroupChartProps) => {
                 type="monotone"
                 dataKey={accountingAccount.accountingAccount?.name}
                 stroke={getColor(index)}
+              />
+            ))}
+          {accountGroup.accountGroups
+            ?.sort((a, b) => ((a.serialNo || 0) > (b.serialNo || 0) ? 1 : -1))
+            .map((grp, index) => (
+              <Line
+                key={grp.accountGroup?._id}
+                type="monotone"
+                dataKey={grp.accountGroup?.name}
+                stroke={getColor(
+                  (accountGroup.accountingAccounts?.length ?? 0) + index
+                )}
               />
             ))}
         </LineChart>
