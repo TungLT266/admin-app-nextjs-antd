@@ -215,7 +215,9 @@
       "type": "Loại Thu/Chi",
       "wallet": "Ví",
       "status": "Trạng thái",
-      "documentDate": "Ngày chứng từ"
+      "documentDate": "Ngày chứng từ",
+      "amountFrom": "Số tiền từ",
+      "amountTo": "Số tiền đến"
     },
     "form": {
       "documentDate": "Ngày chứng từ",

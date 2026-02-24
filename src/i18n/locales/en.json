@@ -215,7 +215,9 @@
       "type": "Income/Expense Type",
       "wallet": "Wallet",
       "status": "Status",
-      "documentDate": "Document Date"
+      "documentDate": "Document Date",
+      "amountFrom": "Amount From",
+      "amountTo": "Amount To"
     },
     "form": {
       "documentDate": "Document Date",
