@@ -17,13 +17,6 @@ import { IIncome } from "@/api/income";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 
-const amountInputNumberProps = {
-  formatter: (value: number | undefined) =>
-    value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "",
-  parser: (value: string | undefined) =>
-    (value ? Number(value.replace(/,/g, "")) : null) as unknown as number,
-};
-
 interface FilterSectionProps {
   selectedRows: IIncome[];
   onClearSelection: () => void;
@@ -117,26 +110,21 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
             <DatePicker.RangePicker />
           </FormItemCustom>
 
-          <div className="flex flex-col" style={{ margin: 0 }}>
-            <label className="text-sm">{t("income.filter.amount")}</label>
-            <div className="flex items-center gap-1 mt-1">
-              <Form.Item name="amountFrom" noStyle>
-                <InputNumber
-                  className="!w-[130px]"
-                  placeholder={t("income.filter.amountFrom")}
-                  {...amountInputNumberProps}
-                />
-              </Form.Item>
-              <span className="text-gray-400">–</span>
-              <Form.Item name="amountTo" noStyle>
-                <InputNumber
-                  className="!w-[130px]"
-                  placeholder={t("income.filter.amountTo")}
-                  {...amountInputNumberProps}
-                />
-              </Form.Item>
-            </div>
-          </div>
+          <FormItemCustom label={t("income.filter.amountFrom")} name="amountFrom">
+            <InputNumber
+              className="!w-[150px]"
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+            />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("income.filter.amountTo")} name="amountTo">
+            <InputNumber
+              className="!w-[150px]"
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+            />
+          </FormItemCustom>
         </Form>
       </div>
 

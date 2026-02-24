@@ -216,9 +216,8 @@
       "wallet": "Wallet",
       "status": "Status",
       "documentDate": "Document Date",
-      "amount": "Amount",
-      "amountFrom": "From",
-      "amountTo": "To"
+      "amountFrom": "Amount From",
+      "amountTo": "Amount To"
     },
     "form": {
       "documentDate": "Document Date",
