@@ -113,18 +113,16 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
           <FormItemCustom label={t("income.filter.amountFrom")} name="amountFrom">
             <InputNumber
               className="!w-[150px]"
-              min={0}
-              formatter={(value) => value ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
-              parser={(value) => value ? Number(value.replace(/,/g, "")) : 0}
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
             />
           </FormItemCustom>
 
           <FormItemCustom label={t("income.filter.amountTo")} name="amountTo">
             <InputNumber
               className="!w-[150px]"
-              min={0}
-              formatter={(value) => value ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
-              parser={(value) => value ? Number(value.replace(/,/g, "")) : 0}
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
             />
           </FormItemCustom>
         </Form>
