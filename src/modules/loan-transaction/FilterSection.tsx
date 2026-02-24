@@ -1,4 +1,4 @@
-import { DatePicker, Form, Select } from "antd";
+import { DatePicker, Form, InputNumber, Select } from "antd";
 import { useLoanTransactionContext } from "./LoanTransactionContextProvider";
 import { formatDateInputApi } from "@/utils/DateUtils";
 import { FormItemCustom } from "@/shared/component/element/form";
@@ -18,6 +18,8 @@ const FilterSection = () => {
       transactionType: values.transactionType,
       documentDateFrom: formatDateInputApi(values.documentDate?.[0]),
       documentDateTo: formatDateInputApi(values.documentDate?.[1]),
+      amountFrom: values.amountFrom ?? undefined,
+      amountTo: values.amountTo ?? undefined,
     });
   };
 
@@ -44,6 +46,22 @@ const FilterSection = () => {
 
           <FormItemCustom label={t("loanTransaction.filter.documentDate")} name="documentDate">
             <DatePicker.RangePicker />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("loanTransaction.filter.amountFrom")} name="amountFrom">
+            <InputNumber
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+              style={{ width: 150 }}
+            />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("loanTransaction.filter.amountTo")} name="amountTo">
+            <InputNumber
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+              style={{ width: 150 }}
+            />
           </FormItemCustom>
         </Form>
       </div>

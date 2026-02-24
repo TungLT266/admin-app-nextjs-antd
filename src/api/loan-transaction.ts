@@ -33,6 +33,8 @@ export interface ILoanTransactionListReq extends PaginationReq {
   transactionType?: string;
   documentDateFrom?: string;
   documentDateTo?: string;
+  amountFrom?: number;
+  amountTo?: number;
 }
 
 export const getAllLoanTransactionApi = async (

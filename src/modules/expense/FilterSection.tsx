@@ -1,7 +1,7 @@
 import CreateButton from "./create/CreateButton";
 import BulkConfirmButton from "./BulkConfirmButton";
 import BulkUnconfirmButton from "./BulkUnconfirmButton";
-import { DatePicker, Form, Input, Select } from "antd";
+import { DatePicker, Form, Input, InputNumber, Select } from "antd";
 import { useExpenseContext } from "./ExpenseContextProvider";
 import { formatDateInputApi } from "@/utils/DateUtils";
 import { ISelectOption } from "@/shared/type/ISelectOption";
@@ -60,6 +60,8 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
       documentDateTo: formatDateInputApi(values.documentDate?.[1]),
       incomeAndExpenseType: values.incomeAndExpenseType,
       wallet: values.wallet,
+      amountFrom: values.amountFrom ?? undefined,
+      amountTo: values.amountTo ?? undefined,
     });
   };
 
@@ -106,6 +108,22 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
 
           <FormItemCustom label={t("expense.filter.documentDate")} name="documentDate">
             <DatePicker.RangePicker />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("expense.filter.amountFrom")} name="amountFrom">
+            <InputNumber
+              className="!w-[150px]"
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+            />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("expense.filter.amountTo")} name="amountTo">
+            <InputNumber
+              className="!w-[150px]"
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+            />
           </FormItemCustom>
         </Form>
       </div>

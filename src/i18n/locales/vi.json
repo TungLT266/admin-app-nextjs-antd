@@ -269,7 +269,9 @@
       "type": "Loại Chi",
       "wallet": "Ví",
       "status": "Trạng thái",
-      "documentDate": "Ngày chứng từ"
+      "documentDate": "Ngày chứng từ",
+      "amountFrom": "Số tiền từ",
+      "amountTo": "Số tiền đến"
     },
     "form": {
       "documentDate": "Ngày chứng từ",
@@ -322,6 +324,10 @@
       "walletTo": "Đến ví",
       "amount": "Số tiền",
       "description": "Mô tả"
+    },
+    "filter": {
+      "amountFrom": "Số tiền từ",
+      "amountTo": "Số tiền đến"
     },
     "modal": {
       "create": "Tạo chuyển khoản nội bộ",
@@ -505,7 +511,9 @@
       "statusPlaceholder": "Tất cả trạng thái",
       "contact": "Liên hệ",
       "contactPlaceholder": "Tất cả liên hệ",
-      "contractDate": "Ngày hợp đồng"
+      "contractDate": "Ngày hợp đồng",
+      "amountFrom": "Số tiền từ",
+      "amountTo": "Số tiền đến"
     },
     "form": {
       "type": "Loại",
@@ -588,7 +596,9 @@
     "filter": {
       "transactionType": "Loại giao dịch",
       "documentDate": "Ngày chứng từ",
-      "allTypes": "Tất cả loại"
+      "allTypes": "Tất cả loại",
+      "amountFrom": "Số tiền từ",
+      "amountTo": "Số tiền đến"
     },
     "confirm": {
       "deleteTitle": "Xóa giao dịch này?",
@@ -628,7 +638,9 @@
       "title": "Tiêu đề",
       "account": "Tài khoản",
       "wallet": "Ví",
-      "incomeExpenseType": "Loại Thu/Chi"
+      "incomeExpenseType": "Loại Thu/Chi",
+      "amountFrom": "Số tiền từ",
+      "amountTo": "Số tiền đến"
     }
   }
 }

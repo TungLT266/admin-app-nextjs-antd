@@ -43,6 +43,8 @@ export interface ILoanContractListReq extends PaginationReq {
   documentDateTo?: string;
   loanContact?: string;
   wallet?: string;
+  amountFrom?: number;
+  amountTo?: number;
 }
 
 export interface IAmountWithDateReq {

@@ -1,5 +1,5 @@
 import CreateButton from "./create/CreateButton";
-import { DatePicker, Form, Input, Select } from "antd";
+import { DatePicker, Form, Input, InputNumber, Select } from "antd";
 import { useLoanContractContext } from "./LoanContractContextProvider";
 import { formatDateInputApi } from "@/utils/DateUtils";
 import { ISelectOption } from "@/shared/type/ISelectOption";
@@ -37,6 +37,8 @@ const FilterSection = () => {
       documentDateFrom: formatDateInputApi(values.contractDate?.[0]),
       documentDateTo: formatDateInputApi(values.contractDate?.[1]),
       loanContact: values.loanContact,
+      amountFrom: values.amountFrom ?? undefined,
+      amountTo: values.amountTo ?? undefined,
     });
   };
 
@@ -94,6 +96,22 @@ const FilterSection = () => {
 
           <FormItemCustom label={t("loanContract.filter.contractDate")} name="contractDate">
             <DatePicker.RangePicker />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("loanContract.filter.amountFrom")} name="amountFrom">
+            <InputNumber
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+              style={{ width: 150 }}
+            />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("loanContract.filter.amountTo")} name="amountTo">
+            <InputNumber
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+              style={{ width: 150 }}
+            />
           </FormItemCustom>
         </Form>
       </div>

@@ -43,6 +43,8 @@ export interface IBookkeepingListReq extends PaginationReq {
   accountingAccount?: string;
   wallet?: string;
   incomeAndExpenseType?: string;
+  amountFrom?: number;
+  amountTo?: number;
 }
 
 export const getAllBookkeepingApi = async (query: IBookkeepingListReq) => {

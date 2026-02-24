@@ -36,8 +36,10 @@ export interface ILocalTransferListReq extends PaginationReq {
   titleRegex?: string;
   documentDateFrom?: string;
   documentDateTo?: string;
-  walletFrom?: IWallet;
-  walletTo?: IWallet;
+  walletFrom?: string;
+  walletTo?: string;
+  amountFrom?: number;
+  amountTo?: number;
 }
 
 export const createLocalTransferApi = async (body: ICreateLocalTransferReq) => {

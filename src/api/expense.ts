@@ -41,6 +41,8 @@ export interface IExpenseListReq extends PaginationReq {
   documentDateTo?: string;
   incomeAndExpenseType?: string;
   wallet?: string;
+  amountFrom?: number;
+  amountTo?: number;
 }
 
 export const createExpenseApi = async (body: ICreateExpenseReq) => {

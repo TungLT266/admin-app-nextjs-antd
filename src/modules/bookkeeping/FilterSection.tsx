@@ -1,4 +1,4 @@
-import { DatePicker, Form, Input, Select } from "antd";
+import { DatePicker, Form, Input, InputNumber, Select } from "antd";
 import { useBookkeepingContext } from "./BookkeepingContextProvider";
 import { FunctionTypeLabels } from "@/shared/type/FunctionType";
 import { formatDateInputApi } from "@/utils/DateUtils";
@@ -68,6 +68,8 @@ const FilterSection = () => {
       accountingAccount: values.accountingAccount,
       wallet: values.wallet,
       incomeAndExpenseType: values.incomeAndExpenseType,
+      amountFrom: values.amountFrom ?? undefined,
+      amountTo: values.amountTo ?? undefined,
     });
   };
 
@@ -120,6 +122,22 @@ const FilterSection = () => {
               options={incomeAndExpenseTypeOptions}
               className="!w-[200px] !text-left"
               allowClear
+            />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("bookkeeping.filter.amountFrom")} name="amountFrom">
+            <InputNumber
+              className="!w-[150px]"
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+            />
+          </FormItemCustom>
+
+          <FormItemCustom label={t("bookkeeping.filter.amountTo")} name="amountTo">
+            <InputNumber
+              className="!w-[150px]"
+              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
             />
           </FormItemCustom>
         </Form>

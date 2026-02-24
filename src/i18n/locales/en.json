@@ -269,7 +269,9 @@
       "type": "Expense Type",
       "wallet": "Wallet",
       "status": "Status",
-      "documentDate": "Document Date"
+      "documentDate": "Document Date",
+      "amountFrom": "Amount From",
+      "amountTo": "Amount To"
     },
     "form": {
       "documentDate": "Document Date",
@@ -322,6 +324,10 @@
       "walletTo": "Wallet To",
       "amount": "Amount",
       "description": "Description"
+    },
+    "filter": {
+      "amountFrom": "Amount From",
+      "amountTo": "Amount To"
     },
     "modal": {
       "create": "Create Local Transfer",
@@ -505,7 +511,9 @@
       "statusPlaceholder": "All statuses",
       "contact": "Contact",
       "contactPlaceholder": "All contacts",
-      "contractDate": "Contract Date"
+      "contractDate": "Contract Date",
+      "amountFrom": "Amount From",
+      "amountTo": "Amount To"
     },
     "form": {
       "type": "Type",
@@ -588,7 +596,9 @@
     "filter": {
       "transactionType": "Transaction Type",
       "documentDate": "Document Date",
-      "allTypes": "All types"
+      "allTypes": "All types",
+      "amountFrom": "Amount From",
+      "amountTo": "Amount To"
     },
     "confirm": {
       "deleteTitle": "Delete this transaction?",
@@ -628,7 +638,9 @@
       "title": "Title",
       "account": "Account",
       "wallet": "Wallet",
-      "incomeExpenseType": "Income/Expense Type"
+      "incomeExpenseType": "Income/Expense Type",
+      "amountFrom": "Amount From",
+      "amountTo": "Amount To"
     }
   }
 }
