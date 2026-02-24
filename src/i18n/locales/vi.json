@@ -216,8 +216,9 @@
       "wallet": "Ví",
       "status": "Trạng thái",
       "documentDate": "Ngày chứng từ",
-      "amountFrom": "Số tiền từ",
-      "amountTo": "Số tiền đến"
+      "amount": "Số tiền",
+      "amountFrom": "Từ",
+      "amountTo": "Đến"
     },
     "form": {
       "documentDate": "Ngày chứng từ",
