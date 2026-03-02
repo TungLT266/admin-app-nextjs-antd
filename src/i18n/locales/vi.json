@@ -50,7 +50,8 @@
     "contacts": "Liên hệ",
     "loanContracts": "Hợp đồng vay",
     "contractTransactions": "Giao dịch hợp đồng",
-    "bookkeeping": "Sổ kế toán"
+    "bookkeeping": "Sổ kế toán",
+    "monthlyBookClosing": "Khóa sổ tháng"
   },
   "auth": {
     "login": {
@@ -641,6 +642,41 @@
       "incomeExpenseType": "Loại Thu/Chi",
       "amountFrom": "Số tiền từ",
       "amountTo": "Số tiền đến"
+    }
+  },
+  "monthlyBookClosing": {
+    "title": "Khóa sổ tháng",
+    "columns": {
+      "month": "Tháng",
+      "year": "Năm",
+      "closingPeriod": "Kỳ khóa sổ"
+    },
+    "form": {
+      "closingMonth": "Tháng khóa sổ",
+      "month": "Tháng"
+    },
+    "modal": {
+      "create": "Tạo khóa sổ tháng",
+      "confirmClose": "Xác nhận khóa sổ",
+      "unlock": "Mở khóa sổ",
+      "unlockConfirm": "Bạn có chắc chắn muốn mở khóa sổ tháng này? Thao tác này sẽ xóa toàn bộ dữ liệu khóa sổ.",
+      "view": "Chi tiết khóa sổ"
+    },
+    "action": {
+      "view": "Xem",
+      "unlock": "Mở khóa"
+    },
+    "detail": {
+      "title": "Chi tiết số dư theo tài khoản kế toán",
+      "accountNumber": "Số tài khoản",
+      "accountName": "Tên tài khoản",
+      "debitAmount": "Số tiền Nợ",
+      "creditAmount": "Số tiền Có",
+      "total": "Tổng cộng"
+    },
+    "notify": {
+      "createSuccess": "Khóa sổ tháng thành công",
+      "unlockSuccess": "Mở khóa sổ thành công"
     }
   }
 }

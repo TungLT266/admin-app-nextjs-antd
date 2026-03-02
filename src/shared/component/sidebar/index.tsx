@@ -14,6 +14,7 @@ import {
   UnorderedListOutlined,
   ShopOutlined,
   UserOutlined,
+  LockOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
@@ -176,5 +177,10 @@ const items = (t: (key: string) => string): MenuProps["items"] => [
     key: "/bookkeeping",
     icon: <AccountBookOutlined />,
     label: t("sidebar.bookkeeping"),
+  },
+  {
+    key: "/monthly-book-closing",
+    icon: <LockOutlined />,
+    label: t("sidebar.monthlyBookClosing"),
   },
 ];

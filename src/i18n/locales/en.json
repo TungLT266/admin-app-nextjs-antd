@@ -50,7 +50,8 @@
     "contacts": "Contacts",
     "loanContracts": "Loan Contracts",
     "contractTransactions": "Contract Transactions",
-    "bookkeeping": "Bookkeeping"
+    "bookkeeping": "Bookkeeping",
+    "monthlyBookClosing": "Monthly Book Closing"
   },
   "auth": {
     "login": {
@@ -641,6 +642,41 @@
       "incomeExpenseType": "Income/Expense Type",
       "amountFrom": "Amount From",
       "amountTo": "Amount To"
+    }
+  },
+  "monthlyBookClosing": {
+    "title": "Monthly Book Closing",
+    "columns": {
+      "month": "Month",
+      "year": "Year",
+      "closingPeriod": "Closing Period"
+    },
+    "form": {
+      "closingMonth": "Closing Month",
+      "month": "Month"
+    },
+    "modal": {
+      "create": "Create Monthly Book Closing",
+      "confirmClose": "Confirm Closing",
+      "unlock": "Unlock Period",
+      "unlockConfirm": "Are you sure you want to unlock this monthly closing? This will delete all closing data for this period.",
+      "view": "Closing Details"
+    },
+    "action": {
+      "view": "View",
+      "unlock": "Unlock"
+    },
+    "detail": {
+      "title": "Account Balance Details",
+      "accountNumber": "Account Number",
+      "accountName": "Account Name",
+      "debitAmount": "Debit Amount",
+      "creditAmount": "Credit Amount",
+      "total": "Total"
+    },
+    "notify": {
+      "createSuccess": "Monthly book closing created successfully",
+      "unlockSuccess": "Monthly book closing unlocked successfully"
     }
   }
 }
