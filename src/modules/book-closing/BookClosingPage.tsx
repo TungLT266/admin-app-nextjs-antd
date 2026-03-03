@@ -3,8 +3,8 @@
 import { Table, TableProps, Space } from "antd";
 import { useEffect, useState } from "react";
 import { formatDatetime } from "@/utils/DateUtils";
-import { useMonthlyBookClosingContext } from "./MonthlyBookClosingContextProvider";
-import { IMonthlyBookClosing } from "@/api/monthly-book-closing";
+import { useBookClosingContext } from "./BookClosingContextProvider";
+import { IBookClosing } from "@/api/book-closing";
 import CreateButton from "./create/CreateButton";
 import ViewButton from "./view/ViewButton";
 import UnlockButton from "./unlock/UnlockButton";
@@ -12,11 +12,11 @@ import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 
-type DataType = IMonthlyBookClosing & { key?: string };
+type DataType = IBookClosing & { key?: string };
 
-const MonthlyBookClosingPage = () => {
+const BookClosingPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
-    useMonthlyBookClosingContext();
+    useBookClosingContext();
   const { t } = useTranslation();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
@@ -36,23 +36,23 @@ const MonthlyBookClosingPage = () => {
 
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: t("monthlyBookClosing.columns.month"),
+      title: t("bookClosing.columns.closingPeriod"),
+      key: "closingPeriod",
+      align: "center",
+      render: (_, record) =>
+        `${t("bookClosing.form.month")} ${record.month} / ${record.year}`,
+    },
+    {
+      title: t("bookClosing.columns.month"),
       dataIndex: "month",
       key: "month",
       align: "center",
     },
     {
-      title: t("monthlyBookClosing.columns.year"),
+      title: t("bookClosing.columns.year"),
       dataIndex: "year",
       key: "year",
       align: "center",
-    },
-    {
-      title: t("monthlyBookClosing.columns.closingPeriod"),
-      key: "closingPeriod",
-      align: "center",
-      render: (_, record) =>
-        `${t("monthlyBookClosing.form.month")} ${record.month} / ${record.year}`,
     },
     {
       title: t("common.createdAt"),
@@ -81,9 +81,7 @@ const MonthlyBookClosingPage = () => {
   return (
     <div>
       <div className="flex justify-between mb-4">
-        <h2 className="text-xl font-semibold">
-          {t("monthlyBookClosing.title")}
-        </h2>
+        <h2 className="text-xl font-semibold">{t("bookClosing.title")}</h2>
         <CreateButton />
       </div>
       <Table
@@ -105,4 +103,4 @@ const MonthlyBookClosingPage = () => {
   );
 };
 
-export default MonthlyBookClosingPage;
+export default BookClosingPage;

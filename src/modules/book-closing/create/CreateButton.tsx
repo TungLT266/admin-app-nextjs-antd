@@ -2,11 +2,11 @@ import { useNotificationContext } from "@/shared/context/NotificationContextProv
 import { Button, Form, Modal, Typography } from "antd";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import {
-  createMonthlyBookClosingApi,
+  createBookClosingApi,
   getNextClosingMonthApi,
   INextClosingMonthRes,
-} from "@/api/monthly-book-closing";
-import { useMonthlyBookClosingContext } from "../MonthlyBookClosingContextProvider";
+} from "@/api/book-closing";
+import { useBookClosingContext } from "../BookClosingContextProvider";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
@@ -16,7 +16,7 @@ const { Text } = Typography;
 const CreateButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
-  const { fetchDataList } = useMonthlyBookClosingContext();
+  const { fetchDataList } = useBookClosingContext();
   const { t } = useTranslation();
   const [nextMonth, setNextMonth] = useState<INextClosingMonthRes | null>(null);
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
@@ -41,9 +41,9 @@ const CreateButton = () => {
 
   const handleOk = () => {
     setIsSubmitting(true);
-    createMonthlyBookClosingApi()
+    createBookClosingApi()
       .then(() => {
-        notifySuccess(t("monthlyBookClosing.notify.createSuccess"));
+        notifySuccess(t("bookClosing.notify.createSuccess"));
         fetchDataList();
         onClose();
       })
@@ -62,21 +62,25 @@ const CreateButton = () => {
       </Button>
 
       <Modal
-        title={t("monthlyBookClosing.modal.create")}
+        title={t("bookClosing.modal.create")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
         confirmLoading={isSubmitting}
-        okText={t("monthlyBookClosing.modal.confirmClose")}
+        okText={t("bookClosing.modal.confirmClose")}
         cancelText={t("common.cancel")}
       >
         {isLoadingPreview ? (
           <Text>{t("common.loading")}</Text>
         ) : nextMonth ? (
-          <Form layout="horizontal" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
-            <Form.Item label={t("monthlyBookClosing.form.closingMonth")}>
+          <Form
+            layout="horizontal"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+          >
+            <Form.Item label={t("bookClosing.form.closingPeriod")}>
               <Text strong>
-                {`${t("monthlyBookClosing.form.month")} ${nextMonth.month} / ${nextMonth.year}`}
+                {`${t("bookClosing.form.month")} ${nextMonth.month} / ${nextMonth.year}`}
               </Text>
             </Form.Item>
           </Form>

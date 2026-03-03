@@ -179,8 +179,8 @@ const items = (t: (key: string) => string): MenuProps["items"] => [
     label: t("sidebar.bookkeeping"),
   },
   {
-    key: "/monthly-book-closing",
+    key: "/book-closing",
     icon: <LockOutlined />,
-    label: t("sidebar.monthlyBookClosing"),
+    label: t("sidebar.bookClosing"),
   },
 ];

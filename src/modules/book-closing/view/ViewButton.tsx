@@ -2,10 +2,10 @@ import { useNotificationContext } from "@/shared/context/NotificationContextProv
 import { Button, Modal, Table, TableProps, Typography } from "antd";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import {
-  getMonthlyBookClosingByIdApi,
-  IMonthlyBookClosingDetail,
-  IMonthlyBookClosingWithDetails,
-} from "@/api/monthly-book-closing";
+  getBookClosingByIdApi,
+  IBookClosingDetail,
+  IBookClosingWithDetails,
+} from "@/api/book-closing";
 import { useState } from "react";
 import { formatNumber } from "@/utils/NumberUtils";
 import { useTranslation } from "react-i18next";
@@ -19,18 +19,18 @@ interface ViewButtonProps {
   year: number;
 }
 
-type DetailRow = IMonthlyBookClosingDetail & { key: string };
+type DetailRow = IBookClosingDetail & { key: string };
 
 const ViewButton = ({ id, month, year }: ViewButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifyError } = useNotificationContext();
-  const [data, setData] = useState<IMonthlyBookClosingWithDetails | null>(null);
+  const [data, setData] = useState<IBookClosingWithDetails | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
 
   const handleOpen = () => {
     setIsLoading(true);
-    getMonthlyBookClosingByIdApi(id)
+    getBookClosingByIdApi(id)
       .then((res) => {
         setData(res);
         setIsLoading(false);
@@ -44,24 +44,24 @@ const ViewButton = ({ id, month, year }: ViewButtonProps) => {
 
   const columns: TableProps<DetailRow>["columns"] = [
     {
-      title: t("monthlyBookClosing.detail.accountNumber"),
+      title: t("bookClosing.detail.accountNumber"),
       dataIndex: "accountNumber",
       key: "accountNumber",
     },
     {
-      title: t("monthlyBookClosing.detail.accountName"),
+      title: t("bookClosing.detail.accountName"),
       dataIndex: "accountName",
       key: "accountName",
     },
     {
-      title: t("monthlyBookClosing.detail.debitAmount"),
+      title: t("bookClosing.detail.debitAmount"),
       dataIndex: "debitAmount",
       key: "debitAmount",
       align: "right",
       render: (value) => formatNumber(value),
     },
     {
-      title: t("monthlyBookClosing.detail.creditAmount"),
+      title: t("bookClosing.detail.creditAmount"),
       dataIndex: "creditAmount",
       key: "creditAmount",
       align: "right",
@@ -78,19 +78,17 @@ const ViewButton = ({ id, month, year }: ViewButtonProps) => {
   return (
     <>
       <Button type="link" onClick={handleOpen}>
-        {t("monthlyBookClosing.action.view")}
+        {t("bookClosing.action.view")}
       </Button>
 
       <Modal
-        title={`${t("monthlyBookClosing.modal.view")} - ${t("monthlyBookClosing.form.month")} ${month}/${year}`}
+        title={`${t("bookClosing.modal.view")} - ${t("bookClosing.form.month")} ${month}/${year}`}
         open={isOpen}
         onCancel={onClose}
         footer={null}
         width={800}
       >
-        <Text className="block mb-3">
-          {t("monthlyBookClosing.detail.title")}
-        </Text>
+        <Text className="block mb-3">{t("bookClosing.detail.title")}</Text>
         <Table
           columns={columns}
           dataSource={dataSource}
@@ -110,7 +108,7 @@ const ViewButton = ({ id, month, year }: ViewButtonProps) => {
             return (
               <Table.Summary.Row>
                 <Table.Summary.Cell index={0} colSpan={2}>
-                  <Text strong>{t("monthlyBookClosing.detail.total")}</Text>
+                  <Text strong>{t("bookClosing.detail.total")}</Text>
                 </Table.Summary.Cell>
                 <Table.Summary.Cell index={2} align="right">
                   <Text strong>{formatNumber(totalDebit)}</Text>

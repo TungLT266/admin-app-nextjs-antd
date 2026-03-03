@@ -1,0 +1,81 @@
+import {
+  DataWithPagination,
+  IApiResponse,
+  PaginationReq,
+} from "@/shared/type/ApiResponse";
+import { axiosInstance } from "@/utils/ApiUtils";
+
+const apiUrl = "book-closing";
+
+export interface IBookClosing {
+  _id?: string;
+  month?: number;
+  year?: number;
+  companyCode?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  canUnlock?: boolean;
+}
+
+export interface IBookClosingDetail {
+  _id?: string;
+  bookClosingId?: string;
+  month?: number;
+  year?: number;
+  accountNumber?: string;
+  accountName?: string;
+  debitAmount?: number;
+  creditAmount?: number;
+  companyCode?: string;
+}
+
+export interface IBookClosingWithDetails extends IBookClosing {
+  details?: IBookClosingDetail[];
+}
+
+export interface IBookClosingListReq extends PaginationReq {}
+
+export interface INextClosingMonthRes {
+  month: number;
+  year: number;
+}
+
+export const getNextClosingMonthApi =
+  async (): Promise<INextClosingMonthRes> => {
+    const result = await axiosInstance.get<IApiResponse<INextClosingMonthRes>>(
+      `${apiUrl}/next-month`
+    );
+    return result.data.data;
+  };
+
+export const createBookClosingApi = async (): Promise<IBookClosing> => {
+  const result = await axiosInstance.post<IApiResponse<IBookClosing>>(apiUrl);
+  return result.data.data;
+};
+
+export const getAllBookClosingApi = async (
+  query: IBookClosingListReq
+): Promise<DataWithPagination<IBookClosing>> => {
+  const result = await axiosInstance.get<
+    IApiResponse<DataWithPagination<IBookClosing>>
+  >(apiUrl, { params: query });
+  return result.data.data;
+};
+
+export const getBookClosingByIdApi = async (
+  id: string
+): Promise<IBookClosingWithDetails> => {
+  const result = await axiosInstance.get<IApiResponse<IBookClosingWithDetails>>(
+    `${apiUrl}/${id}`
+  );
+  return result.data.data;
+};
+
+export const unlockBookClosingApi = async (
+  id: string
+): Promise<{ success: boolean }> => {
+  const result = await axiosInstance.delete<IApiResponse<{ success: boolean }>>(
+    `${apiUrl}/${id}`
+  );
+  return result.data.data;
+};

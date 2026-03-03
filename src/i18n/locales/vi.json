@@ -51,7 +51,7 @@
     "loanContracts": "Hợp đồng vay",
     "contractTransactions": "Giao dịch hợp đồng",
     "bookkeeping": "Sổ kế toán",
-    "monthlyBookClosing": "Khóa sổ tháng"
+    "bookClosing": "Khóa sổ"
   },
   "auth": {
     "login": {
@@ -644,22 +644,22 @@
       "amountTo": "Số tiền đến"
     }
   },
-  "monthlyBookClosing": {
-    "title": "Khóa sổ tháng",
+  "bookClosing": {
+    "title": "Khóa sổ",
     "columns": {
       "month": "Tháng",
       "year": "Năm",
       "closingPeriod": "Kỳ khóa sổ"
     },
     "form": {
-      "closingMonth": "Tháng khóa sổ",
+      "closingPeriod": "Kỳ khóa sổ",
       "month": "Tháng"
     },
     "modal": {
-      "create": "Tạo khóa sổ tháng",
+      "create": "Tạo khóa sổ",
       "confirmClose": "Xác nhận khóa sổ",
       "unlock": "Mở khóa sổ",
-      "unlockConfirm": "Bạn có chắc chắn muốn mở khóa sổ tháng này? Thao tác này sẽ xóa toàn bộ dữ liệu khóa sổ.",
+      "unlockConfirm": "Bạn có chắc chắn muốn mở khóa sổ kỳ này? Thao tác này sẽ xóa toàn bộ dữ liệu khóa sổ.",
       "view": "Chi tiết khóa sổ"
     },
     "action": {
@@ -675,7 +675,7 @@
       "total": "Tổng cộng"
     },
     "notify": {
-      "createSuccess": "Khóa sổ tháng thành công",
+      "createSuccess": "Khóa sổ thành công",
       "unlockSuccess": "Mở khóa sổ thành công"
     }
   }
