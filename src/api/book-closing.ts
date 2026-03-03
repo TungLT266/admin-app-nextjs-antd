@@ -48,8 +48,18 @@ export const getNextClosingMonthApi =
     return result.data.data;
   };
 
-export const createBookClosingApi = async (): Promise<IBookClosing> => {
-  const result = await axiosInstance.post<IApiResponse<IBookClosing>>(apiUrl);
+export interface ICreateBookClosingReq {
+  month: number;
+  year: number;
+}
+
+export const createBookClosingApi = async (
+  data: ICreateBookClosingReq
+): Promise<IBookClosing> => {
+  const result = await axiosInstance.post<IApiResponse<IBookClosing>>(
+    apiUrl,
+    data
+  );
   return result.data.data;
 };
 

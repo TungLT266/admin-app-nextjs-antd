@@ -40,8 +40,9 @@ const CreateButton = () => {
   }, [isOpen]);
 
   const handleOk = () => {
+    if (!nextMonth) return;
     setIsSubmitting(true);
-    createBookClosingApi()
+    createBookClosingApi({ month: nextMonth.month, year: nextMonth.year })
       .then(() => {
         notifySuccess(t("bookClosing.notify.createSuccess"));
         fetchDataList();
