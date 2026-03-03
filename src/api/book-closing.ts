@@ -34,6 +34,19 @@ export interface IBookClosingWithDetails extends IBookClosing {
 
 export interface IBookClosingListReq extends PaginationReq {}
 
+export interface ILastBookClosingRes {
+  month: number;
+  year: number;
+}
+
+export const getLastBookClosingApi = async (
+): Promise<ILastBookClosingRes | null> => {
+  const result = await axiosInstance.get<IApiResponse<ILastBookClosingRes | null>>(
+    `${apiUrl}/last-closing`
+  );
+  return result.data.data;
+};
+
 export interface IBookClosingPreviewDetail {
   accountNumber: string;
   accountName: string;
