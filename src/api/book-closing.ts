@@ -34,19 +34,6 @@ export interface IBookClosingWithDetails extends IBookClosing {
 
 export interface IBookClosingListReq extends PaginationReq {}
 
-export interface INextClosingMonthRes {
-  month: number;
-  year: number;
-}
-
-export const getNextClosingMonthApi =
-  async (): Promise<INextClosingMonthRes> => {
-    const result = await axiosInstance.get<IApiResponse<INextClosingMonthRes>>(
-      `${apiUrl}/next-month`
-    );
-    return result.data.data;
-  };
-
 export interface IBookClosingPreviewDetail {
   accountNumber: string;
   accountName: string;
