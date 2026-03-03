@@ -18,7 +18,6 @@ export interface IBookClosing {
 
 export interface IBookClosingDetail {
   _id?: string;
-  bookClosingId?: string;
   month?: number;
   year?: number;
   accountNumber?: string;
