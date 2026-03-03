@@ -47,6 +47,27 @@ export const getNextClosingMonthApi =
     return result.data.data;
   };
 
+export interface IBookClosingPreviewDetail {
+  accountNumber: string;
+  accountName: string;
+  debitAmount: number;
+  creditAmount: number;
+}
+
+export interface IBookClosingPreviewRes {
+  month: number;
+  year: number;
+  details: IBookClosingPreviewDetail[];
+}
+
+export const getBookClosingPreviewApi =
+  async (): Promise<IBookClosingPreviewRes> => {
+    const result = await axiosInstance.get<IApiResponse<IBookClosingPreviewRes>>(
+      `${apiUrl}/preview-details`
+    );
+    return result.data.data;
+  };
+
 export interface ICreateBookClosingReq {
   month: number;
   year: number;
