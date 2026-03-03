@@ -13,7 +13,6 @@ export interface IBookClosing {
   year?: number;
   companyCode?: string;
   createdAt?: Date;
-  updatedAt?: Date;
   canUnlock?: boolean;
 }
 
@@ -23,6 +22,7 @@ export interface IBookClosingDetail {
   month?: number;
   year?: number;
   accountNumber?: string;
+  /** Computed at query time by joining with accounting_accounts */
   accountName?: string;
   debitAmount?: number;
   creditAmount?: number;
