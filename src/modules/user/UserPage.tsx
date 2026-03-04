@@ -2,7 +2,7 @@
 import { useUserContext } from "@/modules/user/UserContextProvider";
 import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
-import { UserStatus, UserStatusLabels } from "./type";
+import { UserRole, UserRoleLabels, UserStatus, UserStatusLabels } from "./type";
 import { formatDatetime } from "@/utils/DateUtils";
 import EditButton from "./edit/EditButton";
 import DeleteButton from "./delete/DeleteButton";
@@ -43,6 +43,20 @@ const UserPage = () => {
       key: "password",
       align: "center",
       render: () => "••••••••",
+    },
+    {
+      title: t("user.columns.role"),
+      dataIndex: "role",
+      key: "role",
+      align: "center",
+      render: (role) => {
+        const roleLabel = UserRoleLabels.find((item) => item.value === role);
+        return (
+          <Tag color={role === UserRole.ADMIN ? "purple" : "blue"}>
+            {roleLabel?.label ?? role}
+          </Tag>
+        );
+      },
     },
     {
       title: t("user.columns.status"),

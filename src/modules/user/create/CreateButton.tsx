@@ -6,6 +6,7 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { useUserContext } from "@/modules/user/UserContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { UserRole } from "../type";
 
 const CreateButton = () => {
   const [form] = Form.useForm();
@@ -13,6 +14,11 @@ const CreateButton = () => {
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useUserContext();
   const { t } = useTranslation();
+
+  const handleOpen = () => {
+    form.setFieldsValue({ role: UserRole.USER });
+    onOpen();
+  };
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateUserReq = { ...values };
@@ -30,7 +36,7 @@ const CreateButton = () => {
 
   return (
     <>
-      <Button type="primary" onClick={onOpen}>
+      <Button type="primary" onClick={handleOpen}>
         {t("common.create")}
       </Button>
 

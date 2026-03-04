@@ -415,6 +415,7 @@
     "columns": {
       "username": "Username",
       "password": "Password",
+      "role": "Role",
       "status": "Status",
       "createdAt": "Created At",
       "updatedAt": "Updated At",
@@ -427,8 +428,14 @@
       "passwordRequired": "Please input password!",
       "newPassword": "New Password",
       "newPasswordPlaceholder": "Leave blank to keep current",
+      "role": "Role",
+      "roleRequired": "Please select a role!",
       "status": "Status",
       "statusRequired": "Please select status!"
+    },
+    "role": {
+      "ADMIN": "Admin",
+      "USER": "User"
     },
     "modal": {
       "create": "Create User",

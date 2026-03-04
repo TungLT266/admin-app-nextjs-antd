@@ -1,5 +1,5 @@
 import { Form, FormProps, Input, Select } from "antd";
-import { UserStatusLabels } from "../type";
+import { UserRoleLabels, UserStatusLabels } from "../type";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
@@ -48,6 +48,14 @@ const CreateUpdateForm = ({
         <Input.Password
           placeholder={isEditForm ? t("user.form.newPasswordPlaceholder") : ""}
         />
+      </Form.Item>
+
+      <Form.Item
+        label={t("user.form.role")}
+        name="role"
+        rules={[{ required: true, message: t("user.form.roleRequired") }]}
+      >
+        <Select options={UserRoleLabels} />
       </Form.Item>
 
       {isEditForm && (

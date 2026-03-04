@@ -10,16 +10,19 @@ const apiUrl = "users";
 export interface ICreateUserReq {
   username?: string;
   password?: string;
+  role?: string;
 }
 
 export interface IUpdateUserReq {
   password?: string;
   status?: string;
+  role?: string;
 }
 
 export interface IUser {
   _id?: string;
   username?: string;
+  role?: string;
   status?: string;
   createdAt?: Date;
   updatedAt?: Date;

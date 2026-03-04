@@ -415,6 +415,7 @@
     "columns": {
       "username": "Tên đăng nhập",
       "password": "Mật khẩu",
+      "role": "Vai trò",
       "status": "Trạng thái",
       "createdAt": "Ngày tạo",
       "updatedAt": "Ngày cập nhật",
@@ -427,8 +428,14 @@
       "passwordRequired": "Vui lòng nhập mật khẩu!",
       "newPassword": "Mật khẩu mới",
       "newPasswordPlaceholder": "Để trống để giữ nguyên mật khẩu",
+      "role": "Vai trò",
+      "roleRequired": "Vui lòng chọn vai trò!",
       "status": "Trạng thái",
       "statusRequired": "Vui lòng chọn trạng thái!"
+    },
+    "role": {
+      "ADMIN": "Quản trị viên",
+      "USER": "Người dùng"
     },
     "modal": {
       "create": "Tạo người dùng",

@@ -23,7 +23,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   useEffect(() => {
     if (isOpen) {
       getUserByIdApi(id).then((res) => {
-        form.setFieldsValue({ status: res?.status, password: "" });
+        form.setFieldsValue({ status: res?.status, role: res?.role, password: "" });
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,6 +32,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: IUpdateUserReq = {
       status: values.status,
+      role: values.role,
       ...(values.password ? { password: values.password } : {}),
     };
     updateUserApi(id, data)
