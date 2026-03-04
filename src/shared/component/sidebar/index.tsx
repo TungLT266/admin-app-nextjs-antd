@@ -28,6 +28,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { t } = useTranslation();
   const [userRole, setUserRole] = useState<UserRole>(null);
+  const [roleLoading, setRoleLoading] = useState(true);
 
   // Decode JWT to read role
   useEffect(() => {
@@ -40,6 +41,7 @@ export default function Sidebar() {
         setUserRole(null);
       }
     }
+    setRoleLoading(false);
   }, []);
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
@@ -90,14 +92,29 @@ export default function Sidebar() {
       width={250}
     >
       <div className="demo-logo-vertical" />
-      <Menu
-        theme="dark"
-        mode="inline"
-        selectedKeys={[pathname]}
-        defaultOpenKeys={getOpenKeys()}
-        items={getVisibleItems()}
-        onClick={handleMenuClick}
-      />
+      {roleLoading ? (
+        <div className="flex flex-col gap-3 px-4 pt-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-9 rounded-lg animate-pulse"
+              style={{
+                background: "rgba(255,255,255,0.08)",
+                width: i % 3 === 2 ? "60%" : "100%",
+              }}
+            />
+          ))}
+        </div>
+      ) : (
+        <Menu
+          theme="dark"
+          mode="inline"
+          selectedKeys={[pathname]}
+          defaultOpenKeys={getOpenKeys()}
+          items={getVisibleItems()}
+          onClick={handleMenuClick}
+        />
+      )}
     </Sider>
   );
 }
