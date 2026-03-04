@@ -19,11 +19,7 @@ const LoginPage = () => {
       const data: ILoginReq = { ...values };
       const res = await loginApi(data);
 
-      if (res.companies.length === 0) {
-        // No companies: access_token issued directly, user will only see the Company menu
-        localStorage.setItem("accessToken", res.access_token!);
-        router.push("/");
-      } else if (res.companies.length === 1) {
+      if (res.companies.length === 1) {
         // Auto-select the only company
         const { access_token } = await selectCompanyApi({
           tempToken: res.temp_token!,
