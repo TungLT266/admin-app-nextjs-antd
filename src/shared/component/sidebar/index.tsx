@@ -21,21 +21,26 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 
+type UserRole = "ADMIN" | "USER" | null;
+
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const { t } = useTranslation();
   const [isRestrictedMode, setIsRestrictedMode] = useState(false);
+  const [userRole, setUserRole] = useState<UserRole>(null);
 
-  // Decode JWT to check if user has a company; restrict menu if not
+  // Decode JWT to check companyCode and role
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split(".")[1]));
         setIsRestrictedMode(!payload.companyCode);
+        setUserRole(payload.role ?? null);
       } catch {
         setIsRestrictedMode(false);
+        setUserRole(null);
       }
     }
   }, []);
@@ -60,9 +65,22 @@ export default function Sidebar() {
     return [];
   };
 
-  const visibleItems = isRestrictedMode
-    ? items(t).filter((item) => item?.key === '/company')
-    : items(t);
+  const getVisibleItems = (): MenuProps["items"] => {
+    // No company yet — only show company menu regardless of role
+    if (isRestrictedMode) {
+      return items(t).filter((item) => item?.key === '/company');
+    }
+    // ADMIN: only company + user
+    if (userRole === "ADMIN") {
+      return items(t).filter(
+        (item) => item?.key === '/company' || item?.key === '/user',
+      );
+    }
+    // USER: everything except company and user
+    return items(t).filter(
+      (item) => item?.key !== '/company' && item?.key !== '/user',
+    );
+  };
 
   return (
     <Sider
@@ -84,7 +102,7 @@ export default function Sidebar() {
         mode="inline"
         selectedKeys={[pathname]}
         defaultOpenKeys={getOpenKeys()}
-        items={visibleItems}
+        items={getVisibleItems()}
         onClick={handleMenuClick}
       />
     </Sider>
