@@ -491,6 +491,7 @@
     "title": "Hợp đồng vay",
     "columns": {
       "contractDate": "Ngày hợp đồng",
+      "contractCode": "Mã hợp đồng",
       "title": "Tiêu đề",
       "type": "Loại",
       "contact": "Liên hệ",
@@ -512,6 +513,8 @@
       "cancelled": "Đã hủy"
     },
     "filter": {
+      "contractCode": "Mã hợp đồng",
+      "contractCodePlaceholder": "Tìm theo mã...",
       "title": "Tiêu đề",
       "titlePlaceholder": "Tìm theo tiêu đề...",
       "type": "Loại",

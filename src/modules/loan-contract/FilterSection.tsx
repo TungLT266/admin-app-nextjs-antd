@@ -31,6 +31,7 @@ const FilterSection = () => {
     const values = form.getFieldsValue();
     setDataQuery({
       ...dataQuery,
+      contractCodeRegex: values.contractCode,
       titleRegex: values.title,
       status: values.status,
       loanType: values.loanType,
@@ -51,6 +52,10 @@ const FilterSection = () => {
           onValuesChange={handleValuesChange}
           className="flex gap-3 flex-wrap"
         >
+          <FormItemCustom label={t("loanContract.filter.contractCode")} name="contractCode">
+            <Input placeholder={t("loanContract.filter.contractCodePlaceholder")} />
+          </FormItemCustom>
+
           <FormItemCustom label={t("loanContract.filter.title")} name="title">
             <Input placeholder={t("loanContract.filter.titlePlaceholder")} />
           </FormItemCustom>

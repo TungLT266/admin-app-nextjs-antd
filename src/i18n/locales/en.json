@@ -491,6 +491,7 @@
     "title": "Loan Contracts",
     "columns": {
       "contractDate": "Contract Date",
+      "contractCode": "Contract Code",
       "title": "Title",
       "type": "Type",
       "contact": "Contact",
@@ -512,6 +513,8 @@
       "cancelled": "Cancelled"
     },
     "filter": {
+      "contractCode": "Contract Code",
+      "contractCodePlaceholder": "Search by code...",
       "title": "Title",
       "titlePlaceholder": "Search by title...",
       "type": "Type",

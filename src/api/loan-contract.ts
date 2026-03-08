@@ -21,6 +21,7 @@ export interface ICreateLoanContractReq {
 
 export interface ILoanContract {
   _id?: string;
+  contractCode?: string;
   loanType?: string;
   loanContact?: ILoanContact;
   contractDate?: string;
@@ -31,6 +32,7 @@ export interface ILoanContract {
   wallet?: IWallet;
   status?: string;
   companyCode?: string;
+  activeTransactionCount?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -39,6 +41,7 @@ export interface ILoanContractListReq extends PaginationReq {
   status?: string;
   loanType?: string;
   titleRegex?: string;
+  contractCodeRegex?: string;
   documentDateFrom?: string;
   documentDateTo?: string;
   loanContact?: string;

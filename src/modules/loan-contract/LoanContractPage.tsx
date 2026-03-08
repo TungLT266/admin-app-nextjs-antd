@@ -21,6 +21,7 @@ import CancelButton from "./CancelButton";
 import ReopenButton from "./ReopenButton";
 import LockButton from "./LockButton";
 import UnlockButton from "./UnlockButton";
+import ContractTransactionsExpanded from "./ContractTransactionsExpanded";
 import { formatNumber } from "@/utils/NumberUtils";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
@@ -53,6 +54,12 @@ const LoanContractPage = () => {
       key: "contractDate",
       align: "center",
       render: (contractDate) => formatDate(contractDate),
+    },
+    {
+      title: t("loanContract.columns.contractCode"),
+      dataIndex: "contractCode",
+      key: "contractCode",
+      align: "center",
     },
     {
       title: t("loanContract.columns.title"),
@@ -128,7 +135,9 @@ const LoanContractPage = () => {
                 <RecordPaymentButton id={id} />
                 <LockButton id={id} />
                 <CompleteButton id={id} />
-                <CancelButton id={id} />
+                {(record.activeTransactionCount ?? 0) === 0 && (
+                  <CancelButton id={id} />
+                )}
               </>
             )}
             {status === LoanStatus.LOCKED && (
@@ -167,6 +176,14 @@ const LoanContractPage = () => {
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
+        expandable={{
+          expandedRowRender: (record) => (
+            <ContractTransactionsExpanded
+              contractId={record._id!}
+              onContractUpdated={fetchDataList}
+            />
+          ),
+        }}
         pagination={{
           ...dataList.pagination,
           pageSizeOptions,
