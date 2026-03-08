@@ -507,6 +507,7 @@
     "status": {
       "pending": "Pending",
       "active": "Active",
+      "locked": "Locked",
       "completed": "Completed",
       "cancelled": "Cancelled"
     },
@@ -552,7 +553,9 @@
       "recordPayment": "Record Payment",
       "complete": "Complete Contract",
       "cancel": "Cancel Contract",
-      "reopen": "Reopen Contract"
+      "reopen": "Reopen Contract",
+      "lock": "Lock Contract",
+      "unlock": "Unlock Contract"
     },
     "button": {
       "confirmActivate": "Confirm & Activate",
@@ -561,9 +564,13 @@
       "complete": "Complete Contract",
       "cancel": "Cancel Contract",
       "reopen": "Reopen Contract",
+      "lock": "Lock Contract",
+      "unlock": "Unlock Contract",
       "yesComplete": "Yes, Complete",
       "yesCancel": "Yes, Cancel",
-      "yesReopen": "Yes, Reopen"
+      "yesReopen": "Yes, Reopen",
+      "yesLock": "Yes, Lock",
+      "yesUnlock": "Yes, Unlock"
     },
     "notify": {
       "createSuccess": "Contract created successfully",
@@ -574,13 +581,17 @@
       "paymentSuccess": "Payment recorded successfully",
       "completeSuccess": "Contract marked as completed",
       "cancelSuccess": "Contract cancelled successfully",
-      "reopenSuccess": "Contract reopened successfully"
+      "reopenSuccess": "Contract reopened successfully",
+      "lockSuccess": "Contract locked successfully",
+      "unlockSuccess": "Contract unlocked successfully"
     },
     "confirm": {
       "delete": "Are you sure you want to delete this contract?",
       "complete": "Mark this contract as Completed? This cannot be undone.",
       "cancel": "Are you sure you want to cancel this contract? All associated transactions will also be marked as cancelled.",
-      "reopen": "Reopen this contract and move it back to Active? All associated transactions will also be restored to active status."
+      "reopen": "Reopen this contract and move it back to Active? All associated transactions will also be restored to active status.",
+      "lock": "Lock this contract? No operations will be allowed while the contract is locked.",
+      "unlock": "Unlock this contract and move it back to Active status?"
     }
   },
   "loanTransaction": {

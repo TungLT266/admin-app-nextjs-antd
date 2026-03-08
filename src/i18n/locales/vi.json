@@ -507,6 +507,7 @@
     "status": {
       "pending": "Chờ xử lý",
       "active": "Đang hoạt động",
+      "locked": "Đã khóa",
       "completed": "Hoàn thành",
       "cancelled": "Đã hủy"
     },
@@ -552,7 +553,9 @@
       "recordPayment": "Ghi nhận thanh toán",
       "complete": "Hoàn thành hợp đồng",
       "cancel": "Hủy hợp đồng",
-      "reopen": "Mở lại hợp đồng"
+      "reopen": "Mở lại hợp đồng",
+      "lock": "Khóa hợp đồng",
+      "unlock": "Bỏ khóa hợp đồng"
     },
     "button": {
       "confirmActivate": "Xác nhận & Kích hoạt",
@@ -561,9 +564,13 @@
       "complete": "Hoàn thành hợp đồng",
       "cancel": "Hủy hợp đồng",
       "reopen": "Mở lại hợp đồng",
+      "lock": "Khóa hợp đồng",
+      "unlock": "Bỏ khóa hợp đồng",
       "yesComplete": "Có, Hoàn thành",
       "yesCancel": "Có, Hủy",
-      "yesReopen": "Có, Mở lại"
+      "yesReopen": "Có, Mở lại",
+      "yesLock": "Có, Khóa",
+      "yesUnlock": "Có, Bỏ khóa"
     },
     "notify": {
       "createSuccess": "Tạo hợp đồng thành công",
@@ -574,13 +581,17 @@
       "paymentSuccess": "Ghi nhận thanh toán thành công",
       "completeSuccess": "Hợp đồng đã được hoàn thành",
       "cancelSuccess": "Hủy hợp đồng thành công",
-      "reopenSuccess": "Mở lại hợp đồng thành công"
+      "reopenSuccess": "Mở lại hợp đồng thành công",
+      "lockSuccess": "Khóa hợp đồng thành công",
+      "unlockSuccess": "Bỏ khóa hợp đồng thành công"
     },
     "confirm": {
       "delete": "Bạn có chắc chắn muốn xóa hợp đồng này?",
       "complete": "Đánh dấu hợp đồng này là Hoàn thành? Thao tác này không thể hoàn tác.",
       "cancel": "Bạn có chắc chắn muốn hủy hợp đồng này? Tất cả giao dịch liên quan cũng sẽ bị hủy.",
-      "reopen": "Mở lại hợp đồng và chuyển về trạng thái Hoạt động? Tất cả giao dịch liên quan cũng sẽ được khôi phục."
+      "reopen": "Mở lại hợp đồng và chuyển về trạng thái Hoạt động? Tất cả giao dịch liên quan cũng sẽ được khôi phục.",
+      "lock": "Khóa hợp đồng này? Không có thao tác nào được phép khi hợp đồng đang ở trạng thái khóa.",
+      "unlock": "Bỏ khóa hợp đồng và chuyển về trạng thái Đang hoạt động?"
     }
   },
   "loanTransaction": {

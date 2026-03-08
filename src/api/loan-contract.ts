@@ -143,3 +143,17 @@ export const reopenLoanContractApi = async (id: string) => {
   );
   return result.data.data;
 };
+
+export const lockLoanContractApi = async (id: string) => {
+  const result = await axiosInstance.patch<IApiResponse<ILoanContract>>(
+    `${apiUrl}/${id}/lock`
+  );
+  return result.data.data;
+};
+
+export const unlockLoanContractApi = async (id: string) => {
+  const result = await axiosInstance.patch<IApiResponse<ILoanContract>>(
+    `${apiUrl}/${id}/unlock`
+  );
+  return result.data.data;
+};

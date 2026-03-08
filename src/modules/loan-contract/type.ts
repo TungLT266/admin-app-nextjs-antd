@@ -1,6 +1,7 @@
 export enum LoanStatus {
   PENDING = "PENDING",
   ACTIVE = "ACTIVE",
+  LOCKED = "LOCKED",
   COMPLETED = "COMPLETED",
   CANCELLED = "CANCELLED",
 }
@@ -8,6 +9,7 @@ export enum LoanStatus {
 export const LoanStatusLabels = [
   { value: LoanStatus.PENDING, label: "Pending", color: "orange" },
   { value: LoanStatus.ACTIVE, label: "Active", color: "blue" },
+  { value: LoanStatus.LOCKED, label: "Locked", color: "purple" },
   { value: LoanStatus.COMPLETED, label: "Completed", color: "green" },
   { value: LoanStatus.CANCELLED, label: "Cancelled", color: "red" },
 ];

@@ -19,6 +19,8 @@ import RecordPaymentButton from "./RecordPaymentButton";
 import CompleteButton from "./CompleteButton";
 import CancelButton from "./CancelButton";
 import ReopenButton from "./ReopenButton";
+import LockButton from "./LockButton";
+import UnlockButton from "./UnlockButton";
 import { formatNumber } from "@/utils/NumberUtils";
 import { pageSizeOptions } from "@/shared/type/ApiResponse";
 import FilterSection from "./FilterSection";
@@ -124,8 +126,14 @@ const LoanContractPage = () => {
               <>
                 <AddDisbursementButton id={id} />
                 <RecordPaymentButton id={id} />
+                <LockButton id={id} />
                 <CompleteButton id={id} />
                 <CancelButton id={id} />
+              </>
+            )}
+            {status === LoanStatus.LOCKED && (
+              <>
+                <UnlockButton id={id} />
               </>
             )}
             {status === LoanStatus.COMPLETED && (
