@@ -39,9 +39,9 @@ const CreateUpdateForm = ({ onFinish, form }: CreateUpdateFormProps) => {
     });
   }, []);
 
-  const loanTypeOptions = LoanTypeLabels.map((t) => ({
-    label: t.label,
-    value: t.value,
+  const loanTypeOptions = LoanTypeLabels.map((item) => ({
+    label: t(item.label),
+    value: item.value,
   }));
 
   return (

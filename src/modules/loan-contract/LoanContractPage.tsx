@@ -72,8 +72,8 @@ const LoanContractPage = () => {
       key: "loanType",
       align: "center",
       render: (loanType) => {
-        const label = LoanTypeLabels.find((t) => t.value === loanType);
-        return <Tag color={label?.color}>{label?.label}</Tag>;
+        const label = LoanTypeLabels.find((item) => item.value === loanType);
+        return <Tag color={label?.color}>{label ? t(label.label) : null}</Tag>;
       },
     },
     {

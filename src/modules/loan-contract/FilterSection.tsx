@@ -64,9 +64,9 @@ const FilterSection = () => {
             <Select
               allowClear
               placeholder={t("loanContract.filter.typePlaceholder")}
-              options={LoanTypeLabels.map((t) => ({
-                label: t.label,
-                value: t.value,
+              options={LoanTypeLabels.map((item) => ({
+                label: t(item.label),
+                value: item.value,
               }))}
               style={{ width: 180 }}
             />

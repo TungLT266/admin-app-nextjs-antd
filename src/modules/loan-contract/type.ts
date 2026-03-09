@@ -20,8 +20,8 @@ export enum LoanType {
 }
 
 export const LoanTypeLabels = [
-  { value: LoanType.LOAN, label: "Loan (Cho vay)", color: "cyan" },
-  { value: LoanType.DEBT, label: "Debt (Đi vay)", color: "volcano" },
+  { value: LoanType.LOAN, label: "loanContract.type.loan", color: "cyan" },
+  { value: LoanType.DEBT, label: "loanContract.type.debt", color: "volcano" },
 ];
 
 export enum LoanTransactionType {
@@ -30,8 +30,8 @@ export enum LoanTransactionType {
 }
 
 export const LoanTransactionTypeLabels = [
-  { value: LoanTransactionType.DISBURSEMENT, label: "Disbursement", color: "blue" },
-  { value: LoanTransactionType.PAYMENT, label: "Payment", color: "green" },
+  { value: LoanTransactionType.DISBURSEMENT, label: "loanTransaction.transactionType.disbursement", color: "blue" },
+  { value: LoanTransactionType.PAYMENT, label: "loanTransaction.transactionType.payment", color: "green" },
 ];
 
 

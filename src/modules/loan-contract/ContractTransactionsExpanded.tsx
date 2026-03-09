@@ -82,7 +82,7 @@ const ContractTransactionsExpanded = ({ contractId, onContractUpdated }: Props) 
         const label = LoanTransactionTypeLabels.find(
           (item) => item.value === transactionType
         );
-        return label ? <Tag color={label.color}>{label.label}</Tag> : null;
+        return label ? <Tag color={label.color}>{t(label.label)}</Tag> : null;
       },
     },
     {

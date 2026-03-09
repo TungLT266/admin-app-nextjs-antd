@@ -24,12 +24,13 @@ const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
   const [walletOptions, setWalletOptions] = useState<ISelectOption[]>([]);
 
   useEffect(() => {
+    if (!isOpen) return;
     getAllActiveWalletApi().then((res) => {
       setWalletOptions(
         res.items?.map((item: IWallet) => ({ label: item.name, value: item._id })) || []
       );
     });
-  }, []);
+  }, [isOpen]);
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: IAmountWithDateReq = {
