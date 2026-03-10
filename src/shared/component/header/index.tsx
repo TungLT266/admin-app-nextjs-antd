@@ -22,15 +22,12 @@ export default function HeaderLayout() {
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [username, setUsername] = useState<string>("");
-  const [loggingOut, setLoggingOut] = useState(false);
-
   useEffect(() => {
     const payload = getTokenPayload();
     if (payload?.username) setUsername(payload.username);
   }, []);
 
   const handleLogout = async () => {
-    setLoggingOut(true);
     try {
       await logoutApi();
     } catch {

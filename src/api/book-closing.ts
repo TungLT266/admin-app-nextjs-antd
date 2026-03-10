@@ -32,7 +32,7 @@ export interface IBookClosingWithDetails extends IBookClosing {
   details?: IBookClosingDetail[];
 }
 
-export interface IBookClosingListReq extends PaginationReq {}
+export type IBookClosingListReq = PaginationReq;
 
 export interface ILastBookClosingRes {
   month: number;

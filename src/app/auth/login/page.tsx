@@ -38,7 +38,7 @@ const LoginPage = () => {
         sessionStorage.setItem("loginUsername", values.username || "");
         router.push("/auth/select-company");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(
         typeof err === "string" ? err : t("auth.login.error")
       );

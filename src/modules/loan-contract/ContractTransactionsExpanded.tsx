@@ -8,7 +8,7 @@ import {
   getAllLoanTransactionApi,
   ILoanTransaction,
 } from "@/api/loan-transaction";
-import { LoanStatus, LoanStatusLabels, LoanTransactionTypeLabels } from "./type";
+import { LoanStatus, LoanTransactionTypeLabels } from "./type";
 import { formatNumber } from "@/utils/NumberUtils";
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import { useTranslation } from "react-i18next";

@@ -64,7 +64,7 @@ const SelectCompanyPage = () => {
       sessionStorage.removeItem("loginUsername");
       localStorage.setItem("accessToken", access_token);
       router.push("/");
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(typeof err === "string" ? err : t("auth.selectCompany.error"));
       setLoading("");
     }

@@ -6,7 +6,7 @@ import { ISelectOption } from "@/shared/type/ISelectOption";
 import { DatePicker, Form, FormProps, Input, InputNumber, Select } from "antd";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { LoanType, LoanTypeLabels } from "../type";
+import { LoanTypeLabels } from "../type";
 
 interface CreateUpdateFormProps {
   onFinish: FormProps["onFinish"];
