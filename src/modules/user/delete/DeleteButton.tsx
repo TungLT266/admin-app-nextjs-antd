@@ -2,7 +2,7 @@ import { useNotificationContext } from "@/shared/context/NotificationContextProv
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { UserDeleteOutlined } from "@ant-design/icons";
 import { Button, Modal, Tooltip } from "antd";
-import { removeUserFromCompanyApi } from "@/api/user-company";
+import { deleteUserApi } from "@/api/user";
 import { useUserContext } from "@/modules/user/UserContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
@@ -18,7 +18,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
   const { t } = useTranslation();
 
   const handleOk = () => {
-    removeUserFromCompanyApi(id)
+    deleteUserApi(id)
       .then(() => {
         notifySuccess(t("user.notify.deleteSuccess"));
         fetchDataList();

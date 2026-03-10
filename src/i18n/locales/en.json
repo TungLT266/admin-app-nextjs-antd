@@ -51,7 +51,8 @@
     "loanContracts": "Loan Contracts",
     "contractTransactions": "Contract Transactions",
     "bookkeeping": "Bookkeeping",
-    "bookClosing": "Book Closing"
+    "bookClosing": "Book Closing",
+    "userCompany": "User Company"
   },
   "auth": {
     "login": {
@@ -451,6 +452,27 @@
       "modalTitle": "Remove User from Company",
       "ok": "Remove",
       "confirm": "Are you sure you want to remove this user from the current company? The user account will not be deleted."
+    }
+  },
+  "userCompany": {
+    "title": "User Company",
+    "addUser": {
+      "button": "Add User",
+      "modalTitle": "Add Users to Company",
+      "searchPlaceholder": "Search by username...",
+      "noAvailableUsers": "No available users",
+      "submit": "Add Selected",
+      "success": "Users added successfully"
+    },
+    "removeUser": {
+      "tooltip": "Remove from Company",
+      "confirm": "Are you sure you want to remove this user from the company?",
+      "ok": "Remove",
+      "success": "User removed from company successfully"
+    },
+    "users": {
+      "title": "Users in company",
+      "empty": "No users assigned to this company"
     }
   },
   "loanContact": {

@@ -65,15 +65,21 @@ export default function Sidebar() {
   };
 
   const getVisibleItems = (): MenuProps["items"] => {
-    // ADMIN: only company + user
+    // ADMIN: only company, user, and user-company
     if (userRole === "ADMIN") {
       return items(t).filter(
-        (item) => item?.key === '/company' || item?.key === '/user',
+        (item) =>
+          item?.key === '/company' ||
+          item?.key === '/user' ||
+          item?.key === '/user-company',
       );
     }
-    // USER (default): everything except company and user
+    // USER (default): everything except company, user, and user-company
     return items(t).filter(
-      (item) => item?.key !== '/company' && item?.key !== '/user',
+      (item) =>
+        item?.key !== '/company' &&
+        item?.key !== '/user' &&
+        item?.key !== '/user-company',
     );
   };
 
@@ -136,6 +142,11 @@ const items = (t: (key: string) => string): MenuProps["items"] => [
     key: "/user",
     icon: <UserOutlined />,
     label: t("sidebar.user"),
+  },
+  {
+    key: "/user-company",
+    icon: <TeamOutlined />,
+    label: t("sidebar.userCompany"),
   },
   {
     key: "/accounting-account",

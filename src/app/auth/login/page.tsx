@@ -19,11 +19,15 @@ const LoginPage = () => {
       const data: ILoginReq = { ...values };
       const res = await loginApi(data);
 
-      if (res.companies.length === 1) {
+      if (res.access_token) {
+        // ADMIN: direct access_token returned, no company selection needed
+        localStorage.setItem("accessToken", res.access_token);
+        router.push("/");
+      } else if (res.companies!.length === 1) {
         // Auto-select the only company
         const { access_token } = await selectCompanyApi({
           tempToken: res.temp_token!,
-          companyCode: res.companies[0].code,
+          companyCode: res.companies![0].code,
         });
         localStorage.setItem("accessToken", access_token);
         router.push("/");

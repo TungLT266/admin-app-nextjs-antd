@@ -51,7 +51,8 @@
     "loanContracts": "Hợp đồng vay",
     "contractTransactions": "Giao dịch hợp đồng",
     "bookkeeping": "Sổ kế toán",
-    "bookClosing": "Khóa sổ"
+    "bookClosing": "Khóa sổ",
+    "userCompany": "Người dùng - Công ty"
   },
   "auth": {
     "login": {
@@ -451,6 +452,27 @@
       "modalTitle": "Xóa người dùng khỏi công ty",
       "ok": "Xóa",
       "confirm": "Bạn có chắc chắn muốn xóa người dùng này khỏi công ty hiện tại? Tài khoản người dùng sẽ không bị xóa."
+    }
+  },
+  "userCompany": {
+    "title": "Người dùng - Công ty",
+    "addUser": {
+      "button": "Thêm người dùng",
+      "modalTitle": "Thêm người dùng vào công ty",
+      "searchPlaceholder": "Tìm theo tên đăng nhập...",
+      "noAvailableUsers": "Không có người dùng khả dụng",
+      "submit": "Thêm đã chọn",
+      "success": "Thêm người dùng thành công"
+    },
+    "removeUser": {
+      "tooltip": "Xóa khỏi công ty",
+      "confirm": "Bạn có chắc chắn muốn xóa người dùng này khỏi công ty?",
+      "ok": "Xóa",
+      "success": "Đã xóa người dùng khỏi công ty thành công"
+    },
+    "users": {
+      "title": "Người dùng trong công ty",
+      "empty": "Chưa có người dùng nào được gán vào công ty này"
     }
   },
   "loanContact": {
