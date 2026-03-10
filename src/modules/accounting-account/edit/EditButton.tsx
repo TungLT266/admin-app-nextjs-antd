@@ -27,7 +27,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   useEffect(() => {
     if (isOpen) {
       getAccountingAccountByIdApi(id).then((res) => {
-        const initialValues: IUpdateAccountingAccountReq = {
+        const initialValues = {
           number: res.number,
           name: res.name,
           status: res.status,
