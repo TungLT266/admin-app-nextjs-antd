@@ -50,7 +50,7 @@ const CompanyUsersExpanded = ({
       notifySuccess(t("userCompany.removeUser.success"));
       fetchUsers();
     } catch (err: unknown) {
-      notifyError(err);
+      notifyError(typeof err === "string" ? err : String(err));
     }
   };
 

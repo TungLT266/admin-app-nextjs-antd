@@ -67,7 +67,7 @@ export default function Sidebar() {
   const getVisibleItems = (): MenuProps["items"] => {
     // ADMIN: only company, user, and user-company
     if (userRole === "ADMIN") {
-      return items(t).filter(
+      return (items(t) ?? []).filter(
         (item) =>
           item?.key === '/company' ||
           item?.key === '/user' ||
@@ -75,7 +75,7 @@ export default function Sidebar() {
       );
     }
     // USER (default): everything except company, user, and user-company
-    return items(t).filter(
+    return (items(t) ?? []).filter(
       (item) =>
         item?.key !== '/company' &&
         item?.key !== '/user' &&
