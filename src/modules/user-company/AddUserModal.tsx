@@ -83,7 +83,7 @@ const AddUserModal = ({
       notifySuccess(t("userCompany.addUser.success"));
       onSuccess();
     } catch (err: unknown) {
-      notifyError(err);
+      notifyError(typeof err === "string" ? err : String(err));
     } finally {
       setSubmitting(false);
     }
