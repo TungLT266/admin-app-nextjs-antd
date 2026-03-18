@@ -1,5 +1,6 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
-import { Button, Modal } from "antd";
+import { Button, Modal, Tooltip } from "antd";
+import { UnlockOutlined } from "@ant-design/icons";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { unlockBookClosingApi } from "@/api/book-closing";
 import { useBookClosingContext } from "../BookClosingContextProvider";
@@ -31,9 +32,14 @@ const UnlockButton = ({ id }: UnlockButtonProps) => {
 
   return (
     <>
-      <Button type="default" danger onClick={onOpen}>
-        {t("bookClosing.action.unlock")}
-      </Button>
+      <Tooltip title={t("bookClosing.action.unlock")}>
+        <Button
+          shape="circle"
+          icon={<UnlockOutlined />}
+          onClick={onOpen}
+          style={{ backgroundColor: "#13c2c2", color: "white" }}
+        />
+      </Tooltip>
 
       <Modal
         title={t("bookClosing.modal.unlock")}

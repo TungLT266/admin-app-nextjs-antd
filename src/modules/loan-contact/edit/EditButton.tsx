@@ -52,6 +52,7 @@ const EditButton = ({ id }: EditButtonProps) => {
     <>
       <Tooltip title={t("common.edit")}>
         <Button
+          type="primary"
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}

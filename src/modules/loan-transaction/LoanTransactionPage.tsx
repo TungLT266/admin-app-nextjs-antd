@@ -1,15 +1,11 @@
 "use client";
 
-import { Button, Popconfirm, Table, TableProps, Tag } from "antd";
+import { Table, TableProps, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { formatDate, formatDatetime } from "@/utils/DateUtils";
 import { useLoanTransactionContext } from "./LoanTransactionContextProvider";
+import { ILoanTransaction } from "@/api/loan-transaction";
 import {
-  deleteLoanTransactionApi,
-  ILoanTransaction,
-} from "@/api/loan-transaction";
-import {
-  LoanStatus,
   LoanStatusLabels,
   LoanTransactionTypeLabels,
   LoanTypeLabels,
@@ -27,8 +23,6 @@ const LoanTransactionPage = () => {
   const { dataList, fetchDataList, dataQuery, setDataQuery, isLoading } =
     useLoanTransactionContext();
   const [dataSource, setDataSource] = useState<DataType[]>([]);
-  const [deletingId, setDeletingId] = useState<string | null>(null);
-
   useEffect(() => {
     fetchDataList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,16 +33,6 @@ const LoanTransactionPage = () => {
       dataList.items?.map((item) => ({ ...item, key: item._id })) || [],
     );
   }, [dataList]);
-
-  const handleDelete = async (id: string) => {
-    try {
-      setDeletingId(id);
-      await deleteLoanTransactionApi(id);
-      fetchDataList();
-    } finally {
-      setDeletingId(null);
-    }
-  };
 
   const columns: TableProps<DataType>["columns"] = [
     {
@@ -123,28 +107,6 @@ const LoanTransactionPage = () => {
       align: "center",
       render: (createdAt) => formatDatetime(createdAt),
     },
-    {
-      title: t("loanTransaction.columns.action"),
-      key: "actions",
-      align: "center",
-      render: (_, record) => {
-        if (record.status !== LoanStatus.ACTIVE) return null;
-        return (
-          <Popconfirm
-            title={t("loanTransaction.confirm.deleteTitle")}
-            description={t("loanTransaction.confirm.deleteDescription")}
-            onConfirm={() => handleDelete(record._id!)}
-            okText={t("loanTransaction.confirm.okText")}
-            okButtonProps={{ danger: true }}
-            cancelText={t("loanTransaction.confirm.cancelText")}
-          >
-            <Button danger size="small" loading={deletingId === record._id}>
-              {t("common.delete")}
-            </Button>
-          </Popconfirm>
-        );
-      },
-    },
   ];
 
   const handleTableChange: TableProps<DataType>["onChange"] = (pagination) => {
@@ -162,6 +124,7 @@ const LoanTransactionPage = () => {
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         pagination={{
           ...dataList.pagination,
           pageSizeOptions,

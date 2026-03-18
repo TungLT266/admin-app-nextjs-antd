@@ -108,6 +108,8 @@ const LocalTransferPage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 160,
       render: (id, record) => {
         const { status } = record;
         return (
@@ -146,6 +148,7 @@ const LocalTransferPage = () => {
       <Table<DataType>
         columns={columns}
         dataSource={dataSource}
+        scroll={{ x: "max-content" }}
         pagination={{
           ...dataList.pagination,
           pageSizeOptions: pageSizeOptions,

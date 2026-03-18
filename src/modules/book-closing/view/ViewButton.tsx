@@ -1,5 +1,6 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
-import { Button, Modal, Table, TableProps, Typography } from "antd";
+import { Button, Modal, Table, TableProps, Tooltip, Typography } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import {
   getBookClosingByIdApi,
@@ -77,9 +78,14 @@ const ViewButton = ({ id, month, year }: ViewButtonProps) => {
 
   return (
     <>
-      <Button type="link" onClick={handleOpen}>
-        {t("bookClosing.action.view")}
-      </Button>
+      <Tooltip title={t("bookClosing.action.view")}>
+        <Button
+          shape="circle"
+          icon={<EyeOutlined />}
+          onClick={handleOpen}
+          style={{ backgroundColor: "#1677ff", color: "white" }}
+        />
+      </Tooltip>
 
       <Modal
         title={`${t("bookClosing.modal.view")} - ${t("bookClosing.form.month")} ${month}/${year}`}

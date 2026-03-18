@@ -118,6 +118,8 @@ const IncomePage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 160,
       render: (id, record) => {
         const { status } = record;
         return (
@@ -167,6 +169,7 @@ const IncomePage = () => {
         columns={columns}
         dataSource={dataSource}
         rowSelection={rowSelection}
+        scroll={{ x: "max-content" }}
         pagination={{
           ...dataList.pagination,
           pageSizeOptions: pageSizeOptions,

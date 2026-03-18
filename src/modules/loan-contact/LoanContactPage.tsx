@@ -59,6 +59,8 @@ const LoanContactPage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 120,
       render: (id) => (
         <div className="flex gap-2 justify-center">
           <EditButton id={id} />
@@ -83,6 +85,7 @@ const LoanContactPage = () => {
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         pagination={{
           ...dataList.pagination,
           pageSizeOptions,

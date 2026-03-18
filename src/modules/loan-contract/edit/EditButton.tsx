@@ -60,7 +60,7 @@ const EditButton = ({ id }: EditButtonProps) => {
   return (
     <>
       <Tooltip title={t("common.edit")}>
-        <Button shape="circle" icon={<EditOutlined />} onClick={onOpen} />
+        <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={onOpen} />
       </Tooltip>
       <Modal
         title={t("loanContract.modal.update")}

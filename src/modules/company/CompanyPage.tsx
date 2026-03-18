@@ -88,6 +88,8 @@ const CompanyPage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 120,
       render: (id) => {
         return (
           <div className="flex gap-2 justify-center">
@@ -107,6 +109,7 @@ const CompanyPage = () => {
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         pagination={false}
       />
 

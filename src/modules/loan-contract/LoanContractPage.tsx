@@ -118,6 +118,8 @@ const LoanContractPage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 200,
       render: (id, record) => {
         const { status } = record;
         return (
@@ -176,6 +178,7 @@ const LoanContractPage = () => {
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         expandable={{
           expandedRowRender: (record) => (
             <ContractTransactionsExpanded

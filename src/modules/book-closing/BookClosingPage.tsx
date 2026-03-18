@@ -1,6 +1,6 @@
 "use client";
 
-import { Table, TableProps, Space } from "antd";
+import { Table, TableProps } from "antd";
 import { useEffect, useState } from "react";
 import { formatDatetime } from "@/utils/DateUtils";
 import { useBookClosingContext } from "./BookClosingContextProvider";
@@ -65,15 +65,17 @@ const BookClosingPage = () => {
       title: t("common.actions"),
       key: "actions",
       align: "center",
+      fixed: "right",
+      width: 160,
       render: (_, record) => (
-        <Space>
+        <div className="flex gap-2 justify-center flex-wrap">
           <ViewButton
             id={record._id!}
             month={record.month!}
             year={record.year!}
           />
           {record.canUnlock && <UnlockButton id={record._id!} />}
-        </Space>
+        </div>
       ),
     },
   ];
@@ -88,6 +90,7 @@ const BookClosingPage = () => {
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         pagination={{
           current: dataList.pagination?.current,
           pageSize: dataList.pagination?.pageSize,

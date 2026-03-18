@@ -220,6 +220,7 @@ const BookkeepingPage = () => {
         dataSource={dataSource}
         bordered
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         pagination={false}
       />
 

@@ -86,6 +86,8 @@ const AccountingAccountPage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 160,
       render: (id, record) => {
         return (
           <div className="flex gap-2 justify-center">
@@ -106,6 +108,7 @@ const AccountingAccountPage = () => {
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         pagination={false}
       />
 

@@ -75,6 +75,7 @@ const UserCompanyPage = () => {
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         pagination={false}
         expandable={{
           expandedRowRender: (record) => (

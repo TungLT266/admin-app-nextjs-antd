@@ -111,6 +111,8 @@ const IncomeAndExpenseTypePage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 120,
       render: (id) => {
         return (
           <div className="flex gap-2 justify-center">
@@ -137,6 +139,7 @@ const IncomeAndExpenseTypePage = () => {
       <Table<DataType>
         columns={columns}
         dataSource={dataSource}
+        scroll={{ x: "max-content" }}
         pagination={{
           ...dataList.pagination,
           pageSizeOptions: pageSizeOptions,

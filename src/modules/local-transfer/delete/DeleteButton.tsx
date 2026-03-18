@@ -3,7 +3,7 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Modal } from "antd";
+import { Button, Modal, Tooltip } from "antd";
 import { useLocalTransferContext } from "../LocalTransferContextProvider";
 import { deleteLocalTransferApi } from "@/api/local-transfer";
 
@@ -31,13 +31,15 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
 
   return (
     <>
-      <Button
-        type="primary"
-        shape="circle"
-        icon={<DeleteOutlined />}
-        onClick={onOpen}
-        danger
-      />
+      <Tooltip title={t("common.delete")}>
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<DeleteOutlined />}
+          onClick={onOpen}
+          danger
+        />
+      </Tooltip>
 
       <Modal
         title={t("common.deleteTitle")}

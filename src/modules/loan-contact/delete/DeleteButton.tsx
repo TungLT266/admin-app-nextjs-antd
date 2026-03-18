@@ -31,6 +31,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
     <>
       <Tooltip title={t("common.delete")}>
         <Button
+          type="primary"
           danger
           shape="circle"
           icon={<DeleteOutlined />}

@@ -1,7 +1,7 @@
 import { useNotificationContext } from "@/shared/context/NotificationContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Modal } from "antd";
+import { Button, Modal, Tooltip } from "antd";
 import { useWalletContext } from "../WalletContextProvider";
 import { deleteWalletApi } from "@/api/wallet";
 import { useTranslation } from "react-i18next";
@@ -31,13 +31,15 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
 
   return (
     <>
-      <Button
-        type="primary"
-        shape="circle"
-        icon={<DeleteOutlined />}
-        onClick={onOpen}
-        danger
-      />
+      <Tooltip title={t("common.delete")}>
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<DeleteOutlined />}
+          onClick={onOpen}
+          danger
+        />
+      </Tooltip>
 
       <Modal
         title={t("common.deleteTitle")}

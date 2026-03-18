@@ -156,6 +156,8 @@ const AccountGroupPage = () => {
       dataIndex: "_id",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 160,
       render: (id, record) => {
         return (
           <div className="flex gap-2 justify-center">
@@ -183,6 +185,7 @@ const AccountGroupPage = () => {
       <Table<DataType>
         columns={columns}
         dataSource={dataSource}
+        scroll={{ x: "max-content" }}
         pagination={{
           ...dataList.pagination,
           pageSizeOptions: pageSizeOptions,
