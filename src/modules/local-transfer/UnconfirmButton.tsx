@@ -6,18 +6,22 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { unconfirmLocalTransferApi } from "@/api/local-transfer";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 interface DeleteButtonProps {
   id: string;
 }
 
 const UnconfirmButton = ({ id }: DeleteButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLocalTransferContext();
 
   const handleOk = () => {
+    onClose();
+    setIsLoading(true);
     unconfirmLocalTransferApi(id)
       .then(() => {
         notifySuccess(t("localTransfer.notify.unconfirmSuccess"));
@@ -25,7 +29,8 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -36,6 +41,7 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
           shape="circle"
           icon={<CloseOutlined />}
           onClick={onOpen}
+          loading={isLoading}
           danger
         />
       </Tooltip>

@@ -5,7 +5,7 @@ import "@/i18n/config";
 import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLoanContactContext } from "../LoanContactContextProvider";
 import {
   getLoanContactByIdApi,
@@ -18,6 +18,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,13 +40,15 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateLoanContactReq = { ...values };
+    onClose();
+    setIsLoading(true);
     updateLoanContactApi(id, data)
       .then(() => {
         notifySuccess(t("loanContact.notify.updateSuccess"));
         fetchDataList();
-        onClose();
       })
-      .catch((error) => notifyError(error));
+      .catch((error) => notifyError(error))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -56,6 +59,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}
+          loading={isLoading}
         />
       </Tooltip>
       <Modal

@@ -8,7 +8,7 @@ import {
   IUpdateCompanyReq,
   updateCompanyApi,
 } from "@/api/company";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCompanyContext } from "@/modules/company/CompanyContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
@@ -18,6 +18,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -45,6 +46,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       description: values.description,
       status: values.status,
     };
+    onClose();
+    setIsLoading(true);
     updateCompanyApi(id, data)
       .then(() => {
         notifySuccess(t("company.notify.updateSuccess"));
@@ -53,8 +56,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -65,6 +68,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}
+          loading={isLoading}
         />
       </Tooltip>
 

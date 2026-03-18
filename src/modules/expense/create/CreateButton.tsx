@@ -7,8 +7,10 @@ import { createExpenseApi, ICreateExpenseReq } from "@/api/expense";
 import { formatDateInputApi } from "@/utils/DateUtils";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 const CreateButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -21,6 +23,8 @@ const CreateButton = () => {
       documentDate: formatDateInputApi(values.documentDate),
       accountingDate: formatDateInputApi(values.accountingDate),
     };
+    onClose();
+    setIsLoading(true);
     createExpenseApi(data)
       .then(() => {
         notifySuccess(t("expense.notify.createSuccess"));
@@ -29,13 +33,13 @@ const CreateButton = () => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <>
-      <Button type="primary" onClick={onOpen}>
+      <Button type="primary" onClick={onOpen} loading={isLoading}>
         {t("common.create")}
       </Button>
 

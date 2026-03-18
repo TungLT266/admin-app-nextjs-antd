@@ -6,8 +6,10 @@ import { useLoanContactContext } from "../LoanContactContextProvider";
 import { createLoanContactApi, ICreateLoanContactReq } from "@/api/loan-contact";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 const CreateButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -16,19 +18,21 @@ const CreateButton = () => {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateLoanContactReq = { ...values };
+    onClose();
+    setIsLoading(true);
     createLoanContactApi(data)
       .then(() => {
         notifySuccess(t("loanContact.notify.createSuccess"));
         form.resetFields();
         fetchDataList();
       })
-      .catch((error) => notifyError(error));
-    onClose();
+      .catch((error) => notifyError(error))
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <>
-      <Button type="primary" onClick={onOpen}>
+      <Button type="primary" onClick={onOpen} loading={isLoading}>
         {t("common.create")}
       </Button>
       <Modal

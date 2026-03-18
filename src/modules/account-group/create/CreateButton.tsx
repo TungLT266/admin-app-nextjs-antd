@@ -6,8 +6,10 @@ import { useAccountGroupContext } from "../AccountGroupContextProvider";
 import { createAccountGroupApi, ICreateAccountGroupReq } from "@/api/account-group";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 const CreateButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -16,6 +18,8 @@ const CreateButton = () => {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateAccountGroupReq = { ...values };
+    onClose();
+    setIsLoading(true);
     createAccountGroupApi(data)
       .then(() => {
         notifySuccess(t("accountGroup.notify.createSuccess"));
@@ -24,13 +28,13 @@ const CreateButton = () => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <>
-      <Button type="primary" onClick={onOpen}>
+      <Button type="primary" onClick={onOpen} loading={isLoading}>
         {t("common.create")}
       </Button>
 

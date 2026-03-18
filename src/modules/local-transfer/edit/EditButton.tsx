@@ -5,7 +5,7 @@ import "@/i18n/config";
 import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocalTransferContext } from "../LocalTransferContextProvider";
 import dayjs from "dayjs";
 import { formatDateInputApi } from "@/utils/DateUtils";
@@ -20,6 +20,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -52,6 +53,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       ...values,
       documentDate: formatDateInputApi(values.documentDate),
     };
+    onClose();
+    setIsLoading(true);
     updateLocalTransferApi(id, data)
       .then(() => {
         notifySuccess(t("localTransfer.notify.updateSuccess"));
@@ -60,8 +63,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -72,6 +75,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}
+          loading={isLoading}
         />
       </Tooltip>
 

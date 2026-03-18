@@ -6,9 +6,11 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { useUserContext } from "@/modules/user/UserContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 import { UserRole } from "../type";
 
 const CreateButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -22,6 +24,8 @@ const CreateButton = () => {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateUserReq = { ...values };
+    onClose();
+    setIsLoading(true);
     createUserApi(data)
       .then(() => {
         notifySuccess(t("user.notify.createSuccess"));
@@ -30,13 +34,13 @@ const CreateButton = () => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <>
-      <Button type="primary" onClick={handleOpen}>
+      <Button type="primary" onClick={handleOpen} loading={isLoading}>
         {t("common.create")}
       </Button>
 

@@ -3,7 +3,7 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useWalletContext } from "../WalletContextProvider";
 import {
   getWalletByIdApi,
@@ -18,6 +18,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -48,6 +49,8 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: IUpdateWalletReq = { ...values };
+    onClose();
+    setIsLoading(true);
     updateWalletApi(id, data)
       .then(() => {
         notifySuccess(t("wallet.notify.updateSuccess"));
@@ -56,8 +59,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -68,6 +71,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}
+          loading={isLoading}
         />
       </Tooltip>
 

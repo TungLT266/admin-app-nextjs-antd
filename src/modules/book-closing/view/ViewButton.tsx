@@ -83,6 +83,7 @@ const ViewButton = ({ id, month, year }: ViewButtonProps) => {
           shape="circle"
           icon={<EyeOutlined />}
           onClick={handleOpen}
+          loading={isLoading}
           style={{ backgroundColor: "#1677ff", color: "white" }}
         />
       </Tooltip>

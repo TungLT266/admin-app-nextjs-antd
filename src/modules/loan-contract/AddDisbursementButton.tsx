@@ -16,6 +16,7 @@ interface AddDisbursementButtonProps {
 }
 
 const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,14 +38,16 @@ const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
       ...values,
       documentDate: formatDateInputApi(values.documentDate),
     };
+    onClose();
+    setIsLoading(true);
     addDisbursementApi(id, data)
       .then(() => {
         notifySuccess(t("loanContract.notify.disbursementSuccess"));
         form.resetFields();
         fetchDataList();
       })
-      .catch((error) => notifyError(error));
-    onClose();
+      .catch((error) => notifyError(error))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -54,6 +57,7 @@ const AddDisbursementButton = ({ id }: AddDisbursementButtonProps) => {
           shape="circle"
           icon={<PlusOutlined />}
           onClick={onOpen}
+          loading={isLoading}
           style={{ backgroundColor: "#1677ff", color: "white" }}
         />
       </Tooltip>

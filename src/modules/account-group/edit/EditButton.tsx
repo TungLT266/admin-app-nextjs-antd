@@ -5,7 +5,7 @@ import "@/i18n/config";
 import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAccountGroupContext } from "../AccountGroupContextProvider";
 import {
   getAccountGroupByIdApi,
@@ -18,6 +18,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,6 +56,8 @@ const EditButton = ({ id }: EditButtonProps) => {
     console.log("Success:::::", values);
 
     const data: IUpdateAccountGroupReq = { ...values };
+    onClose();
+    setIsLoading(true);
     updateAccountGroupApi(id, data)
       .then(() => {
         notifySuccess(t("accountGroup.notify.updateSuccess"));
@@ -63,8 +66,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -75,6 +78,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}
+          loading={isLoading}
         />
       </Tooltip>
 

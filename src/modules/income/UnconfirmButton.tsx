@@ -6,18 +6,22 @@ import { useIncomeContext } from "./IncomeContextProvider";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 interface DeleteButtonProps {
   id: string;
 }
 
 const UnconfirmButton = ({ id }: DeleteButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useIncomeContext();
   const { t } = useTranslation();
 
   const handleOk = () => {
+    onClose();
+    setIsLoading(true);
     unconfirmIncomeApi(id)
       .then(() => {
         notifySuccess(t("income.notify.unconfirmSuccess"));
@@ -25,7 +29,8 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -36,6 +41,7 @@ const UnconfirmButton = ({ id }: DeleteButtonProps) => {
           shape="circle"
           icon={<CloseOutlined />}
           onClick={onOpen}
+          loading={isLoading}
           danger
         />
       </Tooltip>

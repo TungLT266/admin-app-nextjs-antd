@@ -4,7 +4,7 @@ import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
 import { getUserByIdApi, IUpdateUserReq, updateUserApi } from "@/api/user";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUserContext } from "@/modules/user/UserContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
@@ -14,6 +14,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -35,6 +36,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       role: values.role,
       ...(values.password ? { password: values.password } : {}),
     };
+    onClose();
+    setIsLoading(true);
     updateUserApi(id, data)
       .then(() => {
         notifySuccess(t("user.notify.updateSuccess"));
@@ -43,8 +46,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -55,6 +58,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}
+          loading={isLoading}
         />
       </Tooltip>
 

@@ -21,6 +21,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -63,6 +64,8 @@ const EditButton = ({ id }: EditButtonProps) => {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: IUpdateIncomeAndExpenseTypeReq = { ...values };
+    onClose();
+    setIsLoading(true);
     updateIncomeAndExpenseTypeApi(id, data)
       .then(() => {
         notifySuccess(t("incomeExpenseType.notify.updateSuccess"));
@@ -71,8 +74,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -83,6 +86,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}
+          loading={isLoading}
         />
       </Tooltip>
 

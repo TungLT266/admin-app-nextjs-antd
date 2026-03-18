@@ -6,18 +6,22 @@ import { deleteUserApi } from "@/api/user";
 import { useUserContext } from "@/modules/user/UserContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 interface DeleteButtonProps {
   id: string;
 }
 
 const DeleteButton = ({ id }: DeleteButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useUserContext();
   const { t } = useTranslation();
 
   const handleOk = () => {
+    onClose();
+    setIsLoading(true);
     deleteUserApi(id)
       .then(() => {
         notifySuccess(t("user.notify.deleteSuccess"));
@@ -25,8 +29,8 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -37,6 +41,7 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
           shape="circle"
           icon={<UserDeleteOutlined />}
           onClick={onOpen}
+          loading={isLoading}
           danger
         />
       </Tooltip>

@@ -9,8 +9,10 @@ import useDisclosure from "@/shared/hook/useDisclosure";
 import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 const CreateButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -19,6 +21,8 @@ const CreateButton = () => {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateAccountingAccountReq = { ...values };
+    onClose();
+    setIsLoading(true);
     createAccountingAccountApi(data)
       .then(() => {
         notifySuccess(t("accountingAccount.notify.createSuccess"));
@@ -27,13 +31,13 @@ const CreateButton = () => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <>
-      <Button type="primary" onClick={onOpen}>
+      <Button type="primary" onClick={onOpen} loading={isLoading}>
         {t("common.create")}
       </Button>
 

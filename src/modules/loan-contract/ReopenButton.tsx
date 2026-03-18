@@ -6,25 +6,29 @@ import { reopenLoanContractApi } from "@/api/loan-contract";
 import { useLoanContractContext } from "./LoanContractContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 interface ReopenButtonProps {
   id: string;
 }
 
 const ReopenButton = ({ id }: ReopenButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLoanContractContext();
 
   const handleOk = () => {
+    onClose();
+    setIsLoading(true);
     reopenLoanContractApi(id)
       .then(() => {
         notifySuccess(t("loanContract.notify.reopenSuccess"));
         fetchDataList();
       })
-      .catch((error) => notifyError(error));
-    onClose();
+      .catch((error) => notifyError(error))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -34,6 +38,7 @@ const ReopenButton = ({ id }: ReopenButtonProps) => {
           shape="circle"
           icon={<RedoOutlined />}
           onClick={onOpen}
+          loading={isLoading}
           style={{ backgroundColor: "#fa8c16", color: "white" }}
         />
       </Tooltip>

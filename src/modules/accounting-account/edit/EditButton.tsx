@@ -8,7 +8,7 @@ import {
   IUpdateAccountingAccountReq,
   updateAccountingAccountApi,
 } from "@/api/accounting-account";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
@@ -18,6 +18,7 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ id }: EditButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -46,6 +47,8 @@ const EditButton = ({ id }: EditButtonProps) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { number: _number, ...rest } = values;
     const data: IUpdateAccountingAccountReq = { ...rest };
+    onClose();
+    setIsLoading(true);
     updateAccountingAccountApi(id, data)
       .then(() => {
         notifySuccess(t("accountingAccount.notify.updateSuccess"));
@@ -54,8 +57,8 @@ const EditButton = ({ id }: EditButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -66,6 +69,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           shape="circle"
           icon={<EditOutlined />}
           onClick={onOpen}
+          loading={isLoading}
         />
       </Tooltip>
 

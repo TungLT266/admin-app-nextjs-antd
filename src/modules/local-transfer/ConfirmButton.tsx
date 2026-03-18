@@ -5,17 +5,20 @@ import { useLocalTransferContext } from "./LocalTransferContextProvider";
 import { confirmLocalTransferApi } from "@/api/local-transfer";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 interface DeleteButtonProps {
   id: string;
 }
 
 const ConfirmButton = ({ id }: DeleteButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useLocalTransferContext();
 
   const handleClick = () => {
+    setIsLoading(true);
     confirmLocalTransferApi(id)
       .then(() => {
         notifySuccess(t("localTransfer.notify.confirmSuccess"));
@@ -23,7 +26,8 @@ const ConfirmButton = ({ id }: DeleteButtonProps) => {
       })
       .catch((error) => {
         notifyError(error);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -34,6 +38,7 @@ const ConfirmButton = ({ id }: DeleteButtonProps) => {
           shape="circle"
           icon={<CheckOutlined />}
           onClick={handleClick}
+          loading={isLoading}
           style={{ backgroundColor: "green" }}
         />
       </Tooltip>

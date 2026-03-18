@@ -47,12 +47,12 @@ const CreateButton = () => {
 
   const handleOk = () => {
     if (!preview) return;
+    onClose();
     setIsSubmitting(true);
     createBookClosingApi({ month: preview.month, year: preview.year })
       .then(() => {
         notifySuccess(t("bookClosing.notify.createSuccess"));
         fetchDataList();
-        onClose();
       })
       .catch((error) => {
         notifyError(error);
@@ -97,7 +97,7 @@ const CreateButton = () => {
 
   return (
     <>
-      <Button type="primary" onClick={onOpen}>
+      <Button type="primary" onClick={onOpen} loading={isSubmitting}>
         {t("common.create")}
       </Button>
 
@@ -106,7 +106,6 @@ const CreateButton = () => {
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
-        confirmLoading={isSubmitting}
         okText={t("bookClosing.modal.confirmClose")}
         cancelText={t("common.cancel")}
         width={800}

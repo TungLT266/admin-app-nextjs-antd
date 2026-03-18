@@ -6,28 +6,31 @@ import { unlockBookClosingApi } from "@/api/book-closing";
 import { useBookClosingContext } from "../BookClosingContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
 
 interface UnlockButtonProps {
   id: string;
 }
 
 const UnlockButton = ({ id }: UnlockButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
   const { fetchDataList } = useBookClosingContext();
   const { t } = useTranslation();
 
   const handleUnlock = () => {
+    onClose();
+    setIsLoading(true);
     unlockBookClosingApi(id)
       .then(() => {
         notifySuccess(t("bookClosing.notify.unlockSuccess"));
         fetchDataList();
-        onClose();
       })
       .catch((error) => {
         notifyError(error);
-        onClose();
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -37,6 +40,7 @@ const UnlockButton = ({ id }: UnlockButtonProps) => {
           shape="circle"
           icon={<UnlockOutlined />}
           onClick={onOpen}
+          loading={isLoading}
           style={{ backgroundColor: "#13c2c2", color: "white" }}
         />
       </Tooltip>

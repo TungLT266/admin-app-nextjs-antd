@@ -26,6 +26,7 @@ interface RecordPaymentButtonProps {
 }
 
 const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -47,14 +48,16 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
       ...values,
       documentDate: formatDateInputApi(values.documentDate),
     };
+    onClose();
+    setIsLoading(true);
     recordPaymentApi(id, data)
       .then(() => {
         notifySuccess(t("loanContract.notify.paymentSuccess"));
         form.resetFields();
         fetchDataList();
       })
-      .catch((error) => notifyError(error));
-    onClose();
+      .catch((error) => notifyError(error))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -64,6 +67,7 @@ const RecordPaymentButton = ({ id }: RecordPaymentButtonProps) => {
           shape="circle"
           icon={<DollarOutlined />}
           onClick={onOpen}
+          loading={isLoading}
           style={{ backgroundColor: "#52c41a", color: "white" }}
         />
       </Tooltip>

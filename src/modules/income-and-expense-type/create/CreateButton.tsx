@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 
 const CreateButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { notifySuccess, notifyError } = useNotificationContext();
@@ -41,6 +42,8 @@ const CreateButton = () => {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     const data: ICreateIncomeAndExpenseTypeReq = { ...values };
+    onClose();
+    setIsLoading(true);
     createIncomeAndExpenseTypeApi(data)
       .then(() => {
         notifySuccess(t("incomeExpenseType.notify.createSuccess"));
@@ -49,13 +52,13 @@ const CreateButton = () => {
       })
       .catch((error) => {
         notifyError(error);
-      });
-    onClose();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <>
-      <Button type="primary" onClick={onOpen}>
+      <Button type="primary" onClick={onOpen} loading={isLoading}>
         {t("common.create")}
       </Button>
 
