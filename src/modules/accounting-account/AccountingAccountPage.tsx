@@ -1,6 +1,6 @@
 "use client";
 import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
-import { Table, TableProps, Tag } from "antd";
+import { TableProps, Tag } from "antd";
 import ResponsiveTable from "@/shared/component/mobile/ResponsiveTable";
 import { useEffect, useState } from "react";
 import { AccountingAccountStatus, AccountingAccountStatusLabels } from "./type";

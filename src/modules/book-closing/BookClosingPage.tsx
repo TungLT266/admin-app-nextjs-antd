@@ -1,6 +1,6 @@
 "use client";
 
-import { Table, TableProps } from "antd";
+import { TableProps } from "antd";
 import ResponsiveTable from "@/shared/component/mobile/ResponsiveTable";
 import { useEffect, useState } from "react";
 import { formatDatetime } from "@/utils/DateUtils";
