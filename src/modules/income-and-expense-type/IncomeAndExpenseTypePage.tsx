@@ -1,6 +1,7 @@
 "use client";
 import { useIncomeAndExpenseTypeContext } from "@/modules/income-and-expense-type/IncomeAndExpenseTypeContextProvider";
 import { Table, TableProps, Tag } from "antd";
+import ResponsiveTable from "@/shared/component/mobile/ResponsiveTable";
 import { useEffect, useState } from "react";
 import { IncomeExpenseType, IncomeExpenseTypeLabels } from "./type";
 import {
@@ -136,7 +137,7 @@ const IncomeAndExpenseTypePage = () => {
     <>
       <FilterSection />
 
-      <Table<DataType>
+      <ResponsiveTable<DataType>
         columns={columns}
         dataSource={dataSource}
         scroll={{ x: "max-content" }}

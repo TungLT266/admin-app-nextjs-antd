@@ -5,49 +5,69 @@ import { UserStatusLabels } from "./type";
 import { FormItemCustom } from "@/shared/component/element/form";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
+import { useIsMobile } from "@/shared/hook/useIsMobile";
+import MobileFilterWrapper from "@/shared/component/mobile/MobileFilterWrapper";
 
 const FilterSection = () => {
   const { dataQuery, setDataQuery } = useUserContext();
   const [form] = Form.useForm();
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const buildQuery = (values = form.getFieldsValue()) => ({
+    ...dataQuery,
+    usernameRegex: values.username ? `^${values.username}` : "",
+    status: values.status,
+  });
 
   const handleValuesChange = () => {
-    const values = form.getFieldsValue();
-    setDataQuery({
-      ...dataQuery,
-      usernameRegex: values.username ? `^${values.username}` : "",
-      status: values.status,
-    });
+    if (isMobile) return;
+    setDataQuery(buildQuery());
   };
 
+  const applyFilter = () => setDataQuery(buildQuery());
+
+  const resetFilter = () => {
+    form.resetFields();
+    setDataQuery(buildQuery({}));
+  };
+
+  const activeFilterCount = Object.values(form.getFieldsValue()).filter(
+    (v) => v !== undefined && v !== null && v !== ""
+  ).length;
+
   return (
-    <div className="flex mb-5 flex-col">
-      <div className="flex">
-        <Form
-          layout="vertical"
-          form={form}
-          onValuesChange={handleValuesChange}
-          className="w-full flex gap-3"
-          style={{ paddingBottom: 16 }}
-        >
-          <FormItemCustom label={t("user.columns.username")} name="username">
-            <Input className="!w-[200px]" />
-          </FormItemCustom>
+    <MobileFilterWrapper
+      open={drawerOpen}
+      onOpen={() => setDrawerOpen(true)}
+      onClose={() => setDrawerOpen(false)}
+      onApply={applyFilter}
+      onReset={resetFilter}
+      activeFilterCount={activeFilterCount}
+      actions={<CreateButton />}
+    >
+      <Form
+        layout="vertical"
+        form={form}
+        onValuesChange={handleValuesChange}
+        className="w-full flex flex-col md:flex-row gap-3"
+        style={{ paddingBottom: 16 }}
+      >
+        <FormItemCustom label={t("user.columns.username")} name="username">
+          <Input className="w-full md:!w-[200px]" />
+        </FormItemCustom>
 
-          <FormItemCustom label={t("common.status")} name="status">
-            <Select
-              options={UserStatusLabels}
-              className="!w-[200px] !text-left"
-              allowClear
-            />
-          </FormItemCustom>
-        </Form>
-      </div>
-
-      <div className="flex">
-        <CreateButton />
-      </div>
-    </div>
+        <FormItemCustom label={t("common.status")} name="status">
+          <Select
+            options={UserStatusLabels}
+            className="w-full md:!w-[200px] !text-left"
+            allowClear
+          />
+        </FormItemCustom>
+      </Form>
+    </MobileFilterWrapper>
   );
 };
 

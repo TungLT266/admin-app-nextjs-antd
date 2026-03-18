@@ -16,11 +16,12 @@ import {
   UserOutlined,
   LockOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, MenuProps } from "antd";
+import { Drawer, Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 import { useSidebar } from "@/shared/context/SidebarContext";
+import { useIsMobile } from "@/shared/hook/useIsMobile";
 
 type UserRole = "ADMIN" | "USER" | null;
 
@@ -28,7 +29,8 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const { t } = useTranslation();
-  const { collapsed } = useSidebar();
+  const { collapsed, mobileOpen, closeMobile } = useSidebar();
+  const isMobile = useIsMobile();
   const [userRole, setUserRole] = useState<UserRole>(null);
   const [roleLoading, setRoleLoading] = useState(true);
 
@@ -47,8 +49,12 @@ export default function Sidebar() {
   }, []);
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
-    if (e.key === pathname) return;
+    if (e.key === pathname) {
+      if (isMobile) closeMobile();
+      return;
+    }
     router.push(e.key);
+    if (isMobile) closeMobile();
   };
 
   // Determine which submenu should be open based on the current pathname
@@ -85,24 +91,8 @@ export default function Sidebar() {
     );
   };
 
-  return (
-    <Sider
-      collapsed={collapsed}
-      collapsedWidth={80}
-      width={250}
-      trigger={null}
-      style={{
-        overflow: 'auto',
-        height: '100vh',
-        position: 'fixed',
-        insetInlineStart: 0,
-        top: 0,
-        bottom: 0,
-        scrollbarWidth: 'thin',
-        scrollbarColor: 'unset',
-        transition: 'width 0.2s',
-      }}
-    >
+  const menuContent = (
+    <>
       <div className="demo-logo-vertical" />
       {roleLoading ? (
         <div className="flex flex-col gap-3 px-4 pt-4">
@@ -127,6 +117,48 @@ export default function Sidebar() {
           onClick={handleMenuClick}
         />
       )}
+    </>
+  );
+
+  if (isMobile) {
+    return (
+      <Drawer
+        open={mobileOpen}
+        onClose={closeMobile}
+        placement="left"
+        width={250}
+        styles={{
+          body: { padding: 0, background: "#001529" },
+          header: { display: "none" },
+        }}
+        style={{ padding: 0 }}
+      >
+        <div style={{ background: "#001529", minHeight: "100%" }}>
+          {menuContent}
+        </div>
+      </Drawer>
+    );
+  }
+
+  return (
+    <Sider
+      collapsed={collapsed}
+      collapsedWidth={80}
+      width={250}
+      trigger={null}
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        insetInlineStart: 0,
+        top: 0,
+        bottom: 0,
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'unset',
+        transition: 'width 0.2s',
+      }}
+    >
+      {menuContent}
     </Sider>
   );
 }

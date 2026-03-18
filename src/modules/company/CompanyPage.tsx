@@ -1,6 +1,7 @@
 "use client";
 import { useCompanyContext } from "@/modules/company/CompanyContextProvider";
 import { Table, TableProps, Tag } from "antd";
+import ResponsiveTable from "@/shared/component/mobile/ResponsiveTable";
 import { useEffect, useState } from "react";
 import { CompanyStatus, CompanyStatusLabels } from "./type";
 import { formatDatetime } from "@/utils/DateUtils";
@@ -105,7 +106,7 @@ const CompanyPage = () => {
     <>
       <FilterSection />
 
-      <Table<DataType>
+      <ResponsiveTable<DataType>
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}

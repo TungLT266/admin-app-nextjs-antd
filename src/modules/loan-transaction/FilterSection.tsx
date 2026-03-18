@@ -5,67 +5,90 @@ import { FormItemCustom } from "@/shared/component/element/form";
 import { LoanTransactionTypeLabels } from "../loan-contract/type";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useState } from "react";
+import { useIsMobile } from "@/shared/hook/useIsMobile";
+import MobileFilterWrapper from "@/shared/component/mobile/MobileFilterWrapper";
 
 const FilterSection = () => {
   const { t } = useTranslation();
   const { dataQuery, setDataQuery } = useLoanTransactionContext();
   const [form] = Form.useForm();
+  const isMobile = useIsMobile();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const buildQuery = (values = form.getFieldsValue()) => ({
+    ...dataQuery,
+    transactionType: values.transactionType,
+    documentDateFrom: formatDateInputApi(values.documentDate?.[0]),
+    documentDateTo: formatDateInputApi(values.documentDate?.[1]),
+    amountFrom: values.amountFrom ?? undefined,
+    amountTo: values.amountTo ?? undefined,
+  });
 
   const handleValuesChange = () => {
-    const values = form.getFieldsValue();
-    setDataQuery({
-      ...dataQuery,
-      transactionType: values.transactionType,
-      documentDateFrom: formatDateInputApi(values.documentDate?.[0]),
-      documentDateTo: formatDateInputApi(values.documentDate?.[1]),
-      amountFrom: values.amountFrom ?? undefined,
-      amountTo: values.amountTo ?? undefined,
-    });
+    if (isMobile) return;
+    setDataQuery(buildQuery());
   };
 
+  const applyFilter = () => setDataQuery(buildQuery());
+
+  const resetFilter = () => {
+    form.resetFields();
+    setDataQuery(buildQuery({}));
+  };
+
+  const activeFilterCount = Object.values(form.getFieldsValue()).filter(
+    (v) => v !== undefined && v !== null && v !== ""
+  ).length;
+
   return (
-    <div className="flex mb-5 flex-col">
-      <div className="flex">
-        <Form
-          layout="vertical"
-          form={form}
-          onValuesChange={handleValuesChange}
-          className="flex gap-3 flex-wrap"
-        >
-          <FormItemCustom label={t("loanTransaction.filter.transactionType")} name="transactionType">
-            <Select
-              allowClear
-              placeholder={t("loanTransaction.filter.allTypes")}
-              options={LoanTransactionTypeLabels.map((item) => ({
-                label: t(item.label),
-                value: item.value,
-              }))}
-              style={{ width: 180 }}
-            />
-          </FormItemCustom>
+    <MobileFilterWrapper
+      open={drawerOpen}
+      onOpen={() => setDrawerOpen(true)}
+      onClose={() => setDrawerOpen(false)}
+      onApply={applyFilter}
+      onReset={resetFilter}
+      activeFilterCount={activeFilterCount}
+    >
+      <Form
+        layout="vertical"
+        form={form}
+        onValuesChange={handleValuesChange}
+        className="w-full flex flex-col md:flex-row flex-wrap gap-3"
+      >
+        <FormItemCustom label={t("loanTransaction.filter.transactionType")} name="transactionType">
+          <Select
+            allowClear
+            placeholder={t("loanTransaction.filter.allTypes")}
+            options={LoanTransactionTypeLabels.map((item) => ({
+              label: t(item.label),
+              value: item.value,
+            }))}
+            className="w-full md:!w-[180px]"
+          />
+        </FormItemCustom>
 
-          <FormItemCustom label={t("loanTransaction.filter.documentDate")} name="documentDate">
-            <DatePicker.RangePicker />
-          </FormItemCustom>
+        <FormItemCustom label={t("loanTransaction.filter.documentDate")} name="documentDate">
+          <DatePicker.RangePicker className="w-full" />
+        </FormItemCustom>
 
-          <FormItemCustom label={t("loanTransaction.filter.amountFrom")} name="amountFrom">
-            <InputNumber
-              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
-              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
-              style={{ width: 150 }}
-            />
-          </FormItemCustom>
+        <FormItemCustom label={t("loanTransaction.filter.amountFrom")} name="amountFrom">
+          <InputNumber
+            className="w-full md:!w-[150px]"
+            formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+            parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+          />
+        </FormItemCustom>
 
-          <FormItemCustom label={t("loanTransaction.filter.amountTo")} name="amountTo">
-            <InputNumber
-              formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
-              parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
-              style={{ width: 150 }}
-            />
-          </FormItemCustom>
-        </Form>
-      </div>
-    </div>
+        <FormItemCustom label={t("loanTransaction.filter.amountTo")} name="amountTo">
+          <InputNumber
+            className="w-full md:!w-[150px]"
+            formatter={(value) => value != null ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}
+            parser={(value) => (value ? Number(value.replace(/,/g, "")) : null) as unknown as number}
+          />
+        </FormItemCustom>
+      </Form>
+    </MobileFilterWrapper>
   );
 };
 

@@ -1,6 +1,7 @@
 "use client";
 import { useUserContext } from "@/modules/user/UserContextProvider";
 import { Table, TableProps, Tag } from "antd";
+import ResponsiveTable from "@/shared/component/mobile/ResponsiveTable";
 import { useEffect, useState } from "react";
 import { UserRole, UserRoleLabels, UserStatus, UserStatusLabels } from "./type";
 import { formatDatetime } from "@/utils/DateUtils";
@@ -112,7 +113,7 @@ const UserPage = () => {
     <>
       <FilterSection />
 
-      <Table<DataType>
+      <ResponsiveTable<DataType>
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}

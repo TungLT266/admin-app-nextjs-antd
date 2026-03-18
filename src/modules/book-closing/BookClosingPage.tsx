@@ -1,6 +1,7 @@
 "use client";
 
 import { Table, TableProps } from "antd";
+import ResponsiveTable from "@/shared/component/mobile/ResponsiveTable";
 import { useEffect, useState } from "react";
 import { formatDatetime } from "@/utils/DateUtils";
 import { useBookClosingContext } from "./BookClosingContextProvider";
@@ -86,7 +87,7 @@ const BookClosingPage = () => {
         <h2 className="text-xl font-semibold">{t("bookClosing.title")}</h2>
         <CreateButton />
       </div>
-      <Table
+      <ResponsiveTable
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}

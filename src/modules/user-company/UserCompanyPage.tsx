@@ -1,6 +1,7 @@
 "use client";
 import { useUserCompanyContext } from "./UserCompanyContextProvider";
 import { Table, TableProps, Tag } from "antd";
+import ResponsiveTable from "@/shared/component/mobile/ResponsiveTable";
 import { useEffect, useState } from "react";
 import { ICompany } from "@/api/company";
 import { CompanyStatus, CompanyStatusLabels } from "../company/type";
@@ -71,7 +72,7 @@ const UserCompanyPage = () => {
 
   return (
     <>
-      <Table<DataType>
+      <ResponsiveTable<DataType>
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}

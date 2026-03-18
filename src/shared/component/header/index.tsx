@@ -3,6 +3,7 @@ import { getTokenPayload, logoutApi } from "@/api/auth";
 import {
   LogoutOutlined,
   MenuFoldOutlined,
+  MenuOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -13,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useSidebar } from "@/shared/context/SidebarContext";
+import { useIsMobile } from "@/shared/hook/useIsMobile";
 
 export default function HeaderLayout() {
   const {
@@ -21,7 +23,8 @@ export default function HeaderLayout() {
 
   const { t } = useTranslation();
   const router = useRouter();
-  const { collapsed, toggleCollapsed } = useSidebar();
+  const { collapsed, toggleCollapsed, openMobile } = useSidebar();
+  const isMobile = useIsMobile();
   const [username, setUsername] = useState<string>("");
   useEffect(() => {
     const payload = getTokenPayload();
@@ -73,8 +76,14 @@ export default function HeaderLayout() {
       {/* Left: sidebar toggle */}
       <Button
         type="text"
-        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={toggleCollapsed}
+        icon={
+          isMobile
+            ? <MenuOutlined />
+            : collapsed
+              ? <MenuUnfoldOutlined />
+              : <MenuFoldOutlined />
+        }
+        onClick={isMobile ? openMobile : toggleCollapsed}
         style={{ fontSize: "16px", width: 64, height: 64 }}
       />
 
@@ -100,4 +109,3 @@ export default function HeaderLayout() {
 }
 
 const { Header } = Layout;
-

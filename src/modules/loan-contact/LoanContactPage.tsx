@@ -1,6 +1,7 @@
 "use client";
 
 import { Table, TableProps } from "antd";
+import ResponsiveTable from "@/shared/component/mobile/ResponsiveTable";
 import { useEffect, useState } from "react";
 import { formatDatetime } from "@/utils/DateUtils";
 import EditButton from "./edit/EditButton";
@@ -81,7 +82,7 @@ const LoanContactPage = () => {
   return (
     <>
       <FilterSection />
-      <Table<DataType>
+      <ResponsiveTable<DataType>
         columns={columns}
         dataSource={dataSource}
         loading={isLoading}

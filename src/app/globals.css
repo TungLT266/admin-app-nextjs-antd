@@ -25,3 +25,45 @@ body {
     text-wrap: balance;
   }
 }
+
+/* ── Mobile responsive overrides ──────────────────────────── */
+@media (max-width: 767px) {
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .ant-layout,
+  .ant-layout-content {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* Filter forms: stack vertically on mobile */
+  .ant-form.flex {
+    flex-direction: column !important;
+  }
+
+  /* Form items: full width */
+  .ant-form-item {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* All inputs / selects / pickers: full width, override any fixed px class */
+  .ant-form-item .ant-input,
+  .ant-form-item .ant-input-affix-wrapper,
+  .ant-form-item .ant-select,
+  .ant-form-item .ant-input-number,
+  .ant-form-item .ant-picker,
+  .ant-form-item .ant-picker-range {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .ant-form-item .ant-select-selector {
+    width: 100% !important;
+  }
+}
