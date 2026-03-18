@@ -65,14 +65,15 @@ export default function MobileFilterWrapper({
           )}
         </div>
 
-        {/* Bottom drawer with form fields */}
+        {/* Right drawer with form fields */}
         <Drawer
           title={t("common.filter")}
-          placement="bottom"
+          placement="right"
+          width="85vw"
           open={open}
           onClose={onClose}
           styles={{
-            body: { maxHeight: "65vh", overflowY: "auto", padding: "16px" },
+            body: { overflowY: "auto", padding: "16px" },
             footer: { padding: "12px 16px" },
           }}
           footer={
