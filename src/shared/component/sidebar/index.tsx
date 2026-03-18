@@ -20,6 +20,7 @@ import { Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { useSidebar } from "@/shared/context/SidebarContext";
 
 type UserRole = "ADMIN" | "USER" | null;
 
@@ -27,6 +28,7 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const { t } = useTranslation();
+  const { collapsed } = useSidebar();
   const [userRole, setUserRole] = useState<UserRole>(null);
   const [roleLoading, setRoleLoading] = useState(true);
 
@@ -85,6 +87,10 @@ export default function Sidebar() {
 
   return (
     <Sider
+      collapsed={collapsed}
+      collapsedWidth={80}
+      width={250}
+      trigger={null}
       style={{
         overflow: 'auto',
         height: '100vh',
@@ -94,8 +100,8 @@ export default function Sidebar() {
         bottom: 0,
         scrollbarWidth: 'thin',
         scrollbarColor: 'unset',
+        transition: 'width 0.2s',
       }}
-      width={250}
     >
       <div className="demo-logo-vertical" />
       {roleLoading ? (

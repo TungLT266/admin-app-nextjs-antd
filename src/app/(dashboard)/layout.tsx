@@ -6,27 +6,44 @@ import HeaderLayout from "@/shared/component/header";
 import AuthGuard from "@/shared/component/auth/AuthGuard";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import { SidebarProvider, useSidebar } from "@/shared/context/SidebarContext";
+
+function DashboardContent({ children }: { children: React.ReactNode }) {
+  const { sidebarWidth } = useSidebar();
+  const { t } = useTranslation();
+
+  return (
+    <Layout hasSider>
+      <Sidebar />
+      <Layout
+        style={{
+          marginInlineStart: sidebarWidth,
+          minHeight: "100vh",
+          transition: "margin-inline-start 0.2s",
+        }}
+      >
+        <HeaderLayout />
+        <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+          {children}
+        </Content>
+        <Footer style={{ textAlign: "center" }}>
+          {t("common.footer")}
+        </Footer>
+      </Layout>
+    </Layout>
+  );
+}
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { t } = useTranslation();
   return (
     <AuthGuard>
-      <Layout hasSider>
-        <Sidebar />
-        <Layout style={{ marginInlineStart: 250, minHeight: "100vh" }}>
-          <HeaderLayout />
-          <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
-            {children}
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            {t("common.footer")}
-          </Footer>
-        </Layout>
-      </Layout>
+      <SidebarProvider>
+        <DashboardContent>{children}</DashboardContent>
+      </SidebarProvider>
     </AuthGuard>
   );
 }

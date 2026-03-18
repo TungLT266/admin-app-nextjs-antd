@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useSidebar } from "@/shared/context/SidebarContext";
 
 export default function HeaderLayout() {
   const {
@@ -20,7 +21,7 @@ export default function HeaderLayout() {
 
   const { t } = useTranslation();
   const router = useRouter();
-  const [collapsed, setCollapsed] = useState(false);
+  const { collapsed, toggleCollapsed } = useSidebar();
   const [username, setUsername] = useState<string>("");
   useEffect(() => {
     const payload = getTokenPayload();
@@ -73,7 +74,7 @@ export default function HeaderLayout() {
       <Button
         type="text"
         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={toggleCollapsed}
         style={{ fontSize: "16px", width: 64, height: 64 }}
       />
 
