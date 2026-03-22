@@ -11,6 +11,8 @@ import {
   ICreateLoanContractReq,
 } from "@/api/loan-contract";
 import { formatDateInputApi } from "@/utils/DateUtils";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
+
 
 const CreateButton = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,14 +44,14 @@ const CreateButton = () => {
       <Button type="primary" onClick={onOpen} loading={isLoading}>
         {t("common.create")}
       </Button>
-      <Modal
+      <ResponsiveFormModal
         title={t("loanContract.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

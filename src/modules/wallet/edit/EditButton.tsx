@@ -12,6 +12,8 @@ import {
 } from "@/api/wallet";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
+
 
 interface EditButtonProps {
   id: string;
@@ -75,14 +77,14 @@ const EditButton = ({ id }: EditButtonProps) => {
         />
       </Tooltip>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("wallet.modal.update")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} isEditForm />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

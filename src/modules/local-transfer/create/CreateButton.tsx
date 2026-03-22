@@ -7,6 +7,7 @@ import CreateUpdateForm from "./CreateUpdateForm";
 import useDisclosure from "@/shared/hook/useDisclosure";
 import { useLocalTransferContext } from "../LocalTransferContextProvider";
 import { formatDateInputApi } from "@/utils/DateUtils";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
 import {
   createLocalTransferApi,
   ICreateLocalTransferReq,
@@ -45,14 +46,14 @@ const CreateButton = () => {
         {t("common.create")}
       </Button>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("localTransfer.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 import { formatNumber } from "@/utils/NumberUtils";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
+
 
 const { Text } = Typography;
 
@@ -101,7 +103,7 @@ const CreateButton = () => {
         {t("common.create")}
       </Button>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("bookClosing.modal.create")}
         open={isOpen}
         onOk={handleOk}
@@ -159,7 +161,7 @@ const CreateButton = () => {
             />
           </>
         ) : null}
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

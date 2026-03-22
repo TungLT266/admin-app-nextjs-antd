@@ -7,6 +7,7 @@ import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
 import { useEffect, useState } from "react";
 import { useAccountGroupContext } from "../AccountGroupContextProvider";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
 import {
   getAccountGroupByIdApi,
   IUpdateAccountGroupReq,
@@ -82,14 +83,14 @@ const EditButton = ({ id }: EditButtonProps) => {
         />
       </Tooltip>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("accountGroup.modal.update")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} isEditForm />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { IAccountingAccount } from "@/api/accounting-account";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
+
 
 const CreateButton = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +64,7 @@ const CreateButton = () => {
         {t("common.create")}
       </Button>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("incomeExpenseType.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
@@ -74,7 +76,7 @@ const CreateButton = () => {
           accountingAccountOptions={accountingAccountOptions}
           setType={setType}
         />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

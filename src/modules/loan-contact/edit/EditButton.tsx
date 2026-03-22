@@ -7,6 +7,7 @@ import { Button, Form, FormProps, Modal, Tooltip } from "antd";
 import CreateUpdateForm from "../create/CreateUpdateForm";
 import { useEffect, useState } from "react";
 import { useLoanContactContext } from "../LoanContactContextProvider";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
 import {
   getLoanContactByIdApi,
   ICreateLoanContactReq,
@@ -62,14 +63,14 @@ const EditButton = ({ id }: EditButtonProps) => {
           loading={isLoading}
         />
       </Tooltip>
-      <Modal
+      <ResponsiveFormModal
         title={t("loanContact.modal.update")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

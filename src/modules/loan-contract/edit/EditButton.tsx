@@ -14,6 +14,8 @@ import {
 } from "@/api/loan-contract";
 import dayjs from "dayjs";
 import { formatDateInputApi } from "@/utils/DateUtils";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
+
 
 interface EditButtonProps {
   id: string;
@@ -65,14 +67,14 @@ const EditButton = ({ id }: EditButtonProps) => {
       <Tooltip title={t("common.edit")}>
         <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={onOpen} loading={isLoading} />
       </Tooltip>
-      <Modal
+      <ResponsiveFormModal
         title={t("loanContract.modal.update")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

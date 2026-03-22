@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { useAccountingAccountContext } from "@/modules/accounting-account/AccountingAccountContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
+
 
 interface EditButtonProps {
   id: string;
@@ -73,14 +75,14 @@ const EditButton = ({ id }: EditButtonProps) => {
         />
       </Tooltip>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("accountingAccount.modal.update")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} isEditForm />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

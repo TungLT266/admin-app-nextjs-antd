@@ -7,6 +7,8 @@ import { useCompanyContext } from "@/modules/company/CompanyContextProvider";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
 import { useState } from "react";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
+
 
 const CreateButton = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,14 +40,14 @@ const CreateButton = () => {
         {t("common.create")}
       </Button>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("company.modal.create")}
         open={isOpen}
         onOk={() => form.submit()}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

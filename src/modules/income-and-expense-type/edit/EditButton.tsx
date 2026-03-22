@@ -15,6 +15,8 @@ import { ISelectOption } from "@/shared/type/ISelectOption";
 import { IAccountingAccount } from "@/api/accounting-account";
 import { useTranslation } from "react-i18next";
 import "@/i18n/config";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
+
 
 interface EditButtonProps {
   id: string;
@@ -90,7 +92,7 @@ const EditButton = ({ id }: EditButtonProps) => {
         />
       </Tooltip>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("incomeExpenseType.modal.update")}
         open={isOpen}
         onOk={handleOk}
@@ -102,7 +104,7 @@ const EditButton = ({ id }: EditButtonProps) => {
           isEditForm
           accountingAccountOptions={accountingAccountOptions}
         />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };

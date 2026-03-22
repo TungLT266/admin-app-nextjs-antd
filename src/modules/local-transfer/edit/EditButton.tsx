@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useLocalTransferContext } from "../LocalTransferContextProvider";
 import dayjs from "dayjs";
 import { formatDateInputApi } from "@/utils/DateUtils";
+import ResponsiveFormModal from "@/shared/component/modal/ResponsiveFormModal";
 import {
   getLocalTransferByIdApi,
   ICreateLocalTransferReq,
@@ -79,14 +80,14 @@ const EditButton = ({ id }: EditButtonProps) => {
         />
       </Tooltip>
 
-      <Modal
+      <ResponsiveFormModal
         title={t("localTransfer.modal.update")}
         open={isOpen}
         onOk={handleOk}
         onCancel={onClose}
       >
         <CreateUpdateForm form={form} onFinish={onFinish} />
-      </Modal>
+      </ResponsiveFormModal>
     </>
   );
 };
