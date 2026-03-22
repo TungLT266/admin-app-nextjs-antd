@@ -220,6 +220,8 @@
       "wallet": "Wallet",
       "status": "Status",
       "documentDate": "Document Date",
+      "documentDateFrom": "Date From",
+      "documentDateTo": "Date To",
       "amountFrom": "Amount From",
       "amountTo": "Amount To"
     },
@@ -274,6 +276,8 @@
       "wallet": "Wallet",
       "status": "Status",
       "documentDate": "Document Date",
+      "documentDateFrom": "Date From",
+      "documentDateTo": "Date To",
       "amountFrom": "Amount From",
       "amountTo": "Amount To"
     },
@@ -330,6 +334,8 @@
       "description": "Description"
     },
     "filter": {
+      "documentDateFrom": "Date From",
+      "documentDateTo": "Date To",
       "amountFrom": "Amount From",
       "amountTo": "Amount To"
     },
@@ -548,6 +554,8 @@
       "contact": "Contact",
       "contactPlaceholder": "All contacts",
       "contractDate": "Contract Date",
+      "contractDateFrom": "Date From",
+      "contractDateTo": "Date To",
       "amountFrom": "Amount From",
       "amountTo": "Amount To"
     },
@@ -642,6 +650,8 @@
     "filter": {
       "transactionType": "Transaction Type",
       "documentDate": "Document Date",
+      "documentDateFrom": "Date From",
+      "documentDateTo": "Date To",
       "allTypes": "All types",
       "amountFrom": "Amount From",
       "amountTo": "Amount To"
@@ -681,6 +691,8 @@
     "filter": {
       "function": "Function",
       "documentDate": "Document Date",
+      "documentDateFrom": "Date From",
+      "documentDateTo": "Date To",
       "title": "Title",
       "account": "Account",
       "wallet": "Wallet",

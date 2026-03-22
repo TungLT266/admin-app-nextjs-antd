@@ -58,8 +58,8 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
     ...dataQuery,
     titleRegex: values.title,
     status: values.status,
-    documentDateFrom: formatDateInputApi(values.documentDate?.[0]),
-    documentDateTo: formatDateInputApi(values.documentDate?.[1]),
+    documentDateFrom: formatDateInputApi(values.documentDateFrom),
+    documentDateTo: formatDateInputApi(values.documentDateTo),
     incomeAndExpenseType: values.incomeAndExpenseType,
     wallet: values.wallet,
     amountFrom: values.amountFrom ?? undefined,
@@ -138,8 +138,12 @@ const FilterSection = ({ selectedRows, onClearSelection }: FilterSectionProps) =
           />
         </FormItemCustom>
 
-        <FormItemCustom label={t("expense.filter.documentDate")} name="documentDate">
-          <DatePicker.RangePicker className="w-full" />
+        <FormItemCustom label={t("expense.filter.documentDateFrom")} name="documentDateFrom">
+          <DatePicker className="w-full md:!w-[150px]" />
+        </FormItemCustom>
+
+        <FormItemCustom label={t("expense.filter.documentDateTo")} name="documentDateTo">
+          <DatePicker className="w-full md:!w-[150px]" />
         </FormItemCustom>
 
         <FormItemCustom label={t("expense.filter.amountFrom")} name="amountFrom">

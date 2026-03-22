@@ -35,8 +35,8 @@ const FilterSection = () => {
     ...dataQuery,
     titleRegex: values.title,
     status: values.status,
-    documentDateFrom: formatDateInputApi(values.documentDate?.[0]),
-    documentDateTo: formatDateInputApi(values.documentDate?.[1]),
+    documentDateFrom: formatDateInputApi(values.documentDateFrom),
+    documentDateTo: formatDateInputApi(values.documentDateTo),
     walletFrom: values.walletFrom,
     walletTo: values.walletTo,
     amountFrom: values.amountFrom ?? undefined,
@@ -104,8 +104,12 @@ const FilterSection = () => {
           />
         </FormItemCustom>
 
-        <FormItemCustom label={t("localTransfer.form.documentDate")} name="documentDate">
-          <DatePicker.RangePicker className="w-full" />
+        <FormItemCustom label={t("localTransfer.filter.documentDateFrom")} name="documentDateFrom">
+          <DatePicker className="w-full md:!w-[150px]" />
+        </FormItemCustom>
+
+        <FormItemCustom label={t("localTransfer.filter.documentDateTo")} name="documentDateTo">
+          <DatePicker className="w-full md:!w-[150px]" />
         </FormItemCustom>
 
         <FormItemCustom label={t("localTransfer.filter.amountFrom")} name="amountFrom">

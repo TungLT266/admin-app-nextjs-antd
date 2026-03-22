@@ -220,6 +220,8 @@
       "wallet": "Ví",
       "status": "Trạng thái",
       "documentDate": "Ngày chứng từ",
+      "documentDateFrom": "Ngày CT từ",
+      "documentDateTo": "Ngày CT đến",
       "amountFrom": "Số tiền từ",
       "amountTo": "Số tiền đến"
     },
@@ -274,6 +276,8 @@
       "wallet": "Ví",
       "status": "Trạng thái",
       "documentDate": "Ngày chứng từ",
+      "documentDateFrom": "Ngày CT từ",
+      "documentDateTo": "Ngày CT đến",
       "amountFrom": "Số tiền từ",
       "amountTo": "Số tiền đến"
     },
@@ -330,6 +334,8 @@
       "description": "Mô tả"
     },
     "filter": {
+      "documentDateFrom": "Ngày CT từ",
+      "documentDateTo": "Ngày CT đến",
       "amountFrom": "Số tiền từ",
       "amountTo": "Số tiền đến"
     },
@@ -548,6 +554,8 @@
       "contact": "Liên hệ",
       "contactPlaceholder": "Tất cả liên hệ",
       "contractDate": "Ngày hợp đồng",
+      "contractDateFrom": "Ngày HĐ từ",
+      "contractDateTo": "Ngày HĐ đến",
       "amountFrom": "Số tiền từ",
       "amountTo": "Số tiền đến"
     },
@@ -642,6 +650,8 @@
     "filter": {
       "transactionType": "Loại giao dịch",
       "documentDate": "Ngày chứng từ",
+      "documentDateFrom": "Ngày CT từ",
+      "documentDateTo": "Ngày CT đến",
       "allTypes": "Tất cả loại",
       "amountFrom": "Số tiền từ",
       "amountTo": "Số tiền đến"
@@ -681,6 +691,8 @@
     "filter": {
       "function": "Chức năng",
       "documentDate": "Ngày chứng từ",
+      "documentDateFrom": "Ngày CT từ",
+      "documentDateTo": "Ngày CT đến",
       "title": "Tiêu đề",
       "account": "Tài khoản",
       "wallet": "Ví",

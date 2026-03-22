@@ -37,8 +37,8 @@ const FilterSection = () => {
     titleRegex: values.title,
     status: values.status,
     loanType: values.loanType,
-    documentDateFrom: formatDateInputApi(values.contractDate?.[0]),
-    documentDateTo: formatDateInputApi(values.contractDate?.[1]),
+    documentDateFrom: formatDateInputApi(values.contractDateFrom),
+    documentDateTo: formatDateInputApi(values.contractDateTo),
     loanContact: values.loanContact,
     amountFrom: values.amountFrom ?? undefined,
     amountTo: values.amountTo ?? undefined,
@@ -123,8 +123,12 @@ const FilterSection = () => {
           />
         </FormItemCustom>
 
-        <FormItemCustom label={t("loanContract.filter.contractDate")} name="contractDate">
-          <DatePicker.RangePicker className="w-full" />
+        <FormItemCustom label={t("loanContract.filter.contractDateFrom")} name="contractDateFrom">
+          <DatePicker className="w-full md:!w-[150px]" />
+        </FormItemCustom>
+
+        <FormItemCustom label={t("loanContract.filter.contractDateTo")} name="contractDateTo">
+          <DatePicker className="w-full md:!w-[150px]" />
         </FormItemCustom>
 
         <FormItemCustom label={t("loanContract.filter.amountFrom")} name="amountFrom">

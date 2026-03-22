@@ -19,8 +19,8 @@ const FilterSection = () => {
   const buildQuery = (values = form.getFieldsValue()) => ({
     ...dataQuery,
     transactionType: values.transactionType,
-    documentDateFrom: formatDateInputApi(values.documentDate?.[0]),
-    documentDateTo: formatDateInputApi(values.documentDate?.[1]),
+    documentDateFrom: formatDateInputApi(values.documentDateFrom),
+    documentDateTo: formatDateInputApi(values.documentDateTo),
     amountFrom: values.amountFrom ?? undefined,
     amountTo: values.amountTo ?? undefined,
   });
@@ -68,8 +68,12 @@ const FilterSection = () => {
           />
         </FormItemCustom>
 
-        <FormItemCustom label={t("loanTransaction.filter.documentDate")} name="documentDate">
-          <DatePicker.RangePicker className="w-full" />
+        <FormItemCustom label={t("loanTransaction.filter.documentDateFrom")} name="documentDateFrom">
+          <DatePicker className="w-full md:!w-[150px]" />
+        </FormItemCustom>
+
+        <FormItemCustom label={t("loanTransaction.filter.documentDateTo")} name="documentDateTo">
+          <DatePicker className="w-full md:!w-[150px]" />
         </FormItemCustom>
 
         <FormItemCustom label={t("loanTransaction.filter.amountFrom")} name="amountFrom">

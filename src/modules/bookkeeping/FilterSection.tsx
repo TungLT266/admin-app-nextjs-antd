@@ -64,8 +64,8 @@ const FilterSection = () => {
   const buildQuery = (values = form.getFieldsValue()) => ({
     ...dataQuery,
     functionType: values.functionType,
-    documentDateFrom: formatDateInputApi(values.documentDate?.[0]),
-    documentDateTo: formatDateInputApi(values.documentDate?.[1]),
+    documentDateFrom: formatDateInputApi(values.documentDateFrom),
+    documentDateTo: formatDateInputApi(values.documentDateTo),
     titleRegex: values.title,
     accountingAccount: values.accountingAccount,
     wallet: values.wallet,
@@ -113,8 +113,12 @@ const FilterSection = () => {
           />
         </FormItemCustom>
 
-        <FormItemCustom label={t("bookkeeping.filter.documentDate")} name="documentDate">
-          <DatePicker.RangePicker className="w-full" />
+        <FormItemCustom label={t("bookkeeping.filter.documentDateFrom")} name="documentDateFrom">
+          <DatePicker className="w-full md:!w-[150px]" />
+        </FormItemCustom>
+
+        <FormItemCustom label={t("bookkeeping.filter.documentDateTo")} name="documentDateTo">
+          <DatePicker className="w-full md:!w-[150px]" />
         </FormItemCustom>
 
         <FormItemCustom label={t("bookkeeping.filter.title")} name="title">
